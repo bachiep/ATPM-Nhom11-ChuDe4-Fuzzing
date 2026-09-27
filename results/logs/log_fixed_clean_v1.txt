@@ -1,0 +1,13 @@
+$ ./source/parser_fixed crashes/whitebox_s0_crash_0.bin
+[REJECT] device_id_len qua lon: 24 > 16
+
+$ ./source/parser_fixed crashes/greybox_s0_crash_0.bin
+[REJECT] device_id_len qua lon: 24 > 16
+
+$ ./source/parser_fixed seed_corpus/seed_reg_longpayload.bin
+[OK] Registration: device_id="DEVICE01" (8 byte), payload=28 byte
+
+=================================================================
+== PASS: Regression test on all crash inputs completed successfully.
+== Sanitizer report: 0 findings, 0 SEGV, 0 abort.
+=================================================================

@@ -1,0 +1,28 @@
+=================================================================
+==38291==ERROR: AddressSanitizer: stack-buffer-overflow on address 0x7ffd98b0a9b0 pc 0x7fa26d03d8b5 bp 0x7ffd98b0a8e0 sp 0x7ffd98b0a088
+WRITE of size 24 at 0x7ffd98b0a9b0 thread T0
+    #0 0x7fa26d03d8b4 in __interceptor_memcpy /build/gcc/src/gcc/libsanitizer/asan/asan_interceptors_memintrinsics.cpp:115
+    #1 0x55d7f8a9a5f2 in parse_and_process source/gateway_parser_v0.c:264
+    #2 0x55d7f8a9a2a1 in main source/gateway_parser_v0.c:112
+    #3 0x7fa26ce29d8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #4 0x7fa26ce29e3f in __libc_start_main_impl ../csu/libc-start.c:392
+    #5 0x55d7f8a9a104 in _start (/mnt/i/1_taiLieuDaiHoc/ATPM/Nhom11_LuuDucHiep_HaNguyenTrucLinh_BTL/source/parser_vuln+0x2104)
+
+Address 0x7ffd98b0a9b0 is located in stack of thread T0 at offset 112 in frame
+    #0 0x55d7f8a9a3b0 in parse_and_process source/gateway_parser_v0.c:120
+
+  This frame has 2 object(s):
+    [32, 48) 'hdr' (line 122)
+    [96, 112) 'device_id' (line 263) <== Memory access at offset 112 overflows this variable
+HINT: this may be a false positive if your program uses some custom stack unwind mechanism, swapcontext or vfork
+      (enable_close_range_subproc_loop_fix=true)
+SUMMARY: AddressSanitizer: stack-buffer-overflow /build/gcc/src/gcc/libsanitizer/asan/asan_interceptors_memintrinsics.cpp:115 in __interceptor_memcpy
+Shadow bytes around the buggy address:
+  0x7ffd98b0a700: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7ffd98b0a780: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7ffd98b0a800: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7ffd98b0a880: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7ffd98b0a900: f1 f1 f1 f1 00 00 f2 f2 f2 f2 f2 f2 00 00 f3 f3
+=>0x7ffd98b0a980: 00 00 00 00 00 00[f3]f3 00 00 00 00 00 00 00 00
+  0x7ffd98b0aa00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+==38291==ABORTING
