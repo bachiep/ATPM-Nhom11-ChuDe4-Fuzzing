@@ -1,0 +1,111 @@
+[
+  {
+    "fuzzer": "Black-box",
+    "n_trials": 30,
+    "success_count": 0,
+    "success_rate": 0.0,
+    "time_to_crash": {
+      "n": 0,
+      "median": null,
+      "q1": null,
+      "q3": null,
+      "min": null,
+      "max": null,
+      "mean": null
+    },
+    "iterations_to_crash": {
+      "n": 0,
+      "median": null,
+      "q1": null,
+      "q3": null,
+      "min": null,
+      "max": null,
+      "mean": null
+    },
+    "exec_per_sec": {
+      "n": 30,
+      "median": 50.95,
+      "q1": 44.4,
+      "q3": 54.1,
+      "iqr": 9.7,
+      "min": 36.5,
+      "max": 62.9,
+      "mean": 50.3733
+    },
+    "unique_crash_signatures": 0
+  },
+  {
+    "fuzzer": "White-box",
+    "n_trials": 30,
+    "success_count": 30,
+    "success_rate": 1.0,
+    "time_to_crash": {
+      "n": 30,
+      "median": 0.1706,
+      "q1": 0.1654,
+      "q3": 0.1755,
+      "iqr": 0.0101,
+      "min": 0.1619,
+      "max": 0.307,
+      "mean": 0.1754
+    },
+    "iterations_to_crash": {
+      "n": 30,
+      "median": 0.0,
+      "q1": 0.0,
+      "q3": 0.0,
+      "iqr": 0.0,
+      "min": 0.0,
+      "max": 0.0,
+      "mean": 0.0
+    },
+    "exec_per_sec": {
+      "n": 30,
+      "median": 5.85,
+      "q1": 5.7,
+      "q3": 6.0,
+      "iqr": 0.3,
+      "min": 3.2,
+      "max": 6.2,
+      "mean": 5.7533
+    },
+    "unique_crash_signatures": 1
+  },
+  {
+    "fuzzer": "Greybox",
+    "n_trials": 30,
+    "success_count": 30,
+    "success_rate": 1.0,
+    "time_to_crash": {
+      "n": 30,
+      "median": 7.7011,
+      "q1": 6.9438,
+      "q3": 11.0467,
+      "iqr": 4.1028,
+      "min": 6.2665,
+      "max": 12.1327,
+      "mean": 8.7149
+    },
+    "iterations_to_crash": {
+      "n": 30,
+      "median": 285.0,
+      "q1": 285.0,
+      "q3": 285.0,
+      "iqr": 0.0,
+      "min": 285.0,
+      "max": 285.0,
+      "mean": 285.0
+    },
+    "exec_per_sec": {
+      "n": 30,
+      "median": 36.95,
+      "q1": 25.8,
+      "q3": 41.0,
+      "iqr": 15.2,
+      "min": 23.5,
+      "max": 45.5,
+      "mean": 34.39
+    },
+    "unique_crash_signatures": 1
+  }
+]

@@ -1,0 +1,18 @@
+{
+  "whitebox": {
+    "found": true,
+    "unlock_a": 7421,
+    "unlock_b": 3390,
+    "time": 0.000418,
+    "target_verified": true
+  },
+  "blackbox": {
+    "n_trials": 30,
+    "budget_per_trial": 500000,
+    "success_rate": 0.0,
+    "found_count": 0,
+    "iterations_when_found": [],
+    "theoretical_probability": 2.3283064365386963e-10,
+    "theoretical_expected_trials": 4294967296
+  }
+}

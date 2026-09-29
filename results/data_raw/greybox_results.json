@@ -1,0 +1,1622 @@
+[
+  {
+    "fuzzer": "greybox",
+    "seed": 0,
+    "budget": 5000,
+    "iterations_used": 285,
+    "wall_time_seconds": 7.818,
+    "exec_per_sec": 36.5,
+    "first_crash_at": 285,
+    "time_to_first_crash_seconds": 7.816561,
+    "total_crashes": 1,
+    "total_lines_covered": 46,
+    "coverage_history": [
+      {
+        "iteration": 1,
+        "new_lines_count": 28,
+        "total_covered": 28
+      },
+      {
+        "iteration": 75,
+        "new_lines_count": 6,
+        "total_covered": 34
+      },
+      {
+        "iteration": 147,
+        "new_lines_count": 6,
+        "total_covered": 40
+      },
+      {
+        "iteration": 235,
+        "new_lines_count": 6,
+        "total_covered": 46
+      }
+    ],
+    "corpus_growth": [
+      {
+        "iteration": 100,
+        "corpus_size": 7,
+        "total_covered": 34
+      },
+      {
+        "iteration": 200,
+        "corpus_size": 8,
+        "total_covered": 40
+      }
+    ],
+    "crashes": [
+      {
+        "iteration": 285,
+        "input_hex": "4947573101011800180000000000000041414141414141414141414141414141414141414141414162070000",
+        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/greybox_s0_crash_0.bin",
+        "asan_signature": "#0 0x760e52128d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117"
+      }
+    ]
+  },
+  {
+    "fuzzer": "greybox",
+    "seed": 1,
+    "budget": 5000,
+    "iterations_used": 285,
+    "wall_time_seconds": 7.053,
+    "exec_per_sec": 40.4,
+    "first_crash_at": 285,
+    "time_to_first_crash_seconds": 7.052655,
+    "total_crashes": 1,
+    "total_lines_covered": 46,
+    "coverage_history": [
+      {
+        "iteration": 1,
+        "new_lines_count": 28,
+        "total_covered": 28
+      },
+      {
+        "iteration": 75,
+        "new_lines_count": 6,
+        "total_covered": 34
+      },
+      {
+        "iteration": 147,
+        "new_lines_count": 6,
+        "total_covered": 40
+      },
+      {
+        "iteration": 235,
+        "new_lines_count": 6,
+        "total_covered": 46
+      }
+    ],
+    "corpus_growth": [
+      {
+        "iteration": 100,
+        "corpus_size": 7,
+        "total_covered": 34
+      },
+      {
+        "iteration": 200,
+        "corpus_size": 8,
+        "total_covered": 40
+      }
+    ],
+    "crashes": [
+      {
+        "iteration": 285,
+        "input_hex": "4947573101011800180000000000000041414141414141414141414141414141414141414141414162070000",
+        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/greybox_s1_crash_0.bin",
+        "asan_signature": "#0 0x7d0900928d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117"
+      }
+    ]
+  },
+  {
+    "fuzzer": "greybox",
+    "seed": 2,
+    "budget": 5000,
+    "iterations_used": 285,
+    "wall_time_seconds": 11.047,
+    "exec_per_sec": 25.8,
+    "first_crash_at": 285,
+    "time_to_first_crash_seconds": 11.046653,
+    "total_crashes": 1,
+    "total_lines_covered": 46,
+    "coverage_history": [
+      {
+        "iteration": 1,
+        "new_lines_count": 28,
+        "total_covered": 28
+      },
+      {
+        "iteration": 75,
+        "new_lines_count": 6,
+        "total_covered": 34
+      },
+      {
+        "iteration": 147,
+        "new_lines_count": 6,
+        "total_covered": 40
+      },
+      {
+        "iteration": 235,
+        "new_lines_count": 6,
+        "total_covered": 46
+      }
+    ],
+    "corpus_growth": [
+      {
+        "iteration": 100,
+        "corpus_size": 7,
+        "total_covered": 34
+      },
+      {
+        "iteration": 200,
+        "corpus_size": 8,
+        "total_covered": 40
+      }
+    ],
+    "crashes": [
+      {
+        "iteration": 285,
+        "input_hex": "4947573101011800180000000000000041414141414141414141414141414141414141414141414162070000",
+        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/greybox_s2_crash_0.bin",
+        "asan_signature": "#0 0x78feda128d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117"
+      }
+    ]
+  },
+  {
+    "fuzzer": "greybox",
+    "seed": 3,
+    "budget": 5000,
+    "iterations_used": 285,
+    "wall_time_seconds": 6.841,
+    "exec_per_sec": 41.7,
+    "first_crash_at": 285,
+    "time_to_first_crash_seconds": 6.84034,
+    "total_crashes": 1,
+    "total_lines_covered": 46,
+    "coverage_history": [
+      {
+        "iteration": 1,
+        "new_lines_count": 28,
+        "total_covered": 28
+      },
+      {
+        "iteration": 75,
+        "new_lines_count": 6,
+        "total_covered": 34
+      },
+      {
+        "iteration": 147,
+        "new_lines_count": 6,
+        "total_covered": 40
+      },
+      {
+        "iteration": 235,
+        "new_lines_count": 6,
+        "total_covered": 46
+      }
+    ],
+    "corpus_growth": [
+      {
+        "iteration": 100,
+        "corpus_size": 7,
+        "total_covered": 34
+      },
+      {
+        "iteration": 200,
+        "corpus_size": 8,
+        "total_covered": 40
+      }
+    ],
+    "crashes": [
+      {
+        "iteration": 285,
+        "input_hex": "4947573101011800180000000000000041414141414141414141414141414141414141414141414162070000",
+        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/greybox_s3_crash_0.bin",
+        "asan_signature": "#0 0x7a7833328d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117"
+      }
+    ]
+  },
+  {
+    "fuzzer": "greybox",
+    "seed": 4,
+    "budget": 5000,
+    "iterations_used": 285,
+    "wall_time_seconds": 6.267,
+    "exec_per_sec": 45.5,
+    "first_crash_at": 285,
+    "time_to_first_crash_seconds": 6.266453,
+    "total_crashes": 1,
+    "total_lines_covered": 46,
+    "coverage_history": [
+      {
+        "iteration": 1,
+        "new_lines_count": 28,
+        "total_covered": 28
+      },
+      {
+        "iteration": 75,
+        "new_lines_count": 6,
+        "total_covered": 34
+      },
+      {
+        "iteration": 147,
+        "new_lines_count": 6,
+        "total_covered": 40
+      },
+      {
+        "iteration": 235,
+        "new_lines_count": 6,
+        "total_covered": 46
+      }
+    ],
+    "corpus_growth": [
+      {
+        "iteration": 100,
+        "corpus_size": 7,
+        "total_covered": 34
+      },
+      {
+        "iteration": 200,
+        "corpus_size": 8,
+        "total_covered": 40
+      }
+    ],
+    "crashes": [
+      {
+        "iteration": 285,
+        "input_hex": "4947573101011800180000000000000041414141414141414141414141414141414141414141414162070000",
+        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/greybox_s4_crash_0.bin",
+        "asan_signature": "#0 0x77294c728d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117"
+      }
+    ]
+  },
+  {
+    "fuzzer": "greybox",
+    "seed": 5,
+    "budget": 5000,
+    "iterations_used": 285,
+    "wall_time_seconds": 11.762,
+    "exec_per_sec": 24.2,
+    "first_crash_at": 285,
+    "time_to_first_crash_seconds": 11.761761,
+    "total_crashes": 1,
+    "total_lines_covered": 46,
+    "coverage_history": [
+      {
+        "iteration": 1,
+        "new_lines_count": 28,
+        "total_covered": 28
+      },
+      {
+        "iteration": 75,
+        "new_lines_count": 6,
+        "total_covered": 34
+      },
+      {
+        "iteration": 147,
+        "new_lines_count": 6,
+        "total_covered": 40
+      },
+      {
+        "iteration": 235,
+        "new_lines_count": 6,
+        "total_covered": 46
+      }
+    ],
+    "corpus_growth": [
+      {
+        "iteration": 100,
+        "corpus_size": 7,
+        "total_covered": 34
+      },
+      {
+        "iteration": 200,
+        "corpus_size": 8,
+        "total_covered": 40
+      }
+    ],
+    "crashes": [
+      {
+        "iteration": 285,
+        "input_hex": "4947573101011800180000000000000041414141414141414141414141414141414141414141414162070000",
+        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/greybox_s5_crash_0.bin",
+        "asan_signature": "#0 0x7ef8cef28d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117"
+      }
+    ]
+  },
+  {
+    "fuzzer": "greybox",
+    "seed": 6,
+    "budget": 5000,
+    "iterations_used": 285,
+    "wall_time_seconds": 7.495,
+    "exec_per_sec": 38.0,
+    "first_crash_at": 285,
+    "time_to_first_crash_seconds": 7.493901,
+    "total_crashes": 1,
+    "total_lines_covered": 46,
+    "coverage_history": [
+      {
+        "iteration": 1,
+        "new_lines_count": 28,
+        "total_covered": 28
+      },
+      {
+        "iteration": 75,
+        "new_lines_count": 6,
+        "total_covered": 34
+      },
+      {
+        "iteration": 147,
+        "new_lines_count": 6,
+        "total_covered": 40
+      },
+      {
+        "iteration": 235,
+        "new_lines_count": 6,
+        "total_covered": 46
+      }
+    ],
+    "corpus_growth": [
+      {
+        "iteration": 100,
+        "corpus_size": 7,
+        "total_covered": 34
+      },
+      {
+        "iteration": 200,
+        "corpus_size": 8,
+        "total_covered": 40
+      }
+    ],
+    "crashes": [
+      {
+        "iteration": 285,
+        "input_hex": "4947573101011800180000000000000041414141414141414141414141414141414141414141414162070000",
+        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/greybox_s6_crash_0.bin",
+        "asan_signature": "#0 0x724c40d28d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117"
+      }
+    ]
+  },
+  {
+    "fuzzer": "greybox",
+    "seed": 7,
+    "budget": 5000,
+    "iterations_used": 285,
+    "wall_time_seconds": 9.937,
+    "exec_per_sec": 28.7,
+    "first_crash_at": 285,
+    "time_to_first_crash_seconds": 9.936672,
+    "total_crashes": 1,
+    "total_lines_covered": 46,
+    "coverage_history": [
+      {
+        "iteration": 1,
+        "new_lines_count": 28,
+        "total_covered": 28
+      },
+      {
+        "iteration": 75,
+        "new_lines_count": 6,
+        "total_covered": 34
+      },
+      {
+        "iteration": 147,
+        "new_lines_count": 6,
+        "total_covered": 40
+      },
+      {
+        "iteration": 235,
+        "new_lines_count": 6,
+        "total_covered": 46
+      }
+    ],
+    "corpus_growth": [
+      {
+        "iteration": 100,
+        "corpus_size": 7,
+        "total_covered": 34
+      },
+      {
+        "iteration": 200,
+        "corpus_size": 8,
+        "total_covered": 40
+      }
+    ],
+    "crashes": [
+      {
+        "iteration": 285,
+        "input_hex": "4947573101011800180000000000000041414141414141414141414141414141414141414141414162070000",
+        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/greybox_s7_crash_0.bin",
+        "asan_signature": "#0 0x75a455928d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117"
+      }
+    ]
+  },
+  {
+    "fuzzer": "greybox",
+    "seed": 8,
+    "budget": 5000,
+    "iterations_used": 285,
+    "wall_time_seconds": 8.149,
+    "exec_per_sec": 35.0,
+    "first_crash_at": 285,
+    "time_to_first_crash_seconds": 8.148624,
+    "total_crashes": 1,
+    "total_lines_covered": 46,
+    "coverage_history": [
+      {
+        "iteration": 1,
+        "new_lines_count": 28,
+        "total_covered": 28
+      },
+      {
+        "iteration": 75,
+        "new_lines_count": 6,
+        "total_covered": 34
+      },
+      {
+        "iteration": 147,
+        "new_lines_count": 6,
+        "total_covered": 40
+      },
+      {
+        "iteration": 235,
+        "new_lines_count": 6,
+        "total_covered": 46
+      }
+    ],
+    "corpus_growth": [
+      {
+        "iteration": 100,
+        "corpus_size": 7,
+        "total_covered": 34
+      },
+      {
+        "iteration": 200,
+        "corpus_size": 8,
+        "total_covered": 40
+      }
+    ],
+    "crashes": [
+      {
+        "iteration": 285,
+        "input_hex": "4947573101011800180000000000000041414141414141414141414141414141414141414141414162070000",
+        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/greybox_s8_crash_0.bin",
+        "asan_signature": "#0 0x7f1bb8328d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117"
+      }
+    ]
+  },
+  {
+    "fuzzer": "greybox",
+    "seed": 9,
+    "budget": 5000,
+    "iterations_used": 285,
+    "wall_time_seconds": 6.862,
+    "exec_per_sec": 41.5,
+    "first_crash_at": 285,
+    "time_to_first_crash_seconds": 6.860887,
+    "total_crashes": 1,
+    "total_lines_covered": 46,
+    "coverage_history": [
+      {
+        "iteration": 1,
+        "new_lines_count": 28,
+        "total_covered": 28
+      },
+      {
+        "iteration": 75,
+        "new_lines_count": 6,
+        "total_covered": 34
+      },
+      {
+        "iteration": 147,
+        "new_lines_count": 6,
+        "total_covered": 40
+      },
+      {
+        "iteration": 235,
+        "new_lines_count": 6,
+        "total_covered": 46
+      }
+    ],
+    "corpus_growth": [
+      {
+        "iteration": 100,
+        "corpus_size": 7,
+        "total_covered": 34
+      },
+      {
+        "iteration": 200,
+        "corpus_size": 8,
+        "total_covered": 40
+      }
+    ],
+    "crashes": [
+      {
+        "iteration": 285,
+        "input_hex": "4947573101011800180000000000000041414141414141414141414141414141414141414141414162070000",
+        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/greybox_s9_crash_0.bin",
+        "asan_signature": "#0 0x7f5feb328d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117"
+      }
+    ]
+  },
+  {
+    "fuzzer": "greybox",
+    "seed": 10,
+    "budget": 5000,
+    "iterations_used": 285,
+    "wall_time_seconds": 11.794,
+    "exec_per_sec": 24.2,
+    "first_crash_at": 285,
+    "time_to_first_crash_seconds": 11.79294,
+    "total_crashes": 1,
+    "total_lines_covered": 46,
+    "coverage_history": [
+      {
+        "iteration": 1,
+        "new_lines_count": 28,
+        "total_covered": 28
+      },
+      {
+        "iteration": 75,
+        "new_lines_count": 6,
+        "total_covered": 34
+      },
+      {
+        "iteration": 147,
+        "new_lines_count": 6,
+        "total_covered": 40
+      },
+      {
+        "iteration": 235,
+        "new_lines_count": 6,
+        "total_covered": 46
+      }
+    ],
+    "corpus_growth": [
+      {
+        "iteration": 100,
+        "corpus_size": 7,
+        "total_covered": 34
+      },
+      {
+        "iteration": 200,
+        "corpus_size": 8,
+        "total_covered": 40
+      }
+    ],
+    "crashes": [
+      {
+        "iteration": 285,
+        "input_hex": "4947573101011800180000000000000041414141414141414141414141414141414141414141414162070000",
+        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/greybox_s10_crash_0.bin",
+        "asan_signature": "#0 0x7e027b928d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117"
+      }
+    ]
+  },
+  {
+    "fuzzer": "greybox",
+    "seed": 11,
+    "budget": 5000,
+    "iterations_used": 285,
+    "wall_time_seconds": 6.944,
+    "exec_per_sec": 41.0,
+    "first_crash_at": 285,
+    "time_to_first_crash_seconds": 6.943823,
+    "total_crashes": 1,
+    "total_lines_covered": 46,
+    "coverage_history": [
+      {
+        "iteration": 1,
+        "new_lines_count": 28,
+        "total_covered": 28
+      },
+      {
+        "iteration": 75,
+        "new_lines_count": 6,
+        "total_covered": 34
+      },
+      {
+        "iteration": 147,
+        "new_lines_count": 6,
+        "total_covered": 40
+      },
+      {
+        "iteration": 235,
+        "new_lines_count": 6,
+        "total_covered": 46
+      }
+    ],
+    "corpus_growth": [
+      {
+        "iteration": 100,
+        "corpus_size": 7,
+        "total_covered": 34
+      },
+      {
+        "iteration": 200,
+        "corpus_size": 8,
+        "total_covered": 40
+      }
+    ],
+    "crashes": [
+      {
+        "iteration": 285,
+        "input_hex": "4947573101011800180000000000000041414141414141414141414141414141414141414141414162070000",
+        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/greybox_s11_crash_0.bin",
+        "asan_signature": "#0 0x778f2f728d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117"
+      }
+    ]
+  },
+  {
+    "fuzzer": "greybox",
+    "seed": 12,
+    "budget": 5000,
+    "iterations_used": 285,
+    "wall_time_seconds": 8.013,
+    "exec_per_sec": 35.6,
+    "first_crash_at": 285,
+    "time_to_first_crash_seconds": 7.964427,
+    "total_crashes": 1,
+    "total_lines_covered": 46,
+    "coverage_history": [
+      {
+        "iteration": 1,
+        "new_lines_count": 28,
+        "total_covered": 28
+      },
+      {
+        "iteration": 75,
+        "new_lines_count": 6,
+        "total_covered": 34
+      },
+      {
+        "iteration": 147,
+        "new_lines_count": 6,
+        "total_covered": 40
+      },
+      {
+        "iteration": 235,
+        "new_lines_count": 6,
+        "total_covered": 46
+      }
+    ],
+    "corpus_growth": [
+      {
+        "iteration": 100,
+        "corpus_size": 7,
+        "total_covered": 34
+      },
+      {
+        "iteration": 200,
+        "corpus_size": 8,
+        "total_covered": 40
+      }
+    ],
+    "crashes": [
+      {
+        "iteration": 285,
+        "input_hex": "4947573101011800180000000000000041414141414141414141414141414141414141414141414162070000",
+        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/greybox_s12_crash_0.bin",
+        "asan_signature": "#0 0x7b077d128d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117"
+      }
+    ]
+  },
+  {
+    "fuzzer": "greybox",
+    "seed": 13,
+    "budget": 5000,
+    "iterations_used": 285,
+    "wall_time_seconds": 10.646,
+    "exec_per_sec": 26.8,
+    "first_crash_at": 285,
+    "time_to_first_crash_seconds": 10.645525,
+    "total_crashes": 1,
+    "total_lines_covered": 46,
+    "coverage_history": [
+      {
+        "iteration": 1,
+        "new_lines_count": 28,
+        "total_covered": 28
+      },
+      {
+        "iteration": 75,
+        "new_lines_count": 6,
+        "total_covered": 34
+      },
+      {
+        "iteration": 147,
+        "new_lines_count": 6,
+        "total_covered": 40
+      },
+      {
+        "iteration": 235,
+        "new_lines_count": 6,
+        "total_covered": 46
+      }
+    ],
+    "corpus_growth": [
+      {
+        "iteration": 100,
+        "corpus_size": 7,
+        "total_covered": 34
+      },
+      {
+        "iteration": 200,
+        "corpus_size": 8,
+        "total_covered": 40
+      }
+    ],
+    "crashes": [
+      {
+        "iteration": 285,
+        "input_hex": "4947573101011800180000000000000041414141414141414141414141414141414141414141414162070000",
+        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/greybox_s13_crash_0.bin",
+        "asan_signature": "#0 0x7df08a928d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117"
+      }
+    ]
+  },
+  {
+    "fuzzer": "greybox",
+    "seed": 14,
+    "budget": 5000,
+    "iterations_used": 285,
+    "wall_time_seconds": 6.882,
+    "exec_per_sec": 41.4,
+    "first_crash_at": 285,
+    "time_to_first_crash_seconds": 6.881104,
+    "total_crashes": 1,
+    "total_lines_covered": 46,
+    "coverage_history": [
+      {
+        "iteration": 1,
+        "new_lines_count": 28,
+        "total_covered": 28
+      },
+      {
+        "iteration": 75,
+        "new_lines_count": 6,
+        "total_covered": 34
+      },
+      {
+        "iteration": 147,
+        "new_lines_count": 6,
+        "total_covered": 40
+      },
+      {
+        "iteration": 235,
+        "new_lines_count": 6,
+        "total_covered": 46
+      }
+    ],
+    "corpus_growth": [
+      {
+        "iteration": 100,
+        "corpus_size": 7,
+        "total_covered": 34
+      },
+      {
+        "iteration": 200,
+        "corpus_size": 8,
+        "total_covered": 40
+      }
+    ],
+    "crashes": [
+      {
+        "iteration": 285,
+        "input_hex": "4947573101011800180000000000000041414141414141414141414141414141414141414141414162070000",
+        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/greybox_s14_crash_0.bin",
+        "asan_signature": "#0 0x752d9ef28d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117"
+      }
+    ]
+  },
+  {
+    "fuzzer": "greybox",
+    "seed": 15,
+    "budget": 5000,
+    "iterations_used": 285,
+    "wall_time_seconds": 11.335,
+    "exec_per_sec": 25.1,
+    "first_crash_at": 285,
+    "time_to_first_crash_seconds": 11.333819,
+    "total_crashes": 1,
+    "total_lines_covered": 46,
+    "coverage_history": [
+      {
+        "iteration": 1,
+        "new_lines_count": 28,
+        "total_covered": 28
+      },
+      {
+        "iteration": 75,
+        "new_lines_count": 6,
+        "total_covered": 34
+      },
+      {
+        "iteration": 147,
+        "new_lines_count": 6,
+        "total_covered": 40
+      },
+      {
+        "iteration": 235,
+        "new_lines_count": 6,
+        "total_covered": 46
+      }
+    ],
+    "corpus_growth": [
+      {
+        "iteration": 100,
+        "corpus_size": 7,
+        "total_covered": 34
+      },
+      {
+        "iteration": 200,
+        "corpus_size": 8,
+        "total_covered": 40
+      }
+    ],
+    "crashes": [
+      {
+        "iteration": 285,
+        "input_hex": "4947573101011800180000000000000041414141414141414141414141414141414141414141414162070000",
+        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/greybox_s15_crash_0.bin",
+        "asan_signature": "#0 0x74c9bab28d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117"
+      }
+    ]
+  },
+  {
+    "fuzzer": "greybox",
+    "seed": 16,
+    "budget": 5000,
+    "iterations_used": 285,
+    "wall_time_seconds": 6.494,
+    "exec_per_sec": 43.9,
+    "first_crash_at": 285,
+    "time_to_first_crash_seconds": 6.493063,
+    "total_crashes": 1,
+    "total_lines_covered": 46,
+    "coverage_history": [
+      {
+        "iteration": 1,
+        "new_lines_count": 28,
+        "total_covered": 28
+      },
+      {
+        "iteration": 75,
+        "new_lines_count": 6,
+        "total_covered": 34
+      },
+      {
+        "iteration": 147,
+        "new_lines_count": 6,
+        "total_covered": 40
+      },
+      {
+        "iteration": 235,
+        "new_lines_count": 6,
+        "total_covered": 46
+      }
+    ],
+    "corpus_growth": [
+      {
+        "iteration": 100,
+        "corpus_size": 7,
+        "total_covered": 34
+      },
+      {
+        "iteration": 200,
+        "corpus_size": 8,
+        "total_covered": 40
+      }
+    ],
+    "crashes": [
+      {
+        "iteration": 285,
+        "input_hex": "4947573101011800180000000000000041414141414141414141414141414141414141414141414162070000",
+        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/greybox_s16_crash_0.bin",
+        "asan_signature": "#0 0x76f9c8328d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117"
+      }
+    ]
+  },
+  {
+    "fuzzer": "greybox",
+    "seed": 17,
+    "budget": 5000,
+    "iterations_used": 285,
+    "wall_time_seconds": 7.626,
+    "exec_per_sec": 37.4,
+    "first_crash_at": 285,
+    "time_to_first_crash_seconds": 7.585613,
+    "total_crashes": 1,
+    "total_lines_covered": 46,
+    "coverage_history": [
+      {
+        "iteration": 1,
+        "new_lines_count": 28,
+        "total_covered": 28
+      },
+      {
+        "iteration": 75,
+        "new_lines_count": 6,
+        "total_covered": 34
+      },
+      {
+        "iteration": 147,
+        "new_lines_count": 6,
+        "total_covered": 40
+      },
+      {
+        "iteration": 235,
+        "new_lines_count": 6,
+        "total_covered": 46
+      }
+    ],
+    "corpus_growth": [
+      {
+        "iteration": 100,
+        "corpus_size": 7,
+        "total_covered": 34
+      },
+      {
+        "iteration": 200,
+        "corpus_size": 8,
+        "total_covered": 40
+      }
+    ],
+    "crashes": [
+      {
+        "iteration": 285,
+        "input_hex": "4947573101011800180000000000000041414141414141414141414141414141414141414141414162070000",
+        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/greybox_s17_crash_0.bin",
+        "asan_signature": "#0 0x79023ab28d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117"
+      }
+    ]
+  },
+  {
+    "fuzzer": "greybox",
+    "seed": 18,
+    "budget": 5000,
+    "iterations_used": 285,
+    "wall_time_seconds": 11.518,
+    "exec_per_sec": 24.7,
+    "first_crash_at": 285,
+    "time_to_first_crash_seconds": 11.517163,
+    "total_crashes": 1,
+    "total_lines_covered": 46,
+    "coverage_history": [
+      {
+        "iteration": 1,
+        "new_lines_count": 28,
+        "total_covered": 28
+      },
+      {
+        "iteration": 75,
+        "new_lines_count": 6,
+        "total_covered": 34
+      },
+      {
+        "iteration": 147,
+        "new_lines_count": 6,
+        "total_covered": 40
+      },
+      {
+        "iteration": 235,
+        "new_lines_count": 6,
+        "total_covered": 46
+      }
+    ],
+    "corpus_growth": [
+      {
+        "iteration": 100,
+        "corpus_size": 7,
+        "total_covered": 34
+      },
+      {
+        "iteration": 200,
+        "corpus_size": 8,
+        "total_covered": 40
+      }
+    ],
+    "crashes": [
+      {
+        "iteration": 285,
+        "input_hex": "4947573101011800180000000000000041414141414141414141414141414141414141414141414162070000",
+        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/greybox_s18_crash_0.bin",
+        "asan_signature": "#0 0x7bc86e728d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117"
+      }
+    ]
+  },
+  {
+    "fuzzer": "greybox",
+    "seed": 19,
+    "budget": 5000,
+    "iterations_used": 285,
+    "wall_time_seconds": 7.107,
+    "exec_per_sec": 40.1,
+    "first_crash_at": 285,
+    "time_to_first_crash_seconds": 7.10611,
+    "total_crashes": 1,
+    "total_lines_covered": 46,
+    "coverage_history": [
+      {
+        "iteration": 1,
+        "new_lines_count": 28,
+        "total_covered": 28
+      },
+      {
+        "iteration": 75,
+        "new_lines_count": 6,
+        "total_covered": 34
+      },
+      {
+        "iteration": 147,
+        "new_lines_count": 6,
+        "total_covered": 40
+      },
+      {
+        "iteration": 235,
+        "new_lines_count": 6,
+        "total_covered": 46
+      }
+    ],
+    "corpus_growth": [
+      {
+        "iteration": 100,
+        "corpus_size": 7,
+        "total_covered": 34
+      },
+      {
+        "iteration": 200,
+        "corpus_size": 8,
+        "total_covered": 40
+      }
+    ],
+    "crashes": [
+      {
+        "iteration": 285,
+        "input_hex": "4947573101011800180000000000000041414141414141414141414141414141414141414141414162070000",
+        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/greybox_s19_crash_0.bin",
+        "asan_signature": "#0 0x7dff9a528d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117"
+      }
+    ]
+  },
+  {
+    "fuzzer": "greybox",
+    "seed": 20,
+    "budget": 5000,
+    "iterations_used": 285,
+    "wall_time_seconds": 12.021,
+    "exec_per_sec": 23.7,
+    "first_crash_at": 285,
+    "time_to_first_crash_seconds": 12.019332,
+    "total_crashes": 1,
+    "total_lines_covered": 46,
+    "coverage_history": [
+      {
+        "iteration": 1,
+        "new_lines_count": 28,
+        "total_covered": 28
+      },
+      {
+        "iteration": 75,
+        "new_lines_count": 6,
+        "total_covered": 34
+      },
+      {
+        "iteration": 147,
+        "new_lines_count": 6,
+        "total_covered": 40
+      },
+      {
+        "iteration": 235,
+        "new_lines_count": 6,
+        "total_covered": 46
+      }
+    ],
+    "corpus_growth": [
+      {
+        "iteration": 100,
+        "corpus_size": 7,
+        "total_covered": 34
+      },
+      {
+        "iteration": 200,
+        "corpus_size": 8,
+        "total_covered": 40
+      }
+    ],
+    "crashes": [
+      {
+        "iteration": 285,
+        "input_hex": "4947573101011800180000000000000041414141414141414141414141414141414141414141414162070000",
+        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/greybox_s20_crash_0.bin",
+        "asan_signature": "#0 0x746028928d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117"
+      }
+    ]
+  },
+  {
+    "fuzzer": "greybox",
+    "seed": 21,
+    "budget": 5000,
+    "iterations_used": 285,
+    "wall_time_seconds": 6.989,
+    "exec_per_sec": 40.8,
+    "first_crash_at": 285,
+    "time_to_first_crash_seconds": 6.988601,
+    "total_crashes": 1,
+    "total_lines_covered": 46,
+    "coverage_history": [
+      {
+        "iteration": 1,
+        "new_lines_count": 28,
+        "total_covered": 28
+      },
+      {
+        "iteration": 75,
+        "new_lines_count": 6,
+        "total_covered": 34
+      },
+      {
+        "iteration": 147,
+        "new_lines_count": 6,
+        "total_covered": 40
+      },
+      {
+        "iteration": 235,
+        "new_lines_count": 6,
+        "total_covered": 46
+      }
+    ],
+    "corpus_growth": [
+      {
+        "iteration": 100,
+        "corpus_size": 7,
+        "total_covered": 34
+      },
+      {
+        "iteration": 200,
+        "corpus_size": 8,
+        "total_covered": 40
+      }
+    ],
+    "crashes": [
+      {
+        "iteration": 285,
+        "input_hex": "4947573101011800180000000000000041414141414141414141414141414141414141414141414162070000",
+        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/greybox_s21_crash_0.bin",
+        "asan_signature": "#0 0x7cb922b28d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117"
+      }
+    ]
+  },
+  {
+    "fuzzer": "greybox",
+    "seed": 22,
+    "budget": 5000,
+    "iterations_used": 285,
+    "wall_time_seconds": 9.069,
+    "exec_per_sec": 31.4,
+    "first_crash_at": 285,
+    "time_to_first_crash_seconds": 9.020458,
+    "total_crashes": 1,
+    "total_lines_covered": 46,
+    "coverage_history": [
+      {
+        "iteration": 1,
+        "new_lines_count": 28,
+        "total_covered": 28
+      },
+      {
+        "iteration": 75,
+        "new_lines_count": 6,
+        "total_covered": 34
+      },
+      {
+        "iteration": 147,
+        "new_lines_count": 6,
+        "total_covered": 40
+      },
+      {
+        "iteration": 235,
+        "new_lines_count": 6,
+        "total_covered": 46
+      }
+    ],
+    "corpus_growth": [
+      {
+        "iteration": 100,
+        "corpus_size": 7,
+        "total_covered": 34
+      },
+      {
+        "iteration": 200,
+        "corpus_size": 8,
+        "total_covered": 40
+      }
+    ],
+    "crashes": [
+      {
+        "iteration": 285,
+        "input_hex": "4947573101011800180000000000000041414141414141414141414141414141414141414141414162070000",
+        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/greybox_s22_crash_0.bin",
+        "asan_signature": "#0 0x7d0930f28d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117"
+      }
+    ]
+  },
+  {
+    "fuzzer": "greybox",
+    "seed": 23,
+    "budget": 5000,
+    "iterations_used": 285,
+    "wall_time_seconds": 9.663,
+    "exec_per_sec": 29.5,
+    "first_crash_at": 285,
+    "time_to_first_crash_seconds": 9.662104,
+    "total_crashes": 1,
+    "total_lines_covered": 46,
+    "coverage_history": [
+      {
+        "iteration": 1,
+        "new_lines_count": 28,
+        "total_covered": 28
+      },
+      {
+        "iteration": 75,
+        "new_lines_count": 6,
+        "total_covered": 34
+      },
+      {
+        "iteration": 147,
+        "new_lines_count": 6,
+        "total_covered": 40
+      },
+      {
+        "iteration": 235,
+        "new_lines_count": 6,
+        "total_covered": 46
+      }
+    ],
+    "corpus_growth": [
+      {
+        "iteration": 100,
+        "corpus_size": 7,
+        "total_covered": 34
+      },
+      {
+        "iteration": 200,
+        "corpus_size": 8,
+        "total_covered": 40
+      }
+    ],
+    "crashes": [
+      {
+        "iteration": 285,
+        "input_hex": "4947573101011800180000000000000041414141414141414141414141414141414141414141414162070000",
+        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/greybox_s23_crash_0.bin",
+        "asan_signature": "#0 0x78bcd2928d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117"
+      }
+    ]
+  },
+  {
+    "fuzzer": "greybox",
+    "seed": 24,
+    "budget": 5000,
+    "iterations_used": 285,
+    "wall_time_seconds": 7.038,
+    "exec_per_sec": 40.5,
+    "first_crash_at": 285,
+    "time_to_first_crash_seconds": 7.036827,
+    "total_crashes": 1,
+    "total_lines_covered": 46,
+    "coverage_history": [
+      {
+        "iteration": 1,
+        "new_lines_count": 28,
+        "total_covered": 28
+      },
+      {
+        "iteration": 75,
+        "new_lines_count": 6,
+        "total_covered": 34
+      },
+      {
+        "iteration": 147,
+        "new_lines_count": 6,
+        "total_covered": 40
+      },
+      {
+        "iteration": 235,
+        "new_lines_count": 6,
+        "total_covered": 46
+      }
+    ],
+    "corpus_growth": [
+      {
+        "iteration": 100,
+        "corpus_size": 7,
+        "total_covered": 34
+      },
+      {
+        "iteration": 200,
+        "corpus_size": 8,
+        "total_covered": 40
+      }
+    ],
+    "crashes": [
+      {
+        "iteration": 285,
+        "input_hex": "4947573101011800180000000000000041414141414141414141414141414141414141414141414162070000",
+        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/greybox_s24_crash_0.bin",
+        "asan_signature": "#0 0x7cb9b1128d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117"
+      }
+    ]
+  },
+  {
+    "fuzzer": "greybox",
+    "seed": 25,
+    "budget": 5000,
+    "iterations_used": 285,
+    "wall_time_seconds": 12.134,
+    "exec_per_sec": 23.5,
+    "first_crash_at": 285,
+    "time_to_first_crash_seconds": 12.132668,
+    "total_crashes": 1,
+    "total_lines_covered": 46,
+    "coverage_history": [
+      {
+        "iteration": 1,
+        "new_lines_count": 28,
+        "total_covered": 28
+      },
+      {
+        "iteration": 75,
+        "new_lines_count": 6,
+        "total_covered": 34
+      },
+      {
+        "iteration": 147,
+        "new_lines_count": 6,
+        "total_covered": 40
+      },
+      {
+        "iteration": 235,
+        "new_lines_count": 6,
+        "total_covered": 46
+      }
+    ],
+    "corpus_growth": [
+      {
+        "iteration": 100,
+        "corpus_size": 7,
+        "total_covered": 34
+      },
+      {
+        "iteration": 200,
+        "corpus_size": 8,
+        "total_covered": 40
+      }
+    ],
+    "crashes": [
+      {
+        "iteration": 285,
+        "input_hex": "4947573101011800180000000000000041414141414141414141414141414141414141414141414162070000",
+        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/greybox_s25_crash_0.bin",
+        "asan_signature": "#0 0x79e7dfb28d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117"
+      }
+    ]
+  },
+  {
+    "fuzzer": "greybox",
+    "seed": 26,
+    "budget": 5000,
+    "iterations_used": 285,
+    "wall_time_seconds": 6.915,
+    "exec_per_sec": 41.2,
+    "first_crash_at": 285,
+    "time_to_first_crash_seconds": 6.913666,
+    "total_crashes": 1,
+    "total_lines_covered": 46,
+    "coverage_history": [
+      {
+        "iteration": 1,
+        "new_lines_count": 28,
+        "total_covered": 28
+      },
+      {
+        "iteration": 75,
+        "new_lines_count": 6,
+        "total_covered": 34
+      },
+      {
+        "iteration": 147,
+        "new_lines_count": 6,
+        "total_covered": 40
+      },
+      {
+        "iteration": 235,
+        "new_lines_count": 6,
+        "total_covered": 46
+      }
+    ],
+    "corpus_growth": [
+      {
+        "iteration": 100,
+        "corpus_size": 7,
+        "total_covered": 34
+      },
+      {
+        "iteration": 200,
+        "corpus_size": 8,
+        "total_covered": 40
+      }
+    ],
+    "crashes": [
+      {
+        "iteration": 285,
+        "input_hex": "4947573101011800180000000000000041414141414141414141414141414141414141414141414162070000",
+        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/greybox_s26_crash_0.bin",
+        "asan_signature": "#0 0x7cd59bf28d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117"
+      }
+    ]
+  },
+  {
+    "fuzzer": "greybox",
+    "seed": 27,
+    "budget": 5000,
+    "iterations_used": 285,
+    "wall_time_seconds": 11.824,
+    "exec_per_sec": 24.1,
+    "first_crash_at": 285,
+    "time_to_first_crash_seconds": 11.823596,
+    "total_crashes": 1,
+    "total_lines_covered": 46,
+    "coverage_history": [
+      {
+        "iteration": 1,
+        "new_lines_count": 28,
+        "total_covered": 28
+      },
+      {
+        "iteration": 75,
+        "new_lines_count": 6,
+        "total_covered": 34
+      },
+      {
+        "iteration": 147,
+        "new_lines_count": 6,
+        "total_covered": 40
+      },
+      {
+        "iteration": 235,
+        "new_lines_count": 6,
+        "total_covered": 46
+      }
+    ],
+    "corpus_growth": [
+      {
+        "iteration": 100,
+        "corpus_size": 7,
+        "total_covered": 34
+      },
+      {
+        "iteration": 200,
+        "corpus_size": 8,
+        "total_covered": 40
+      }
+    ],
+    "crashes": [
+      {
+        "iteration": 285,
+        "input_hex": "4947573101011800180000000000000041414141414141414141414141414141414141414141414162070000",
+        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/greybox_s27_crash_0.bin",
+        "asan_signature": "#0 0x7b5472528d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117"
+      }
+    ]
+  },
+  {
+    "fuzzer": "greybox",
+    "seed": 28,
+    "budget": 5000,
+    "iterations_used": 285,
+    "wall_time_seconds": 6.865,
+    "exec_per_sec": 41.5,
+    "first_crash_at": 285,
+    "time_to_first_crash_seconds": 6.864493,
+    "total_crashes": 1,
+    "total_lines_covered": 46,
+    "coverage_history": [
+      {
+        "iteration": 1,
+        "new_lines_count": 28,
+        "total_covered": 28
+      },
+      {
+        "iteration": 75,
+        "new_lines_count": 6,
+        "total_covered": 34
+      },
+      {
+        "iteration": 147,
+        "new_lines_count": 6,
+        "total_covered": 40
+      },
+      {
+        "iteration": 235,
+        "new_lines_count": 6,
+        "total_covered": 46
+      }
+    ],
+    "corpus_growth": [
+      {
+        "iteration": 100,
+        "corpus_size": 7,
+        "total_covered": 34
+      },
+      {
+        "iteration": 200,
+        "corpus_size": 8,
+        "total_covered": 40
+      }
+    ],
+    "crashes": [
+      {
+        "iteration": 285,
+        "input_hex": "4947573101011800180000000000000041414141414141414141414141414141414141414141414162070000",
+        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/greybox_s28_crash_0.bin",
+        "asan_signature": "#0 0x75e34a528d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117"
+      }
+    ]
+  },
+  {
+    "fuzzer": "greybox",
+    "seed": 29,
+    "budget": 5000,
+    "iterations_used": 285,
+    "wall_time_seconds": 7.498,
+    "exec_per_sec": 38.0,
+    "first_crash_at": 285,
+    "time_to_first_crash_seconds": 7.497611,
+    "total_crashes": 1,
+    "total_lines_covered": 46,
+    "coverage_history": [
+      {
+        "iteration": 1,
+        "new_lines_count": 28,
+        "total_covered": 28
+      },
+      {
+        "iteration": 75,
+        "new_lines_count": 6,
+        "total_covered": 34
+      },
+      {
+        "iteration": 147,
+        "new_lines_count": 6,
+        "total_covered": 40
+      },
+      {
+        "iteration": 235,
+        "new_lines_count": 6,
+        "total_covered": 46
+      }
+    ],
+    "corpus_growth": [
+      {
+        "iteration": 100,
+        "corpus_size": 7,
+        "total_covered": 34
+      },
+      {
+        "iteration": 200,
+        "corpus_size": 8,
+        "total_covered": 40
+      }
+    ],
+    "crashes": [
+      {
+        "iteration": 285,
+        "input_hex": "4947573101011800180000000000000041414141414141414141414141414141414141414141414162070000",
+        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/greybox_s29_crash_0.bin",
+        "asan_signature": "#0 0x739513328d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117"
+      }
+    ]
+  }
+]

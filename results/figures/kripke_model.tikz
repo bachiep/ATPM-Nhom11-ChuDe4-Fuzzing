@@ -1,0 +1,17 @@
+% Sơ đồ chuyển trạng thái Kripke: securegate_iot_packet_parser
+% Nhóm 11 — Lưu Đức Hiệp & Hà Nguyễn Trúc Linh
+\begin{tikzpicture}[
+  every node/.style={draw, circle, inner sep=2pt, minimum size=9mm, align=center, font=\scriptsize},
+  ->, >=stealth, thick, auto
+]
+  \node[fill=blue!20] (nd_idle) at (0.0, 1.5) {gw\_idle\\{\tiny safe}};
+  \node[fill=gray!15] (nd_reg) at (-2.5, 0.0) {rx\_reg\\{\tiny reg\_processing}};
+  \node[fill=gray!15] (nd_unlock) at (2.5, 0.0) {rx\_unlock\\{\tiny unlock\_processing}};
+  \node[fill=red!35] (nd_race) at (0.0, -1.8) {gw\_race\_hazard\\{\tiny violation,reg,unlock}};
+  \draw (nd_idle) -- (nd_reg);
+  \draw (nd_idle) -- (nd_unlock);
+  \draw (nd_reg) -- (nd_idle);
+  \draw (nd_reg) -- (nd_race);
+  \draw (nd_unlock) -- (nd_idle);
+  \draw (nd_race) -- (nd_idle);
+\end{tikzpicture}

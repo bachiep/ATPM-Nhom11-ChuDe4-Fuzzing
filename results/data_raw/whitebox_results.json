@@ -1,0 +1,632 @@
+[
+  {
+    "fuzzer": "whitebox",
+    "seed": 0,
+    "budget": 5000,
+    "iterations_used": 1,
+    "wall_time_seconds": 0.307706,
+    "exec_per_sec": 3.2,
+    "z3_solve_time": 0.021554,
+    "first_crash_at": 0,
+    "time_to_first_crash_seconds": 0.307041,
+    "total_crashes": 1,
+    "crashes": [
+      {
+        "iteration": 0,
+        "input_hex": "49475731010118001800000000000000505050505050505050505050505050505050505050505050ca080000",
+        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/whitebox_s0_crash_0.bin",
+        "asan_signature": "#0 0x7212fe328d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117",
+        "method": "z3_direct"
+      }
+    ]
+  },
+  {
+    "fuzzer": "whitebox",
+    "seed": 1,
+    "budget": 5000,
+    "iterations_used": 1,
+    "wall_time_seconds": 0.172122,
+    "exec_per_sec": 5.8,
+    "z3_solve_time": 0.007404,
+    "first_crash_at": 0,
+    "time_to_first_crash_seconds": 0.171364,
+    "total_crashes": 1,
+    "crashes": [
+      {
+        "iteration": 0,
+        "input_hex": "49475731010118001800000000000000505050505050505050505050505050505050505050505050ca080000",
+        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/whitebox_s1_crash_0.bin",
+        "asan_signature": "#0 0x7ba1be928d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117",
+        "method": "z3_direct"
+      }
+    ]
+  },
+  {
+    "fuzzer": "whitebox",
+    "seed": 2,
+    "budget": 5000,
+    "iterations_used": 1,
+    "wall_time_seconds": 0.168165,
+    "exec_per_sec": 5.9,
+    "z3_solve_time": 0.006657,
+    "first_crash_at": 0,
+    "time_to_first_crash_seconds": 0.166831,
+    "total_crashes": 1,
+    "crashes": [
+      {
+        "iteration": 0,
+        "input_hex": "49475731010118001800000000000000505050505050505050505050505050505050505050505050ca080000",
+        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/whitebox_s2_crash_0.bin",
+        "asan_signature": "#0 0x79538c328d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117",
+        "method": "z3_direct"
+      }
+    ]
+  },
+  {
+    "fuzzer": "whitebox",
+    "seed": 3,
+    "budget": 5000,
+    "iterations_used": 1,
+    "wall_time_seconds": 0.170575,
+    "exec_per_sec": 5.9,
+    "z3_solve_time": 0.006862,
+    "first_crash_at": 0,
+    "time_to_first_crash_seconds": 0.169831,
+    "total_crashes": 1,
+    "crashes": [
+      {
+        "iteration": 0,
+        "input_hex": "49475731010118001800000000000000505050505050505050505050505050505050505050505050ca080000",
+        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/whitebox_s3_crash_0.bin",
+        "asan_signature": "#0 0x756e75d28d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117",
+        "method": "z3_direct"
+      }
+    ]
+  },
+  {
+    "fuzzer": "whitebox",
+    "seed": 4,
+    "budget": 5000,
+    "iterations_used": 1,
+    "wall_time_seconds": 0.165115,
+    "exec_per_sec": 6.1,
+    "z3_solve_time": 0.00435,
+    "first_crash_at": 0,
+    "time_to_first_crash_seconds": 0.163795,
+    "total_crashes": 1,
+    "crashes": [
+      {
+        "iteration": 0,
+        "input_hex": "49475731010118001800000000000000505050505050505050505050505050505050505050505050ca080000",
+        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/whitebox_s4_crash_0.bin",
+        "asan_signature": "#0 0x76d3c0728d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117",
+        "method": "z3_direct"
+      }
+    ]
+  },
+  {
+    "fuzzer": "whitebox",
+    "seed": 5,
+    "budget": 5000,
+    "iterations_used": 1,
+    "wall_time_seconds": 0.182182,
+    "exec_per_sec": 5.5,
+    "z3_solve_time": 0.005266,
+    "first_crash_at": 0,
+    "time_to_first_crash_seconds": 0.181622,
+    "total_crashes": 1,
+    "crashes": [
+      {
+        "iteration": 0,
+        "input_hex": "49475731010118001800000000000000505050505050505050505050505050505050505050505050ca080000",
+        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/whitebox_s5_crash_0.bin",
+        "asan_signature": "#0 0x7fc360b28d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117",
+        "method": "z3_direct"
+      }
+    ]
+  },
+  {
+    "fuzzer": "whitebox",
+    "seed": 6,
+    "budget": 5000,
+    "iterations_used": 1,
+    "wall_time_seconds": 0.164229,
+    "exec_per_sec": 6.1,
+    "z3_solve_time": 0.004126,
+    "first_crash_at": 0,
+    "time_to_first_crash_seconds": 0.163152,
+    "total_crashes": 1,
+    "crashes": [
+      {
+        "iteration": 0,
+        "input_hex": "49475731010118001800000000000000505050505050505050505050505050505050505050505050ca080000",
+        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/whitebox_s6_crash_0.bin",
+        "asan_signature": "#0 0x7cda0bb28d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117",
+        "method": "z3_direct"
+      }
+    ]
+  },
+  {
+    "fuzzer": "whitebox",
+    "seed": 7,
+    "budget": 5000,
+    "iterations_used": 1,
+    "wall_time_seconds": 0.175381,
+    "exec_per_sec": 5.7,
+    "z3_solve_time": 0.003826,
+    "first_crash_at": 0,
+    "time_to_first_crash_seconds": 0.174572,
+    "total_crashes": 1,
+    "crashes": [
+      {
+        "iteration": 0,
+        "input_hex": "49475731010118001800000000000000505050505050505050505050505050505050505050505050ca080000",
+        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/whitebox_s7_crash_0.bin",
+        "asan_signature": "#0 0x7cad81128d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117",
+        "method": "z3_direct"
+      }
+    ]
+  },
+  {
+    "fuzzer": "whitebox",
+    "seed": 8,
+    "budget": 5000,
+    "iterations_used": 1,
+    "wall_time_seconds": 0.164621,
+    "exec_per_sec": 6.1,
+    "z3_solve_time": 0.004323,
+    "first_crash_at": 0,
+    "time_to_first_crash_seconds": 0.164045,
+    "total_crashes": 1,
+    "crashes": [
+      {
+        "iteration": 0,
+        "input_hex": "49475731010118001800000000000000505050505050505050505050505050505050505050505050ca080000",
+        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/whitebox_s8_crash_0.bin",
+        "asan_signature": "#0 0x72798f728d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117",
+        "method": "z3_direct"
+      }
+    ]
+  },
+  {
+    "fuzzer": "whitebox",
+    "seed": 9,
+    "budget": 5000,
+    "iterations_used": 1,
+    "wall_time_seconds": 0.172573,
+    "exec_per_sec": 5.8,
+    "z3_solve_time": 0.00394,
+    "first_crash_at": 0,
+    "time_to_first_crash_seconds": 0.17189,
+    "total_crashes": 1,
+    "crashes": [
+      {
+        "iteration": 0,
+        "input_hex": "49475731010118001800000000000000505050505050505050505050505050505050505050505050ca080000",
+        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/whitebox_s9_crash_0.bin",
+        "asan_signature": "#0 0x7bd273d28d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117",
+        "method": "z3_direct"
+      }
+    ]
+  },
+  {
+    "fuzzer": "whitebox",
+    "seed": 10,
+    "budget": 5000,
+    "iterations_used": 1,
+    "wall_time_seconds": 0.166625,
+    "exec_per_sec": 6.0,
+    "z3_solve_time": 0.003812,
+    "first_crash_at": 0,
+    "time_to_first_crash_seconds": 0.165437,
+    "total_crashes": 1,
+    "crashes": [
+      {
+        "iteration": 0,
+        "input_hex": "49475731010118001800000000000000505050505050505050505050505050505050505050505050ca080000",
+        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/whitebox_s10_crash_0.bin",
+        "asan_signature": "#0 0x72258c928d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117",
+        "method": "z3_direct"
+      }
+    ]
+  },
+  {
+    "fuzzer": "whitebox",
+    "seed": 11,
+    "budget": 5000,
+    "iterations_used": 1,
+    "wall_time_seconds": 0.174875,
+    "exec_per_sec": 5.7,
+    "z3_solve_time": 0.004173,
+    "first_crash_at": 0,
+    "time_to_first_crash_seconds": 0.174347,
+    "total_crashes": 1,
+    "crashes": [
+      {
+        "iteration": 0,
+        "input_hex": "49475731010118001800000000000000505050505050505050505050505050505050505050505050ca080000",
+        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/whitebox_s11_crash_0.bin",
+        "asan_signature": "#0 0x744bed328d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117",
+        "method": "z3_direct"
+      }
+    ]
+  },
+  {
+    "fuzzer": "whitebox",
+    "seed": 12,
+    "budget": 5000,
+    "iterations_used": 1,
+    "wall_time_seconds": 0.169051,
+    "exec_per_sec": 5.9,
+    "z3_solve_time": 0.003891,
+    "first_crash_at": 0,
+    "time_to_first_crash_seconds": 0.168159,
+    "total_crashes": 1,
+    "crashes": [
+      {
+        "iteration": 0,
+        "input_hex": "49475731010118001800000000000000505050505050505050505050505050505050505050505050ca080000",
+        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/whitebox_s12_crash_0.bin",
+        "asan_signature": "#0 0x70cfe6928d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117",
+        "method": "z3_direct"
+      }
+    ]
+  },
+  {
+    "fuzzer": "whitebox",
+    "seed": 13,
+    "budget": 5000,
+    "iterations_used": 1,
+    "wall_time_seconds": 0.180065,
+    "exec_per_sec": 5.6,
+    "z3_solve_time": 0.003949,
+    "first_crash_at": 0,
+    "time_to_first_crash_seconds": 0.179373,
+    "total_crashes": 1,
+    "crashes": [
+      {
+        "iteration": 0,
+        "input_hex": "49475731010118001800000000000000505050505050505050505050505050505050505050505050ca080000",
+        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/whitebox_s13_crash_0.bin",
+        "asan_signature": "#0 0x7dd943f28d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117",
+        "method": "z3_direct"
+      }
+    ]
+  },
+  {
+    "fuzzer": "whitebox",
+    "seed": 14,
+    "budget": 5000,
+    "iterations_used": 1,
+    "wall_time_seconds": 0.176632,
+    "exec_per_sec": 5.7,
+    "z3_solve_time": 0.003856,
+    "first_crash_at": 0,
+    "time_to_first_crash_seconds": 0.175638,
+    "total_crashes": 1,
+    "crashes": [
+      {
+        "iteration": 0,
+        "input_hex": "49475731010118001800000000000000505050505050505050505050505050505050505050505050ca080000",
+        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/whitebox_s14_crash_0.bin",
+        "asan_signature": "#0 0x72b395728d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117",
+        "method": "z3_direct"
+      }
+    ]
+  },
+  {
+    "fuzzer": "whitebox",
+    "seed": 15,
+    "budget": 5000,
+    "iterations_used": 1,
+    "wall_time_seconds": 0.168038,
+    "exec_per_sec": 6.0,
+    "z3_solve_time": 0.004013,
+    "first_crash_at": 0,
+    "time_to_first_crash_seconds": 0.167544,
+    "total_crashes": 1,
+    "crashes": [
+      {
+        "iteration": 0,
+        "input_hex": "49475731010118001800000000000000505050505050505050505050505050505050505050505050ca080000",
+        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/whitebox_s15_crash_0.bin",
+        "asan_signature": "#0 0x76d766728d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117",
+        "method": "z3_direct"
+      }
+    ]
+  },
+  {
+    "fuzzer": "whitebox",
+    "seed": 16,
+    "budget": 5000,
+    "iterations_used": 1,
+    "wall_time_seconds": 0.167567,
+    "exec_per_sec": 6.0,
+    "z3_solve_time": 0.003797,
+    "first_crash_at": 0,
+    "time_to_first_crash_seconds": 0.166875,
+    "total_crashes": 1,
+    "crashes": [
+      {
+        "iteration": 0,
+        "input_hex": "49475731010118001800000000000000505050505050505050505050505050505050505050505050ca080000",
+        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/whitebox_s16_crash_0.bin",
+        "asan_signature": "#0 0x7e6ee8528d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117",
+        "method": "z3_direct"
+      }
+    ]
+  },
+  {
+    "fuzzer": "whitebox",
+    "seed": 17,
+    "budget": 5000,
+    "iterations_used": 1,
+    "wall_time_seconds": 0.167353,
+    "exec_per_sec": 6.0,
+    "z3_solve_time": 0.004,
+    "first_crash_at": 0,
+    "time_to_first_crash_seconds": 0.166608,
+    "total_crashes": 1,
+    "crashes": [
+      {
+        "iteration": 0,
+        "input_hex": "49475731010118001800000000000000505050505050505050505050505050505050505050505050ca080000",
+        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/whitebox_s17_crash_0.bin",
+        "asan_signature": "#0 0x738fd3728d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117",
+        "method": "z3_direct"
+      }
+    ]
+  },
+  {
+    "fuzzer": "whitebox",
+    "seed": 18,
+    "budget": 5000,
+    "iterations_used": 1,
+    "wall_time_seconds": 0.163408,
+    "exec_per_sec": 6.1,
+    "z3_solve_time": 0.003979,
+    "first_crash_at": 0,
+    "time_to_first_crash_seconds": 0.162607,
+    "total_crashes": 1,
+    "crashes": [
+      {
+        "iteration": 0,
+        "input_hex": "49475731010118001800000000000000505050505050505050505050505050505050505050505050ca080000",
+        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/whitebox_s18_crash_0.bin",
+        "asan_signature": "#0 0x7203a2f28d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117",
+        "method": "z3_direct"
+      }
+    ]
+  },
+  {
+    "fuzzer": "whitebox",
+    "seed": 19,
+    "budget": 5000,
+    "iterations_used": 1,
+    "wall_time_seconds": 0.174443,
+    "exec_per_sec": 5.7,
+    "z3_solve_time": 0.004082,
+    "first_crash_at": 0,
+    "time_to_first_crash_seconds": 0.174043,
+    "total_crashes": 1,
+    "crashes": [
+      {
+        "iteration": 0,
+        "input_hex": "49475731010118001800000000000000505050505050505050505050505050505050505050505050ca080000",
+        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/whitebox_s19_crash_0.bin",
+        "asan_signature": "#0 0x72220ab28d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117",
+        "method": "z3_direct"
+      }
+    ]
+  },
+  {
+    "fuzzer": "whitebox",
+    "seed": 20,
+    "budget": 5000,
+    "iterations_used": 1,
+    "wall_time_seconds": 0.165201,
+    "exec_per_sec": 6.1,
+    "z3_solve_time": 0.00405,
+    "first_crash_at": 0,
+    "time_to_first_crash_seconds": 0.164395,
+    "total_crashes": 1,
+    "crashes": [
+      {
+        "iteration": 0,
+        "input_hex": "49475731010118001800000000000000505050505050505050505050505050505050505050505050ca080000",
+        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/whitebox_s20_crash_0.bin",
+        "asan_signature": "#0 0x75fc48528d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117",
+        "method": "z3_direct"
+      }
+    ]
+  },
+  {
+    "fuzzer": "whitebox",
+    "seed": 21,
+    "budget": 5000,
+    "iterations_used": 1,
+    "wall_time_seconds": 0.176096,
+    "exec_per_sec": 5.7,
+    "z3_solve_time": 0.004077,
+    "first_crash_at": 0,
+    "time_to_first_crash_seconds": 0.175542,
+    "total_crashes": 1,
+    "crashes": [
+      {
+        "iteration": 0,
+        "input_hex": "49475731010118001800000000000000505050505050505050505050505050505050505050505050ca080000",
+        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/whitebox_s21_crash_0.bin",
+        "asan_signature": "#0 0x73e647128d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117",
+        "method": "z3_direct"
+      }
+    ]
+  },
+  {
+    "fuzzer": "whitebox",
+    "seed": 22,
+    "budget": 5000,
+    "iterations_used": 1,
+    "wall_time_seconds": 0.175963,
+    "exec_per_sec": 5.7,
+    "z3_solve_time": 0.004127,
+    "first_crash_at": 0,
+    "time_to_first_crash_seconds": 0.174896,
+    "total_crashes": 1,
+    "crashes": [
+      {
+        "iteration": 0,
+        "input_hex": "49475731010118001800000000000000505050505050505050505050505050505050505050505050ca080000",
+        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/whitebox_s22_crash_0.bin",
+        "asan_signature": "#0 0x754efdd28d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117",
+        "method": "z3_direct"
+      }
+    ]
+  },
+  {
+    "fuzzer": "whitebox",
+    "seed": 23,
+    "budget": 5000,
+    "iterations_used": 1,
+    "wall_time_seconds": 0.162561,
+    "exec_per_sec": 6.2,
+    "z3_solve_time": 0.003833,
+    "first_crash_at": 0,
+    "time_to_first_crash_seconds": 0.161863,
+    "total_crashes": 1,
+    "crashes": [
+      {
+        "iteration": 0,
+        "input_hex": "49475731010118001800000000000000505050505050505050505050505050505050505050505050ca080000",
+        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/whitebox_s23_crash_0.bin",
+        "asan_signature": "#0 0x76da11328d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117",
+        "method": "z3_direct"
+      }
+    ]
+  },
+  {
+    "fuzzer": "whitebox",
+    "seed": 24,
+    "budget": 5000,
+    "iterations_used": 1,
+    "wall_time_seconds": 0.167726,
+    "exec_per_sec": 6.0,
+    "z3_solve_time": 0.003838,
+    "first_crash_at": 0,
+    "time_to_first_crash_seconds": 0.166522,
+    "total_crashes": 1,
+    "crashes": [
+      {
+        "iteration": 0,
+        "input_hex": "49475731010118001800000000000000505050505050505050505050505050505050505050505050ca080000",
+        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/whitebox_s24_crash_0.bin",
+        "asan_signature": "#0 0x7858ec928d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117",
+        "method": "z3_direct"
+      }
+    ]
+  },
+  {
+    "fuzzer": "whitebox",
+    "seed": 25,
+    "budget": 5000,
+    "iterations_used": 1,
+    "wall_time_seconds": 0.165324,
+    "exec_per_sec": 6.0,
+    "z3_solve_time": 0.004265,
+    "first_crash_at": 0,
+    "time_to_first_crash_seconds": 0.164733,
+    "total_crashes": 1,
+    "crashes": [
+      {
+        "iteration": 0,
+        "input_hex": "49475731010118001800000000000000505050505050505050505050505050505050505050505050ca080000",
+        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/whitebox_s25_crash_0.bin",
+        "asan_signature": "#0 0x71716db28d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117",
+        "method": "z3_direct"
+      }
+    ]
+  },
+  {
+    "fuzzer": "whitebox",
+    "seed": 26,
+    "budget": 5000,
+    "iterations_used": 1,
+    "wall_time_seconds": 0.176881,
+    "exec_per_sec": 5.7,
+    "z3_solve_time": 0.003977,
+    "first_crash_at": 0,
+    "time_to_first_crash_seconds": 0.175744,
+    "total_crashes": 1,
+    "crashes": [
+      {
+        "iteration": 0,
+        "input_hex": "49475731010118001800000000000000505050505050505050505050505050505050505050505050ca080000",
+        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/whitebox_s26_crash_0.bin",
+        "asan_signature": "#0 0x7f2630328d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117",
+        "method": "z3_direct"
+      }
+    ]
+  },
+  {
+    "fuzzer": "whitebox",
+    "seed": 27,
+    "budget": 5000,
+    "iterations_used": 1,
+    "wall_time_seconds": 0.177099,
+    "exec_per_sec": 5.6,
+    "z3_solve_time": 0.003917,
+    "first_crash_at": 0,
+    "time_to_first_crash_seconds": 0.176443,
+    "total_crashes": 1,
+    "crashes": [
+      {
+        "iteration": 0,
+        "input_hex": "49475731010118001800000000000000505050505050505050505050505050505050505050505050ca080000",
+        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/whitebox_s27_crash_0.bin",
+        "asan_signature": "#0 0x73179d928d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117",
+        "method": "z3_direct"
+      }
+    ]
+  },
+  {
+    "fuzzer": "whitebox",
+    "seed": 28,
+    "budget": 5000,
+    "iterations_used": 1,
+    "wall_time_seconds": 0.195346,
+    "exec_per_sec": 5.1,
+    "z3_solve_time": 0.00643,
+    "first_crash_at": 0,
+    "time_to_first_crash_seconds": 0.194336,
+    "total_crashes": 1,
+    "crashes": [
+      {
+        "iteration": 0,
+        "input_hex": "49475731010118001800000000000000505050505050505050505050505050505050505050505050ca080000",
+        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/whitebox_s28_crash_0.bin",
+        "asan_signature": "#0 0x7c88d8728d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117",
+        "method": "z3_direct"
+      }
+    ]
+  },
+  {
+    "fuzzer": "whitebox",
+    "seed": 29,
+    "budget": 5000,
+    "iterations_used": 1,
+    "wall_time_seconds": 0.173965,
+    "exec_per_sec": 5.7,
+    "z3_solve_time": 0.003813,
+    "first_crash_at": 0,
+    "time_to_first_crash_seconds": 0.173414,
+    "total_crashes": 1,
+    "crashes": [
+      {
+        "iteration": 0,
+        "input_hex": "49475731010118001800000000000000505050505050505050505050505050505050505050505050ca080000",
+        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/whitebox_s29_crash_0.bin",
+        "asan_signature": "#0 0x7a420a728d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117",
+        "method": "z3_direct"
+      }
+    ]
+  }
+]
