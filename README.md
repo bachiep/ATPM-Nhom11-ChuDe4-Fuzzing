@@ -8,10 +8,10 @@
 ### Thông tin Nhóm 11
 **Kho lưu trữ GitHub chính thức:** [https://github.com/bachiep/ATPM-Nhom11-ChuDe4-Fuzzing](https://github.com/bachiep/ATPM-Nhom11-ChuDe4-Fuzzing)
 
-| STT | Họ và Tên | Mã Sinh Viên | Vai Trò | Tỷ lệ Đóng góp | GitHub Account |
-|:---:|:---|:---:|:---:|:---:|:---:|
-| 1 | **Lưu Đức Hiệp** | 22010174 | Trưởng nhóm | 50% | [@bachiep](https://github.com/bachiep) |
-| 2 | **Hà Nguyễn Trúc Linh** | 22010198 | Thành viên | 50% | [@tomchienxuu](https://github.com/tomchienxuu) |
+| STT | Họ và Tên | Mã Sinh Viên | Khóa | Vai Trò | Tỷ lệ Đóng góp | GitHub Account |
+|:---:|:---|:---:|:---:|:---:|:---:|:---:|
+| 1 | **Lưu Đức Hiệp** | | | Trưởng nhóm | 50% | [@bachiep](https://github.com/bachiep) |
+| 2 | **Hà Nguyễn Trúc Linh** | | | Thành viên | 50% | [@tomchienxuu](https://github.com/tomchienxuu) |
 
 ---
 
