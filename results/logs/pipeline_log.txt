@@ -1,0 +1,83 @@
+==========================================================================
+BÁO CÁO PIPELINE — Đặc tả: securegate_iot_packet_parser
+==========================================================================
+
+[Chương 1] Kiểm chứng hình thức (Kripke/CTL)
+  Trạng thái deadlock: không có
+  AG(!violation)       -> VI PHAM (thoa tai: [])
+  EF(reg_processing)   -> DUNG (thoa tai: ['gw_idle', 'gw_race_hazard', 'rx_reg_packet', 'rx_unlock_packet'])
+  EF(unlock_processing) -> DUNG (thoa tai: ['gw_idle', 'gw_race_hazard', 'rx_reg_packet', 'rx_unlock_packet'])
+  Mutual exclusion    -> VI PHAM (trang thai nguy hiem: ['gw_idle', 'gw_race_hazard', 'rx_reg_packet', 'rx_unlock_packet'])
+
+[Chương 2] Static C Checker trên mã sinh từ đặc tả
+  Phát hiện 4 vấn đề:
+    [dong    8] HIGH   dangerous-function Sử dụng hàm không an toàn 'strcpy()' — dễ gây buffer overflow. Goi y: dung strncpy thay the.
+    [dong   14] MEDIUM memory-leak      Con trỏ 'buf' được cấp phát (malloc/calloc/realloc) nhưng không thấy free() trong hàm log_securegate_audit_event() — nghi ngờ rò rỉ bộ nhớ
+    [dong   24] HIGH   double-free      Double-free trên con trỏ 'buf' (đã free() tại dòng 23) trong hàm terminate_securegate_session()
+    [dong   32] HIGH   use-after-free   Khả năng sử dụng con trỏ 'buf' sau khi free() (freed tại dòng 31) trong hàm cleanup_stream_buffer()
+
+[Chương 3] Trích xuất AST/điều kiện + SMT (Z3)
+  parse_securegate_device_id: bien=['buffer'] dieu_kien=[] vong_lap=[]
+      -> độ phức tạp McCabe=1, độ sâu lồng nhau=1, so cau lenh~=3
+  log_securegate_audit_event: bien=['buf'] dieu_kien=[] vong_lap=[]
+      -> độ phức tạp McCabe=1, độ sâu lồng nhau=1, so cau lenh~=2
+  terminate_securegate_session: bien=['buf'] dieu_kien=[] vong_lap=[]
+      -> độ phức tạp McCabe=1, độ sâu lồng nhau=1, so cau lenh~=4
+  cleanup_stream_buffer: bien=['buf'] dieu_kien=[] vong_lap=[]
+      -> độ phức tạp McCabe=1, độ sâu lồng nhau=1, so cau lenh~=4
+  calculate_gateway_drop_ratio: bien=[] dieu_kien=[] vong_lap=[]
+      -> độ phức tạp McCabe=1, độ sâu lồng nhau=1, so cau lenh~=0
+  verify_securegate_unlock_guard: bien=[] dieu_kien=['unlock_a == 7421', 'unlock_b == 3390'] vong_lap=[]
+      -> độ phức tạp McCabe=3, độ sâu lồng nhau=3, so cau lenh~=3
+  securegate_checksum_accumulator: sat model={'header_checksum': 2000000001, 'payload_checksum': 0}
+  securegate_checksum_accumulator (int32 overflow?): sat model={'header_checksum': 1, 'payload_checksum': 2147483647}
+
+[Chương 4] Dynamic Fuzzing trên hàm sinh từ đặc tả
+  calculate_gateway_drop_ratio: black-box: 11/300 lan crash
+  verify_securegate_unlock_guard: concolic: crash_input={'unlock_a': 7421, 'unlock_b': 3390} sau 3 lan thu
+
+[Phân loại CWE/CVE] Tổng hợp toàn bộ phát hiện
+  Phân loại 9 phát hiện theo CWE/CVE:
+    [ch1] cong thuc AG(!violation): safety-property-violation -> CWE-693 (Protection Mechanism Failure)
+    [ch1] mô hình trạng thái: mutual-exclusion-violation -> CWE-667 (Improper Locking)
+    [ch2] dong 8: dangerous-function -> CWE-120 (Buffer Copy without Checking Size of Input)
+        vi du minh hoa: CVE-2003-0352 (2003) — Lỗi tràn bộ đệm trong dịch vụ RPC/DCOM của Windows (khai thác bởi sâu MSBlast).
+    [ch2] dong 14: memory-leak -> CWE-401 (Missing Release of Memory after Effective Lifetime)
+    [ch2] dong 24: double-free -> CWE-415 (Double Free)
+    [ch2] dong 32: use-after-free -> CWE-416 (Use After Free)
+        vi du minh hoa: CVE-2019-0708 (2019) — 'BlueKeep' — lỗi use-after-free trong dịch vụ Remote Desktop của Windows.
+    [ch3] securegate_checksum_accumulator: integer-overflow -> CWE-190 (Integer Overflow or Wraparound)
+        vi du minh hoa: CVE-2016-5195 (2016) — 'Dirty COW' — điều kiện tranh chấp liên quan tới xử lý bộ nhớ trong Linux kernel.
+    [ch4] calculate_gateway_drop_ratio: uncontrolled-crash -> CWE-248 (Uncaught Exception)
+    [ch4] verify_securegate_unlock_guard: uncontrolled-crash -> CWE-248 (Uncaught Exception)
+
+[Test Case] Truy vết từ đặc tả (tài liệu hóa)
+  6 test case được khai báo trong đặc tả:
+    [HIGH] TC-SG-01 — Kiểm chứng xung đột đồng thời giữa xử lý Registration và Unlock  (truy vet: REQ-SG-01, REQ-SG-02)
+        Tien dieu kien: Hệ thống ở trạng thái gw_idle
+        Buoc 1: Tiến trình nhận gói Registration kích hoạt trạng thái rx_reg_packet
+        Buoc 2: Đồng thời tiến trình Unlock kích hoạt trạng thái rx_unlock_packet
+        Buoc 3: Kiểm chứng mô hình Kripke bằng thuật toán Model Checking
+        Kết quả mong đợi: Mô hình chuyển vào trạng thái gw_race_hazard làm thuộc tính AG(!violation) bị SAI (phát hiện phản ví dụ)
+    [HIGH] TC-SG-02 — Kiểm thử lỗi tràn bộ đệm khi device_id trong gói tin nhị phân vượt quá 16 bytes  (truy vet: REQ-SG-03)
+        Tien dieu kien: Hàm parse_securegate_device_id() sinh từ đặc tả với bug=buffer-overflow
+        Buoc 1: Sinh mã nguồn C cho hàm parse_securegate_device_id()
+        Buoc 2: Chạy công cụ phân tích tĩnh check_c_source()
+        Kết quả mong đợi: Phát hiện cảnh báo dangerous-function (CWE-120/121) do hàm strcpy sao chép vào buffer 16 bytes không kiểm tra biên
+    [HIGH] TC-SG-03 — Kiểm tra chu kỳ cấp phát và giải phóng tài nguyên bộ nhớ C  (truy vet: REQ-SG-04, REQ-SG-05, REQ-SG-06)
+        Tien dieu kien: Các hàm log_securegate_audit_event, terminate_securegate_session, cleanup_stream_buffer đã được sinh mã C
+        Buoc 1: Gộp toàn bộ mã C của các hàm quản lý tài nguyên
+        Buoc 2: Thực thi check_c_source() trên khối mã gộp
+        Kết quả mong đợi: Phát hiện đủ 3 lớp lỗ hổng bộ nhớ: Rò rỉ bộ nhớ (CWE-401), Giải phóng trùng lặp (CWE-415), và Truy cập sau giải phóng (CWE-416)
+    [MEDIUM] TC-SG-04 — Kiểm chứng nguy cơ tràn số nguyên 32-bit trong bộ cộng dồn checksum gói tin  (truy vet: REQ-SG-07)
+        Tien dieu kien: Hai biến header_checksum và payload_checksum không âm có tổng > 2 tỷ
+        Buoc 1: Thực thi kiểm tra check_int32_overflow() bằng Z3 SMT Solver trên biểu thức header_checksum + payload_checksum
+        Kết quả mong đợi: Z3 Solver trả về kết quả SAT cùng nghiệm phản ví dụ chứng minh biểu thức vượt giới hạn INT32_MAX
+    [MEDIUM] TC-SG-05 — Fuzzing hộp đen hàm tính toán tỷ lệ rớt gói calculate_gateway_drop_ratio  (truy vet: REQ-SG-08)
+        Tien dieu kien: Hàm Python calculate_gateway_drop_ratio(received_packets, dropped_packets) sinh từ đặc tả
+        Buoc 1: Chạy blackbox_fuzz() ngẫu nhiên 300 lượt thử
+        Kết quả mong đợi: Tìm thấy ít nhất 1 đầu vào có dropped_packets=0 kích hoạt crash ZeroDivisionError (CWE-369)
+    [LOW] TC-SG-06 — Kiểm thử Concolic giải ngược cặp mã mở khóa bí mật 32-bit (7421, 3390)  (truy vet: REQ-SG-09)
+        Tien dieu kien: Hàm Python verify_securegate_unlock_guard(unlock_a, unlock_b) với magic values=(7421, 3390)
+        Buoc 1: Chạy concolic_fuzz() với ngân sách tối đa 15 vòng lặp
+        Kết quả mong đợi: Thuật toán Concolic giải hệ phương trình đường đi thành công và tìm ra đúng cặp (7421, 3390) chỉ trong <= 15 lần thử
