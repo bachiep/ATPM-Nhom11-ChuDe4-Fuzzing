@@ -1,7 +1,8 @@
 # HƯỚNG DẪN KIỂM TRA & THẨM ĐỊNH TOÀN DIỆN DỰ ÁN BÀI TẬP LỚN
 ## Môn học: An Toàn Phần Mềm (CSE703093 / CSE703153) — ThS. Vũ Quang Dũng (ĐH Phenikaa)
 ### Đề tài 4: Dự án Fuzzing — Phân tích Cú pháp Gói tin Nhị phân SecureGate IoT Gateway
-### Nhóm thực hiện: Nhóm 11 — Lưu Đức Hiệp & Hà Nguyễn Trúc Linh
+### Nhóm thực hiện: Nhóm 11 — Lưu Đức Hiệp (22010174) & Hà Nguyễn Trúc Linh (22010198)
+**Kho lưu trữ GitHub:** [https://github.com/bachiep/ATPM-Nhom11-ChuDe4-Fuzzing](https://github.com/bachiep/ATPM-Nhom11-ChuDe4-Fuzzing)
 
 ---
 

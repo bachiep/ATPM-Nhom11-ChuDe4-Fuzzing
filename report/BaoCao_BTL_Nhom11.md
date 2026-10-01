@@ -10,12 +10,14 @@
 **Học kỳ / Năm học:** Học kỳ I — Năm học 2026–2027  
 **Nhóm thực hiện:** Nhóm 11 — Lớp CSE703093  
 
+**Kho lưu trữ mã nguồn GitHub:** [https://github.com/bachiep/ATPM-Nhom11-ChuDe4-Fuzzing](https://github.com/bachiep/ATPM-Nhom11-ChuDe4-Fuzzing)  
+
 | STT | Họ và tên | Mã sinh viên (MSSV) | Lớp | Vai trò & Nhiệm vụ |
 |:---:|---|:---:|:---:|---|
-| 1 | **Lưu Đức Hiệp** | *(Điền thông tin)* | *(Điền thông tin)* | Nhóm trưởng: Thiết kế target parser, cài đặt White-box Fuzzer (Z3), phân tích và vá lỗi CWE-121 |
-| 2 | **Hà Nguyễn Trúc Linh** | *(Điền thông tin)* | *(Điền thông tin)* | Thành viên: Cài đặt Black-box & Greybox Fuzzer, thực thi benchmark 30 trials, thống kê định lượng |
+| 1 | **Lưu Đức Hiệp** | 22010174 | K16-CNTT | Nhóm trưởng: Thiết kế target parser, cài đặt White-box Fuzzer (Z3), phân tích và vá lỗi CWE-121 |
+| 2 | **Hà Nguyễn Trúc Linh** | 22010198 | K16-CNTT | Thành viên: Cài đặt Black-box & Greybox Fuzzer, thực thi benchmark 30 trials, thống kê định lượng |
 
-*Hà Nội, Tháng 09 Năm 2026*
+*Hà Nội, Tháng 10 Năm 2026*
 
 ---
 
@@ -26,15 +28,18 @@
    - 2.1 Bối cảnh và Động lực
    - 2.2 Mục tiêu đề tài
    - 2.3 Mô tả kiến trúc và Attack Surface của Target Parser
-   - 2.4 Phạm vi thực hiện
+   - 2.4 Sự khác biệt bản chất: Tầng biên nhị phân vs Ứng dụng Web / Query CRUD
+   - 2.5 Cơ chế quản lý bộ nhớ & Vòng đời dữ liệu (Stack vs Heap, Tức thời vs Chờ xử lý)
+   - 2.6 Phạm vi thực hiện
 3. [Phần 3: Phương pháp luận](#phần-3--phương-pháp-luận)
    - 3.1 Quy trình 5 bước áp dụng
    - 3.2 Chiến lược Fuzzing Hộp đen (Black-box Fuzzing)
    - 3.3 Chiến lược Fuzzing Hộp trắng (White-box Fuzzing với Z3 SMT Solver)
    - 3.4 Chiến lược Fuzzing Hộp xám (Greybox Coverage-Guided Fuzzing)
+   - 3.5 Độ phức tạp ngữ nghĩa & Tính tất yếu toán học của Fuzzing thông minh
 4. [Phần 4: Phân tích Lỗ hổng & Bản vá (CWE-121)](#phần-4--phân-tích-lỗ-hổng--bản-vá)
    - 4.1 Vị trí lỗ hổng
-   - 4.2 Phân tích nguyên nhân gốc rễ (Root Cause)
+   - 4.2 Phân tích nguyên nhân gốc rễ (Root Cause & CERT C Rules)
    - 4.3 Bằng chứng trước khi vá (v0 — ASan Crash Trace)
    - 4.4 Kỹ thuật vá lỗi (So sánh chi tiết v0 vs v1)
    - 4.5 Bằng chứng kiểm chứng sau khi vá (v1 — 0 Finding)
@@ -46,6 +51,10 @@
    - 6.4 Phân tích Benchmark phụ: Rào cản 32-bit Unlock Code
    - 6.5 Kết quả Kiểm thử Tự động Toàn diện (PyTest 30 Test Cases)
    - 6.6 Kiểm chứng Đặc tả Hình thức với Công cụ Giảng viên (SpecVerificationLab)
+     + 6.6.1 Lý do thiết kế & Chi tiết 10 Sheet Đặc tả (SSOT)
+     + 6.6.2 Mô hình hóa Trạng thái Kripke & Kiểm soát Tài nguyên Lưu trữ
+     + 6.6.3 Khai thác 4 Chức năng Cốt lõi của SpecVerificationLab
+     + 6.6.4 Bảng tổng hợp 9 Phát hiện An ninh (CWE/CVE)
 7. [Phần 7: Phản biện & Bài học Kinh nghiệm](#phần-7--phản-biện--bài-học-kinh-nghiệm)
    - 7.1 Đánh giá thiết kế và giải pháp ngăn ngừa từ đầu
    - 7.2 Các nguy cơ bảo mật tiềm ẩn còn nghi ngờ
@@ -156,7 +165,90 @@ $$\text{Checksum} = \left(\sum_{i=0}^{16 + \text{payload\_len} - 1} \text{byte}_
 - **Attack Surface:** Điểm vào duy nhất là đối số đường dẫn file nhị phân `argv[1]` trong hàm `main()`. Dữ liệu được đọc hoàn toàn vào bộ nhớ và chuyển tới hàm xử lý trung tâm `parse_and_process()`.
 - **Kích thước mã nguồn:** File `source/gateway_parser.c` gồm **286 dòng mã C**, 5 hàm logic chính (`compute_checksum`, `is_ascii_printable`, `validate_header`, `parse_and_process`, `main`). Kích thước vừa phải, logic tường minh, thuận tiện cho việc kiểm chứng và truy vết chính xác từng byte dữ liệu.
 
-### 2.4 Phạm vi Thực hiện
+### 2.4 Sự Khác biệt Bản chất: Tầng Biên Mạng Nhị phân (Đề tài 4) so với Mô hình Ứng dụng Web / Query CRUD
+
+Một câu hỏi mang tính nguyên lý mà Giảng viên thường đặt ra: *Tại sao nhóm lại chọn làm bộ phân tích cú pháp gói tin mạng nhị phân, và nó khác biệt gì với đa số các đề tài ứng dụng khác (Web, CRUD, Database Query)?*
+
+| Tiêu chí So sánh | Mô hình Ứng dụng Web / Query CRUD (Các đề tài khác) | Mô hình Tầng Biên Nhị phân SecureGate IoT (Đề tài 4) |
+|---|---|---|
+| **Định dạng Dữ liệu Đầu vào** | Dữ liệu văn bản có cấu trúc cấp cao (Text-based / High-level: JSON, XML, Form-data, SQL Query string). | **Luồng byte nhị phân thô không tin cậy** (Untrusted Raw Binary Stream), giải mã theo từng byte và offset Little-Endian. |
+| **Môi trường & Cơ chế Bộ nhớ** | Chạy trên Runtime cấp cao (Node.js, JVM, .NET, Python) có Garbage Collection (GC) tự động quản lý bộ nhớ. | **Ngôn ngữ C thuần (Low-level ISO C99/C11)** trực tiếp thao tác con trỏ vật lý (`pointer arithmetic`), không có GC bảo vệ. |
+| **Tầng bảo vệ Trung gian** | Dữ liệu được các parser chuẩn hóa của Web server (Nginx, Express, Tomcat) tiền xử lý và bóc tách trước khi tới mã nguồn nghiệp vụ. | **Không có tầng trung gian (Direct Ingress)**: Parser là chốt chặn phòng thủ đầu tiên, tiếp xúc trực tiếp với socket mạng hoặc file nhị phân. |
+| **Bản chất Lỗ hổng Trọng tâm** | Lỗi logic nghiệp vụ, phân quyền (IDOR), hoặc tiêm lệnh (SQLi, Command Injection) do truy vấn trực tiếp không qua tham số hóa. | **Lỗi an toàn bộ nhớ mức thấp** (Memory Corruption: Stack/Heap Overflow, Use-After-Free, Double-Free, Integer Wrap-around). |
+| **Hậu quả khi bị Khai thác** | Rò rỉ dữ liệu bảng cơ sở dữ liệu, bypass đăng nhập ứng dụng. | **Làm sập tiến trình hệ thống (DoS Crash SEGV)** hoặc **Ghi đè con trỏ lệnh (Control Flow Hijacking - RIP/EIP)** để thực thi mã máy tùy ý. |
+
+**Ý nghĩa:** Trong khi các dự án ứng dụng kiểm thử việc "truy vấn dữ liệu có an toàn không", Đề tài 4 kiểm thử việc **"hệ thống có sống sót khi tiếp nhận và giải mã luồng byte tùy ý từ môi trường mạng không tin cậy hay không"**.
+
+### 2.5 Cơ chế Quản lý Bộ nhớ & Vòng đời Dữ liệu (Memory Lifecycle Architecture)
+
+Kiến trúc bộ nhớ của SecureGate IoT Gateway được thiết kế dựa trên sự phân tách có chủ đích giữa **Heap** và **Stack**, đáp ứng hai yêu cầu kỹ thuật đối nghịch trong hệ thống nhúng: **Khả năng chịu tải kích thước biến thiên** và **Độ trễ xử lý cực thấp (Microsecond Latency)**.
+
+```
+[LUỒNG DỮ LIỆU NGOẠI LAI VÀO CỔNG MẠNG / FILE DUMP]
+                     │
+                     ▼
+       ┌─────────────────────────────┐
+       │   CẤP PHÁT BỘ ĐỆM HEAP      │  malloc(file_size)
+       │  (Dung lượng biến thiên)    │  (Chứa toàn bộ 20..65555 bytes)
+       └──────────────┬──────────────┘
+                      │
+         ┌────────────┴────────────┐
+         │                         │
+         ▼                         ▼
+┌──────────────────┐      ┌─────────────────────────────┐
+│ XỬ LÝ TỨC THỜI   │      │ CHỜ XỬ LÝ SAU (DEFERRED)   │
+│ (IMMEDIATE)      │      │ (Zero-Copy Payload Queue)   │
+│ Trên STACK FRAME │      │                             │
+│                  │      │ Con trỏ:                    │
+│ 1. GatewayHeader │      │ const uint8_t *payload      │
+│    (16 bytes)    │      │ Chỉ tham chiếu vào Heap     │
+│ 2. device_id     │      │ Chưa giải mã ngay           │
+│    (16/17 bytes) │      │ Đẩy vào Ring Buffer / Queue │
+│ Fast Ingress     │      │ Worker thread xử lý sau     │
+│ Filter & Routing │      └─────────────────────────────┘
+└────────┬─────────┘
+         │
+    [KIỂM SOÁT BIÊN: NGUỒN GỐC LỖ HỔNG CWE-121]
+    - v0: device_id_len cho phép tới 32 bytes -> Tràn Stack 16 bytes!
+    - v1: device_id_len > 16 -> DROP ngay lập tức (Fail-Safe)!
+```
+
+#### 1. Cấp phát Vùng đệm Heap Toàn cục (Ingress Heap Allocation)
+- Khi một gói tin nhị phân đi vào hệ thống, kích thước thực tế của gói tin là biến thiên ($16 \le \text{size} \le 65,555$ bytes do `payload_len` là số nguyên 16-bit).
+- **Tại sao phải cấp phát trên Heap?** Trong các vi điều khiển hoặc hệ thống IoT nhúng (như FreeRTOS, Linux nhúng), kích thước ngăn xếp dành cho mỗi tác vụ (Task Stack) thường bị giới hạn rất hẹp (chỉ từ 4KB đến 16KB). Nếu lập trình viên cấp phát một mảng đệm tĩnh cực đại trên Stack (ví dụ `char buf[65536]`) hoặc dùng `alloca()`, nguy cơ làm sập ngăn xếp (Stack Overflow tự nhiên) sẽ xảy ra ngay lập tức. Do đó, việc dùng `malloc()` để đưa gói tin thô vào Heap là bắt buộc để cô lập rủi ro kích thước.
+
+#### 2. Cơ chế Xử lý Tức thời trên Ngăn xếp (Immediate Stack Inspection)
+- **Header 16 bytes (`GatewayHeader hdr`):** Được nạp và sao chép trực tiếp vào biến cấu trúc cục bộ trên **Stack Frame**.
+  * *Lý do Hiệu năng (Latency & Cache Locality):* IoT Gateway đóng vai trò là thiết bị định tuyến biên tiếp nhận hàng chục nghìn gói tin mỗi giây. Việc đưa 16 bytes Header vào Stack Frame cho phép CPU truy xuất các trường dữ liệu thông qua các thanh ghi hoặc bộ đệm L1 Cache với độ trễ tối ưu $O(1)$, hoàn toàn không tốn chi phí khóa luồng hệ thống của `malloc/free`.
+  * *Lý do An ninh (Fast-Fail Gatekeeper):* Dữ liệu Header cần được **thẩm định tức thời** (Immediate Inspection) ngay tại cửa ngõ: kiểm tra Magic Bytes (`"IGW1"`), Version, Checksum và quyền định tuyến. Nếu header sai lệch, hệ thống lập tức DROP gói tin, giải phóng bộ nhớ Heap và kết thúc hàm ngay trong microsecond đầu tiên. Cơ chế này giúp gateway ngăn chặn các cuộc tấn công DoS làm tràn hàng đợi xử lý.
+- **Trích xuất Định danh Thiết bị (`device_id`):**
+  * Trong gói Đăng ký (Registration), trường `device_id` được trích xuất vào biến cục bộ `device_id` trên Stack nhằm truy vấn tức thì Bảng định tuyến phiên (Session Routing Table) để cấp quyền kết nối.
+
+#### 3. Cơ chế Chờ Xử lý Sau (Deferred / Queued Processing)
+- **Dữ liệu Payload (Sensor Telemetry Data):**
+  * Phần payload (có thể dài tới hàng chục KB chứa dữ liệu đo đạc cảm biến) **tuyệt đối không được giải mã hay xử lý nghiệp vụ ngay lập tức** trong luồng tiếp nhận gói tin (Ingress Thread).
+  * Sau khi Header và Checksum được xác thực hợp lệ, con trỏ dữ liệu `payload` được giữ nguyên trên Heap dưới dạng **Zero-copy Reference** (`const uint8_t *payload`) và được đẩy vào một Hàng đợi Sự kiện (Ring Buffer / Event Queue).
+  * Các luồng công nhân (Worker Threads) ở tầng xử lý logic sau sẽ lấy dữ liệu từ hàng đợi để bóc tách, mã hóa và lưu vào cơ sở dữ liệu sau (Asynchronous Deferred Processing). Thiết kế này giải phóng Ingress Thread ngay lập tức để tiếp nhận các gói tin tiếp theo mà không bị nghẽn (Non-blocking I/O).
+
+#### 4. Phân tích Nguyên nhân Sinh ra Lỗ hổng CWE-121 và Cơ chế Kiểm soát
+- **Điểm phát sinh lỗi trong `v0`:** Chính vì mong muốn tối ưu hóa hiệu năng bằng cách dùng biến cục bộ trên Stack, lập trình viên đã khai báo `char device_id[16];`. Tuy nhiên, do sơ suất trong khâu kiểm soát biên ở tầng Ingress:
+  ```c
+  if (hdr.device_id_len > 32) return -1;  /* Cho phép tới 32 bytes */
+  char device_id[16];                     /* Bộ đệm đích chỉ có 16 bytes */
+  memcpy(device_id, payload, hdr.device_id_len); /* TRÀN NGĂN XẾP! */
+  ```
+  Lập trình viên đã nhầm lẫn giữa giới hạn độ dài payload và sức chứa của mảng stack. Lệnh `memcpy` sao chép 24–32 bytes vào bộ nhớ 16 bytes, ghi đè phá vỡ vùng bảo vệ (Redzone `[f3]`), đè lên Saved Frame Pointer (RBP) và Return Address (RIP) của hàm `parse_and_process()`.
+- **Cơ chế Kiểm soát Triệt để trong `v1`:**
+  Đồng bộ hóa tuyệt đối giữa Ingress Validation và Kích thước Bộ đệm:
+  ```c
+  if (hdr.device_id_len > 16) return -1;  /* Từ chối sớm dứt khoát */
+  char device_id[17];                     /* Cấp phát 16 + 1 byte '\0' */
+  memcpy(device_id, payload, hdr.device_id_len);
+  device_id[hdr.device_id_len] = '\0';   /* Bảo đảm kết thúc chuỗi (CERT STR31-C) */
+  ```
+  Bản vá đảm bảo mọi dữ liệu lưu vào Stack Frame đều nằm dưới sự kiểm soát biên tuyệt đối, không có bất kỳ byte nào được phép ghi tràn ra ngoài phạm vi cấp phát.
+
+### 2.6 Phạm vi Thực hiện
 - **Trong phạm vi:** Thiết kế parser nhị phân đơn mục tiêu; cài đặt và phân tích chuyên sâu 1 lỗi an toàn bộ nhớ cốt lõi (CWE-121); áp dụng phân tích tĩnh (Cppcheck), runtime sanitizers (ASan/UBSan), coverage tracking (`gcov`); thực nghiệm đo lường 3 chiến lược Fuzzing với số liệu thống kê đầy đủ; xây dựng bản vá hoàn chỉnh `v1`.
 - **Ngoài phạm vi:** Đề tài không khai thác lỗ hổng để chiếm quyền điều khiển (RCE shellcode); không triển khai parser thành dịch vụ mạng thực (network daemon); không so sánh tốc độ thô của các công cụ công nghiệp nặng (AFL++/libFuzzer) do khác biệt về cơ chế IPC/forkserver.
 
@@ -218,6 +310,40 @@ Theo đúng phương pháp luận an toàn phần mềm được giảng dạy t
   - Nếu input mới làm tăng độ phủ mã lệnh (New Line/Branch Coverage), input đó được đánh giá là "tiến triển có giá trị" và được lưu lại vào Corpus Queue để làm hạt giống cho các vòng đột biến tiếp theo.
 - **Khả năng mở khóa từng Byte (Byte-by-byte Guard Breakthrough):**
   Khi gặp chuỗi so sánh `magic[0] == 'I'`, `magic[1] == 'G'`, `magic[2] == 'W'`, `magic[3] == '1'`, mỗi khi fuzzer đoán đúng 1 byte, `gcov` sẽ ghi nhận thêm 1 dòng lệnh mới được thực thi. Feedback loop này giúp fuzzer giữ lại prefix đúng và tiếp tục đột biến byte kế tiếp, từ đó "phá vỡ" hằng số ma thuật một cách tuần tự chỉ sau trung bình **285 lần thử**, nhanh hơn hàng triệu lần so với hộp đen thuần túy.
+
+---
+
+### 3.5 Độ Phức tạp Ngữ nghĩa & Tính Tất yếu Toán học của Fuzzing Thông minh
+
+Một nhận định sai lầm thường thấy trong kiểm thử phần mềm là cho rằng chỉ cần tăng số lượng ca kiểm thử động hoặc chạy Fuzzing ngẫu nhiên đủ lâu là có thể bao phủ được mọi nhánh mã nguồn. Tuy nhiên, đối với một bộ phân tích cú pháp giao thức nhị phân có cơ chế phòng thủ nhiều lớp như SecureGate IoT Gateway, **phân tích động thông thường và Black-box Fuzzing bị chặn đứng hoàn toàn bởi rào cản ngữ nghĩa toán học**.
+
+#### 1. Rào cản Xác suất Kép (Compound Defense Barriers)
+Để một gói tin đầu vào có thể đi xuyên qua chuỗi xác thực và chạm tới vị trí hàm xử lý đăng ký chứa lỗ hổng tràn bộ đệm tại dòng 264, gói tin phải đồng thời thỏa mãn hai chốt chặn toán học độc lập:
+1. **Chốt chặn 1 — Hằng số Ma thuật Magic Bytes (4 bytes):** 
+   Chuỗi 4 bytes đầu vào phải trùng khớp chính xác mã định danh `"IGW1"` (`0x49 0x47 0x57 0x31`). Với mỗi byte có 256 khả năng, xác suất để một gói tin ngẫu nhiên đoán trúng là:
+   $$P_{\text{magic}} = \left(\frac{1}{256}\right)^4 = \frac{1}{4,294,967,296} \approx 2.328 \times 10^{-10}$$
+2. **Chốt chặn 2 — Tổng Kiểm tra Checksum Tích lũy 32-bit (4 bytes):**
+   Giá trị 4 bytes cuối cùng phải khớp hoàn toàn với tổng cộng dồn của 16 bytes header và toàn bộ bytes payload theo modulo $2^{32}$. Không gian giá trị là $2^{32}$, do đó xác suất một gói tin ngẫu nhiên có checksum hợp lệ là:
+   $$P_{\text{checksum}} = \frac{1}{2^{32}} = \frac{1}{4,294,967,296} \approx 2.328 \times 10^{-10}$$
+
+Nếu thực hiện **Fuzzing Hộp đen ngẫu nhiên (Black-box Random Testing)**, xác suất để một gói tin ngẫu nhiên vượt qua đồng thời cả hai điều kiện trên trong một lần thử là tích số xác suất của hai biến cố độc lập:
+$$P_{\text{bypass}} = P_{\text{magic}} \times P_{\text{checksum}} = \left(\frac{1}{2^{32}}\right)^2 = \frac{1}{2^{64}} \approx 5.421 \times 10^{-20}$$
+
+Giả sử hệ thống kiểm thử cực mạnh có thể thực thi $100.000$ gói tin mỗi giây ($10^5 \text{ exec/s}$), thời gian kỳ vọng toán học để ngẫu nhiên tìm thấy một gói tin hợp lệ là:
+$$T_{\text{kỳ vọng}} = \frac{1}{10^5 \times 5.421 \times 10^{-20}} \approx 1.845 \times 10^{14} \text{ giây} \approx 5.85 \text{ triệu năm!}$$
+Con số này chứng minh về mặt toán học rằng: **Kiểm thử động ngẫu nhiên hoàn toàn không thể chạm tới mã nguồn nghiệp vụ bên trong**. Kết quả thực nghiệm 0/30 trials (150.000 lần thử) của Black-box Fuzzer là hệ quả tất yếu của định luật xác suất, chứ không phải do thiếu thời gian chạy.
+
+#### 2. Tính Tất yếu của Fuzzing Thông minh (Greybox & Whitebox SMT)
+Đặc tả càng khắt khe, rào cản ngữ nghĩa càng cao thì độ phức tạp để tạo ra dữ liệu fuzzing thông minh càng vượt trội so với phân tích động đơn thuần:
+- **Greybox Fuzzing (Dẫn dắt bởi Phản hồi gcov):**
+  - Greybox không đoán 4 bytes magic cùng lúc. Khi mã nguồn kiểm tra từng ký tự, nếu một đột biến ngẫu nhiên khớp được ký tự `'I'`, `gcov` ghi nhận độ phủ tăng (New Branch Coverage).
+  - Fuzzer lưu gói tin chứa `'I'` vào hàng đợi và tiếp tục đột biến byte tiếp theo để tìm `'G'`, `'W'`, `'1'`.
+  - Độ phức tạp tìm kiếm giảm từ hàm mũ $256^4 \approx 4.3 \times 10^9$ xuống bài toán tuyến tính $256 \times 4 = 1.024$ phép thử. Nhờ đó, Greybox tìm ra Magic Bytes chỉ sau trung bình **285 lượt thử**.
+- **White-box Fuzzing với Z3 SMT Solver (Dynamic Symbolic Execution):**
+  - Đối với Checksum 32-bit, ngay cả Greybox cũng gặp bế tắc lớn vì việc thay đổi bất kỳ byte nào trong payload sẽ lập tức phá vỡ tính toàn vẹn của Checksum.
+  - Fuzzer Hộp trắng giải quyết triệt để rào cản này bằng cách mô hình hóa toàn bộ điều kiện đường đi (Path Condition) thành hệ phương trình Bit-Vector và số học:
+    $$\bigwedge_{i=0}^3 (\text{magic}[i] == \text{expected}[i]) \wedge (\text{sum}(\text{bytes}) \equiv \text{checksum} \pmod{2^{32}}) \wedge (\text{id\_len} > 16)$$
+  - Thay vì thử sai, Z3 SMT Solver sử dụng thuật toán DPLL(T) và lý thuyết Bit-Vector để giải phương trình trong **0.17 giây** (0 lượt thử nghiệm mò mẫm), sinh ra gói tin khai thác chuẩn xác 100% kích hoạt ngay lập tức lỗi CWE-121.
 
 ---
 
@@ -463,45 +589,80 @@ python -m pytest tests/ -v
 
 Nhóm thực hiện kiểm chứng mô hình hóa đặc tả giao thức SecureGate IoT Gateway bằng chính bộ công cụ giảng viên cấp phát: **Spec Verification Lab** (`SpecVerificationLab.exe` từ bộ công cụ `Ứng dụng hỗ trợ xử lý Spec - môn học Software_Security - updated.zip`).
 
-#### 1. Dữ liệu Đầu vào Đặc tả
-- **File đặc tả:** `Nhom11_SecureGate_IoT_Gateway_Spec.xlsx` gồm đầy đủ 10 sheets chuẩn theo `Hướng dẫn tạo Spec file dạng excel.pdf`:
-  - `ThongTin`: Định danh hệ thống `securegate_iot_packet_parser`, mô tả bài toán phân tích cú pháp gói tin IGW1 (Nhóm 11: Lưu Đức Hiệp & Hà Nguyễn Trúc Linh).
-  - `YeuCauChucNang`: 9 yêu cầu (`REQ-SG-01` đến `REQ-SG-09`) bao phủ 4 danh mục: safety, liveness, memory, functional.
-  - `YeuCauPhiChucNang` & `RangBuoc`: 6 mục quy chuẩn hiệu năng, độ trễ và ràng buộc cấu trúc nhị phân IGW1.
-  - `MoHinhTrangThai`: 4 trạng thái (`gw_idle`, `rx_reg_packet`, `rx_unlock_packet`, `gw_race_hazard`).
-  - `ThuocTinhAnToan` & `LoaiTruLanNhau`: Công thức CTL `AG(!violation)`, `EF(...)` và cặp loại trừ `reg_processing` vs `unlock_processing`.
-  - `HamSinhMa`: 6 hàm mô phỏng (4 hàm C an toàn bộ nhớ, 2 hàm Python cho Fuzzing).
-  - `KiemTraSoHoc`: Bộ cộng dồn checksum kiểm chứng tràn số int32 bằng Z3 SMT Solver.
-  - `TestCase`: 6 kịch bản kiểm thử truy vết IEEE 829.
+#### 6.6.1 Lý do Thiết kế & Cấu trúc Chi tiết 10 Sheet Đặc tả (Single Source of Truth - SSOT)
+Giảng viên đã nhấn mạnh: *Mọi kịch bản đặc tả không được sinh ra ngẫu nhiên mà phải có lý do kỹ thuật rõ ràng, giải thích tại sao lại làm như thế, các thành phần sinh ra được lưu trữ và kiểm soát như thế nào*.
+Tệp đặc tả `specification/Nhom11_SecureGate_IoT_Gateway_Spec.xlsx` được nhóm thiết kế đóng vai trò là **Nguồn Chân lý Đơn nhất (Single Source of Truth - SSOT)**, kết nối xuyên suốt từ yêu cầu bảo mật đến mô hình toán học và mã nguồn thực thi. Cả 10 sheets đều có sứ mệnh độc lập và liên kết chặt chẽ:
 
-#### 2. Kết quả Thực thi Tích hợp 4 Chương trên Công cụ
-Toàn bộ quy trình kiểm chứng tự động đã được thực thi và ghi nhận tại `Pipeline_Report_Nhom11.txt`:
+1. **`ThongTin` (Siêu dữ liệu & Trách nhiệm Học thuật):**
+   - *Lý do tồn tại:* Định danh hệ thống `securegate_iot_packet_parser`, phiên bản giao thức IGW1, xác nhận hai tác giả thực hiện (Lưu Đức Hiệp - MSSV 22010174 & Hà Nguyễn Trúc Linh - MSSV 22010198) và cam kết liêm chính học thuật chia đều 50%-50%. Tool dùng sheet này để tạo tiêu đề báo cáo và xác định ngữ cảnh kiểm thử.
+2. **`YeuCauChucNang` (9 Yêu cầu Phân loại Rõ ràng):**
+   - *Lý do tồn tại:* Đặc tả 9 yêu cầu (`REQ-SG-01` đến `REQ-SG-09`) bao phủ 4 nhóm nghiệp vụ an ninh:
+     * *Nhóm Safety:* Loại trừ tranh chấp bộ đệm (Mutual Exclusion) giữa các luồng.
+     * *Nhóm Memory:* Kiểm soát cấp phát, chống tràn stack (CWE-121) và rò rỉ heap (CWE-401).
+     * *Nhóm Integrity:* Ràng buộc hằng số Magic Bytes `"IGW1"` và Checksum tích lũy modulo $2^{32}$.
+     * *Nhóm Functional:* Cơ chế mở khóa quản trị khẩn cấp qua cặp khóa bí mật `(7421, 3390)`.
+   - Mỗi yêu cầu đều gắn với tiêu chí nghiệm thu định lượng (Acceptance Criteria) để phục vụ kiểm chứng hình thức.
+3. **`YeuCauPhiChucNang` (Các Chỉ số Hiệu năng & Ràng buộc Hệ thống Nhúng):**
+   - *Lý do tồn tại:* Đối với thiết bị mạng IoT Gateway, tính an toàn phải đi đôi với hiệu năng xử lý. Sheet này ấn định các ngưỡng cứng: độ trễ giải mã gói $\le 50 \mu s$, thông lượng $\ge 10.000$ gói/giây, và footprint RAM tối đa $\le 2$ MB để đảm bảo khả năng triển khai thực tế trên vi điều khiển nhúng.
+4. **`RangBuoc` (Đặc tả Cấu trúc Nhị phân Cứng):**
+   - *Lý do tồn tại:* Định nghĩa quy chuẩn đóng gói byte của giao thức IGW1: Header cố định 16 bytes, Checksum 4 bytes ở đuôi gói tin, quy tắc Little-Endian, và yêu cầu chuỗi định danh thiết bị bắt buộc là ký tự in được (ASCII printable). Đây là căn cứ để bộ sinh mã và solver thiết lập miền giá trị.
+5. **`MoHinhTrangThai` (Không gian Trạng thái Kripke $S$ và Quan hệ Chuyển dịch $R$):**
+   - *Lý do tồn tại:* Mô hình hóa toán học chu trình hoạt động của parser qua 4 trạng thái: `gw_idle` (chờ nhận gói), `rx_reg_packet` (đang xử lý gói đăng ký), `rx_unlock_packet` (đang xác thực mở khóa), và `gw_race_hazard` (xung đột tài nguyên do nhận gói đồng thời).
+6. **`ThuocTinhAnToan` (Công thức Kiểm chứng Hình thức CTL):**
+   - *Lý do tồn tại:* Định nghĩa các mệnh đề logic thời gian nhánh (Computational Tree Logic - CTL):
+     * Thuộc tính an toàn: $\Phi_1 = AG(\neg \text{violation})$ — Trong mọi nhánh thực thi và mọi trạng thái tương lai, hệ thống không bao giờ được rơi vào xung đột bộ nhớ.
+     * Thuộc tính sống: $\Phi_2 = EF(\text{reg\_processing})$ và $\Phi_3 = EF(\text{unlock\_processing})$ — Đảm bảo không tồn tại bế tắc (No Deadlock), luôn tồn tại đường đi để xử lý thành công từng loại gói tin.
+7. **`LoaiTruLanNhau` (Ràng buộc Độc quyền Tài nguyên - Mutual Exclusion):**
+   - *Lý do tồn tại:* Khai báo cặp nhãn hoạt động xung đột độc quyền: `reg_processing` $\perp$ `unlock_processing`. Nếu hệ thống đồng thời kích hoạt cả hai nhãn trên cùng một bộ đệm stream mà thiếu khóa đồng bộ, công cụ kiểm chứng sẽ báo động vi phạm an toàn.
+8. **`HamSinhMa` (Khung Hàm Mô phỏng Quản lý Bộ nhớ C và Python):**
+   - *Lý do tồn tại:* Định nghĩa mã nguồn 6 hàm (4 hàm C an toàn bộ nhớ, 2 hàm Python cho Fuzzing) mô phỏng các mẫu lỗi kinh điển: `strcpy` không kiểm tra biên (CWE-120/121), quên `free` (CWE-401), giải phóng đúp (CWE-415), truy cập bộ nhớ sau giải phóng (CWE-416). Dùng làm đầu vào cho bộ phân tích AST và C-Checker.
+9. **`KiemTraSoHoc` (Mô hình Hóa Ràng buộc Bit-Vector 32-bit cho SMT):**
+   - *Lý do tồn tại:* Định nghĩa phương trình cộng dồn Checksum: `total = header_checksum + payload_checksum`. Khai báo điều kiện tràn số nguyên trên miền giá trị Bit-Vector 32-bit để Z3 SMT Solver chứng minh sự tồn tại của lỗi CWE-190.
+10. **`TestCase` (Ma trận Truy vết Toàn diện Chuẩn IEEE 829):**
+    - *Lý do tồn tại:* Xây dựng 6 kịch bản kiểm thử độc lập, mỗi kịch bản liên kết trực tiếp một-một từ Yêu cầu chức năng (`REQ-SG-xx`) $\to$ Trạng thái Kripke $\to$ Dòng mã nguồn thực thi $\to$ Lỗi CWE tương ứng. Đảm bảo tính kiểm chứng xuyên suốt (Traceability).
 
-1. **[Chương 1] Kiểm chứng hình thức Kripke / CTL:**
-   - Trạng thái bế tắc (Deadlock): **Không có** (mọi trạng thái đều có bước chuyển tiếp hợp lệ).
-   - Công thức `AG(!violation)`: **VI PHẠM** (phát hiện phản ví dụ dẫn tới trạng thái `gw_race_hazard` khi luồng Registration và Unlock đồng thời can thiệp đệm chia sẻ).
-   - Công thức `EF(reg_processing)` và `EF(unlock_processing)`: **ĐÚNG** (tồn tại đường đi từ trạng thái khởi tạo `gw_idle` để xử lý từng loại gói tin).
-   - Loại trừ lẫn nhau (Mutual Exclusion): **VI PHẠM** tại trạng thái `gw_race_hazard` do cùng lúc mang cả 2 nhãn hoạt động độc quyền.
+#### 6.6.2 Mô hình hóa Quá trình Chuyển đổi Trạng thái Kripke & Kiểm soát Tài nguyên Lưu trữ
+Hệ thống không vận hành tùy tiện mà tuân thủ một cấu trúc chuyển trạng thái hình thức (Kripke Structure) $M = (S, S_0, R, L)$:
+- **Tập trạng thái:** $S = \{\text{gw\_idle}, \text{rx\_reg\_packet}, \text{rx\_unlock\_packet}, \text{gw\_race\_hazard}\}$.
+- **Trạng thái khởi tạo:** $S_0 = \{\text{gw\_idle}\}$.
+- **Quan hệ chuyển dịch trạng thái $R$:**
+  * $(\text{gw\_idle}, \text{rx\_reg\_packet})$: Kích hoạt khi có sự kiện nhận gói đăng ký `event_packet_reg`. Hệ thống trích xuất `device_id` vào Stack Frame và chiếm giữ Session Routing Lock.
+  * $(\text{gw\_idle}, \text{rx\_unlock\_packet})$: Kích hoạt khi có sự kiện mở khóa `event_packet_unlock`. Hệ thống trích xuất cặp mã bí mật `(unlock_a, unlock_b)`.
+  * $(\text{rx\_reg\_packet}, \text{gw\_race\_hazard})$ và $(\text{rx\_unlock\_packet}, \text{gw\_race\_hazard})$: Kích hoạt khi có gói tin thứ hai ập đến trên cùng kênh giao tiếp mà thiếu cơ chế khóa đồng bộ (Mutex Lock).
+- **Hàm gán nhãn trạng thái $L$:**
+  * $L(\text{gw\_idle}) = \{\text{ready}\}$
+  * $L(\text{rx\_reg\_packet}) = \{\text{reg\_processing}\}$
+  * $L(\text{rx\_unlock\_packet}) = \{\text{unlock\_processing}\}$
+  * $L(\text{gw\_race\_hazard}) = \{\text{reg\_processing}, \text{unlock\_processing}, \text{violation}\}$
 
-2. **[Chương 2] Phân tích tĩnh An toàn Bộ nhớ C (Static C Checker):**
-   - Dòng 8: `HIGH` — `dangerous-function`: Hàm `strcpy()` không kiểm tra kích thước đệm đích `buffer[16]` $\to$ **CWE-120/121 (Stack Buffer Overflow)**.
-   - Dòng 14: `MEDIUM` — `memory-leak`: Con trỏ `buf` được cấp phát `malloc(32)` trong `log_securegate_audit_event()` nhưng không có lệnh `free()` $\to$ **CWE-401 (Memory Leak)**.
-   - Dòng 24: `HIGH` — `double-free`: Con trỏ `buf` bị giải phóng 2 lần liên tiếp trong `terminate_securegate_session()` $\to$ **CWE-415 (Double Free)**.
-   - Dòng 32: `HIGH` — `use-after-free`: Thao tác ghi dữ liệu `buf[0]=1` sau khi con trỏ đã bị `free()` trong `cleanup_stream_buffer()` $\to$ **CWE-416 (Use After Free)**.
+**Kiểm chứng An toàn Bộ nhớ qua Mô hình:**
+- Khi chạy thuật toán Model Checking với thuộc tính an toàn $AG(\neg \text{violation})$, công cụ lập tức tìm thấy một phản ví dụ (Counterexample Trace):
+  $$\text{gw\_idle} \xrightarrow{\text{event\_packet\_reg}} \text{rx\_reg\_packet} \xrightarrow{\text{event\_packet\_unlock}} \text{gw\_race\_hazard}$$
+- Tại trạng thái `gw_race_hazard`, nhãn `violation` xuất hiện đồng thời với việc cả hai nhãn `reg_processing` và `unlock_processing` cùng hoạt động, vi phạm nguyên lý Loại trừ Lẫn nhau (Mutual Exclusion Violation).
+- **Ý nghĩa Kỹ thuật:** Phân tích này chứng minh rằng việc xử lý dữ liệu mạng nhị phân bắt buộc phải có cơ chế đồng bộ hóa tuần tự (Mutex hoặc Single-threaded Event Loop), nếu không sẽ dẫn tới xung đột bộ đệm chia sẻ (Race Hazard) tại thời điểm thực thi.
 
-3. **[Chương 3] Trích xuất AST & SMT Z3 Solver:**
-   - Trích xuất AST tự động: Hàm `verify_securegate_unlock_guard` có độ phức tạp McCabe = 3, độ sâu lồng nhau = 3.
-   - Kiểm tra tính thỏa được (SAT) điều kiện checksum: Tìm được nghiệm hợp lệ `{'header_checksum': 2000000001, 'payload_checksum': 0}`.
-   - Kiểm tra nguy cơ tràn số nguyên 32-bit: Z3 Solver trả về **SAT** với mô hình nghiệm:
-     $$\text{header\_checksum} = 1, \quad \text{payload\_checksum} = 2,147,483,647 \implies \text{Tổng} = 2,147,483,648 > \text{INT32\_MAX}$$
-     Chứng minh biểu thức số học bị tràn số nguyên có dấu (Wrap-around thành số âm, **CWE-190**).
+#### 6.6.3 Khai thác Toàn diện 4 Chức năng Cốt lõi của Công cụ Giảng viên (`SpecVerificationLab`)
+Nhóm đã khai thác triệt để cả 4 khối chức năng tích hợp trong ứng dụng `SpecVerificationLab.exe`:
 
-4. **[Chương 4] Dynamic Fuzzing trên mã Python sinh ra:**
-   - Hàm `calculate_gateway_drop_ratio`: Fuzzer hộp đen ngẫu nhiên tìm thấy **11/300 lần crash** với ngoại lệ `ZeroDivisionError` (**CWE-369**).
-   - Hàm `verify_securegate_unlock_guard`: Thuật toán Concolic giải ngược hệ ràng buộc đường đi thành công và tìm ra chính xác cặp mã mở khóa khẩn cấp:
-     $$\text{crash\_input} = \{\text{'unlock\_a'}: 7421, \text{'unlock\_b'}: 3390\} \quad \text{sau đúng 3 lần thử!}$$
+1. **Chức năng 1 — Thẩm định Bảng Đặc tả & Bóc tách Ma trận (Spec Validation & Traceability):**
+   - Ứng dụng đọc file `Nhom11_SecureGate_IoT_Gateway_Spec.xlsx`, kiểm tra cú pháp tên cột, kiểu dữ liệu của cả 10 sheets.
+   - Thiết lập đồ thị liên kết giữa Yêu cầu $\to$ Thuộc tính kiểm chứng $\to$ Kịch bản kiểm thử, đảm bảo không có yêu cầu nào bị "mồ côi" (Orphaned Requirements).
+2. **Chức năng 2 — Kiểm chứng Mô hình Trạng thái Hình thức (Formal Model Checking Kripke/CTL):**
+   - Dựng ma trận kề biểu diễn đồ thị không gian trạng thái.
+   - Duyệt đồ thị để chứng minh hệ thống **không có trạng thái bế tắc (No Deadlock)**.
+   - Đánh giá công thức CTL $AG(\neg \text{violation})$ và xuất trace phản ví dụ chỉ ra chính xác đường đi dẫn tới trạng thái lỗi `gw_race_hazard`.
+3. **Chức năng 3 — Phân tích Cú pháp Cây AST & Z3 SMT Solver:**
+   - Trích xuất cây cú pháp trừu tượng (AST) của các hàm C trong sheet `HamSinhMa`.
+   - Tính toán độ phức tạp chu trình McCabe (McCabe Cyclomatic Complexity = 3) và độ sâu lồng nhau của các khối rẽ nhánh.
+   - Thiết lập bài toán thỏa mãn mệnh đề (SAT) với Z3 SMT Solver:
+     * Tìm nghiệm Checksum hợp lệ: Solver trả về SAT với giá trị mẫu `{'header_checksum': 2000000001, 'payload_checksum': 0}`.
+     * Tìm nguy cơ tràn số nguyên (CWE-190): Solver tìm thấy mô hình nghiệm $(\text{header\_checksum} = 1, \text{payload\_checksum} = 2,147,483,647)$ có tổng vượt quá `INT32_MAX` ($2,147,483,648$), chứng minh biểu thức cộng tích lũy bị wrap-around thành số âm.
+4. **Chức năng 4 — Tự động Sinh mã Kiểm toán (Code Generation) & Xuất Báo cáo Tích hợp:**
+   - Tự động sinh mã nguồn C có gắn các tiền điều kiện và hậu điều kiện kiểm toán (`assert`).
+   - Tự động thực thi Fuzzing động trên mã Python sinh ra, phát hiện ngoại lệ chia cho 0 (`CWE-369`) và giải ngược cặp khóa bí mật (`7421, 3390`) sau đúng 3 vòng lặp Concolic.
+   - Xuất toàn bộ kết quả thành văn bản chính thức: **`BaoCao_TichHop_SpecVerificationLab_Nhom11.docx`** (chứa 7 bảng dữ liệu và sơ đồ vector) lưu trong thư mục nộp bài.
 
-#### 3. Bảng Ma trận Tổng hợp 9 Phát hiện CWE/CVE từ Công cụ
+#### 6.6.4 Bảng Ma trận Tổng hợp 9 Phát hiện CWE/CVE từ Công cụ
 Tool của giảng viên đã tự động tổng hợp toàn bộ 9 phát hiện an ninh chuẩn hóa:
 
 | Nguồn kiểm chứng | Vị trí phát hiện | Loại phát hiện kỹ thuật | Phân loại CWE chuẩn | Ví dụ CVE minh họa thực tế |
@@ -516,7 +677,7 @@ Tool của giảng viên đã tự động tổng hợp toàn bộ 9 phát hiệ
 | **Chương 4** | `calculate_gateway_drop_ratio` | `uncontrolled-crash` | **CWE-369 / CWE-248** (Divide By Zero) | — |
 | **Chương 4** | `verify_securegate_unlock_guard` | `uncontrolled-crash` | **CWE-248** (Uncaught Exception) | — |
 
-Toàn bộ kết quả kiểm chứng đã được xuất trực tiếp thành tài liệu Word chính thức: **`BaoCao_TichHop_SpecVerificationLab_Nhom11.docx`** (chứa 7 bảng dữ liệu và sơ đồ TikZ vector) lưu tại thư mục nộp bài.
+Toàn bộ kết quả kiểm chứng đã được xuất trực tiếp thành tài liệu Word chính thức: **`BaoCao_TichHop_SpecVerificationLab_Nhom11.docx`** lưu tại thư mục nộp bài.
 
 ![Minh chứng Ứng dụng: Giao diện SpecVerificationLab nạp và kiểm chứng thành công đặc tả SecureGate IoT Gateway](screenshots/spec_verification_lab.png)
 
