@@ -32,43 +32,38 @@
 ```text
 ATPM-Nhom11-ChuDe4-Fuzzing/
 ├── .gitignore
-├── README.md
-├── HUONG_DAN_KIEM_TRA_DU_AN.md      # Cẩm nang nghiệm thu toàn diện dự án
-├── HUONG_DAN_KIEM_TRA_DU_AN.pdf     # Bản PDF in ấn chính thức
+├── README.md                            # Hướng dẫn toàn diện và cẩm nang nghiệm thu
 ├── specification/
-│   └── Nhom11_SecureGate_IoT_Gateway_Spec.xlsx  # Đặc tả hình thức 10 sheet Excel
+│   └── Nhom11_SecureGate_IoT_Gateway_Spec.xlsx  # Đặc tả hình thức 10 sheet Excel (SSOT)
 ├── source/
-│   ├── gateway_parser_v0.c          # Chương trình mục tiêu chứa lỗi CWE-121
-│   ├── gateway_parser_v1.c          # Bản vá an toàn chuẩn CERT C
-│   ├── gateway_parser.c             # Mã nguồn tổng hợp
-│   ├── parser_vuln.exe              # Binary thực thi chứa lỗi
-│   ├── parser_fixed.exe             # Binary thực thi an toàn
-│   ├── blackbox_fuzzer.py           # Động cơ Fuzzing hộp đen
-│   ├── greybox_fuzzer.py            # Động cơ Fuzzing hộp xám dẫn hướng độ phủ
-│   ├── whitebox_fuzzer.py           # Động cơ Fuzzing hộp trắng SMT Z3
-│   ├── packet_builder.py            # Module xây dựng cấu trúc gói tin IGW1
-│   └── unlock_benchmark.py          # Benchmark vượt rào cản Magic Guard
+│   ├── gateway_parser_v0.c              # Chương trình mục tiêu chứa lỗi CWE-121
+│   ├── gateway_parser_v1.c              # Bản vá an toàn chuẩn CERT C
+│   ├── gateway_parser.c                 # Mã nguồn tổng hợp
+│   ├── parser_vuln.exe                  # Binary thực thi chứa lỗi
+│   ├── parser_fixed.exe                 # Binary thực thi an toàn
+│   ├── blackbox_fuzzer.py               # Động cơ Fuzzing hộp đen
+│   ├── greybox_fuzzer.py                # Động cơ Fuzzing hộp xám dẫn hướng độ phủ
+│   ├── whitebox_fuzzer.py               # Động cơ Fuzzing hộp trắng SMT Z3
+│   ├── packet_builder.py                # Module xây dựng cấu trúc gói tin IGW1
+│   └── unlock_benchmark.py              # Benchmark vượt rào cản Magic Guard
 ├── tests/
-│   ├── test_parser.py               # 15 Unit tests kiểm tra parser logic & CWE-121
-│   └── test_fuzzers.py              # 15 Unit tests kiểm tra 3 động cơ Fuzzer
-├── seed_corpus/                     # 4 tệp seed nhị phân mồi ban đầu
-├── crashes/                         # 60 payload nhị phân kích hoạt crash qua 30 trials
+│   ├── test_parser.py                   # 15 Unit tests kiểm tra parser logic & CWE-121
+│   └── test_fuzzers.py                  # 15 Unit tests kiểm tra 3 động cơ Fuzzer
+├── seed_corpus/                         # 4 tệp seed nhị phân mồi ban đầu
+├── crashes/                             # 60 payload nhị phân kích hoạt crash qua 30 trials
 ├── results/
-│   ├── data_raw/                    # Dữ liệu JSON thô 30 trials benchmark
-│   ├── figures/                     # 5 biểu đồ trực quan hóa số liệu
-│   ├── logs/                        # Forensic logs (ASan v0, clean v1, Cppcheck)
-│   └── screenshots/                 # Minh chứng kiểm chứng công cụ & terminal
+│   ├── data_raw/                        # Dữ liệu JSON thô 30 trials benchmark
+│   ├── figures/                         # 5 biểu đồ trực quan hóa số liệu
+│   ├── logs/                            # Forensic logs (ASan v0, clean v1, Cppcheck)
+│   └── screenshots/                     # Minh chứng kiểm chứng công cụ & terminal
 ├── scripts/
-│   ├── verify_project.py            # Kịch bản tự động kiểm tra 8 khâu (Audit script)
-│   ├── run_benchmark.py             # Kịch bản thực thi benchmark 30 trials
-│   ├── aggregate_results.py         # Kịch bản tổng hợp số liệu thống kê
-│   ├── generate_charts.py           # Kịch bản vẽ đồ thị trực quan hóa
-│   └── export_all_docs.py           # Kịch bản xuất báo cáo sang Word & PDF
+│   ├── verify_project.py                # Kịch bản tự động kiểm tra 8 khâu (Audit script)
+│   ├── run_benchmark.py                 # Kịch bản thực thi benchmark 30 trials
+│   ├── aggregate_results.py             # Kịch bản tổng hợp số liệu thống kê
+│   ├── generate_charts.py               # Kịch bản vẽ đồ thị trực quan hóa
+│   └── export_all_docs.py               # Kịch bản biên dịch tài liệu Word/PDF
 └── report/
-    ├── BaoCao_BTL_Nhom11.pdf        # Báo cáo chính thức 8 chương (Bắt buộc)
-    ├── BaoCao_BTL_Nhom11.docx       # Bản Word có thể chỉnh sửa
-    ├── BaoCao_BTL_Nhom11.md         # Mã nguồn văn bản báo cáo
-    └── BaoCao_TichHop_SpecVerificationLab.docx # Báo cáo kiểm chứng từ SpecVerificationLab
+    └── BaoCao_BTL_Nhom11.pdf            # Báo cáo chính thức 8 chương (Bắt buộc theo chuẩn Thầy)
 ```
 
 ---
