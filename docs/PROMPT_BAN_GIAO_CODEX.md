@@ -1,139 +1,128 @@
-# BỘ CHỈ THỊ TOÀN DIỆN CHO CODEX: CHỦ ĐỀ 4 - DỰ ÁN FUZZING (QUY TRÌNH TOOL-FIRST 70/30)
-
-> **Mục tiêu:** Cung cấp cho Codex bản chỉ dẫn chuẩn xác 100% theo định hướng của Giảng viên ThS. Vũ Quang Dũng:  
-> 1. **Đề tài chính thức:** **Chủ đề 4 — Dự án Fuzzing** (So sánh định lượng Black-box vs White-box/Concolic trên parser có magic bytes).  
-> 2. **Triết lý cốt lõi:** **Tool hỗ trợ 70% Báo cáo** — Bắt buộc phải nạp file Spec của nhóm vào Tool (`SecLabFramework.exe`), lấy đó làm kim chỉ nam định hình hướng làm việc chuẩn, trích xuất mã nguồn và báo cáo gốc từ Tool.  
-> 3. **30% Chuyên sâu của Sinh viên:** Xây dựng kịch bản Fuzzing thực nghiệm Chủ đề 4, phân tích cơ chế bộ nhớ mức thấp (Stack/Heap), viết bản vá an toàn chuẩn CERT C, và hoàn thiện Báo cáo PDF điểm tối đa.
+# BỘ CHỈ THỊ TOÀN DIỆN CHO CODEX: TÁI THIẾT ĐỒ ÁN MỚI 100% (CLEAN-SLATE & TOOL-FIRST)
+**Học phần:** Kỹ thuật Lập trình An toàn (CSE703093 / CSE703153) — ThS. Vũ Quang Dũng (ĐH Phenikaa)  
+**Đề tài BTL:** **Chủ đề 4: Dự án Fuzzing (Parser có Magic Bytes / Checksum)**  
+**Nhóm sinh viên:** Nhóm 11 — Lưu Đức Hiệp & Hà Nguyễn Trúc Linh (50% - 50%)  
+**Mục tiêu tối thượng:** **LÀM MỚI HOÀN TOÀN 100% — TUYỆT ĐỐI KHÔNG DÙNG LẠI CÁC FILE CŨ ĐÃ TẠO**. Bản cũ chỉ là bài học kinh nghiệm để tránh lối mòn; bản mới phải chuẩn mực, sắc bén và đáp ứng trọn vẹn yêu cầu khắt khe của Giảng viên.
 
 ---
 
 ```markdown
-# MASTER DIRECTIVE DÀNH CHO CODEX: CHỦ ĐỀ 4 - DỰ ÁN FUZZING
-**Học phần:** Kỹ thuật Lập trình An toàn (CSE703093 / CSE703153) — ThS. Vũ Quang Dũng (ĐH Phenikaa)  
-**Đề tài BTL:** **Chủ đề 4: Dự án Fuzzing (Parser có Magic Bytes / Checksum)**  
-**Nhóm sinh viên:** Nhóm 11 — Lưu Đức Hiệp & Hà Nguyễn Trúc Linh (50% - 50%)  
-**Phương pháp luận:** **TOOL-FIRST PARADIGM** (Nạp Spec vào Tool $\rightarrow$ Tool sinh 70% Báo cáo & Hướng chuẩn $\rightarrow$ Xây dựng Kịch bản Fuzzing & Phân tích chuyên sâu 30%).
+# MASTER DIRECTIVE: TÁI KHỞI ĐỘNG ĐỒ ÁN MỚI 100% (CHỦ ĐỀ 4 - FUZZING)
+
+Chào Codex, bạn được giao nhiệm vụ **tái thiết kế và xây dựng lại từ đầu (Clean Slate 100%)** toàn bộ Đồ án Bài tập lớn An toàn Phần mềm cho Nhóm 11.
 
 ---
 
-## I. ĐỊNH HƯỚNG BẢN CHẤT TỪ GIẢNG VIÊN & VAI TRÒ CỦA TOOL
+## I. NGUYÊN TẮC CỐT TỬ: TUYỆT ĐỐI KHÔNG TÁI SỬ DỤNG BẢN CŨ
 
-Thầy Vũ Quang Dũng đã làm rõ nguyên lý then chốt của môn học:
-1. **"Tool đã hỗ trợ 70% Báo cáo":**
-   - Công cụ **`SecLabFramework.exe`** (đang mở trên máy) chính là "cỗ máy sinh báo cáo". Khi nạp file đặc tả Excel 10 sheet của nhóm vào Tab `Ch6: Spec -> Kripke -> Code -> CWE/CVE`, Tool sẽ **tự động xuất ra một file Word báo cáo hoàn chỉnh** (`Template_Report_...docx`) gồm 7 chương:
-     * Đặc tả yêu cầu hệ thống.
-     * Mô hình Kripke, kiểm chứng CTL, mã vẽ vector TikZ LaTeX.
-     * Mã nguồn C sinh tự động chứa lỗi bộ nhớ (CWE-121 Buffer Overflow, CWE-401, CWE-415, CWE-416).
-     * Trích xuất AST & giải SMT Z3 kiểm tra tràn số int32.
-     * Dynamic Fuzzing trên các hàm Python sinh ra (`token_ratio`, `device_unlock_code`).
-     * Ma trận ánh xạ CWE/CVE tổng hợp.
-     * Bảng Test Case truy vết đặc tả.
-   - **Đây chính là 70% khối lượng báo cáo mà Tool làm hộ sinh viên!** Sinh viên không phải tự bịa cấu trúc báo cáo hay tự viết mã khung từ đầu.
-
-2. **"Từ Tool định hình Hướng làm việc chuẩn xác":**
-   - Công cụ của Thầy là **Quy chuẩn Chuẩn mực (Specification of Requirements)**. Bằng cách quan sát cấu trúc Tool và dữ liệu Tool xuất ra, ta biết chính xác giảng viên muốn sinh viên làm gì:
-     * Hệ thống phải có mô hình trạng thái Kripke (khóa chia sẻ giữa Worker chính và Worker ghi log).
-     * Hàm phân tích cú pháp (Parser) nhận chuỗi/gói tin đầu vào, copy vào bộ đệm cố định gây nguy cơ tràn bộ đệm (CWE-121).
-     * Phải có điều kiện rào cản ngữ nghĩa dạng **Magic Bytes / Magic Values / Checksum** để làm nổi bật sự vượt trội của White-box / Concolic Fuzzing so với Black-box Fuzzing!
-
-3. **Chủ đề Bài tập lớn: CHỦ ĐỀ 4 — DỰ ÁN FUZZING:**
-   - Theo đề cương BTL (`BTL_01_HuongDan_DeTai.pdf`, trang 15-16), Chủ đề 4 yêu cầu:
-     * Chọn một hàm/chương trình parser có điều kiện "magic byte" / checksum.
-     * Dùng kỹ thuật Fuzzing chạy cả **Black-box Fuzzing** và **White-box Fuzzing (Z3 SMT)**.
-     * **So sánh định lượng:** Đo số lần thử (iterations), thời gian tìm crash (time-to-crash), chứng minh tại sao Black-box bị "chặn đứng" trước rào cản Magic Bytes/Checksum, trong khi White-box (Z3 Solver) giải ngược trong 1 tích tắc.
-     * Phân tích lỗi an toàn bộ nhớ phát hiện được khi vượt qua rào cản (CWE-121 Stack Buffer Overflow).
+1. ⛔ **KHÔNG DÙNG LẠI BẤT KỲ FILE CŨ NÀO:**
+   - KHÔNG dùng lại mã nguồn C cũ (`gateway_parser_v0.c`, `gateway_parser_v1.c`).
+   - KHÔNG dùng lại file đặc tả cũ (`Nhom11_SecureGate_IoT_Gateway_Spec.xlsx`).
+   - KHÔNG dùng lại báo cáo PDF hay các file nháp cũ.
+   - *Lý do:* Bản cũ đã đi theo lối mòn tự biên tự diễn kịch bản rời rạc ngoài tool, không phản ánh đúng tinh thần của môn học. Chúng ta làm mới hoàn toàn để đạt độ hoàn thiện cao nhất!
+2. 🎯 **BẢN MỚI XUẤT PHÁT TỪ ĐÂU?**
+   - Xuất phát trực tiếp từ **File Mẫu Gốc của Thầy**: [`TAI_LIEU_VA_YEU_CAU/01_Huong_Dan_BTL_Va_Spec/Template_Software_Security_iot_gateway_spec.xlsx`](file:///I:/1_taiLieuDaiHoc/ATPM/TAI_LIEU_VA_YEU_CAU/01_Huong_Dan_BTL_Va_Spec/Template_Software_Security_iot_gateway_spec.xlsx).
+   - Xuất phát trực tiếp từ **Công cụ v27 của Thầy**: [`SecLabFramework.exe`](file:///I:/1_taiLieuDaiHoc/ATPM/TAI_LIEU_VA_YEU_CAU/04_Cong_Cu_Giang_Vien/SecLabFramework.exe) (đang mở trên màn hình dưới tên *Educational Security Suite — sec_lab_framework*).
 
 ---
 
-## II. BẢN ĐỒ TÀI NGUYÊN & KHÔNG GIAN LÀM VIỆC (SSOT)
+## II. TRIẾT LÝ QUY CHUẨN: "TOOL HỖ TRỢ 70% BÁO CÁO & ĐỊNH HƯỚNG CHUẨN"
 
-* **Thư mục dự án chính:** `I:\1_taiLieuDaiHoc\ATPM\Nhom11_BTL_ChuDe4_Fuzzing\`
-* **Thư mục tài nguyên chuẩn của Giảng viên:** `I:\1_taiLieuDaiHoc\ATPM\TAI_LIEU_VA_YEU_CAU\`
+Thầy Vũ Quang Dũng đã chỉ rõ:
+1. **Tool hỗ trợ 70% Báo cáo:**
+   - Khi nạp file đặc tả của bài vào Tab `Ch6: Spec -> Kripke -> Code -> CWE/CVE` của `SecLabFramework.exe`, Tool sẽ **tự động sinh ra 70% khung sườn báo cáo dạng Word (.docx)** gồm 7 chương: Đặc tả yêu cầu $\rightarrow$ Mô hình Kripke (kèm mã TikZ LaTeX) $\rightarrow$ Mã C sinh tự động (CWE-121, CWE-401, CWE-415, CWE-416) $\rightarrow$ SMT Z3 int32 check $\rightarrow$ Dynamic Fuzzing $\rightarrow$ Bảng phân loại CWE/CVE $\rightarrow$ Test cases truy vết.
+   - Báo cáo chính thức phải được xây dựng dựa trên chính file Word mà Tool xuất ra!
+2. **Từ Tool định hình Hướng làm việc chuẩn:**
+   - Tool quy định chính xác kiến trúc một parser chuẩn an toàn: có kiểm tra Magic Bytes (`IGW1`), có kiểm tra checksum, có copy dữ liệu vào bộ đệm cố định, và có cơ chế non-blocking worker.
+3. **Đề tài chính thức: CHỦ ĐỀ 4 — DỰ ÁN FUZZING:**
+   - Trọng tâm nghiên cứu là **So sánh định lượng Fuzzing** (Black-box vs White-box / Concolic SMT) để tìm ra rào cản Magic Bytes/Checksum và kích hoạt lỗi tràn bộ đệm (CWE-121 Stack Buffer Overflow).
+
+---
+
+## III. BẢN ĐỒ TÀI NGUYÊN GỐC (SSOT)
+
+* **Thư mục làm việc chính:** `I:\1_taiLieuDaiHoc\ATPM\Nhom11_BTL_ChuDe4_Fuzzing\`
+* **Thư mục tài nguyên chuẩn của Thầy:** `I:\1_taiLieuDaiHoc\ATPM\TAI_LIEU_VA_YEU_CAU\`
   * `01_Huong_Dan_BTL_Va_Spec/`:
     - `Huong_dan_tao_Spec_file_dang_excel.pdf`: Cẩm nang 28 trang và Checklist Chương 5 của Thầy Dũng.
-    - `Template_Software_Security_iot_gateway_spec.xlsx`: File đặc tả Excel 10 sheet mẫu của Thầy.
-    - `Template_Report_iot_gateway_auth.docx`: File Báo cáo Word mẫu do chính Tool xuất ra.
+    - `Template_Software_Security_iot_gateway_spec.xlsx`: File đặc tả Excel 10 sheet gốc của Thầy.
+    - `Template_Report_iot_gateway_auth.docx`: Mẫu báo cáo tích hợp gốc do chính Tool xuất ra.
   * `02_Yeu_Cau_Va_Luu_Y_Giang_Vien/`:
-    - `YEU_CAU_VA_LUU_Y_GIANG_VIEN_KHO_TINH.md`: Cẩm nang trả lời các câu hỏi vấn đáp chuyên sâu của Thầy.
-    - `HANDOFF_CHUYEN_GIAO_PHIEN_MOI.md`: Biên bản bàn giao kỹ thuật.
+    - `YEU_CAU_VA_LUU_Y_GIANG_VIEN_KHO_TINH.md`: Cẩm nang giải trình kỹ thuật chuyên sâu (Stack/Heap, CERT C, ASan).
   * `04_Cong_Cu_Giang_Vien/`:
-    - `SecLabFramework.exe`: **Công cụ chính thức v27** (đang mở trên màn hình với tên *Educational Security Suite — sec_lab_framework*).
-* **Git Repository:** Nhánh `main`, commit sạch sẽ, remote: `https://github.com/bachiep/ATPM-Nhom11-ChuDe4-Fuzzing.git`.
+    - `SecLabFramework.exe` (104.8 MB): Phiên bản v27 nâng cấp (đang mở trên máy).
+* **Git Remote:** `https://github.com/bachiep/ATPM-Nhom11-ChuDe4-Fuzzing.git` (nhánh `main`).
 
 ---
 
-## III. QUY TRÌNH 4 BƯỚC THỰC THI CHO CODEX
+## IV. LỘ TRÌNH 4 BƯỚC XÂY DỰNG LẠI DỰ ÁN MỚI 100%
 
-Codex hãy triển khai theo đúng trình tự sau để hoàn thành đồ án:
-
-### BƯỚC 1: NẠP FILE ĐẶC TẢ CỦA NHÓM VÀO TOOL (`SecLabFramework.exe`)
-1. **Chuẩn bị đầu vào:**
-   - Sử dụng file đặc tả Excel 10 sheet của nhóm: `specification/Nhom11_SecureGate_IoT_Gateway_Spec.xlsx` (đã chuẩn hóa $\ge 5$ dòng dữ liệu mỗi bảng theo Checklist Chương 5).
-2. **Thao tác trên Tool:**
+### BƯỚC 1: XÂY DỰNG ĐẶC TẢ MỚI & NẠP VÀO TOOL (`SecLabFramework.exe`)
+1. **Lưu trữ bản cũ:** Di chuyển toàn bộ các file cũ của lần làm trước vào thư mục `archive_legacy_v0/` để cách ly hoàn toàn, đảm bảo không bị lẫn lộn.
+2. **Khởi tạo Spec mới tinh cho Nhóm 11:**
+   - Dựa trên template gốc của Thầy `Template_Software_Security_iot_gateway_spec.xlsx`, tạo file đặc tả mới: `specification/Nhom11_IoT_Gateway_Auth_Spec_v2.xlsx`.
+   - Chuẩn hóa đúng 10 sheets, mỗi sheet dữ liệu đảm bảo $\ge 5$ dòng để vượt qua Checklist Chương 5 của Thầy.
+3. **Nạp vào Tool và Xuất 70% Báo cáo gốc:**
    - Mở Tab **`Ch6: Spec -> Kripke -> Code -> CWE/CVE`** trên ứng dụng `SecLabFramework.exe`.
-   - Chọn đường dẫn nạp file `Nhom11_SecureGate_IoT_Gateway_Spec.xlsx`.
-   - Kích hoạt tiến trình phân tích tự động: Spec $\rightarrow$ Kripke $\rightarrow$ Sinh Code C $\rightarrow$ CWE/CVE.
-   - Nhấn **Xuất Báo cáo Tích hợp (Export DOCX)** để lấy file Word chứa **70% nội dung báo cáo** do chính Tool sinh ra!
-3. **Trích xuất Artifacts gốc từ Tool:**
-   - Lưu trữ mã C sinh ra: hàm `parse_device_id` (CWE-121), `write_log_entry` (CWE-401), `close_session` (CWE-415), `release_session_buffer` (CWE-416).
-   - Lưu trữ mã TikZ LaTeX mô hình Kripke và công thức CTL.
-   - Lưu file Word sinh ra vào `results/` làm căn cứ nghiệm thu.
+   - Nạp file Spec mới vừa tạo.
+   - Chạy quy trình phân tích và bấm **Xuất Báo cáo Tích hợp (Export DOCX)**.
+   - Thu thập artifacts mới toanh do Tool sinh ra:
+     * Mã C parser mới (hàm `parse_device_id` bị CWE-121, `write_log_entry` bị CWE-401, `close_session` bị CWE-415, `release_session_buffer` bị CWE-416).
+     * Mã TikZ LaTeX mô hình trạng thái Kripke.
+     * File Word báo cáo gốc lưu tại `results/BaoCao_Goc_Tu_Tool.docx`.
 
-### BƯỚC 2: XÂY DỰNG KỊCH BẢN FUZZING CHỦ ĐỀ 4 TỪ KẾT QUẢ TOOL
-1. **Thiết lập mục tiêu Fuzzing (Target Parser):**
-   - Target Parser (`gateway_parser_v0.c`): Nhận gói tin nhị phân có Magic Bytes `IGW1` (4 bytes) + Checksum (4 bytes) + Payload độ dài tùy biến.
-   - Hàm `parse_device_id` lấy payload copy bằng `strcpy`/`memcpy` vào bộ đệm cố định 16 bytes (lỗi CWE-121).
-2. **Vận hành Chuỗi Fuzzing trên Tab `Ch4: Coverage & Fuzzing` của Tool:**
-   - Chạy tuần tự các chế độ trên giao diện Tool:
+### BƯỚC 2: XÂY DỰNG KỊCH BẢN FUZZING CHỦ ĐỀ 4 TỪ MÃ MỚI
+1. **Thiết lập Target Parser mới:**
+   - Đặt mã C mới sinh từ Tool vào `source/gateway_parser_v0.c`.
+2. **Vận hành Fuzzing trên Tab `Ch4: Coverage & Fuzzing` của Tool:**
+   - Chạy chuỗi kiểm thử Fuzzing trên giao diện Tool:
      * `Coverage Tracker`: Đo độ phủ nhánh thực thi.
-     * `Black-box Fuzzer`: Fuzz ngẫu nhiên tìm ngoại lệ (ZeroDivisionError / Crash).
-     * `Mutation Fuzzer`: Đột biến payload.
-     * `White-box / Concolic Fuzzer`: Dùng SMT Z3 giải ngược Magic Value `(7421, 3390)` trong hàm mở khóa (`device_unlock_code`).
-   - Nhấn **Xuất báo cáo chi tiết (PDF/DOCX)** tại Tab Ch4 để lấy biểu đồ so sánh kỹ thuật.
-3. **Thực nghiệm Benchmark 30 trials (Dữ liệu định lượng Chủ đề 4):**
-   - Chạy 30 lượt đối đầu giữa:
-     * **Black-box Fuzzing:** Xác suất ngẫu nhiên vượt qua 4 bytes Magic (`1 / 2^32`) gần như bằng 0 $\rightarrow$ Thất bại 100%.
-     * **Greybox Fuzzing (gcov coverage-guided):** Mất trung bình 45,000+ iterations mới đột biến trúng.
-     * **White-box Fuzzing (Z3 SMT):** Giải phương trình Bit-Vector tìm ra magic bytes trong **1 lần thử duy nhất (~14ms)**!
-   - Ghi lại số liệu thực nghiệm đầy đủ trong `results/data_raw/` (không bịa đặt số liệu).
+     * `Black-box Fuzzer`: Fuzz ngẫu nhiên tìm crash chia 0 (`token_ratio`).
+     * `Mutation Fuzzer`: Đột biến header.
+     * `White-box / Concolic Fuzzer`: Dùng SMT Z3 giải ngược Magic Value `(7421, 3390)` trong hàm `device_unlock_code`.
+   - Xuất báo cáo Fuzzing từ Tab Ch4 để lấy biểu đồ và số liệu chính thức.
+3. **Thực nghiệm Định lượng 30 trials (So sánh Black-box vs White-box):**
+   - Đo đạc chính xác:
+     * Black-box Fuzzing: Tỷ lệ thành công 0% trước 4 byte Magic Bytes/Checksum.
+     * White-box Fuzzing (Z3 SMT): Giải ngược thành công trong 1 lần thử duy nhất (~14ms).
+   - Lưu trữ toàn bộ log JSON thực nghiệm mới vào `results/data_raw/`.
 
-### BƯỚC 3: BỔ SUNG 30% CHIỀU SÂU KỸ THUẬT & BẢN VÁ AN TOÀN CERT C
-1. **Xây dựng Bản vá An toàn (Safe Fixes) `source/gateway_parser_v1.c`:**
-   - Vá CWE-121 theo chuẩn **CERT STR31-C**: Kiểm tra cận độ dài trước khi sao chép, dùng `snprintf` an toàn.
-   - Vá CWE-401 theo chuẩn **CERT MEM31-C**: Giải phóng vùng nhớ log ngay khi đóng phiên.
-   - Vá CWE-415 & CWE-416 theo chuẩn **CERT MEM30-C**: Gán `ptr = NULL` ngay sau khi `free()`, kiểm tra con trỏ hợp lệ trước khi truy xuất.
+### BƯỚC 3: PHÁT TRIỂN 30% CHIỀU SÂU KỸ THUẬT & BẢN VÁ CERT C
+1. **Bản vá an toàn mới `source/gateway_parser_v1.c`:**
+   - Vá CWE-121 bằng **CERT STR31-C** (ràng buộc độ dài bộ đệm, dùng `snprintf`).
+   - Vá CWE-401 bằng **CERT MEM31-C** (giải phóng toàn bộ heap buffer khi đóng phiên).
+   - Vá CWE-415 & CWE-416 bằng **CERT MEM30-C** (gán `ptr = NULL` ngay sau khi `free`).
 2. **Phân tích Kiến trúc Bộ nhớ Mức thấp (Thỏa mãn yêu cầu khắt khe của Thầy Dũng):**
-   - Giải thích cơ chế Stack vs Heap:
-     * Hàm `parse_device_id` lưu buffer trên **Stack Frame**. Khi tràn bộ đệm, dữ liệu ghi đè **Saved Frame Pointer (RBP)** và **Return Address (RIP)**, dẫn đến chiếm quyền điều khiển luồng thực thi khi hàm `ret`.
-     * Quản lý Heap Arena: Con trỏ sau `free()` không được gán NULL sẽ tạo ra Dangling Pointer, truy cập lại gây Use-After-Free làm hỏng metadata của Heap Chunk (tấn công heap exploitation).
-     * Vòng đời non-blocking của Worker: Gateway xử lý theo sự kiện, gói tin vào $\rightarrow$ parse tạm thời trên Stack $\rightarrow$ xác thực xong giải phóng ngay, không duy trì buffer treo trên heap gây rò rỉ.
-3. **Phản biện Static vs Dynamic Analysis:**
-   - Giải thích tại sao Cppcheck (Static Analysis) bỏ lọt lỗi CWE-121: Do kích thước payload phụ thuộc dữ liệu mạng runtime.
-   - Chứng minh AddressSanitizer (ASan) phát hiện chính xác: Nhờ cơ chế **Shadow Bytes (0xfb - Stack Redzone)** bắt ngay điểm ghi ngoài biên.
+   - **Stack Frame:** Phân tích chi tiết tại sao dữ liệu ghi đè **Saved Frame Pointer (RBP)** và **Return Address (RIP)** dẫn đến hijacking luồng thực thi.
+   - **Heap Arena:** Giải thích cơ chế chunk allocation, freelist và tại sao Dangling Pointer dẫn đến Use-After-Free làm hỏng heap metadata.
+   - **Non-blocking Worker:** Giải thích lifecycle gói tin được cấp phát tạm trên Stack và giải phóng ngay trong frame, không để rò rỉ bộ nhớ.
+3. **Đối chiếu Static Analysis vs Dynamic Analysis:**
+   - Chứng minh Cppcheck bỏ lọt CWE-121 do phụ thuộc input mạng runtime.
+   - Chứng minh **AddressSanitizer (ASan)** bắt crash chuẩn xác qua **Shadow Bytes (0xfb - Stack Redzone)**.
 
-### BƯỚC 4: HỢP NHẤT BÁO CÁO TOÀN DIỆN, THẨM ĐỊNH & BÀN GIAO
+### BƯỚC 4: HỢP NHẤT BÁO CÁO PDF, THẨM ĐỊNH & NỘP BÀI
 1. **Hợp nhất Báo cáo chính thức:**
-   - Lấy 70% nội dung khung sườn từ tệp Word do Tool sinh ra ở Bước 1.
-   - Ghép 30% phân tích chuyên sâu (cơ chế bộ nhớ, bản vá CERT C, benchmark Fuzzing 30 trials của Chủ đề 4) từ Bước 2 và 3.
-   - Biên dịch ra file PDF chính thức: `report/BaoCao_BTL_Nhom11.pdf` bằng Word COM script (`scripts/export_all_docs.py`).
-2. **Kiểm tra Thẩm định Kỹ thuật:**
-   - Cập nhật SHA-256 trong `scripts/verify_project.py` và chạy:
+   - Khung sườn 70% lấy từ file Word do Tool sinh ra ở Bước 1.
+   - Ghép 30% nội dung phân tích chuyên sâu (kiến trúc bộ nhớ, bản vá CERT C, benchmark Fuzzing Chủ đề 4) từ Bước 2 và 3.
+   - Biên dịch ra `report/BaoCao_BTL_Nhom11.pdf` bằng Word COM script.
+2. **Thẩm định Kỹ thuật 10/10 PASS:**
+   - Cập nhật mã băm SHA-256 mới và chạy kịch bản kiểm tra:
      ```bash
      python scripts/verify_project.py
      pytest tests/
      ```
-     **Đảm bảo 10/10 khâu kiểm định đạt PASS (100%)**.
+     Bảo đảm toàn bộ các khâu đều đạt PASS 100%.
 3. **Đóng gói & Commit:**
-   - Đóng gói file nộp bài: `Nhom11_BTL_ChuDe4_Fuzzing.zip`.
-   - Git commit sạch sẽ và push lên `origin main`.
+   - Đóng gói file nộp bài chuẩn: `Nhom11_BTL_ChuDe4_Fuzzing.zip`.
+   - Git commit sạch sẽ với thông điệp rõ ràng theo chuẩn Conventional Commits và push lên `origin main`.
 
 ---
 
-## IV. CÁC NGUYÊN TẮC BẢO MẬT BẮT BUỘC
-* **Tuyệt đối để trống:** Mã sinh viên (MSSV) và Khóa/Lớp trên trang bìa, bảng phân công và tài liệu cam đoan.
+## V. CÁC NGUYÊN TẮC BẢO MẬT BẮT BUỘC
+* **Tuyệt đối để trống:** Mã số sinh viên (MSSV) và Khóa/Lớp trên mọi trang bìa, bảng phân công và tài liệu cam đoan.
 * **Tên thành viên:** Lưu Đức Hiệp & Hà Nguyễn Trúc Linh (50% - 50%).
-* **Số liệu trung thực:** Toàn bộ số liệu thời gian, độ phủ, crash count phải dựa 100% trên log thực tế và file JSON thô.
+* **Số liệu trung thực:** Dựa 100% trên dữ liệu thực tế từ Tool và log ASan thực nghiệm.
 
 ---
-Codex, hãy tiếp nhận không gian làm việc và báo cáo lộ trình thực thi chi tiết cho người dùng!
+Codex, hãy bắt đầu thực thi theo lộ trình Clean Slate mới 100% này và báo cáo kế hoạch cho người dùng!
 ```
