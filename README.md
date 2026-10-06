@@ -33,6 +33,9 @@
 ATPM-Nhom11-ChuDe4-Fuzzing/
 ├── .gitignore
 ├── README.md                            # Hướng dẫn toàn diện và cẩm nang nghiệm thu
+├── docs/                                # Cẩm nang yêu cầu giảng viên & tài liệu chuyển giao
+│   ├── HANDOFF_CHUYEN_GIAO_PHIEN_MOI.md
+│   └── YEU_CAU_VA_LUU_Y_GIANG_VIEN_KHO_TINH.md
 ├── specification/
 │   └── Nhom11_SecureGate_IoT_Gateway_Spec.xlsx  # Đặc tả hình thức 10 sheet Excel (SSOT)
 ├── source/
