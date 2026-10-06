@@ -1,28 +1,29 @@
 # BIÊN BẢN CHUYỂN GIAO PHIÊN LÀM VIỆC (SESSION HANDOFF)
-**Dự án:** Bài tập lớn An toàn Phần mềm — Đề tài 4: SecureGate IoT Gateway Fuzzing & Formal Verification  
 **Học phần:** Kỹ thuật Lập trình An toàn (CSE703093 / CSE703153) — ThS. Vũ Quang Dũng (ĐH Phenikaa)  
 **Nhóm sinh viên:** Nhóm 11 — Lưu Đức Hiệp & Hà Nguyễn Trúc Linh (50% - 50%)  
 **Ngày lập biên bản:** 06/10/2026  
-**Mục đích:** Bàn giao toàn bộ ngữ cảnh, trạng thái kỹ thuật và nhiệm vụ trọng tâm cho phiên làm việc mới khi tiếp nhận **2 TOOL MỚI** từ giảng viên.
+**Nguyên tắc cốt lõi:**  
+- **Tư duy cởi mở, không gò ép:** Đề tài IoT Gateway trước đó chỉ là bài tập thử nghiệm và tích lũy kinh nghiệm phương pháp. Sẵn sàng bắt đầu một dự án mới hoàn toàn nếu 2 công cụ mới của giảng viên định hình một bài toán/hệ thống khác.  
+- **Không cần tạo Repo mới:** Triển khai trực tiếp trên workspace hiện tại.  
+- **Mọi thứ xuất phát từ Tool giảng viên ("Tool hỗ trợ 70%"):** Đề tài, luồng dữ liệu, đặc tả, mã nguồn và kết quả báo cáo sẽ được định hình trực tiếp từ 2 tool mới của thầy.
 
 ---
 
-## 1. TÌNH HÌNH DỰ ÁN & VẤN ĐỀ MỚI XUẤT HIỆN
+## 1. TÌNH HÌNH DỰ ÁN & ĐỊNH HƯỚNG MỚI
 
-### 1.1 Hiện trạng kỹ thuật tính đến trước phiên mới
-* **Kho mã nguồn:** Git Repository sạch (`clean working tree`), nhánh `main`, commit mới nhất `e7df7bd`:
-  `docs(spec): expand specification sheets to 5+ rows and update validation hashes`  
-  Remote: `https://github.com/bachiep/ATPM-Nhom11-ChuDe4-Fuzzing.git` (đã push).
-* **Kết quả kiểm định hiện tại:** Kịch bản `scripts/verify_project.py` đạt **10/10 PASS** (Khâu 1 đến 8 đều đạt chuẩn, PyTest 30/30 passed, mã băm SHA-256 khớp 100%).
-* **Tệp đặc tả Excel:** `specification/Nhom11_SecureGate_IoT_Gateway_Spec.xlsx` đủ 10 sheet chuẩn, toàn bộ các sheet dữ liệu đều đạt $\ge 5$ dòng theo đúng Checklist Chương 5 của `Huong_dan_tao_Spec_file_dang_excel.pdf`.
-* **Báo cáo chính thức:** `report/BaoCao_BTL_Nhom11.pdf` (15 trang) đã được biên dịch sạch, không còn file nháp trên Git.
-* **Tệp nộp bài:** `Nhom11_BTL_ChuDe4_Fuzzing.zip` (2.01 MB) đặt tại thư mục gốc `I:\1_taiLieuDaiHoc\ATPM\`.
+### 1.1 Kinh nghiệm tích lũy từ phiên trước
+* **Kỹ năng cốt lõi đã làm chủ:**
+  - Quy chuẩn tệp đặc tả Excel 10 sheet theo Checklist Chương 5 (`Huong_dan_tao_Spec_file_dang_excel.pdf`).
+  - Phân tích an toàn bộ nhớ C (Stack vs Heap, CERT C STR31-C, MEM30-C, AddressSanitizer).
+  - Mô hình hóa hình thức (Kripke model, Z3 SMT Bit-Vector solver).
+  - Tự động hóa kiểm định và xuất báo cáo PDF chuẩn mực qua script.
+* **Workspace hiện tại:** Đã được dọn dẹp sạch sẽ, cấu trúc tài liệu quy chuẩn tại `TAI_LIEU_VA_YEU_CAU/`.
 
 ### 1.2 Biến chuyển mới: Ý kiến của Giảng viên & 2 Tool mới
-Giảng viên vừa xem xét và đưa ra nhận xét chấn chỉnh quan trọng:
-1. **Bài chưa ổn nếu làm rời rạc ngoài tool:** Thầy nhấn mạnh *"Tool của thầy đã hỗ trợ tới 70% rồi, và mọi thứ phải được làm từ tool ra. Nhiệm vụ của các em là dùng tool cho tốt và báo cáo cho giảng viên"*.
-2. **Cung cấp thêm 2 tool mới:** Giảng viên đã bàn giao thêm 2 công cụ mới để phục vụ quá trình làm bài và kiểm định.
-3. **Yêu cầu phân tích sâu:** Không sinh kịch bản ngẫu nhiên; phải giải thích cặn kẽ tại sao lại làm như thế, cơ chế lưu trữ dữ liệu vào Stack/Heap, gọi xong có lưu không hay chờ xử lý sau, và làm rõ sự khác biệt của đề tài Fuzzing/Binary Gateway so với các nhóm làm dự án code thông thường.
+Giảng viên vừa chấn chỉnh định hướng:
+1. **"Tool đã hỗ trợ 70%, mọi thứ phải được làm từ tool ra":** Không tự biên tự diễn kịch bản rời rạc bên ngoài; phải nắm bắt cách vận hành tool của thầy, nạp đúng định dạng và lấy kết quả từ tool để đưa vào báo cáo.
+2. **Cung cấp thêm 2 tool mới:** Sẵn sàng tiếp nhận 2 tool mới để phân tích chức năng và luồng xử lý.
+3. **Sẵn sàng tái thiết lập dự án mới:** Không gò ép đề tài vào IoT Gateway nếu 2 tool mới hướng tới một mô hình/hệ thống mục tiêu khác. Bài toán nào tối ưu nhất cho pipeline của thầy sẽ được chọn làm dự án chính thức.
 
 ---
 
@@ -49,19 +50,20 @@ Khi người dùng mở phiên làm việc mới và cung cấp **2 tool mới**
   * Kiểm tra vị trí của 2 tool mới trong thư mục `I:\1_taiLieuDaiHoc\ATPM\`.
   * Xác định định dạng (Executable `.exe`, Python package, Script, hay Web UI).
   * Đọc file `README`, file hướng dẫn hoặc chạy `--help` để hiểu rõ mục đích và đầu vào/đầu ra của 2 tool này.
-- [ ] **Bước 2: Xác định vị trí 2 Tool mới trong Pipeline 70% của Giảng viên**
-  * Tool mới làm nhiệm vụ gì? (Phân tích AST C? Tự động hóa Fuzzing? Sinh harness? Kiểm tra ràng buộc SMT? Hay Xuất báo cáo nghiệm thu tự động?).
-  * Xác định xem tệp `Nhom11_SecureGate_IoT_Gateway_Spec.xlsx` hoặc mã nguồn C `gateway_parser_v0.c` cần được nạp vào tool mới như thế nào.
-- [ ] **Bước 3: Chạy dữ liệu dự án qua 2 Tool mới ("Mọi thứ làm từ Tool ra")**
-  * Thực thi 2 tool mới với dữ liệu của SecureGate IoT Gateway.
-  * Thu thập toàn bộ artifact sinh ra: log, kết quả quét, mã sinh ra, đồ thị hoặc báo cáo DOCX/PDF từ tool.
-  * Lưu trữ artifact vào `results/` hoặc thư mục quy định.
-- [ ] **Bước 4: Diễn giải & Tích hợp vào Báo cáo**
-  * Đọc kỹ tài liệu `YEU_CAU_VA_LUU_Y_GIANG_VIEN_KHO_TINH.md` để nắm rõ các yêu cầu về:
-    * Giải thích cơ chế lưu trữ (Stack vs Heap, buffer allocation, non-blocking lifecycle).
-    * Lý do kỹ thuật tại sao thiết kế như vậy, không sinh kịch bản rác.
-    * Phân biệt rõ đề tài Gateway Fuzzing với đề tài kiểm thử ứng dụng của các nhóm khác.
-  * Cập nhật các phát hiện mới từ 2 tool vào báo cáo chính thức `report/BaoCao_BTL_Nhom11.pdf`.
+- [ ] **Bước 2: Xác định vai trò & bài toán mục tiêu từ 2 Tool mới**
+  * Tool mới làm nhiệm vụ gì? (Phân tích tĩnh/động AST C? Sinh ca kiểm thử tự động? Kiểm tra mô hình hình thức SMT/Kripke? Hay sinh/quét mã?).
+  * Xác định cấu trúc đầu vào mà 2 tool yêu cầu (file Spec Excel, mã C nguồn, hay giao thức/hệ thống cụ thể nào).
+  * **Quyết định bài toán:** Nếu 2 tool hoạt động tốt nhất trên một hệ thống/nghiệp vụ khác (ví dụ: giao thức nhúng, hệ thống quản lý quyền truy cập, parser mới...), chúng ta sẵn sàng khởi tạo đặc tả và mã nguồn mới hoàn toàn bám sát tool.
+- [ ] **Bước 3: Vận hành Pipeline từ 2 Tool mới ("Mọi thứ làm từ Tool ra")**
+  * Chạy trực tiếp 2 tool với hệ thống mục tiêu.
+  * Thu thập toàn bộ artifact sinh ra: log runtime, bảng phân tích AST, trace kiểm thử, đồ thị trạng thái, hay báo cáo tự động từ tool.
+  * Toàn bộ dữ liệu thực nghiệm và bằng chứng phải trích xuất 100% từ tool thầy cung cấp.
+- [ ] **Bước 4: Thiết kế Báo cáo & Phân tích Chuyên sâu**
+  * Đọc kỹ tài liệu `YEU_CAU_VA_LUU_Y_GIANG_VIEN_KHO_TINH.md` để giải trình cặn kẽ:
+    * Cơ chế lưu trữ dữ liệu (Stack vs Heap, vòng đời con trỏ, buffer allocation).
+    * Lý do kỹ thuật tại sao hệ thống được thiết kế như vậy, không tạo kịch bản bừa bãi.
+    * Giải thích bản chất từng trạng thái, chuyển trạng thái và ràng buộc an toàn.
+  * Tích hợp toàn diện các bằng chứng từ tool vào báo cáo chính thức.
 - [ ] **Bước 5: Đồng bộ Kiểm tra & Bàn giao Hoàn chỉnh**
   * Cập nhật mã băm SHA-256 trong `scripts/verify_project.py` nếu có file báo cáo hoặc spec thay đổi.
   * Chạy `python scripts/verify_project.py` và `pytest tests/` bảo đảm đạt **10/10 PASS**.
