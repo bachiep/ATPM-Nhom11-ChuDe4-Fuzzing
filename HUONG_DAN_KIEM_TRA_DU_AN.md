@@ -20,8 +20,15 @@
 ### 2. CÁC LỆNH KIỂM TRA VÀ TÁI LẬP KẾT QUẢ (REPRODUCIBILITY)
 
 #### Bước 1: Biên dịch mã nguồn C
+
+**Môi trường Linux / WSL / Clang (AddressSanitizer):**
 ```bash
-# Biên dịch cả 2 phiên bản bằng GCC (MinGW-w64 UCRT64)
+gcc -fsanitize=address -O0 -g source/fzp1_parser_v0.c -o source/fzp1_parser_v0_asan
+gcc -fsanitize=address -O0 -g source/fzp1_parser_v1.c -o source/fzp1_parser_v1_asan
+```
+
+**Môi trường Windows (MinGW-w64 UCRT64 với Stack Canary):**
+```bash
 gcc -Wall -Wextra -O0 -g -fstack-protector-all source/fzp1_parser_v0.c -o source/fzp1_parser_v0.exe
 gcc -Wall -Wextra -O0 -g -fstack-protector-all source/fzp1_parser_v1.c -o source/fzp1_parser_v1.exe
 ```
@@ -34,14 +41,15 @@ pytest tests/test_fzp1_parser.py -v
 
 #### Bước 3: Kiểm chứng lỗi và bản vá bằng tệp tấn công
 ```bash
-# 1. Chạy bản lỗi v0 với gói tin payload > 16 byte -> Quan sát hiện tượng SẬP (Crash / Access Violation)
-.\source\fzp1_parser_v0.exe crashes\whitebox_s0_crash_0.bin
-# Mã lỗi trả về: 3221225501 (STATUS_ACCESS_VIOLATION do ghi đè stack canary)
+# 1. Chạy bản lỗi v0 với gói tin payload > 16 byte (whitebox_s0_crash_0.bin)
+# - Trên Linux/Clang ASan: Bắt lỗi Stack Buffer Overflow với shadow byte [f3] (xem results/logs/log_asan_crash_v0.txt)
+# - Trên Windows: SẬP TIẾN TRÌNH (STATUS_STACK_BUFFER_OVERRUN, Exit Code: -1073741795 / 3221225501)
+.\source\fzp1_parser_v0.exe .\crashes\whitebox_s0_crash_0.bin
 
 # 2. Chạy bản vá v1 với cùng tệp tấn công -> Quan sát cơ chế TỪ CHỐI AN TOÀN (CERT STR31-C)
-.\source\fzp1_parser_v1.exe crashes\whitebox_s0_crash_0.bin
-# Thông báo: [SECURITY_REJECT] Payload length 26 exceeds maximum allowed buffer 16
-# Mã lỗi trả về: 2 (Từ chối an toàn, không có lỗi sập bộ nhớ)
+.\source\fzp1_parser_v1.exe .\crashes\whitebox_s0_crash_0.bin
+# Thông báo: [SECURITY_REJECT] Payload length 25 exceeds maximum allowed buffer 16
+# Mã lỗi trả về: 2 (Từ chối an toàn, 0 lỗi sập bộ nhớ)
 ```
 
 #### Bước 4: Chạy lại Benchmark 30 lượt thử nghiệm
@@ -63,6 +71,6 @@ python scripts/verify_project.py
 ### 3. TÓM TẮT KẾT QUẢ ĐẠT ĐƯỢC
 * **Tỷ lệ tìm thấy lỗi qua 30 trials:**
   - Black-box (Ngẫu nhiên mù quáng): **0% (0/30)** — Rào cản toán học $P = 1/2^{40} \approx 9.09 \times 10^{-13}$.
-  - Greybox (Biết Magic header): **80% (24/30)** — Trung vị 2.58 giây.
-  - White-box (Z3 SMT Solver): **100% (30/30)** — Thời gian giải trung bình **7.16 ms**, tìm ra crash ngay trong vòng lặp đầu tiên.
+  - Greybox (Biết Magic header): **80% (24/30)** — Trung vị 3.27 giây.
+  - White-box (Z3 SMT Solver): **100% (30/30)** — Thời gian giải Z3 trung bình **3.92 ms** (trung vị time-to-crash 0.22 giây), tìm ra crash ngay trong vòng lặp đầu tiên.
 * **Chuẩn hóa bản vá:** Tuân thủ 100% **CERT STR31-C**, **CERT MEM31-C**, **CERT MEM30-C**.

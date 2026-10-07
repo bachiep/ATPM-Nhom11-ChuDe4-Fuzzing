@@ -89,17 +89,43 @@ pytest tests/test_fzp1_parser.py -v
 ```
 *Kết quả: 10/10 passed (100%) trong < 0.5 giây.*
 
-#### 4. Biên dịch và Xác minh Bản Vá CWE-121
+#### 4. Biên dịch và Xác minh Lỗ hổng CWE-121 Before/After
+
+**Cách A — Môi trường Linux / WSL / MSYS2 Clang với AddressSanitizer (ASan):**
 ```bash
-# Biên dịch cả hai phiên bản bằng GCC
+# Biên dịch với cờ kiểm tra ô nhớ động AddressSanitizer
+gcc -fsanitize=address -O0 -g source/fzp1_parser_v0.c -o source/fzp1_parser_v0_asan
+gcc -fsanitize=address -O0 -g source/fzp1_parser_v1.c -o source/fzp1_parser_v1_asan
+
+# Kích hoạt lỗi trên bản v0 -> ASan bắt lỗi Stack Buffer Overflow với shadow byte [f3]
+./source/fzp1_parser_v0_asan crashes/whitebox_s0_crash_0.bin
+# (Chi tiết nhật ký lưu tại results/logs/log_asan_crash_v0.txt)
+
+# Kiểm chứng bản vá an toàn v1 -> Xử lý an toàn, 0 memory findings
+./source/fzp1_parser_v1_asan crashes/whitebox_s0_crash_0.bin
+# (Chi tiết nhật ký lưu tại results/logs/log_fixed_clean_v1.txt)
+```
+
+**Cách B — Môi trường Windows MinGW GCC (Stack Smashing Protection):**
+```bash
+# Biên dịch cả hai phiên bản bằng GCC với cờ bảo vệ ngăn xếp
 gcc -Wall -Wextra -O0 -g -fstack-protector-all source/fzp1_parser_v0.c -o source/fzp1_parser_v0.exe
 gcc -Wall -Wextra -O0 -g -fstack-protector-all source/fzp1_parser_v1.c -o source/fzp1_parser_v1.exe
 
-# Kích hoạt lỗi trên bản v0 (Sập tiến trình do ghi đè stack canary)
-.\source\fzp1_parser_v0.exe crashes\whitebox_s0_crash_0.bin
+# Kích hoạt lỗi trên bản v0 (Sập tiến trình STATUS_STACK_BUFFER_OVERRUN do ghi đè canary)
+.\source\fzp1_parser_v0.exe .\crashes\whitebox_s0_crash_0.bin
+# Exit Code: -1073741795 (0xC0000403)
 
-# Kiểm chứng bản vá an toàn v1 (Từ chối an toàn, 0 lỗi bộ nhớ)
-.\source\fzp1_parser_v1.exe crashes\whitebox_s0_crash_0.bin
+# Kiểm chứng bản vá an toàn v1 (Từ chối an toàn CERT STR31-C, Exit Code: 2)
+.\source\fzp1_parser_v1.exe .\crashes\whitebox_s0_crash_0.bin
+```
+
+#### 5. Chạy Fuzzing Kế thừa từ `ch4_dynafuzz`
+```bash
+# Thực thi fuzzer kế thừa từ softsec-toolkit/ch4_dynafuzz (giải symbolic Z3 toàn diện)
+python scripts/run_fzp1_benchmark.py
+python scripts/aggregate_results.py
+python scripts/generate_charts.py
 ```
 
 ---

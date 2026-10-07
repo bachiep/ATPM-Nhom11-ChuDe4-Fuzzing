@@ -4,19 +4,19 @@
     "seed": 0,
     "budget": 1,
     "iterations_used": 1,
-    "wall_time_seconds": 0.0405,
-    "z3_solve_time": 0.0096,
-    "exec_per_sec": 24.7,
+    "wall_time_seconds": 0.0297,
+    "z3_solve_time": 0.0094,
+    "exec_per_sec": 33.7,
     "first_crash_at": 0,
-    "time_to_first_crash_seconds": 0.0405,
+    "time_to_first_crash_seconds": 0.0297,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 0,
         "exit_code": 3221225501,
-        "input_hex": "465a50311a000d1a2734414e5b6875828f9ca9b6c3d0ddeaf704111e2b38454d",
+        "input_hex": "465a50311941484f565d646b727980878e959ca3aab1b8bfc6cdd4dbe2e979",
         "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\whitebox_s0_crash_0.bin",
-        "method": "z3_smt_sat"
+        "method": "z3_smt_symbolic_solver"
       }
     ]
   },
@@ -25,19 +25,19 @@
     "seed": 1,
     "budget": 1,
     "iterations_used": 1,
-    "wall_time_seconds": 0.0187,
-    "z3_solve_time": 0.0057,
-    "exec_per_sec": 53.3,
+    "wall_time_seconds": 0.0173,
+    "z3_solve_time": 0.003,
+    "exec_per_sec": 58.0,
     "first_crash_at": 0,
-    "time_to_first_crash_seconds": 0.0187,
+    "time_to_first_crash_seconds": 0.0173,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 0,
         "exit_code": 3221225501,
-        "input_hex": "465a50311b0714212e3b4855626f7c8996a3b0bdcad7e4f1fe0b1825323f4c5922",
+        "input_hex": "465a50311a545b626970777e858c939aa1a8afb6bdc4cbd2d9e0e7eef5fc0337",
         "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\whitebox_s1_crash_0.bin",
-        "method": "z3_smt_sat"
+        "method": "z3_smt_symbolic_solver"
       }
     ]
   },
@@ -46,19 +46,19 @@
     "seed": 2,
     "budget": 1,
     "iterations_used": 1,
-    "wall_time_seconds": 0.0151,
-    "z3_solve_time": 0.0027,
-    "exec_per_sec": 66.2,
+    "wall_time_seconds": 0.0177,
+    "z3_solve_time": 0.0033,
+    "exec_per_sec": 56.5,
     "first_crash_at": 0,
-    "time_to_first_crash_seconds": 0.0151,
+    "time_to_first_crash_seconds": 0.0177,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 0,
         "exit_code": 3221225501,
-        "input_hex": "465a50311c0e1b2835424f5c697683909daab7c4d1deebf805121f2c394653606d08",
+        "input_hex": "465a50311b676e757c838a91989fa6adb4bbc2c9d0d7dee5ecf3fa01080f161d44",
         "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\whitebox_s2_crash_0.bin",
-        "method": "z3_smt_sat"
+        "method": "z3_smt_symbolic_solver"
       }
     ]
   },
@@ -67,19 +67,19 @@
     "seed": 3,
     "budget": 1,
     "iterations_used": 1,
-    "wall_time_seconds": 0.0145,
-    "z3_solve_time": 0.0025,
-    "exec_per_sec": 69.1,
+    "wall_time_seconds": 0.0182,
+    "z3_solve_time": 0.003,
+    "exec_per_sec": 55.1,
     "first_crash_at": 0,
-    "time_to_first_crash_seconds": 0.0145,
+    "time_to_first_crash_seconds": 0.0182,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 0,
         "exit_code": 3221225501,
-        "input_hex": "465a50311d15222f3c495663707d8a97a4b1becbd8e5f2ff0c192633404d5a677481dd",
+        "input_hex": "465a50311c7a81888f969da4abb2b9c0c7ced5dce3eaf1f8ff060d141b22293037c4",
         "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\whitebox_s3_crash_0.bin",
-        "method": "z3_smt_sat"
+        "method": "z3_smt_symbolic_solver"
       }
     ]
   },
@@ -88,19 +88,19 @@
     "seed": 4,
     "budget": 1,
     "iterations_used": 1,
-    "wall_time_seconds": 0.0147,
-    "z3_solve_time": 0.0027,
-    "exec_per_sec": 67.9,
+    "wall_time_seconds": 0.0174,
+    "z3_solve_time": 0.003,
+    "exec_per_sec": 57.5,
     "first_crash_at": 0,
-    "time_to_first_crash_seconds": 0.0147,
+    "time_to_first_crash_seconds": 0.0174,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 0,
         "exit_code": 3221225501,
-        "input_hex": "465a50311e1c293643505d6a7784919eabb8c5d2dfecf90613202d3a4754616e7b88954d",
+        "input_hex": "465a50311d8d949ba2a9b0b7bec5ccd3dae1e8eff6fd040b121920272e353c434a51a1",
         "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\whitebox_s4_crash_0.bin",
-        "method": "z3_smt_sat"
+        "method": "z3_smt_symbolic_solver"
       }
     ]
   },
@@ -109,19 +109,19 @@
     "seed": 5,
     "budget": 1,
     "iterations_used": 1,
-    "wall_time_seconds": 0.0149,
-    "z3_solve_time": 0.0028,
-    "exec_per_sec": 66.9,
+    "wall_time_seconds": 0.0181,
+    "z3_solve_time": 0.0041,
+    "exec_per_sec": 55.2,
     "first_crash_at": 0,
-    "time_to_first_crash_seconds": 0.0149,
+    "time_to_first_crash_seconds": 0.0181,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 0,
         "exit_code": 3221225501,
-        "input_hex": "465a50311f23303d4a5764717e8b98a5b2bfccd9e6f3000d1a2734414e5b6875828f9ca996",
+        "input_hex": "465a50311ea0a7aeb5bcc3cad1d8dfe6edf4fb020910171e252c333a41484f565d646b2b",
         "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\whitebox_s5_crash_0.bin",
-        "method": "z3_smt_sat"
+        "method": "z3_smt_symbolic_solver"
       }
     ]
   },
@@ -130,19 +130,19 @@
     "seed": 6,
     "budget": 1,
     "iterations_used": 1,
-    "wall_time_seconds": 0.0185,
-    "z3_solve_time": 0.0029,
-    "exec_per_sec": 53.9,
+    "wall_time_seconds": 0.0178,
+    "z3_solve_time": 0.0036,
+    "exec_per_sec": 56.1,
     "first_crash_at": 0,
-    "time_to_first_crash_seconds": 0.0185,
+    "time_to_first_crash_seconds": 0.0178,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 0,
         "exit_code": 3221225501,
-        "input_hex": "465a5031202a3744515e6b7885929facb9c6d3e0edfa0714212e3b4855626f7c8996a3b0bdc0",
+        "input_hex": "465a50311fb3bac1c8cfd6dde4ebf2f900070e151c232a31383f464d545b626970777e850c",
         "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\whitebox_s6_crash_0.bin",
-        "method": "z3_smt_sat"
+        "method": "z3_smt_symbolic_solver"
       }
     ]
   },
@@ -151,19 +151,19 @@
     "seed": 7,
     "budget": 1,
     "iterations_used": 1,
-    "wall_time_seconds": 0.2589,
-    "z3_solve_time": 0.0029,
-    "exec_per_sec": 3.9,
+    "wall_time_seconds": 0.0178,
+    "z3_solve_time": 0.0038,
+    "exec_per_sec": 56.1,
     "first_crash_at": 0,
-    "time_to_first_crash_seconds": 0.2589,
+    "time_to_first_crash_seconds": 0.0178,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 0,
         "exit_code": 3221225501,
-        "input_hex": "465a503121313e4b5865727f8c99a6b3c0cddae7f4010e1b2835424f5c697683909daab7c4d171",
+        "input_hex": "465a503120c6cdd4dbe2e9f0f7fe050c131a21282f363d444b525960676e757c838a91989f20",
         "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\whitebox_s7_crash_0.bin",
-        "method": "z3_smt_sat"
+        "method": "z3_smt_symbolic_solver"
       }
     ]
   },
@@ -172,19 +172,19 @@
     "seed": 8,
     "budget": 1,
     "iterations_used": 1,
-    "wall_time_seconds": 0.2145,
-    "z3_solve_time": 0.0061,
-    "exec_per_sec": 4.7,
+    "wall_time_seconds": 0.2603,
+    "z3_solve_time": 0.0031,
+    "exec_per_sec": 3.8,
     "first_crash_at": 0,
-    "time_to_first_crash_seconds": 0.2145,
+    "time_to_first_crash_seconds": 0.2603,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 0,
         "exit_code": 3221225501,
-        "input_hex": "465a5031223845525f6c798693a0adbac7d4e1eefb0815222f3c495663707d8a97a4b1becbd8e53d",
+        "input_hex": "465a503121d9e0e7eef5fc030a11181f262d343b424950575e656c737a81888f969da4abb2b9f9",
         "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\whitebox_s8_crash_0.bin",
-        "method": "z3_smt_sat"
+        "method": "z3_smt_symbolic_solver"
       }
     ]
   },
@@ -193,19 +193,19 @@
     "seed": 9,
     "budget": 1,
     "iterations_used": 1,
-    "wall_time_seconds": 0.296,
-    "z3_solve_time": 0.006,
-    "exec_per_sec": 3.4,
+    "wall_time_seconds": 0.1955,
+    "z3_solve_time": 0.004,
+    "exec_per_sec": 5.1,
     "first_crash_at": 0,
-    "time_to_first_crash_seconds": 0.296,
+    "time_to_first_crash_seconds": 0.1955,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 0,
-        "exit_code": 3221225477,
-        "input_hex": "465a5031233f4c596673808d9aa7b4c1cedbe8f5020f1c293643505d6a7784919eabb8c5d2dfecf96a",
+        "exit_code": 3221225501,
+        "input_hex": "465a503122ecf3fa01080f161d242b323940474e555c636a71787f868d949ba2a9b0b7bec5ccd3bf",
         "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\whitebox_s9_crash_0.bin",
-        "method": "z3_smt_sat"
+        "method": "z3_smt_symbolic_solver"
       }
     ]
   },
@@ -214,19 +214,19 @@
     "seed": 10,
     "budget": 1,
     "iterations_used": 1,
-    "wall_time_seconds": 0.2767,
-    "z3_solve_time": 0.0062,
-    "exec_per_sec": 3.6,
+    "wall_time_seconds": 0.2443,
+    "z3_solve_time": 0.0039,
+    "exec_per_sec": 4.1,
     "first_crash_at": 0,
-    "time_to_first_crash_seconds": 0.2767,
+    "time_to_first_crash_seconds": 0.2443,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 0,
         "exit_code": 3221225477,
-        "input_hex": "465a5031244653606d7a8794a1aebbc8d5e2effc091623303d4a5764717e8b98a5b2bfccd9e6f3000dd8",
+        "input_hex": "465a503123ff060d141b222930373e454c535a61686f767d848b9299a0a7aeb5bcc3cad1d8dfe6edd4",
         "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\whitebox_s10_crash_0.bin",
-        "method": "z3_smt_sat"
+        "method": "z3_smt_symbolic_solver"
       }
     ]
   },
@@ -235,19 +235,19 @@
     "seed": 11,
     "budget": 1,
     "iterations_used": 1,
-    "wall_time_seconds": 0.2945,
-    "z3_solve_time": 0.0052,
-    "exec_per_sec": 3.4,
+    "wall_time_seconds": 0.2348,
+    "z3_solve_time": 0.0036,
+    "exec_per_sec": 4.3,
     "first_crash_at": 0,
-    "time_to_first_crash_seconds": 0.2945,
+    "time_to_first_crash_seconds": 0.2348,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 0,
         "exit_code": 3221225477,
-        "input_hex": "465a5031254d5a6774818e9ba8b5c2cfdce9f603101d2a3744515e6b7885929facb9c6d3e0edfa07142145",
+        "input_hex": "465a503124121920272e353c434a51585f666d747b828990979ea5acb3bac1c8cfd6dde4ebf2f900072c",
         "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\whitebox_s11_crash_0.bin",
-        "method": "z3_smt_sat"
+        "method": "z3_smt_symbolic_solver"
       }
     ]
   },
@@ -256,19 +256,19 @@
     "seed": 12,
     "budget": 1,
     "iterations_used": 1,
-    "wall_time_seconds": 0.2812,
-    "z3_solve_time": 0.007,
-    "exec_per_sec": 3.6,
+    "wall_time_seconds": 0.2333,
+    "z3_solve_time": 0.0034,
+    "exec_per_sec": 4.3,
     "first_crash_at": 0,
-    "time_to_first_crash_seconds": 0.2812,
+    "time_to_first_crash_seconds": 0.2333,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 0,
         "exit_code": 3221225477,
-        "input_hex": "465a50312654616e7b8895a2afbcc9d6e3f0fd0a1724313e4b5865727f8c99a6b3c0cddae7f4010e1b2835fd",
+        "input_hex": "465a503125252c333a41484f565d646b727980878e959ca3aab1b8bfc6cdd4dbe2e9f0f7fe050c131a21a1",
         "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\whitebox_s12_crash_0.bin",
-        "method": "z3_smt_sat"
+        "method": "z3_smt_symbolic_solver"
       }
     ]
   },
@@ -277,19 +277,19 @@
     "seed": 13,
     "budget": 1,
     "iterations_used": 1,
-    "wall_time_seconds": 0.2758,
-    "z3_solve_time": 0.0034,
-    "exec_per_sec": 3.6,
+    "wall_time_seconds": 0.2405,
+    "z3_solve_time": 0.0041,
+    "exec_per_sec": 4.2,
     "first_crash_at": 0,
-    "time_to_first_crash_seconds": 0.2758,
+    "time_to_first_crash_seconds": 0.2405,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 0,
         "exit_code": 3221225477,
-        "input_hex": "465a5031275b6875828f9ca9b6c3d0ddeaf704111e2b3845525f6c798693a0adbac7d4e1eefb0815222f3c497e",
+        "input_hex": "465a503126383f464d545b626970777e858c939aa1a8afb6bdc4cbd2d9e0e7eef5fc030a11181f262d343b23",
         "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\whitebox_s13_crash_0.bin",
-        "method": "z3_smt_sat"
+        "method": "z3_smt_symbolic_solver"
       }
     ]
   },
@@ -298,19 +298,19 @@
     "seed": 14,
     "budget": 1,
     "iterations_used": 1,
-    "wall_time_seconds": 0.283,
-    "z3_solve_time": 0.0079,
-    "exec_per_sec": 3.5,
+    "wall_time_seconds": 0.2267,
+    "z3_solve_time": 0.0038,
+    "exec_per_sec": 4.4,
     "first_crash_at": 0,
-    "time_to_first_crash_seconds": 0.283,
+    "time_to_first_crash_seconds": 0.2267,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 0,
         "exit_code": 3221225477,
-        "input_hex": "465a503128626f7c8996a3b0bdcad7e4f1fe0b1825323f4c596673808d9aa7b4c1cedbe8f5020f1c293643505d00",
+        "input_hex": "465a5031274b525960676e757c838a91989fa6adb4bbc2c9d0d7dee5ecf3fa01080f161d242b323940474e557c",
         "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\whitebox_s14_crash_0.bin",
-        "method": "z3_smt_sat"
+        "method": "z3_smt_symbolic_solver"
       }
     ]
   },
@@ -319,19 +319,19 @@
     "seed": 15,
     "budget": 1,
     "iterations_used": 1,
-    "wall_time_seconds": 0.2806,
-    "z3_solve_time": 0.0067,
-    "exec_per_sec": 3.6,
+    "wall_time_seconds": 0.2262,
+    "z3_solve_time": 0.0045,
+    "exec_per_sec": 4.4,
     "first_crash_at": 0,
-    "time_to_first_crash_seconds": 0.2806,
+    "time_to_first_crash_seconds": 0.2262,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 0,
         "exit_code": 3221225477,
-        "input_hex": "465a503129697683909daab7c4d1deebf805121f2c394653606d7a8794a1aebbc8d5e2effc091623303d4a57647159",
+        "input_hex": "465a5031285e656c737a81888f969da4abb2b9c0c7ced5dce3eaf1f8ff060d141b222930373e454c535a61686fb8",
         "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\whitebox_s15_crash_0.bin",
-        "method": "z3_smt_sat"
+        "method": "z3_smt_symbolic_solver"
       }
     ]
   },
@@ -340,19 +340,19 @@
     "seed": 16,
     "budget": 1,
     "iterations_used": 1,
-    "wall_time_seconds": 0.2839,
-    "z3_solve_time": 0.0062,
-    "exec_per_sec": 3.5,
+    "wall_time_seconds": 0.2364,
+    "z3_solve_time": 0.0036,
+    "exec_per_sec": 4.2,
     "first_crash_at": 0,
-    "time_to_first_crash_seconds": 0.2839,
+    "time_to_first_crash_seconds": 0.2364,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 0,
         "exit_code": 3221225477,
-        "input_hex": "465a50312a707d8a97a4b1becbd8e5f2ff0c192633404d5a6774818e9ba8b5c2cfdce9f603101d2a3744515e6b78858d",
+        "input_hex": "465a50312971787f868d949ba2a9b0b7bec5ccd3dae1e8eff6fd040b121920272e353c434a51585f666d747b828959",
         "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\whitebox_s16_crash_0.bin",
-        "method": "z3_smt_sat"
+        "method": "z3_smt_symbolic_solver"
       }
     ]
   },
@@ -361,19 +361,19 @@
     "seed": 17,
     "budget": 1,
     "iterations_used": 1,
-    "wall_time_seconds": 0.292,
-    "z3_solve_time": 0.0088,
-    "exec_per_sec": 3.4,
+    "wall_time_seconds": 0.2256,
+    "z3_solve_time": 0.0063,
+    "exec_per_sec": 4.4,
     "first_crash_at": 0,
-    "time_to_first_crash_seconds": 0.292,
+    "time_to_first_crash_seconds": 0.2256,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 0,
         "exit_code": 3221225477,
-        "input_hex": "465a50312b7784919eabb8c5d2dfecf90613202d3a4754616e7b8895a2afbcc9d6e3f0fd0a1724313e4b5865727f8c9972",
+        "input_hex": "465a50312a848b9299a0a7aeb5bcc3cad1d8dfe6edf4fb020910171e252c333a41484f565d646b727980878e959ca307",
         "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\whitebox_s17_crash_0.bin",
-        "method": "z3_smt_sat"
+        "method": "z3_smt_symbolic_solver"
       }
     ]
   },
@@ -382,19 +382,19 @@
     "seed": 18,
     "budget": 1,
     "iterations_used": 1,
-    "wall_time_seconds": 0.2808,
-    "z3_solve_time": 0.0102,
-    "exec_per_sec": 3.6,
+    "wall_time_seconds": 0.2372,
+    "z3_solve_time": 0.0037,
+    "exec_per_sec": 4.2,
     "first_crash_at": 0,
-    "time_to_first_crash_seconds": 0.2808,
+    "time_to_first_crash_seconds": 0.2372,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 0,
         "exit_code": 3221225477,
-        "input_hex": "465a50312c7e8b98a5b2bfccd9e6f3000d1a2734414e5b6875828f9ca9b6c3d0ddeaf704111e2b3845525f6c798693a0ad88",
+        "input_hex": "465a50312b979ea5acb3bac1c8cfd6dde4ebf2f900070e151c232a31383f464d545b626970777e858c939aa1a8afb6bd24",
         "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\whitebox_s18_crash_0.bin",
-        "method": "z3_smt_sat"
+        "method": "z3_smt_symbolic_solver"
       }
     ]
   },
@@ -403,19 +403,19 @@
     "seed": 19,
     "budget": 1,
     "iterations_used": 1,
-    "wall_time_seconds": 0.2645,
-    "z3_solve_time": 0.0072,
-    "exec_per_sec": 3.8,
+    "wall_time_seconds": 0.6131,
+    "z3_solve_time": 0.0042,
+    "exec_per_sec": 1.6,
     "first_crash_at": 0,
-    "time_to_first_crash_seconds": 0.2645,
+    "time_to_first_crash_seconds": 0.6131,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 0,
         "exit_code": 3221225477,
-        "input_hex": "465a50312d85929facb9c6d3e0edfa0714212e3b4855626f7c8996a3b0bdcad7e4f1fe0b1825323f4c596673808d9aa7b4c10d",
+        "input_hex": "465a50312caab1b8bfc6cdd4dbe2e9f0f7fe050c131a21282f363d444b525960676e757c838a91989fa6adb4bbc2c9d0d734",
         "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\whitebox_s19_crash_0.bin",
-        "method": "z3_smt_sat"
+        "method": "z3_smt_symbolic_solver"
       }
     ]
   },
@@ -424,19 +424,19 @@
     "seed": 20,
     "budget": 1,
     "iterations_used": 1,
-    "wall_time_seconds": 0.2927,
-    "z3_solve_time": 0.0105,
-    "exec_per_sec": 3.4,
+    "wall_time_seconds": 0.2372,
+    "z3_solve_time": 0.0051,
+    "exec_per_sec": 4.2,
     "first_crash_at": 0,
-    "time_to_first_crash_seconds": 0.2927,
+    "time_to_first_crash_seconds": 0.2372,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 0,
         "exit_code": 3221225477,
-        "input_hex": "465a50312e8c99a6b3c0cddae7f4010e1b2835424f5c697683909daab7c4d1deebf805121f2c394653606d7a8794a1aebbc8d50d",
+        "input_hex": "465a50312dbdc4cbd2d9e0e7eef5fc030a11181f262d343b424950575e656c737a81888f969da4abb2b9c0c7ced5dce3eaf1a1",
         "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\whitebox_s20_crash_0.bin",
-        "method": "z3_smt_sat"
+        "method": "z3_smt_symbolic_solver"
       }
     ]
   },
@@ -445,19 +445,19 @@
     "seed": 21,
     "budget": 1,
     "iterations_used": 1,
-    "wall_time_seconds": 0.2871,
-    "z3_solve_time": 0.0107,
-    "exec_per_sec": 3.5,
+    "wall_time_seconds": 0.2224,
+    "z3_solve_time": 0.0039,
+    "exec_per_sec": 4.5,
     "first_crash_at": 0,
-    "time_to_first_crash_seconds": 0.2871,
+    "time_to_first_crash_seconds": 0.2224,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 0,
         "exit_code": 3221225477,
-        "input_hex": "465a50312f93a0adbac7d4e1eefb0815222f3c495663707d8a97a4b1becbd8e5f2ff0c192633404d5a6774818e9ba8b5c2cfdce926",
+        "input_hex": "465a50312ed0d7dee5ecf3fa01080f161d242b323940474e555c636a71787f868d949ba2a9b0b7bec5ccd3dae1e8eff6fd040bbb",
         "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\whitebox_s21_crash_0.bin",
-        "method": "z3_smt_sat"
+        "method": "z3_smt_symbolic_solver"
       }
     ]
   },
@@ -466,19 +466,19 @@
     "seed": 22,
     "budget": 1,
     "iterations_used": 1,
-    "wall_time_seconds": 0.2817,
-    "z3_solve_time": 0.0089,
-    "exec_per_sec": 3.6,
+    "wall_time_seconds": 0.2234,
+    "z3_solve_time": 0.004,
+    "exec_per_sec": 4.5,
     "first_crash_at": 0,
-    "time_to_first_crash_seconds": 0.2817,
+    "time_to_first_crash_seconds": 0.2234,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 0,
         "exit_code": 3221225477,
-        "input_hex": "465a5031309aa7b4c1cedbe8f5020f1c293643505d6a7784919eabb8c5d2dfecf90613202d3a4754616e7b8895a2afbcc9d6e3f0fd40",
+        "input_hex": "465a50312fe3eaf1f8ff060d141b222930373e454c535a61686f767d848b9299a0a7aeb5bcc3cad1d8dfe6edf4fb020910171e25ec",
         "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\whitebox_s22_crash_0.bin",
-        "method": "z3_smt_sat"
+        "method": "z3_smt_symbolic_solver"
       }
     ]
   },
@@ -487,19 +487,19 @@
     "seed": 23,
     "budget": 1,
     "iterations_used": 1,
-    "wall_time_seconds": 0.2504,
-    "z3_solve_time": 0.0099,
-    "exec_per_sec": 4.0,
+    "wall_time_seconds": 0.228,
+    "z3_solve_time": 0.0041,
+    "exec_per_sec": 4.4,
     "first_crash_at": 0,
-    "time_to_first_crash_seconds": 0.2504,
+    "time_to_first_crash_seconds": 0.228,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 0,
         "exit_code": 3221225477,
-        "input_hex": "465a503131a1aebbc8d5e2effc091623303d4a5764717e8b98a5b2bfccd9e6f3000d1a2734414e5b6875828f9ca9b6c3d0ddeaf70411a1",
+        "input_hex": "465a503130f6fd040b121920272e353c434a51585f666d747b828990979ea5acb3bac1c8cfd6dde4ebf2f900070e151c232a31383f10",
         "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\whitebox_s23_crash_0.bin",
-        "method": "z3_smt_sat"
+        "method": "z3_smt_symbolic_solver"
       }
     ]
   },
@@ -508,19 +508,19 @@
     "seed": 24,
     "budget": 1,
     "iterations_used": 1,
-    "wall_time_seconds": 0.3038,
-    "z3_solve_time": 0.0108,
-    "exec_per_sec": 3.3,
+    "wall_time_seconds": 0.2404,
+    "z3_solve_time": 0.0038,
+    "exec_per_sec": 4.2,
     "first_crash_at": 0,
-    "time_to_first_crash_seconds": 0.3038,
+    "time_to_first_crash_seconds": 0.2404,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 0,
         "exit_code": 3221225477,
-        "input_hex": "465a503132a8b5c2cfdce9f603101d2a3744515e6b7885929facb9c6d3e0edfa0714212e3b4855626f7c8996a3b0bdcad7e4f1fe0b1825dd",
+        "input_hex": "465a5031310910171e252c333a41484f565d646b727980878e959ca3aab1b8bfc6cdd4dbe2e9f0f7fe050c131a21282f363d444b5259b9",
         "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\whitebox_s24_crash_0.bin",
-        "method": "z3_smt_sat"
+        "method": "z3_smt_symbolic_solver"
       }
     ]
   },
@@ -529,19 +529,19 @@
     "seed": 25,
     "budget": 1,
     "iterations_used": 1,
-    "wall_time_seconds": 0.2756,
-    "z3_solve_time": 0.011,
-    "exec_per_sec": 3.6,
+    "wall_time_seconds": 0.0175,
+    "z3_solve_time": 0.0029,
+    "exec_per_sec": 57.0,
     "first_crash_at": 0,
-    "time_to_first_crash_seconds": 0.2756,
+    "time_to_first_crash_seconds": 0.0175,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 0,
-        "exit_code": 3221225477,
-        "input_hex": "465a503133afbcc9d6e3f0fd0a1724313e4b5865727f8c99a6b3c0cddae7f4010e1b2835424f5c697683909daab7c4d1deebf805121f2c397a",
+        "exit_code": 3221225501,
+        "input_hex": "465a5031191c232a31383f464d545b626970777e858c939aa1a8afb6bdc43c",
         "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\whitebox_s25_crash_0.bin",
-        "method": "z3_smt_sat"
+        "method": "z3_smt_symbolic_solver"
       }
     ]
   },
@@ -550,19 +550,19 @@
     "seed": 26,
     "budget": 1,
     "iterations_used": 1,
-    "wall_time_seconds": 0.2736,
-    "z3_solve_time": 0.0123,
-    "exec_per_sec": 3.7,
+    "wall_time_seconds": 0.0173,
+    "z3_solve_time": 0.0029,
+    "exec_per_sec": 57.9,
     "first_crash_at": 0,
-    "time_to_first_crash_seconds": 0.2736,
+    "time_to_first_crash_seconds": 0.0173,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 0,
-        "exit_code": 3221225477,
-        "input_hex": "465a503134b6c3d0ddeaf704111e2b3845525f6c798693a0adbac7d4e1eefb0815222f3c495663707d8a97a4b1becbd8e5f2ff0c192633404d78",
+        "exit_code": 3221225501,
+        "input_hex": "465a50311a2f363d444b525960676e757c838a91989fa6adb4bbc2c9d0d7de09",
         "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\whitebox_s26_crash_0.bin",
-        "method": "z3_smt_sat"
+        "method": "z3_smt_symbolic_solver"
       }
     ]
   },
@@ -571,19 +571,19 @@
     "seed": 27,
     "budget": 1,
     "iterations_used": 1,
-    "wall_time_seconds": 0.263,
-    "z3_solve_time": 0.0123,
-    "exec_per_sec": 3.8,
+    "wall_time_seconds": 0.0177,
+    "z3_solve_time": 0.0029,
+    "exec_per_sec": 56.5,
     "first_crash_at": 0,
-    "time_to_first_crash_seconds": 0.263,
+    "time_to_first_crash_seconds": 0.0177,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 0,
-        "exit_code": 3221225477,
-        "input_hex": "465a503135bdcad7e4f1fe0b1825323f4c596673808d9aa7b4c1cedbe8f5020f1c293643505d6a7784919eabb8c5d2dfecf90613202d3a47546175",
+        "exit_code": 3221225501,
+        "input_hex": "465a50311b424950575e656c737a81888f969da4abb2b9c0c7ced5dce3eaf1f81b",
         "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\whitebox_s27_crash_0.bin",
-        "method": "z3_smt_sat"
+        "method": "z3_smt_symbolic_solver"
       }
     ]
   },
@@ -592,19 +592,19 @@
     "seed": 28,
     "budget": 1,
     "iterations_used": 1,
-    "wall_time_seconds": 0.2852,
-    "z3_solve_time": 0.0089,
-    "exec_per_sec": 3.5,
+    "wall_time_seconds": 0.0187,
+    "z3_solve_time": 0.0037,
+    "exec_per_sec": 53.5,
     "first_crash_at": 0,
-    "time_to_first_crash_seconds": 0.2852,
+    "time_to_first_crash_seconds": 0.0187,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 0,
-        "exit_code": 3221225477,
-        "input_hex": "465a503136c4d1deebf805121f2c394653606d7a8794a1aebbc8d5e2effc091623303d4a5764717e8b98a5b2bfccd9e6f3000d1a2734414e5b68755d",
+        "exit_code": 3221225501,
+        "input_hex": "465a50311c555c636a71787f868d949ba2a9b0b7bec5ccd3dae1e8eff6fd040b1230",
         "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\whitebox_s28_crash_0.bin",
-        "method": "z3_smt_sat"
+        "method": "z3_smt_symbolic_solver"
       }
     ]
   },
@@ -613,19 +613,19 @@
     "seed": 29,
     "budget": 1,
     "iterations_used": 1,
-    "wall_time_seconds": 0.2466,
-    "z3_solve_time": 0.0068,
-    "exec_per_sec": 4.1,
+    "wall_time_seconds": 0.0176,
+    "z3_solve_time": 0.0029,
+    "exec_per_sec": 56.8,
     "first_crash_at": 0,
-    "time_to_first_crash_seconds": 0.2466,
+    "time_to_first_crash_seconds": 0.0176,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 0,
-        "exit_code": 3221225477,
-        "input_hex": "465a503137cbd8e5f2ff0c192633404d5a6774818e9ba8b5c2cfdce9f603101d2a3744515e6b7885929facb9c6d3e0edfa0714212e3b4855626f7c890e",
+        "exit_code": 3221225501,
+        "input_hex": "465a50311d686f767d848b9299a0a7aeb5bcc3cad1d8dfe6edf4fb020910171e252c68",
         "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\whitebox_s29_crash_0.bin",
-        "method": "z3_smt_sat"
+        "method": "z3_smt_symbolic_solver"
       }
     ]
   }

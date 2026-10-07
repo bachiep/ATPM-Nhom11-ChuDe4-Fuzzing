@@ -153,18 +153,16 @@ Gói tin FZP1 được quy chuẩn đóng gói theo cấu trúc nhị phân tu�
 # PHẦN 3: PHƯƠNG PHÁP LUẬN
 
 ### 3.1. Triết lý Thực hiện: Khai thác Hạt nhân Tự động hóa Tool (70%) và Chiều sâu Nghiên cứu của Nhóm (30%)
-Tuân thủ chỉ đạo phương pháp luận của giảng viên: *"Công cụ hỗ trợ 70% khối lượng tự động hóa, nhóm sinh viên đóng góp 30% phân tích bản chất bộ nhớ, đo lường định lượng khách quan và khắc phục chuẩn mực"*, dự án được phân định rạch ròi, minh bạch giữa 2 thành tố:
-* **Hạt nhân Tự động hóa từ Tool Giảng viên (`SecLabFramework.exe` — 70%):**
-  - Đóng vai trò là Nguồn Chân lý Đơn nhất (SSOT Kernel): Nạp file Excel 10-sheet đặc tả (`specification/Nhom11_FZP1_Fuzzing_Spec.xlsx`).
-  - Tự động hóa kiểm chứng hình thức mô hình Kripke và công thức CTL $AG(\neg \text{violation})$, xuất mã đồ thị TikZ vector LaTeX.
-  - Tự động bóc tách AST, dựng hệ phương trình Bit-Vector và dùng SMT Z3 kiểm tra nguy cơ tràn số int32 tại sheet `KiemTraSoHoc`.
-  - Tự động sinh mã và phân tích các hàm khuôn mẫu (template targets) tại sheet `HamSinhMa` (`parse_fzp1_payload`, `alloc_fzp1_cache`, `close_fzp1_session`, `release_fzp1_stream`, `calculate_fzp1_ratio`, `verify_fzp1_unlock_token`), chứng minh các mẫu vi phạm kinh điển (buffer-overflow, leak, double-free, UAF, divide-by-zero, magic-value) và xuất khung báo cáo tích hợp Word (.docx).
-  - *Lưu ý về giới hạn của Tool:* Bộ sinh mã của Tool chỉ tạo các hàm khuôn mẫu đơn lẻ; Tool **không tự động tổng hợp bộ phân tích cú pháp tệp nhị phân FZP1 hoàn chỉnh**.
+Tuân thủ chỉ đạo phương pháp luận của giảng viên: *"Công cụ hỗ trợ 70% khối lượng tự động hóa, nhóm sinh viên đóng góp 30% phân tích bản chất bộ nhớ, đo lường định lượng khách quan và khắc phục chuẩn mực"*, đề tài kết hợp chặt chẽ giữa bộ công cụ nền tảng của môn học và chiều sâu nghiên cứu của nhóm:
+* **Hạt nhân Tự động hóa từ Bộ Công cụ Môn học (70%):**
+  - **Hạt nhân Đặc tả & Kiểm chứng Hình thức (`SecLabFramework`):** Đóng vai trò là Nguồn Chân lý Đơn nhất (SSOT Kernel), quản lý tệp đặc tả Excel 10-sheet (`specification/Nhom11_FZP1_Fuzzing_Spec.xlsx`). Thực hiện tự động hóa kiểm chứng hình thức mô hình Kripke 4 trạng thái, kiểm toán công thức CTL $AG(\neg \text{violation})$, bóc tách AST và giải SMT Bit-Vector kiểm tra nguy cơ tràn số int32 tại sheet `KiemTraSoHoc`, đồng thời sinh mã phân tích các hàm khuôn mẫu kiểm toán an toàn (CWE-121, 401, 415, 416, 369, 798).
+  - **Nền tảng Kiểm thử Mờ Động (`softsec-toolkit/ch4_dynafuzz`):** Căn cứ theo định hướng Chủ đề 4 (Slide 15–16 bài giảng *Hướng dẫn Đề tài Đồ án Môn học*), nhóm kế thừa kiến trúc và các thuật toán cốt lõi từ `ch4_dynafuzz` (kiểm thử hộp đen ngẫu nhiên `random mutation`, bao gói giao thức cấu trúc `greybox`, và kỹ thuật thực thi ký hiệu concolic `04_concolic_execution.py`, `06_white_box_fuzzing.py`).
+  - *Lưu ý về tính trung thực học thuật:* Bộ sinh mã của SecLab chỉ tạo các hàm khuôn mẫu đơn lẻ; nhóm không tuyên bố công cụ tự động tổng hợp trọn gói bộ phân tích cú pháp tệp nhị phân FZP1.
 * **Nghiên cứu Thực nghiệm Độc lập & Chiều sâu Chuyên môn của Nhóm (30%):**
-  - Nhóm trực tiếp viết tay toàn bộ logic xử lý nhị phân của bộ Parser C thực tế (`fzp1_parser_v0.c` và `fzp1_parser_v1.c`): cấu trúc tệp nhị phân, bộ đệm stack 16 byte, vòng lặp tích lũy XOR Checksum, xác thực Magic Number, cơ chế xử lý run-to-completion thu hồi heap.
-  - Nhóm tự lập trình 3 engine Fuzzing (Black-box, Greybox, White-box Z3 SMT) và chạy thực nghiệm 30 trials độc lập trên binary thực tế.
-  - Nhóm bóc tách cơ chế ô nhớ Stack Frame x86_64, phân tích shadow bytes AddressSanitizer (`[f3]`) và chứng minh điểm mù của Cppcheck.
-  - Nhóm xây dựng bản vá hoàn chỉnh chuẩn **CERT C** (CERT STR31-C, MEM30-C, MEM31-C).
+  - **Hiện thực Bộ Parser FZP1 Nhị phân Hoàn chỉnh:** Nhóm tự tay lập trình bộ phân tích cú pháp C nhị phân (`source/fzp1_parser_v0.c` và `source/fzp1_parser_v1.c`), cài đặt cấu trúc tệp nhị phân 4B Magic + 1B Length + Payload + 1B XOR Checksum, bộ đệm ngăn xếp 16 byte, và vòng đời run-to-completion thu hồi Heap an toàn.
+  - **Phát triển Module Fuzzer Mở rộng (`source/ch4_dynafuzz_fzp1.py`):** Kế thừa `ch4_dynafuzz`, nhóm xây dựng module mở rộng với 3 fuzzer chuyên biệt (`FZP1BlackBoxFuzzer`, `FZP1GreyboxFuzzer`, `FZP1WhiteBoxFuzzer`). Trong đó fuzzer White-box mô hình hóa toàn diện các biến ký hiệu Bit-Vector thuần túy trong Z3 Solver (symbolic Magic, Length, Payload và Checksum), tự động tổng hợp gói tin khai thác SAT với 0 byte hard-code.
+  - **Phân tích Bản chất Ô nhớ Mức thấp:** Nhóm phân tích chi tiết cơ chế ô nhớ Stack Frame x86_64, phân tích shadow bytes AddressSanitizer (`[f3]`), chứng minh điểm mù phân tích tĩnh của Cppcheck, và xây dựng bản vá hoàn chỉnh chuẩn **CERT C** (CERT STR31-C, MEM30-C, MEM31-C).
+  - **Thiết kế Benchmark 30 Trials Khách quan:** Thực thi 30 lượt đo kiểm độc lập, ghi nhận và trực quan hóa dữ liệu thống kê khách quan.
 
 ### 3.2. Môi trường Thực nghiệm, Trình biên dịch và Cờ Kiểm toán An toàn
 * **Hệ điều hành:** Microsoft Windows 11 64-bit (Kiến trúc x86_64).
@@ -205,7 +203,7 @@ Nhóm triển khai 3 engine fuzzer để đối chứng:
   [GREYBOX FUZZER]   ---> [Fixed "FZP1" + Mutate] --> [Magic OK] -> [Checksum Check] --? (Thành công 1/256)
                                                                             |
   [WHITE-BOX Z3]     ---> [SMT Constraint Solver] -> [Magic OK] -> [Checksum OK] -> [CRASH CWE-121]
-                          (Giải SAT trong ~7ms)
+                          (Giải SAT trong ~3.9ms)
 ```
 
 ### 3.4. Quy trình Thiết kế Thực nghiệm Benchmark 30 Trials Khách quan
@@ -320,6 +318,8 @@ Tại sheet `HamSinhMa`, nhóm định nghĩa và kiểm chứng 3 khiếm khuy�
 * **CWE-415 (Double Free):** Hàm `close_fzp1_session` gọi `free(buf)` 2 lần liên tiếp trên cùng một địa chỉ, dẫn đến phá hủy cấu trúc Heap Arena Metadata. Khắc phục theo **CERT MEM30-C** bằng cách gán `buf = NULL` ngay sau lệnh `free` đầu tiên.
 * **CWE-416 (Use-After-Free):** Hàm `release_fzp1_stream` truy cập ghi dữ liệu `buf[0] = 1` sau khi con trỏ đã được trả về hệ điều hành. Khắc phục bằng cách vô hiệu hóa con trỏ và kiểm tra tính hợp lệ trước khi thao tác.
 
+*Lưu ý phân định phạm vi kỹ thuật:* Các hàm trên (cùng với hàm kiểm tra tràn số nguyên CWE-190, chia cho 0 CWE-369 và mã bí mật CWE-798) là các hàm khuôn mẫu tham chiếu (reference template functions) được đặc tả trong tệp SSOT Excel (`specification/Nhom11_FZP1_Fuzzing_Spec.xlsx`) và được phân tích hình thức bởi công cụ SecLab của môn học nhằm bao quát toàn diện phổ lỗ hổng an toàn bộ nhớ theo chuẩn đề cương. Trong khi đó, bộ parser FZP1 thực tế (`source/fzp1_parser_v0.c`) tuân thủ nghiêm ngặt mô hình run-to-completion (chỉ cấp phát Heap tạm thời cho luồng đọc tệp và giải phóng an toàn ngay lập tức), do đó bề mặt tấn công nhị phân FZP1 thực nghiệm tập trung vào lỗ hổng trọng tâm là tràn bộ đệm ngăn xếp **CWE-121**.
+
 ### 4.4. Kiểm chứng Nguy cơ Tràn số Nguyên CWE-190 bằng SMT Z3 Solver
 Tại sheet `KiemTraSoHoc`, biến tích lũy tổng số byte đã xử lý `fzp1_byte_accumulator` được kiểm tra bằng Z3 SMT Solver:
 * Biến số nguyên 32-bit có dấu: $\text{header\_bytes}, \text{payload\_bytes} \in [0, 2^{31}-1]$.
@@ -336,13 +336,13 @@ Bảng đối soát chuẩn hoá toàn bộ các lỗ hổng và trạng thái b
 
 | Mã lỗi CWE | Vị trí (Hàm & Tệp) | Trạng thái $v_0$ (Trước khi vá) | Trạng thái $v_1$ (Sau khi vá) | Chuẩn CERT / Khắc phục | Công cụ Xác minh |
 |---|---|---|---|---|---|
-| **CWE-121** (Stack Buffer Overflow) | `parse_fzp1_payload` (`fzp1_parser_v0.c:48`) | `memcpy` vào buffer 16B khi $L \ge 25$; sập Access Violation `0xC0000005`, ASan báo `[f3]`. | Kiểm tra chặn trên `len <= 16`; từ chối an toàn với mã -3; 0 lỗi, 0 crash. | **CERT STR31-C** | GCC ASan, Pytest, Z3 Whitebox |
-| **CWE-401** (Memory Leak) | `alloc_fzp1_cache` (Đặc tả `HamSinhMa`) | Cấp phát bộ đệm heap 32 byte nhưng không thu hồi; rò rỉ bộ nhớ dài hạn. | Bổ sung hàm giải phóng tài nguyên trước khi thoát luồng. | **CERT MEM31-C** | Memory Analyzer, Spec Pipeline |
-| **CWE-415** (Double Free) | `close_fzp1_session` (Đặc tả `HamSinhMa`) | Triệu gọi `free(buf)` 2 lần liên tiếp gây phá hủy Heap Arena Metadata. | Gán `buf = NULL` ngay sau lệnh giải phóng đầu tiên. | **CERT MEM30-C** | Static C Checker, Spec Pipeline |
-| **CWE-416** (Use-After-Free) | `release_fzp1_stream` (Đặc tả `HamSinhMa`) | Thao tác ghi dữ liệu `buf[0]` sau khi con trỏ đã được trả về hệ điều hành. | Xóa bỏ thao tác truy cập con trỏ lơ lửng, kiểm tra tính hợp lệ NULL. | **CERT MEM30-C** | Static C Checker, Memory Analyzer |
-| **CWE-190** (Integer Overflow) | `fzp1_byte_accumulator` (Đặc tả `KiemTraSoHoc`) | Phép cộng tích lũy 32-bit vượt $2^{31}-1$ bị tràn thành số âm. | Kiểm tra điều kiện tiên quyết trước khi cộng: `a <= INT_MAX - b`. | **CERT INT32-C** | Z3 SMT BitVector Solver |
-| **CWE-369** (Divide by Zero) | `calculate_fzp1_ratio` (Đặc tả `HamSinhMa`) | Phép chia không kiểm tra mẫu số `total_files = 0` gây ngoại lệ sập. | Bổ sung mệnh đề kiểm tra `if (total_files == 0) return 0.0`. | **CERT FLP32-C** | Black-box Fuzzing |
-| **CWE-798** (Hard-coded Credentials)| `verify_fzp1_unlock_token` (Đặc tả `HamSinhMa`) | So sánh cứng cặp token `18010` và `20529` trong mã nguồn. | Chuyển đổi sang cơ chế băm xác thực mật mã ngẫu nhiên. | **CWE-798 Best Practice**| Z3 SMT Concolic Solver |
+| **CWE-121** (Stack Buffer Overflow) | `parse_fzp1_payload` (`source/fzp1_parser_v0.c:48` — Mục tiêu thực nghiệm chính FZP1) | `memcpy` vào buffer 16B khi $L \ge 25$; sập Access Violation `0xC0000005`, ASan báo `[f3]`. | Kiểm tra chặn trên `len <= 16`; từ chối an toàn với mã -3; 0 lỗi, 0 crash. | **CERT STR31-C** | GCC ASan, Pytest, Z3 Whitebox |
+| **CWE-401** (Memory Leak) | `alloc_fzp1_cache` (Khuôn mẫu đặc tả SSOT `HamSinhMa`) | Cấp phát bộ đệm heap 32 byte nhưng không thu hồi; rò rỉ bộ nhớ dài hạn. | Bổ sung hàm giải phóng tài nguyên trước khi thoát luồng. | **CERT MEM31-C** | Memory Analyzer, Spec Pipeline |
+| **CWE-415** (Double Free) | `close_fzp1_session` (Khuôn mẫu đặc tả SSOT `HamSinhMa`) | Triệu gọi `free(buf)` 2 lần liên tiếp gây phá hủy Heap Arena Metadata. | Gán `buf = NULL` ngay sau lệnh giải phóng đầu tiên. | **CERT MEM30-C** | Static C Checker, Spec Pipeline |
+| **CWE-416** (Use-After-Free) | `release_fzp1_stream` (Khuôn mẫu đặc tả SSOT `HamSinhMa`) | Thao tác ghi dữ liệu `buf[0]` sau khi con trỏ đã được trả về hệ điều hành. | Xóa bỏ thao tác truy cập con trỏ lơ lửng, kiểm tra tính hợp lệ NULL. | **CERT MEM30-C** | Static C Checker, Memory Analyzer |
+| **CWE-190** (Integer Overflow) | `fzp1_byte_accumulator` (Khuôn mẫu đặc tả SSOT `KiemTraSoHoc`) | Phép cộng tích lũy 32-bit vượt $2^{31}-1$ bị tràn thành số âm. | Kiểm tra điều kiện tiên quyết trước khi cộng: `a <= INT_MAX - b`. | **CERT INT32-C** | Z3 SMT BitVector Solver |
+| **CWE-369** (Divide by Zero) | `calculate_fzp1_ratio` (Khuôn mẫu đặc tả SSOT `HamSinhMa`) | Phép chia không kiểm tra mẫu số `total_files = 0` gây ngoại lệ sập. | Bổ sung mệnh đề kiểm tra `if (total_files == 0) return 0.0`. | **CERT FLP32-C** | Black-box Fuzzing |
+| **CWE-798** (Hard-coded Credentials)| `verify_fzp1_unlock_token` (Khuôn mẫu đặc tả SSOT `HamSinhMa`) | So sánh cứng cặp token `18010` và `20529` trong mã nguồn. | Chuyển đổi sang cơ chế băm xác thực mật mã ngẫu nhiên. | **CWE-798 Best Practice**| Z3 SMT Concolic Solver |
 
 ---
 
@@ -356,20 +356,20 @@ Toàn bộ số liệu dưới đây được trích xuất trực tiếp từ t
 | **Số lượt thử nghiệm (Trials)** | 30 | 30 | 30 |
 | **Tỷ lệ tìm được crash (Success Rate)** | **0.00% (0 / 30)** | **100.00% (30 / 30)** | **80.00% (24 / 30)** |
 | **Số lỗi phát hiện độc nhất (Unique Bugs)** | 0 | 1 (CWE-121) | 1 (CWE-121) |
-| **Số vòng lặp trung bình để tìm crash** | Không tìm thấy ($>500$) | **1 vòng lặp duy nhất** | 190.8 vòng lặp (Trung vị: 165) |
-| **Thời gian giải SMT trung bình (Z3 Time)**| Không áp dụng | **7.16 ms** (2.5 – 12.3 ms) | Không áp dụng |
-| **Time-to-first-crash: Trung vị (Median)** | — (Hết ngân sách) | **0.2757 giây** | **2.5777 giây** |
-| **Time-to-first-crash: Tứ phân vị Q1** | — | 0.2145 giây | 1.6423 giây |
-| **Time-to-first-crash: Tứ phân vị Q3** | — | 0.2839 giây | 4.7847 giây |
-| **Time-to-first-crash: Nhanh nhất (Min)** | — | **0.0145 giây** | 0.4874 giây |
-| **Time-to-first-crash: Chậm nhất (Max)** | — | 0.3038 giây | 8.1826 giây |
-| **Tốc độ thực thi (Exec/sec Median)** | 64.65 lượt/giây | 3.60 lượt/giây | 58.25 lượt/giây |
+| **Số vòng lặp trung bình để tìm crash** | Không tìm thấy ($>500$) | **1 vòng lặp duy nhất (0 đột biến)** | 190.8 vòng lặp (Trung vị: 165) |
+| **Thời gian giải SMT trung bình (Z3 Time)**| Không áp dụng | **3.92 ms** (2.90 – 9.40 ms) | Không áp dụng |
+| **Time-to-first-crash: Trung vị (Median)** | — (Hết ngân sách) | **0.2229 giây** | **3.2740 giây** |
+| **Time-to-first-crash: Tứ phân vị Q1** | — | 0.0178 giây | 1.7790 giây |
+| **Time-to-first-crash: Tứ phân vị Q3** | — | 0.2364 giây | 5.1139 giây |
+| **Time-to-first-crash: Nhanh nhất (Min)** | — | **0.0173 giây** | 0.3870 giây |
+| **Time-to-first-crash: Chậm nhất (Max)** | — | 0.6131 giây | 10.3933 giây |
+| **Tốc độ thực thi (Exec/sec Median)** | 74.80 lượt/giây | 4.50 lượt/giây | 47.80 lượt/giây |
 
 ### 6.2. Biểu đồ Boxplot Phân bố Thời gian Phát hiện Lỗi (Time-to-first-crash)
 ![Biểu đồ Boxplot so sánh phân bố thời gian tìm thấy crash đầu tiên](figures/time_to_crash_boxplot.png)
 Biểu đồ Boxplot (`results/figures/time_to_crash_boxplot.png`) thể hiện sự khác biệt vượt trội về độ ổn định:
-* **White-box Z3:** Độ phân tán cực kỳ hẹp, trung vị chỉ $0.276$ giây (trong đó phần lớn thời gian là độ trễ khởi tạo tiến trình trên Windows, thời gian tính toán thực của solver chỉ tốn $\approx 7.16$ ms).
-* **Greybox:** Thời gian phân tán rộng từ $0.49$ đến $8.18$ giây phụ thuộc hoàn toàn vào tính may rủi của bộ sinh số ngẫu nhiên khi dò tìm byte checksum.
+* **White-box Z3:** Độ phân tán cực kỳ hẹp, trung vị chỉ $0.223$ giây (trong đó phần lớn thời gian là độ trễ khởi tạo tiến trình thực thi nhị phân trên Windows, thời gian tính toán thực của solver Z3 Bit-Vector chỉ tốn trung bình $\approx 3.92$ ms).
+* **Greybox:** Thời gian phân tán rộng từ $0.387$ đến $10.393$ giây (trung vị $3.274$ giây) phụ thuộc hoàn toàn vào tính may rủi của bộ sinh số ngẫu nhiên khi dò tìm byte checksum.
 * **Black-box:** Không hiển thị trên biểu đồ thời gian vì tỷ lệ tìm thấy lỗi là $0\%$.
 
 ### 6.3. Biểu đồ Cột Tỷ lệ Thành công Vượt qua Rào cản Kiểm tra (Success Rate)
@@ -427,7 +427,7 @@ Kết quả trả về: **0 cảnh báo, 0 lỗi tràn bộ đệm (0 findings)*
 * Điều này chứng minh định lượng rằng đối với các định dạng nhị phân có ràng buộc bảo vệ tính toàn vẹn (Integrity Check), việc kiểm thử ngẫu nhiên mù quáng là hoàn toàn bất khả thi.
 
 ### 7.6. Sức mạnh Đột phá và Chi phí Tính toán của White-box Concolic SMT Z3
-* **Ưu điểm vượt trội:** Chuyển hóa toàn bộ câu lệnh điều kiện thành hệ phương trình logic Bit-Vector. SMT Solver giải quyết trực tiếp bài toán tìm nghiệm trong ~7 ms mà không phụ thuộc vào may rủi.
+* **Ưu điểm vượt trội:** Chuyển hóa toàn bộ câu lệnh điều kiện thành hệ phương trình logic Bit-Vector. SMT Solver giải quyết trực tiếp bài toán tìm nghiệm trong ~3.9 ms mà không phụ thuộc vào may rủi.
 * **Hạn chế và Chi phí (Path Explosion & Non-linear Arithmetic):** Nếu hàm mục tiêu chứa các vòng lặp phụ thuộc dữ liệu phức tạp hoặc hàm băm mật mã (SHA-256), bài toán sẽ trở thành phi tuyến, khiến bộ giải SMT bùng nổ không gian đường đi (Path Explosion). Do đó, phương pháp tiếp cận tối ưu trong công nghiệp là **Hybrid Fuzzing** (kết hợp Greybox tốc độ cao với Concolic giải rào cản).
 
 ---

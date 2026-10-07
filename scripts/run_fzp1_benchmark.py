@@ -166,51 +166,23 @@ def run_greybox_trial(seed: int, budget: int = GREYBOX_BUDGET) -> dict:
 
 
 # =====================================================================
-# 3. WHITE-BOX FUZZING (Z3 SMT Solver)
+# 3. WHITE-BOX FUZZING (Z3 SMT Symbolic Solver - ch4_dynafuzz)
 # =====================================================================
 def run_whitebox_trial(seed: int) -> dict:
     start_time = time.time()
+    sys.path.insert(0, BASE_DIR)
+    from source.ch4_dynafuzz_fzp1 import FZP1WhiteBoxFuzzer
 
-    # Chon do dai payload vuot nguong stack buffer (> 16 bytes, nguong crash thuc te tren stack >= 25)
-    # Do dai thay doi theo seed de moi trial co input doc nhat: 26 .. 55 bytes
-    target_payload_len = 26 + (seed % 30)
-
-    t_z3_start = time.time()
-    s = Solver()
-
-    # Ràng buộc symbolic cho các byte payload
-    # De du lieu co tinh da dang, dat mot so byte co dinh theo seed
-    sym_payload = [BitVec(f"p_{i}", 8) for i in range(target_payload_len)]
-
-    # Rang buoc XOR Checksum
-    xor_acc = BitVecVal(0, 8)
-    for b in sym_payload:
-        xor_acc = xor_acc ^ b
-
-    chk_sym = BitVec("chk", 8)
-    s.add(chk_sym == xor_acc)
-
-    # Them rang buoc payload khong rong va chua ky tu printable
-    for i, b in enumerate(sym_payload):
-        # Seeded constraint to produce different unique bytes per trial
-        val = (seed * 7 + i * 13) % 256
-        s.add(b == BitVecVal(val, 8))
-
-    res = s.check()
-    z3_solve_time = time.time() - t_z3_start
+    # Khởi tạo White-box fuzzer kế thừa từ ch4_dynafuzz
+    wb_fuzzer = FZP1WhiteBoxFuzzer(seed=seed)
+    pkt, z3_solve_time = wb_fuzzer.solve_exploit_packet()
 
     crashes = []
-    if res == sat:
-        m = s.model()
-        payload_bytes = bytes([m[sym_payload[i]].as_long() for i in range(target_payload_len)])
-        chk_val = m[chk_sym].as_long()
-
-        pkt = b"FZP1" + bytes([target_payload_len]) + payload_bytes + bytes([chk_val])
-
-        # Chay target binary de quan sat crash
+    if pkt is not None:
+        # Chạy target binary với gói tin do Z3 sinh ra hoàn toàn từ mô hình Symbolic
         code, out, err = run_target(TARGET_VULN_EXE, pkt)
 
-        # Xac nhan crash
+        # Xác nhận crash tràn stack buffer CWE-121
         if is_crash(code):
             crash_file = os.path.join(CRASH_DIR, f"whitebox_s{seed}_crash_0.bin")
             with open(crash_file, "wb") as f:
@@ -220,7 +192,7 @@ def run_whitebox_trial(seed: int) -> dict:
                 "exit_code": code,
                 "input_hex": pkt.hex(),
                 "saved_to": crash_file,
-                "method": "z3_smt_sat"
+                "method": "z3_smt_symbolic_solver"
             })
 
     elapsed = time.time() - start_time
