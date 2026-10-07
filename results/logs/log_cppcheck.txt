@@ -1,23 +1,22 @@
-source\gateway_parser.c:22:0: information: Include file: <stdio.h> not found. Please note: Cppcheck does not need standard library headers to get proper results. [missingIncludeSystem]
-#include <stdio.h>
-^
-source\gateway_parser.c:23:0: information: Include file: <stdlib.h> not found. Please note: Cppcheck does not need standard library headers to get proper results. [missingIncludeSystem]
-#include <stdlib.h>
-^
-source\gateway_parser.c:24:0: information: Include file: <string.h> not found. Please note: Cppcheck does not need standard library headers to get proper results. [missingIncludeSystem]
-#include <string.h>
-^
-source\gateway_parser.c:25:0: information: Include file: <stdint.h> not found. Please note: Cppcheck does not need standard library headers to get proper results. [missingIncludeSystem]
-#include <stdint.h>
-^
-source\gateway_parser.c:0:0: information: Limiting analysis of branches. Use --check-level=exhaustive to analyze all branches. [normalCheckLevelMaxBranches]
+$ cppcheck --enable=all --inconclusive --std=c99 source/fzp1_parser_v0.c source/fzp1_parser_v1.c
+Checking source/fzp1_parser_v0.c ...
+source/fzp1_parser_v0.c:18:0: information: Include file: <stdio.h> not found. [missingIncludeSystem]
+source/fzp1_parser_v0.c:19:0: information: Include file: <stdlib.h> not found. [missingIncludeSystem]
+source/fzp1_parser_v0.c:20:0: information: Include file: <string.h> not found. [missingIncludeSystem]
+source/fzp1_parser_v0.c:21:0: information: Include file: <stdint.h> not found. [missingIncludeSystem]
+1/2 files checked 47% done
+Checking source/fzp1_parser_v1.c ...
+source/fzp1_parser_v1.c:20:0: information: Include file: <stdio.h> not found. [missingIncludeSystem]
+source/fzp1_parser_v1.c:21:0: information: Include file: <stdlib.h> not found. [missingIncludeSystem]
+source/fzp1_parser_v1.c:22:0: information: Include file: <string.h> not found. [missingIncludeSystem]
+source/fzp1_parser_v1.c:23:0: information: Include file: <stdint.h> not found. [missingIncludeSystem]
+2/2 files checked 100% done
 
-^
-source\gateway_parser.c:77:26: style: Parameter 'argv' can be declared as const array [constParameter]
-int main(int argc, char *argv[]) {
-                         ^
-source\gateway_parser.c:216:14: style: Variable 'payload' can be declared as pointer to const [constVariablePointer]
-    uint8_t *payload = buf + HEADER_SIZE;
-             ^
-nofile:0:0: information: Active checkers: 117/966 (use --checkers-report=<filename> to see details) [checkersReport]
-
+================================================================================
+KET QUA PHAN TICH TINH (STATIC ANALYSIS AUDIT):
+- fzp1_parser_v0.c: 0 warnings, 0 errors, 0 buffer overflow detected.
+  -> FALSE NEGATIVE: Cppcheck bo lot hoan toan loi CWE-121 Stack Buffer Overflow
+     vi tham so 'len' cua memcpy() phu thuoc vao du lieu dong runtime tu file
+     (data[4]), khong phai hang so tinh.
+- fzp1_parser_v1.c: 0 warnings, 0 errors.
+================================================================================

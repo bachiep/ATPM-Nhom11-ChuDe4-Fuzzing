@@ -1,0 +1,17 @@
+% Sơ đồ chuyển trạng thái Kripke: fzp1_binary_parser
+% Nhóm 11 — Lưu Đức Hiệp & Hà Nguyễn Trúc Linh
+\begin{tikzpicture}[
+  every node/.style={draw, ellipse, inner sep=3pt, minimum size=10mm, align=center, font=\scriptsize},
+  ->, >=stealth, thick, auto
+]
+  \node[fill=blue!20] (st_idle) at (0.0, 1.8) {st\_idle\\{\tiny safe, ready}};
+  \node[fill=gray!15] (st_magic) at (-2.8, 0.0) {st\_magic\_valid\\{\tiny magic\_ok}};
+  \node[fill=gray!15] (st_chk) at (2.8, 0.0) {st\_checksum\_valid\\{\tiny checksum\_ok}};
+  \node[fill=red!35] (st_hazard) at (0.0, -1.8) {st\_overflow\_hazard\\{\tiny magic\_ok, chk\_ok, violation}};
+  \draw (st_idle) -- (st_magic);
+  \draw (st_idle) -- (st_chk);
+  \draw (st_magic) -- (st_idle);
+  \draw (st_magic) -- (st_hazard);
+  \draw (st_chk) -- (st_idle);
+  \draw (st_hazard) -- (st_idle);
+\end{tikzpicture}

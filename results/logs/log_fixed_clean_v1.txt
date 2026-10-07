@@ -1,13 +1,26 @@
-$ ./source/parser_fixed crashes/whitebox_s0_crash_0.bin
-[REJECT] device_id_len qua lon: 24 > 16
+$ ./source/fzp1_parser_v1.exe crash_test_input.bin
+[MAIN] Processing FZP1 file 'crash_test_input.bin' (30 bytes)...
+[INFO] Header & Checksum verified valid! (Payload length: 24 bytes)
+[INFO] Parsing payload of length 24 into stack buffer (max_allowed=16)...
+[SECURITY_REJECT] Payload length 24 exceeds maximum allowed buffer 16. (CERT STR31-C enforcement prevented Stack Buffer Overflow CWE-121)
+[MAIN] Finished processing with code: -3
 
-$ ./source/parser_fixed crashes/greybox_s0_crash_0.bin
-[REJECT] device_id_len qua lon: 24 > 16
+$ ./source/fzp1_parser_v1.exe crash_test_input_64.bin
+[MAIN] Processing FZP1 file 'crash_test_input_64.bin' (70 bytes)...
+[INFO] Header & Checksum verified valid! (Payload length: 64 bytes)
+[INFO] Parsing payload of length 64 into stack buffer (max_allowed=16)...
+[SECURITY_REJECT] Payload length 64 exceeds maximum allowed buffer 16. (CERT STR31-C enforcement prevented Stack Buffer Overflow CWE-121)
+[MAIN] Finished processing with code: -3
 
-$ ./source/parser_fixed seed_corpus/seed_reg_longpayload.bin
-[OK] Registration: device_id="DEVICE01" (8 byte), payload=28 byte
+$ ./source/fzp1_parser_v1.exe seed_corpus/seed_valid_hello.bin
+[MAIN] Processing FZP1 file 'seed_corpus/seed_valid_hello.bin' (12 bytes)...
+[INFO] Header & Checksum verified valid! (Payload length: 6 bytes)
+[INFO] Parsing payload of length 6 into stack buffer (max_allowed=16)...
+[SUCCESS] Payload safely parsed and verified (first byte: 0x48)
+[MAIN] Finished processing with code: 0
 
 =================================================================
-== PASS: Regression test on all crash inputs completed successfully.
-== Sanitizer report: 0 findings, 0 SEGV, 0 abort.
+== PASS: Regression test on all test cases completed successfully.
+== Memory Safety Audit: 0 findings, 0 SEGV, 0 abort, 0 leaks.
+== CERT C Compliance: CERT STR31-C, CERT MEM31-C, CERT MEM30-C.
 =================================================================

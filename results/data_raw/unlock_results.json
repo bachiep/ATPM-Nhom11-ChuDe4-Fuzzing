@@ -1,18 +1,202 @@
 {
   "whitebox": {
-    "found": true,
-    "unlock_a": 7421,
-    "unlock_b": 3390,
-    "time": 0.000418,
-    "target_verified": true
+    "status": "sat",
+    "time": 0.00583,
+    "model": {
+      "token_a": 18010,
+      "token_b": 20529
+    },
+    "iterations": 1
   },
   "blackbox": {
     "n_trials": 30,
-    "budget_per_trial": 500000,
-    "success_rate": 0.0,
+    "budget_per_trial": 100000,
     "found_count": 0,
-    "iterations_when_found": [],
+    "success_rate": 0.0,
     "theoretical_probability": 2.3283064365386963e-10,
-    "theoretical_expected_trials": 4294967296
+    "theoretical_expected_trials": 4294967296,
+    "total_time_seconds": 2.4805,
+    "trials": [
+      {
+        "seed": 0,
+        "found": false,
+        "tries": 100000,
+        "time": 0.0835
+      },
+      {
+        "seed": 1,
+        "found": false,
+        "tries": 100000,
+        "time": 0.082
+      },
+      {
+        "seed": 2,
+        "found": false,
+        "tries": 100000,
+        "time": 0.0813
+      },
+      {
+        "seed": 3,
+        "found": false,
+        "tries": 100000,
+        "time": 0.0836
+      },
+      {
+        "seed": 4,
+        "found": false,
+        "tries": 100000,
+        "time": 0.0834
+      },
+      {
+        "seed": 5,
+        "found": false,
+        "tries": 100000,
+        "time": 0.0841
+      },
+      {
+        "seed": 6,
+        "found": false,
+        "tries": 100000,
+        "time": 0.0824
+      },
+      {
+        "seed": 7,
+        "found": false,
+        "tries": 100000,
+        "time": 0.0825
+      },
+      {
+        "seed": 8,
+        "found": false,
+        "tries": 100000,
+        "time": 0.0817
+      },
+      {
+        "seed": 9,
+        "found": false,
+        "tries": 100000,
+        "time": 0.0817
+      },
+      {
+        "seed": 10,
+        "found": false,
+        "tries": 100000,
+        "time": 0.0821
+      },
+      {
+        "seed": 11,
+        "found": false,
+        "tries": 100000,
+        "time": 0.0815
+      },
+      {
+        "seed": 12,
+        "found": false,
+        "tries": 100000,
+        "time": 0.0814
+      },
+      {
+        "seed": 13,
+        "found": false,
+        "tries": 100000,
+        "time": 0.0812
+      },
+      {
+        "seed": 14,
+        "found": false,
+        "tries": 100000,
+        "time": 0.0821
+      },
+      {
+        "seed": 15,
+        "found": false,
+        "tries": 100000,
+        "time": 0.082
+      },
+      {
+        "seed": 16,
+        "found": false,
+        "tries": 100000,
+        "time": 0.0819
+      },
+      {
+        "seed": 17,
+        "found": false,
+        "tries": 100000,
+        "time": 0.0841
+      },
+      {
+        "seed": 18,
+        "found": false,
+        "tries": 100000,
+        "time": 0.0841
+      },
+      {
+        "seed": 19,
+        "found": false,
+        "tries": 100000,
+        "time": 0.0824
+      },
+      {
+        "seed": 20,
+        "found": false,
+        "tries": 100000,
+        "time": 0.0833
+      },
+      {
+        "seed": 21,
+        "found": false,
+        "tries": 100000,
+        "time": 0.0828
+      },
+      {
+        "seed": 22,
+        "found": false,
+        "tries": 100000,
+        "time": 0.0832
+      },
+      {
+        "seed": 23,
+        "found": false,
+        "tries": 100000,
+        "time": 0.0816
+      },
+      {
+        "seed": 24,
+        "found": false,
+        "tries": 100000,
+        "time": 0.0829
+      },
+      {
+        "seed": 25,
+        "found": false,
+        "tries": 100000,
+        "time": 0.0848
+      },
+      {
+        "seed": 26,
+        "found": false,
+        "tries": 100000,
+        "time": 0.0841
+      },
+      {
+        "seed": 27,
+        "found": false,
+        "tries": 100000,
+        "time": 0.0816
+      },
+      {
+        "seed": 28,
+        "found": false,
+        "tries": 100000,
+        "time": 0.0823
+      },
+      {
+        "seed": 29,
+        "found": false,
+        "tries": 100000,
+        "time": 0.0849
+      }
+    ]
   }
 }

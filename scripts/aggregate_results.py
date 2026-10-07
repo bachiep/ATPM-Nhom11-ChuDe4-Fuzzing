@@ -11,7 +11,7 @@ import statistics
 import sys
 
 BTL_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DATA_DIR = os.path.join(BTL_DIR, "data", "raw")
+DATA_DIR = os.path.join(BTL_DIR, "results", "data_raw")
 REPORT_DIR = os.path.join(BTL_DIR, "report")
 
 

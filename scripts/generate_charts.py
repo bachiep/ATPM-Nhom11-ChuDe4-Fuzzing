@@ -9,8 +9,9 @@ import os
 import sys
 
 BTL_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DATA_DIR = os.path.join(BTL_DIR, "data", "raw")
-FIG_DIR = os.path.join(BTL_DIR, "report", "figures")
+DATA_DIR = os.path.join(BTL_DIR, "results", "data_raw")
+FIG_DIR = os.path.join(BTL_DIR, "results", "figures")
+REPORT_FIG_DIR = os.path.join(BTL_DIR, "report", "figures")
 
 # Matplotlib backend khong can display
 import matplotlib
@@ -91,7 +92,7 @@ def chart_success_rate(bb: list, wb: list, gb: list) -> None:
                 f"{val:.0f}%", ha="center", va="bottom", fontweight="bold")
 
     ax.set_ylabel("Tỷ lệ thành công (%)")
-    ax.set_title("Tỷ lệ tìm được crash (30 trials, 5000 inputs/trial)")
+    ax.set_title("Tỷ lệ tìm được crash (30 trials)")
     ax.set_ylim(0, 110)
     ax.grid(axis="y", alpha=0.3)
     plt.tight_layout()
@@ -189,7 +190,9 @@ def chart_unlock_benchmark() -> None:
 
 
 def main():
+    import shutil
     os.makedirs(FIG_DIR, exist_ok=True)
+    os.makedirs(REPORT_FIG_DIR, exist_ok=True)
 
     print("=" * 60)
     print("  TAO BIEU DO")
@@ -204,7 +207,12 @@ def main():
     chart_greybox_coverage(gb)
     chart_unlock_benchmark()
 
-    print(f"\nBieu do luu tai: {FIG_DIR}/")
+    # Sync to report/figures
+    for f in os.listdir(FIG_DIR):
+        if f.endswith(".png"):
+            shutil.copy2(os.path.join(FIG_DIR, f), os.path.join(REPORT_FIG_DIR, f))
+
+    print(f"\nBieu do luu tai: {FIG_DIR}/ va {REPORT_FIG_DIR}/")
 
 
 if __name__ == "__main__":

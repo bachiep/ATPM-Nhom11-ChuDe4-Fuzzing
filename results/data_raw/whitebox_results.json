@@ -2,630 +2,630 @@
   {
     "fuzzer": "whitebox",
     "seed": 0,
-    "budget": 5000,
+    "budget": 1,
     "iterations_used": 1,
-    "wall_time_seconds": 0.307706,
-    "exec_per_sec": 3.2,
-    "z3_solve_time": 0.021554,
+    "wall_time_seconds": 0.0405,
+    "z3_solve_time": 0.0096,
+    "exec_per_sec": 24.7,
     "first_crash_at": 0,
-    "time_to_first_crash_seconds": 0.307041,
+    "time_to_first_crash_seconds": 0.0405,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 0,
-        "input_hex": "49475731010118001800000000000000505050505050505050505050505050505050505050505050ca080000",
-        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/whitebox_s0_crash_0.bin",
-        "asan_signature": "#0 0x7212fe328d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117",
-        "method": "z3_direct"
+        "exit_code": 3221225501,
+        "input_hex": "465a50311a000d1a2734414e5b6875828f9ca9b6c3d0ddeaf704111e2b38454d",
+        "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\whitebox_s0_crash_0.bin",
+        "method": "z3_smt_sat"
       }
     ]
   },
   {
     "fuzzer": "whitebox",
     "seed": 1,
-    "budget": 5000,
+    "budget": 1,
     "iterations_used": 1,
-    "wall_time_seconds": 0.172122,
-    "exec_per_sec": 5.8,
-    "z3_solve_time": 0.007404,
+    "wall_time_seconds": 0.0187,
+    "z3_solve_time": 0.0057,
+    "exec_per_sec": 53.3,
     "first_crash_at": 0,
-    "time_to_first_crash_seconds": 0.171364,
+    "time_to_first_crash_seconds": 0.0187,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 0,
-        "input_hex": "49475731010118001800000000000000505050505050505050505050505050505050505050505050ca080000",
-        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/whitebox_s1_crash_0.bin",
-        "asan_signature": "#0 0x7ba1be928d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117",
-        "method": "z3_direct"
+        "exit_code": 3221225501,
+        "input_hex": "465a50311b0714212e3b4855626f7c8996a3b0bdcad7e4f1fe0b1825323f4c5922",
+        "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\whitebox_s1_crash_0.bin",
+        "method": "z3_smt_sat"
       }
     ]
   },
   {
     "fuzzer": "whitebox",
     "seed": 2,
-    "budget": 5000,
+    "budget": 1,
     "iterations_used": 1,
-    "wall_time_seconds": 0.168165,
-    "exec_per_sec": 5.9,
-    "z3_solve_time": 0.006657,
+    "wall_time_seconds": 0.0151,
+    "z3_solve_time": 0.0027,
+    "exec_per_sec": 66.2,
     "first_crash_at": 0,
-    "time_to_first_crash_seconds": 0.166831,
+    "time_to_first_crash_seconds": 0.0151,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 0,
-        "input_hex": "49475731010118001800000000000000505050505050505050505050505050505050505050505050ca080000",
-        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/whitebox_s2_crash_0.bin",
-        "asan_signature": "#0 0x79538c328d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117",
-        "method": "z3_direct"
+        "exit_code": 3221225501,
+        "input_hex": "465a50311c0e1b2835424f5c697683909daab7c4d1deebf805121f2c394653606d08",
+        "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\whitebox_s2_crash_0.bin",
+        "method": "z3_smt_sat"
       }
     ]
   },
   {
     "fuzzer": "whitebox",
     "seed": 3,
-    "budget": 5000,
+    "budget": 1,
     "iterations_used": 1,
-    "wall_time_seconds": 0.170575,
-    "exec_per_sec": 5.9,
-    "z3_solve_time": 0.006862,
+    "wall_time_seconds": 0.0145,
+    "z3_solve_time": 0.0025,
+    "exec_per_sec": 69.1,
     "first_crash_at": 0,
-    "time_to_first_crash_seconds": 0.169831,
+    "time_to_first_crash_seconds": 0.0145,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 0,
-        "input_hex": "49475731010118001800000000000000505050505050505050505050505050505050505050505050ca080000",
-        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/whitebox_s3_crash_0.bin",
-        "asan_signature": "#0 0x756e75d28d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117",
-        "method": "z3_direct"
+        "exit_code": 3221225501,
+        "input_hex": "465a50311d15222f3c495663707d8a97a4b1becbd8e5f2ff0c192633404d5a677481dd",
+        "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\whitebox_s3_crash_0.bin",
+        "method": "z3_smt_sat"
       }
     ]
   },
   {
     "fuzzer": "whitebox",
     "seed": 4,
-    "budget": 5000,
+    "budget": 1,
     "iterations_used": 1,
-    "wall_time_seconds": 0.165115,
-    "exec_per_sec": 6.1,
-    "z3_solve_time": 0.00435,
+    "wall_time_seconds": 0.0147,
+    "z3_solve_time": 0.0027,
+    "exec_per_sec": 67.9,
     "first_crash_at": 0,
-    "time_to_first_crash_seconds": 0.163795,
+    "time_to_first_crash_seconds": 0.0147,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 0,
-        "input_hex": "49475731010118001800000000000000505050505050505050505050505050505050505050505050ca080000",
-        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/whitebox_s4_crash_0.bin",
-        "asan_signature": "#0 0x76d3c0728d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117",
-        "method": "z3_direct"
+        "exit_code": 3221225501,
+        "input_hex": "465a50311e1c293643505d6a7784919eabb8c5d2dfecf90613202d3a4754616e7b88954d",
+        "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\whitebox_s4_crash_0.bin",
+        "method": "z3_smt_sat"
       }
     ]
   },
   {
     "fuzzer": "whitebox",
     "seed": 5,
-    "budget": 5000,
+    "budget": 1,
     "iterations_used": 1,
-    "wall_time_seconds": 0.182182,
-    "exec_per_sec": 5.5,
-    "z3_solve_time": 0.005266,
+    "wall_time_seconds": 0.0149,
+    "z3_solve_time": 0.0028,
+    "exec_per_sec": 66.9,
     "first_crash_at": 0,
-    "time_to_first_crash_seconds": 0.181622,
+    "time_to_first_crash_seconds": 0.0149,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 0,
-        "input_hex": "49475731010118001800000000000000505050505050505050505050505050505050505050505050ca080000",
-        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/whitebox_s5_crash_0.bin",
-        "asan_signature": "#0 0x7fc360b28d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117",
-        "method": "z3_direct"
+        "exit_code": 3221225501,
+        "input_hex": "465a50311f23303d4a5764717e8b98a5b2bfccd9e6f3000d1a2734414e5b6875828f9ca996",
+        "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\whitebox_s5_crash_0.bin",
+        "method": "z3_smt_sat"
       }
     ]
   },
   {
     "fuzzer": "whitebox",
     "seed": 6,
-    "budget": 5000,
+    "budget": 1,
     "iterations_used": 1,
-    "wall_time_seconds": 0.164229,
-    "exec_per_sec": 6.1,
-    "z3_solve_time": 0.004126,
+    "wall_time_seconds": 0.0185,
+    "z3_solve_time": 0.0029,
+    "exec_per_sec": 53.9,
     "first_crash_at": 0,
-    "time_to_first_crash_seconds": 0.163152,
+    "time_to_first_crash_seconds": 0.0185,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 0,
-        "input_hex": "49475731010118001800000000000000505050505050505050505050505050505050505050505050ca080000",
-        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/whitebox_s6_crash_0.bin",
-        "asan_signature": "#0 0x7cda0bb28d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117",
-        "method": "z3_direct"
+        "exit_code": 3221225501,
+        "input_hex": "465a5031202a3744515e6b7885929facb9c6d3e0edfa0714212e3b4855626f7c8996a3b0bdc0",
+        "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\whitebox_s6_crash_0.bin",
+        "method": "z3_smt_sat"
       }
     ]
   },
   {
     "fuzzer": "whitebox",
     "seed": 7,
-    "budget": 5000,
+    "budget": 1,
     "iterations_used": 1,
-    "wall_time_seconds": 0.175381,
-    "exec_per_sec": 5.7,
-    "z3_solve_time": 0.003826,
+    "wall_time_seconds": 0.2589,
+    "z3_solve_time": 0.0029,
+    "exec_per_sec": 3.9,
     "first_crash_at": 0,
-    "time_to_first_crash_seconds": 0.174572,
+    "time_to_first_crash_seconds": 0.2589,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 0,
-        "input_hex": "49475731010118001800000000000000505050505050505050505050505050505050505050505050ca080000",
-        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/whitebox_s7_crash_0.bin",
-        "asan_signature": "#0 0x7cad81128d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117",
-        "method": "z3_direct"
+        "exit_code": 3221225501,
+        "input_hex": "465a503121313e4b5865727f8c99a6b3c0cddae7f4010e1b2835424f5c697683909daab7c4d171",
+        "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\whitebox_s7_crash_0.bin",
+        "method": "z3_smt_sat"
       }
     ]
   },
   {
     "fuzzer": "whitebox",
     "seed": 8,
-    "budget": 5000,
+    "budget": 1,
     "iterations_used": 1,
-    "wall_time_seconds": 0.164621,
-    "exec_per_sec": 6.1,
-    "z3_solve_time": 0.004323,
+    "wall_time_seconds": 0.2145,
+    "z3_solve_time": 0.0061,
+    "exec_per_sec": 4.7,
     "first_crash_at": 0,
-    "time_to_first_crash_seconds": 0.164045,
+    "time_to_first_crash_seconds": 0.2145,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 0,
-        "input_hex": "49475731010118001800000000000000505050505050505050505050505050505050505050505050ca080000",
-        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/whitebox_s8_crash_0.bin",
-        "asan_signature": "#0 0x72798f728d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117",
-        "method": "z3_direct"
+        "exit_code": 3221225501,
+        "input_hex": "465a5031223845525f6c798693a0adbac7d4e1eefb0815222f3c495663707d8a97a4b1becbd8e53d",
+        "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\whitebox_s8_crash_0.bin",
+        "method": "z3_smt_sat"
       }
     ]
   },
   {
     "fuzzer": "whitebox",
     "seed": 9,
-    "budget": 5000,
+    "budget": 1,
     "iterations_used": 1,
-    "wall_time_seconds": 0.172573,
-    "exec_per_sec": 5.8,
-    "z3_solve_time": 0.00394,
+    "wall_time_seconds": 0.296,
+    "z3_solve_time": 0.006,
+    "exec_per_sec": 3.4,
     "first_crash_at": 0,
-    "time_to_first_crash_seconds": 0.17189,
+    "time_to_first_crash_seconds": 0.296,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 0,
-        "input_hex": "49475731010118001800000000000000505050505050505050505050505050505050505050505050ca080000",
-        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/whitebox_s9_crash_0.bin",
-        "asan_signature": "#0 0x7bd273d28d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117",
-        "method": "z3_direct"
+        "exit_code": 3221225477,
+        "input_hex": "465a5031233f4c596673808d9aa7b4c1cedbe8f5020f1c293643505d6a7784919eabb8c5d2dfecf96a",
+        "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\whitebox_s9_crash_0.bin",
+        "method": "z3_smt_sat"
       }
     ]
   },
   {
     "fuzzer": "whitebox",
     "seed": 10,
-    "budget": 5000,
+    "budget": 1,
     "iterations_used": 1,
-    "wall_time_seconds": 0.166625,
-    "exec_per_sec": 6.0,
-    "z3_solve_time": 0.003812,
+    "wall_time_seconds": 0.2767,
+    "z3_solve_time": 0.0062,
+    "exec_per_sec": 3.6,
     "first_crash_at": 0,
-    "time_to_first_crash_seconds": 0.165437,
+    "time_to_first_crash_seconds": 0.2767,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 0,
-        "input_hex": "49475731010118001800000000000000505050505050505050505050505050505050505050505050ca080000",
-        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/whitebox_s10_crash_0.bin",
-        "asan_signature": "#0 0x72258c928d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117",
-        "method": "z3_direct"
+        "exit_code": 3221225477,
+        "input_hex": "465a5031244653606d7a8794a1aebbc8d5e2effc091623303d4a5764717e8b98a5b2bfccd9e6f3000dd8",
+        "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\whitebox_s10_crash_0.bin",
+        "method": "z3_smt_sat"
       }
     ]
   },
   {
     "fuzzer": "whitebox",
     "seed": 11,
-    "budget": 5000,
+    "budget": 1,
     "iterations_used": 1,
-    "wall_time_seconds": 0.174875,
-    "exec_per_sec": 5.7,
-    "z3_solve_time": 0.004173,
+    "wall_time_seconds": 0.2945,
+    "z3_solve_time": 0.0052,
+    "exec_per_sec": 3.4,
     "first_crash_at": 0,
-    "time_to_first_crash_seconds": 0.174347,
+    "time_to_first_crash_seconds": 0.2945,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 0,
-        "input_hex": "49475731010118001800000000000000505050505050505050505050505050505050505050505050ca080000",
-        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/whitebox_s11_crash_0.bin",
-        "asan_signature": "#0 0x744bed328d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117",
-        "method": "z3_direct"
+        "exit_code": 3221225477,
+        "input_hex": "465a5031254d5a6774818e9ba8b5c2cfdce9f603101d2a3744515e6b7885929facb9c6d3e0edfa07142145",
+        "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\whitebox_s11_crash_0.bin",
+        "method": "z3_smt_sat"
       }
     ]
   },
   {
     "fuzzer": "whitebox",
     "seed": 12,
-    "budget": 5000,
+    "budget": 1,
     "iterations_used": 1,
-    "wall_time_seconds": 0.169051,
-    "exec_per_sec": 5.9,
-    "z3_solve_time": 0.003891,
+    "wall_time_seconds": 0.2812,
+    "z3_solve_time": 0.007,
+    "exec_per_sec": 3.6,
     "first_crash_at": 0,
-    "time_to_first_crash_seconds": 0.168159,
+    "time_to_first_crash_seconds": 0.2812,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 0,
-        "input_hex": "49475731010118001800000000000000505050505050505050505050505050505050505050505050ca080000",
-        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/whitebox_s12_crash_0.bin",
-        "asan_signature": "#0 0x70cfe6928d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117",
-        "method": "z3_direct"
+        "exit_code": 3221225477,
+        "input_hex": "465a50312654616e7b8895a2afbcc9d6e3f0fd0a1724313e4b5865727f8c99a6b3c0cddae7f4010e1b2835fd",
+        "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\whitebox_s12_crash_0.bin",
+        "method": "z3_smt_sat"
       }
     ]
   },
   {
     "fuzzer": "whitebox",
     "seed": 13,
-    "budget": 5000,
+    "budget": 1,
     "iterations_used": 1,
-    "wall_time_seconds": 0.180065,
-    "exec_per_sec": 5.6,
-    "z3_solve_time": 0.003949,
+    "wall_time_seconds": 0.2758,
+    "z3_solve_time": 0.0034,
+    "exec_per_sec": 3.6,
     "first_crash_at": 0,
-    "time_to_first_crash_seconds": 0.179373,
+    "time_to_first_crash_seconds": 0.2758,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 0,
-        "input_hex": "49475731010118001800000000000000505050505050505050505050505050505050505050505050ca080000",
-        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/whitebox_s13_crash_0.bin",
-        "asan_signature": "#0 0x7dd943f28d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117",
-        "method": "z3_direct"
+        "exit_code": 3221225477,
+        "input_hex": "465a5031275b6875828f9ca9b6c3d0ddeaf704111e2b3845525f6c798693a0adbac7d4e1eefb0815222f3c497e",
+        "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\whitebox_s13_crash_0.bin",
+        "method": "z3_smt_sat"
       }
     ]
   },
   {
     "fuzzer": "whitebox",
     "seed": 14,
-    "budget": 5000,
+    "budget": 1,
     "iterations_used": 1,
-    "wall_time_seconds": 0.176632,
-    "exec_per_sec": 5.7,
-    "z3_solve_time": 0.003856,
+    "wall_time_seconds": 0.283,
+    "z3_solve_time": 0.0079,
+    "exec_per_sec": 3.5,
     "first_crash_at": 0,
-    "time_to_first_crash_seconds": 0.175638,
+    "time_to_first_crash_seconds": 0.283,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 0,
-        "input_hex": "49475731010118001800000000000000505050505050505050505050505050505050505050505050ca080000",
-        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/whitebox_s14_crash_0.bin",
-        "asan_signature": "#0 0x72b395728d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117",
-        "method": "z3_direct"
+        "exit_code": 3221225477,
+        "input_hex": "465a503128626f7c8996a3b0bdcad7e4f1fe0b1825323f4c596673808d9aa7b4c1cedbe8f5020f1c293643505d00",
+        "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\whitebox_s14_crash_0.bin",
+        "method": "z3_smt_sat"
       }
     ]
   },
   {
     "fuzzer": "whitebox",
     "seed": 15,
-    "budget": 5000,
+    "budget": 1,
     "iterations_used": 1,
-    "wall_time_seconds": 0.168038,
-    "exec_per_sec": 6.0,
-    "z3_solve_time": 0.004013,
+    "wall_time_seconds": 0.2806,
+    "z3_solve_time": 0.0067,
+    "exec_per_sec": 3.6,
     "first_crash_at": 0,
-    "time_to_first_crash_seconds": 0.167544,
+    "time_to_first_crash_seconds": 0.2806,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 0,
-        "input_hex": "49475731010118001800000000000000505050505050505050505050505050505050505050505050ca080000",
-        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/whitebox_s15_crash_0.bin",
-        "asan_signature": "#0 0x76d766728d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117",
-        "method": "z3_direct"
+        "exit_code": 3221225477,
+        "input_hex": "465a503129697683909daab7c4d1deebf805121f2c394653606d7a8794a1aebbc8d5e2effc091623303d4a57647159",
+        "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\whitebox_s15_crash_0.bin",
+        "method": "z3_smt_sat"
       }
     ]
   },
   {
     "fuzzer": "whitebox",
     "seed": 16,
-    "budget": 5000,
+    "budget": 1,
     "iterations_used": 1,
-    "wall_time_seconds": 0.167567,
-    "exec_per_sec": 6.0,
-    "z3_solve_time": 0.003797,
+    "wall_time_seconds": 0.2839,
+    "z3_solve_time": 0.0062,
+    "exec_per_sec": 3.5,
     "first_crash_at": 0,
-    "time_to_first_crash_seconds": 0.166875,
+    "time_to_first_crash_seconds": 0.2839,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 0,
-        "input_hex": "49475731010118001800000000000000505050505050505050505050505050505050505050505050ca080000",
-        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/whitebox_s16_crash_0.bin",
-        "asan_signature": "#0 0x7e6ee8528d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117",
-        "method": "z3_direct"
+        "exit_code": 3221225477,
+        "input_hex": "465a50312a707d8a97a4b1becbd8e5f2ff0c192633404d5a6774818e9ba8b5c2cfdce9f603101d2a3744515e6b78858d",
+        "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\whitebox_s16_crash_0.bin",
+        "method": "z3_smt_sat"
       }
     ]
   },
   {
     "fuzzer": "whitebox",
     "seed": 17,
-    "budget": 5000,
+    "budget": 1,
     "iterations_used": 1,
-    "wall_time_seconds": 0.167353,
-    "exec_per_sec": 6.0,
-    "z3_solve_time": 0.004,
+    "wall_time_seconds": 0.292,
+    "z3_solve_time": 0.0088,
+    "exec_per_sec": 3.4,
     "first_crash_at": 0,
-    "time_to_first_crash_seconds": 0.166608,
+    "time_to_first_crash_seconds": 0.292,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 0,
-        "input_hex": "49475731010118001800000000000000505050505050505050505050505050505050505050505050ca080000",
-        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/whitebox_s17_crash_0.bin",
-        "asan_signature": "#0 0x738fd3728d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117",
-        "method": "z3_direct"
+        "exit_code": 3221225477,
+        "input_hex": "465a50312b7784919eabb8c5d2dfecf90613202d3a4754616e7b8895a2afbcc9d6e3f0fd0a1724313e4b5865727f8c9972",
+        "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\whitebox_s17_crash_0.bin",
+        "method": "z3_smt_sat"
       }
     ]
   },
   {
     "fuzzer": "whitebox",
     "seed": 18,
-    "budget": 5000,
+    "budget": 1,
     "iterations_used": 1,
-    "wall_time_seconds": 0.163408,
-    "exec_per_sec": 6.1,
-    "z3_solve_time": 0.003979,
+    "wall_time_seconds": 0.2808,
+    "z3_solve_time": 0.0102,
+    "exec_per_sec": 3.6,
     "first_crash_at": 0,
-    "time_to_first_crash_seconds": 0.162607,
+    "time_to_first_crash_seconds": 0.2808,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 0,
-        "input_hex": "49475731010118001800000000000000505050505050505050505050505050505050505050505050ca080000",
-        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/whitebox_s18_crash_0.bin",
-        "asan_signature": "#0 0x7203a2f28d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117",
-        "method": "z3_direct"
+        "exit_code": 3221225477,
+        "input_hex": "465a50312c7e8b98a5b2bfccd9e6f3000d1a2734414e5b6875828f9ca9b6c3d0ddeaf704111e2b3845525f6c798693a0ad88",
+        "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\whitebox_s18_crash_0.bin",
+        "method": "z3_smt_sat"
       }
     ]
   },
   {
     "fuzzer": "whitebox",
     "seed": 19,
-    "budget": 5000,
+    "budget": 1,
     "iterations_used": 1,
-    "wall_time_seconds": 0.174443,
-    "exec_per_sec": 5.7,
-    "z3_solve_time": 0.004082,
+    "wall_time_seconds": 0.2645,
+    "z3_solve_time": 0.0072,
+    "exec_per_sec": 3.8,
     "first_crash_at": 0,
-    "time_to_first_crash_seconds": 0.174043,
+    "time_to_first_crash_seconds": 0.2645,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 0,
-        "input_hex": "49475731010118001800000000000000505050505050505050505050505050505050505050505050ca080000",
-        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/whitebox_s19_crash_0.bin",
-        "asan_signature": "#0 0x72220ab28d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117",
-        "method": "z3_direct"
+        "exit_code": 3221225477,
+        "input_hex": "465a50312d85929facb9c6d3e0edfa0714212e3b4855626f7c8996a3b0bdcad7e4f1fe0b1825323f4c596673808d9aa7b4c10d",
+        "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\whitebox_s19_crash_0.bin",
+        "method": "z3_smt_sat"
       }
     ]
   },
   {
     "fuzzer": "whitebox",
     "seed": 20,
-    "budget": 5000,
+    "budget": 1,
     "iterations_used": 1,
-    "wall_time_seconds": 0.165201,
-    "exec_per_sec": 6.1,
-    "z3_solve_time": 0.00405,
+    "wall_time_seconds": 0.2927,
+    "z3_solve_time": 0.0105,
+    "exec_per_sec": 3.4,
     "first_crash_at": 0,
-    "time_to_first_crash_seconds": 0.164395,
+    "time_to_first_crash_seconds": 0.2927,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 0,
-        "input_hex": "49475731010118001800000000000000505050505050505050505050505050505050505050505050ca080000",
-        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/whitebox_s20_crash_0.bin",
-        "asan_signature": "#0 0x75fc48528d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117",
-        "method": "z3_direct"
+        "exit_code": 3221225477,
+        "input_hex": "465a50312e8c99a6b3c0cddae7f4010e1b2835424f5c697683909daab7c4d1deebf805121f2c394653606d7a8794a1aebbc8d50d",
+        "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\whitebox_s20_crash_0.bin",
+        "method": "z3_smt_sat"
       }
     ]
   },
   {
     "fuzzer": "whitebox",
     "seed": 21,
-    "budget": 5000,
+    "budget": 1,
     "iterations_used": 1,
-    "wall_time_seconds": 0.176096,
-    "exec_per_sec": 5.7,
-    "z3_solve_time": 0.004077,
+    "wall_time_seconds": 0.2871,
+    "z3_solve_time": 0.0107,
+    "exec_per_sec": 3.5,
     "first_crash_at": 0,
-    "time_to_first_crash_seconds": 0.175542,
+    "time_to_first_crash_seconds": 0.2871,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 0,
-        "input_hex": "49475731010118001800000000000000505050505050505050505050505050505050505050505050ca080000",
-        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/whitebox_s21_crash_0.bin",
-        "asan_signature": "#0 0x73e647128d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117",
-        "method": "z3_direct"
+        "exit_code": 3221225477,
+        "input_hex": "465a50312f93a0adbac7d4e1eefb0815222f3c495663707d8a97a4b1becbd8e5f2ff0c192633404d5a6774818e9ba8b5c2cfdce926",
+        "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\whitebox_s21_crash_0.bin",
+        "method": "z3_smt_sat"
       }
     ]
   },
   {
     "fuzzer": "whitebox",
     "seed": 22,
-    "budget": 5000,
+    "budget": 1,
     "iterations_used": 1,
-    "wall_time_seconds": 0.175963,
-    "exec_per_sec": 5.7,
-    "z3_solve_time": 0.004127,
+    "wall_time_seconds": 0.2817,
+    "z3_solve_time": 0.0089,
+    "exec_per_sec": 3.6,
     "first_crash_at": 0,
-    "time_to_first_crash_seconds": 0.174896,
+    "time_to_first_crash_seconds": 0.2817,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 0,
-        "input_hex": "49475731010118001800000000000000505050505050505050505050505050505050505050505050ca080000",
-        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/whitebox_s22_crash_0.bin",
-        "asan_signature": "#0 0x754efdd28d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117",
-        "method": "z3_direct"
+        "exit_code": 3221225477,
+        "input_hex": "465a5031309aa7b4c1cedbe8f5020f1c293643505d6a7784919eabb8c5d2dfecf90613202d3a4754616e7b8895a2afbcc9d6e3f0fd40",
+        "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\whitebox_s22_crash_0.bin",
+        "method": "z3_smt_sat"
       }
     ]
   },
   {
     "fuzzer": "whitebox",
     "seed": 23,
-    "budget": 5000,
+    "budget": 1,
     "iterations_used": 1,
-    "wall_time_seconds": 0.162561,
-    "exec_per_sec": 6.2,
-    "z3_solve_time": 0.003833,
+    "wall_time_seconds": 0.2504,
+    "z3_solve_time": 0.0099,
+    "exec_per_sec": 4.0,
     "first_crash_at": 0,
-    "time_to_first_crash_seconds": 0.161863,
+    "time_to_first_crash_seconds": 0.2504,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 0,
-        "input_hex": "49475731010118001800000000000000505050505050505050505050505050505050505050505050ca080000",
-        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/whitebox_s23_crash_0.bin",
-        "asan_signature": "#0 0x76da11328d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117",
-        "method": "z3_direct"
+        "exit_code": 3221225477,
+        "input_hex": "465a503131a1aebbc8d5e2effc091623303d4a5764717e8b98a5b2bfccd9e6f3000d1a2734414e5b6875828f9ca9b6c3d0ddeaf70411a1",
+        "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\whitebox_s23_crash_0.bin",
+        "method": "z3_smt_sat"
       }
     ]
   },
   {
     "fuzzer": "whitebox",
     "seed": 24,
-    "budget": 5000,
+    "budget": 1,
     "iterations_used": 1,
-    "wall_time_seconds": 0.167726,
-    "exec_per_sec": 6.0,
-    "z3_solve_time": 0.003838,
+    "wall_time_seconds": 0.3038,
+    "z3_solve_time": 0.0108,
+    "exec_per_sec": 3.3,
     "first_crash_at": 0,
-    "time_to_first_crash_seconds": 0.166522,
+    "time_to_first_crash_seconds": 0.3038,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 0,
-        "input_hex": "49475731010118001800000000000000505050505050505050505050505050505050505050505050ca080000",
-        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/whitebox_s24_crash_0.bin",
-        "asan_signature": "#0 0x7858ec928d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117",
-        "method": "z3_direct"
+        "exit_code": 3221225477,
+        "input_hex": "465a503132a8b5c2cfdce9f603101d2a3744515e6b7885929facb9c6d3e0edfa0714212e3b4855626f7c8996a3b0bdcad7e4f1fe0b1825dd",
+        "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\whitebox_s24_crash_0.bin",
+        "method": "z3_smt_sat"
       }
     ]
   },
   {
     "fuzzer": "whitebox",
     "seed": 25,
-    "budget": 5000,
+    "budget": 1,
     "iterations_used": 1,
-    "wall_time_seconds": 0.165324,
-    "exec_per_sec": 6.0,
-    "z3_solve_time": 0.004265,
+    "wall_time_seconds": 0.2756,
+    "z3_solve_time": 0.011,
+    "exec_per_sec": 3.6,
     "first_crash_at": 0,
-    "time_to_first_crash_seconds": 0.164733,
+    "time_to_first_crash_seconds": 0.2756,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 0,
-        "input_hex": "49475731010118001800000000000000505050505050505050505050505050505050505050505050ca080000",
-        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/whitebox_s25_crash_0.bin",
-        "asan_signature": "#0 0x71716db28d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117",
-        "method": "z3_direct"
+        "exit_code": 3221225477,
+        "input_hex": "465a503133afbcc9d6e3f0fd0a1724313e4b5865727f8c99a6b3c0cddae7f4010e1b2835424f5c697683909daab7c4d1deebf805121f2c397a",
+        "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\whitebox_s25_crash_0.bin",
+        "method": "z3_smt_sat"
       }
     ]
   },
   {
     "fuzzer": "whitebox",
     "seed": 26,
-    "budget": 5000,
+    "budget": 1,
     "iterations_used": 1,
-    "wall_time_seconds": 0.176881,
-    "exec_per_sec": 5.7,
-    "z3_solve_time": 0.003977,
+    "wall_time_seconds": 0.2736,
+    "z3_solve_time": 0.0123,
+    "exec_per_sec": 3.7,
     "first_crash_at": 0,
-    "time_to_first_crash_seconds": 0.175744,
+    "time_to_first_crash_seconds": 0.2736,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 0,
-        "input_hex": "49475731010118001800000000000000505050505050505050505050505050505050505050505050ca080000",
-        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/whitebox_s26_crash_0.bin",
-        "asan_signature": "#0 0x7f2630328d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117",
-        "method": "z3_direct"
+        "exit_code": 3221225477,
+        "input_hex": "465a503134b6c3d0ddeaf704111e2b3845525f6c798693a0adbac7d4e1eefb0815222f3c495663707d8a97a4b1becbd8e5f2ff0c192633404d78",
+        "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\whitebox_s26_crash_0.bin",
+        "method": "z3_smt_sat"
       }
     ]
   },
   {
     "fuzzer": "whitebox",
     "seed": 27,
-    "budget": 5000,
+    "budget": 1,
     "iterations_used": 1,
-    "wall_time_seconds": 0.177099,
-    "exec_per_sec": 5.6,
-    "z3_solve_time": 0.003917,
+    "wall_time_seconds": 0.263,
+    "z3_solve_time": 0.0123,
+    "exec_per_sec": 3.8,
     "first_crash_at": 0,
-    "time_to_first_crash_seconds": 0.176443,
+    "time_to_first_crash_seconds": 0.263,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 0,
-        "input_hex": "49475731010118001800000000000000505050505050505050505050505050505050505050505050ca080000",
-        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/whitebox_s27_crash_0.bin",
-        "asan_signature": "#0 0x73179d928d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117",
-        "method": "z3_direct"
+        "exit_code": 3221225477,
+        "input_hex": "465a503135bdcad7e4f1fe0b1825323f4c596673808d9aa7b4c1cedbe8f5020f1c293643505d6a7784919eabb8c5d2dfecf90613202d3a47546175",
+        "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\whitebox_s27_crash_0.bin",
+        "method": "z3_smt_sat"
       }
     ]
   },
   {
     "fuzzer": "whitebox",
     "seed": 28,
-    "budget": 5000,
+    "budget": 1,
     "iterations_used": 1,
-    "wall_time_seconds": 0.195346,
-    "exec_per_sec": 5.1,
-    "z3_solve_time": 0.00643,
+    "wall_time_seconds": 0.2852,
+    "z3_solve_time": 0.0089,
+    "exec_per_sec": 3.5,
     "first_crash_at": 0,
-    "time_to_first_crash_seconds": 0.194336,
+    "time_to_first_crash_seconds": 0.2852,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 0,
-        "input_hex": "49475731010118001800000000000000505050505050505050505050505050505050505050505050ca080000",
-        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/whitebox_s28_crash_0.bin",
-        "asan_signature": "#0 0x7c88d8728d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117",
-        "method": "z3_direct"
+        "exit_code": 3221225477,
+        "input_hex": "465a503136c4d1deebf805121f2c394653606d7a8794a1aebbc8d5e2effc091623303d4a5764717e8b98a5b2bfccd9e6f3000d1a2734414e5b68755d",
+        "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\whitebox_s28_crash_0.bin",
+        "method": "z3_smt_sat"
       }
     ]
   },
   {
     "fuzzer": "whitebox",
     "seed": 29,
-    "budget": 5000,
+    "budget": 1,
     "iterations_used": 1,
-    "wall_time_seconds": 0.173965,
-    "exec_per_sec": 5.7,
-    "z3_solve_time": 0.003813,
+    "wall_time_seconds": 0.2466,
+    "z3_solve_time": 0.0068,
+    "exec_per_sec": 4.1,
     "first_crash_at": 0,
-    "time_to_first_crash_seconds": 0.173414,
+    "time_to_first_crash_seconds": 0.2466,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 0,
-        "input_hex": "49475731010118001800000000000000505050505050505050505050505050505050505050505050ca080000",
-        "saved_to": "/mnt/HDD_3/1_taiLieuDaiHoc/anToanPM/BTL/crashes/whitebox_s29_crash_0.bin",
-        "asan_signature": "#0 0x7a420a728d2c in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:117",
-        "method": "z3_direct"
+        "exit_code": 3221225477,
+        "input_hex": "465a503137cbd8e5f2ff0c192633404d5a6774818e9ba8b5c2cfdce9f603101d2a3744515e6b7885929facb9c6d3e0edfa0714212e3b4855626f7c890e",
+        "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\whitebox_s29_crash_0.bin",
+        "method": "z3_smt_sat"
       }
     ]
   }

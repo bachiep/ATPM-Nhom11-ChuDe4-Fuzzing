@@ -15,7 +15,8 @@ __pycache__/
 .coverage
 htmlcov/
 
-# OS and Editor files
+# Scratch & temporary files
+scratch/
 *.tmp
 *.temp
 *.bak
@@ -24,10 +25,3 @@ Thumbs.db
 .DS_Store
 .vscode/
 .idea/
-
-# Documents & Drafts
-*.docx
-HUONG_DAN_*
-report/*.docx
-report/*.md
-
