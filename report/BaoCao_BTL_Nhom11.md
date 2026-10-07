@@ -160,7 +160,7 @@ Tuân thủ chỉ đạo phương pháp luận của giảng viên: *"Công cụ
   - *Lưu ý về tính trung thực học thuật:* Bộ sinh mã của SecLab chỉ tạo các hàm khuôn mẫu đơn lẻ; nhóm không tuyên bố công cụ tự động tổng hợp trọn gói bộ phân tích cú pháp tệp nhị phân FZP1.
 * **Nghiên cứu Thực nghiệm Độc lập & Chiều sâu Chuyên môn của Nhóm (30%):**
   - **Hiện thực Bộ Parser FZP1 Nhị phân Hoàn chỉnh:** Nhóm tự tay lập trình bộ phân tích cú pháp C nhị phân (`source/fzp1_parser_v0.c` và `source/fzp1_parser_v1.c`), cài đặt cấu trúc tệp nhị phân 4B Magic + 1B Length + Payload + 1B XOR Checksum, bộ đệm ngăn xếp 16 byte, và vòng đời run-to-completion thu hồi Heap an toàn.
-  - **Phát triển Module Fuzzer Mở rộng (`source/ch4_dynafuzz_fzp1.py`):** Kế thừa `ch4_dynafuzz`, nhóm xây dựng module mở rộng với 3 fuzzer chuyên biệt (`FZP1BlackBoxFuzzer`, `FZP1GreyboxFuzzer`, `FZP1WhiteBoxFuzzer`). Trong đó fuzzer White-box mô hình hóa toàn diện các biến ký hiệu Bit-Vector thuần túy trong Z3 Solver (symbolic Magic, Length, Payload và Checksum), tự động tổng hợp gói tin khai thác SAT với 0 byte hard-code.
+  - **Phát triển Module Fuzzer Mở rộng (`source/ch4_dynafuzz_fzp1.py`):** Kế thừa kiến trúc `ch4_dynafuzz`, nhóm xây dựng module mở rộng với 3 fuzzer chuyên biệt (`FZP1BlackBoxFuzzer`, `FZP1GreyboxFuzzer`, `FZP1WhiteBoxFuzzer`). Trong đó, fuzzer White-box được nhóm trực tiếp phân tích mã nguồn parser và mô hình hóa thủ công điều kiện rẽ nhánh (path condition) thành hệ phương trình Bit-Vector trong Z3 Solver (ràng buộc 4 byte Magic `"FZP1"`, chọn độ dài payload $L > 16$ để kích hoạt nhánh tràn ngăn xếp, và giải ngược XOR Checksum để vượt qua xác thực), tự động tổng hợp gói tin khai thác thỏa mãn (SAT).
   - **Phân tích Bản chất Ô nhớ Mức thấp:** Nhóm phân tích chi tiết cơ chế ô nhớ Stack Frame x86_64, phân tích shadow bytes AddressSanitizer (`[f3]`), chứng minh điểm mù phân tích tĩnh của Cppcheck, và xây dựng bản vá hoàn chỉnh chuẩn **CERT C** (CERT STR31-C, MEM30-C, MEM31-C).
   - **Thiết kế Benchmark 30 Trials Khách quan:** Thực thi 30 lượt đo kiểm độc lập, ghi nhận và trực quan hóa dữ liệu thống kê khách quan.
 
@@ -356,7 +356,7 @@ Toàn bộ số liệu dưới đây được trích xuất trực tiếp từ t
 | **Số lượt thử nghiệm (Trials)** | 30 | 30 | 30 |
 | **Tỷ lệ tìm được crash (Success Rate)** | **0.00% (0 / 30)** | **100.00% (30 / 30)** | **80.00% (24 / 30)** |
 | **Số lỗi phát hiện độc nhất (Unique Bugs)** | 0 | 1 (CWE-121) | 1 (CWE-121) |
-| **Số vòng lặp trung bình để tìm crash** | Không tìm thấy ($>500$) | **1 vòng lặp duy nhất (0 đột biến)** | 190.8 vòng lặp (Trung vị: 165) |
+| **Số vòng lặp trung bình để tìm crash** | Không tìm thấy ($>500$) | **1 lần giải SMT Z3 (1 nghiệm SAT)** | 190.8 vòng lặp (Trung vị: 165) |
 | **Thời gian giải SMT trung bình (Z3 Time)**| Không áp dụng | **3.92 ms** (2.90 – 9.40 ms) | Không áp dụng |
 | **Time-to-first-crash: Trung vị (Median)** | — (Hết ngân sách) | **0.2229 giây** | **3.2740 giây** |
 | **Time-to-first-crash: Tứ phân vị Q1** | — | 0.0178 giây | 1.7790 giây |
@@ -434,25 +434,24 @@ Kết quả trả về: **0 cảnh báo, 0 lỗi tràn bộ đệm (0 findings)*
 
 # PHẦN 8: PHỤ LỤC
 
-### Phụ lục A: Hướng dẫn Sử dụng Công cụ Giao diện Đồ họa (GUI) `SecLabFramework.exe` theo Hướng dẫn Giảng viên
-Nhằm đáp ứng yêu cầu nắm vững và vận hành công cụ giảng viên, sinh viên thực hiện quy trình kiểm chứng trực quan trên giao diện đồ họa GUI:
+### Phụ lục A: Bằng chứng Thực nghiệm Giao diện Đồ họa (GUI) `SecLabFramework.exe` & `SpecVerificationLab` theo Hướng dẫn Giảng viên
+Nhằm đáp ứng yêu cầu nắm vững và vận hành công cụ giảng viên, sinh viên thực hiện quy trình kiểm chứng trực quan trên giao diện đồ họa GUI với đầy đủ bằng chứng đối soát:
 
-1. **Khởi chạy ứng dụng:** Chạy trực tiếp `SecLabFramework.exe` trên môi trường Windows.
-2. **Khâu 1 (Nạp Đặc tả SSOT):**
-   - Chuyển sang Tab **`Ch6: Spec -> Kripke -> Code -> CWE/CVE`**.
-   - Bấm nút **Browse** để chọn tệp đặc tả Excel của nhóm: `specification/Nhom11_FZP1_Fuzzing_Spec.xlsx`.
-3. **Khâu 2 (Kiểm chứng Hình thức Kripke/CTL):**
-   - Nhấn nút **Nạp và Phân tích Đặc tả**.
-   - Quan sát sơ đồ chuyển trạng thái Kripke 4 trạng thái, kết quả kiểm tra Deadlock-free và cảnh báo vi phạm thuộc tính CTL $AG(\neg \text{violation})$ tại trạng thái xung đột bộ nhớ.
-4. **Khâu 3 (Trích xuất AST & Kiểm tra SMT Z3):**
-   - Xem kết quả phân tích AST và mô hình hóa Bit-Vector chứng minh nguy cơ tràn số int32 tại hàm `fzp1_byte_accumulator`.
-5. **Khâu 4 (Sinh Mã Template & Kiểm thử Fuzzing):**
-   - Quan sát các hàm C template được công cụ sinh ra từ sheet `HamSinhMa` (chứng minh các mẫu lỗi CWE-121, 401, 415, 416).
-   - Quan sát kết quả Fuzzing mẫu tìm lỗi chia 0 (CWE-369) và Concolic giải ngược cặp mã bí mật.
-6. **Khâu 5 (Xuất Báo cáo Tích hợp):**
-   - Nhấn nút **Xuất Báo cáo Tích hợp (.docx)** để lưu trữ bằng chứng tự động hóa từ công cụ của môn học.
-7. **Khâu 6 (Thực hành Fuzzing Tương tác tại Tab Ch4):**
-   - Chuyển sang Tab **`Ch4: Coverage & Fuzzing`** để thực hiện các bài đo độ phủ mã lệnh và theo dõi đồ thị tăng trưởng coverage.
+#### 1. Kiểm chứng Đặc tả SSOT và Sinh mã Hình thức tại Tab Ch6 (Spec -> Kripke -> Code -> CWE/CVE):
+![Giao diện SecLabFramework Tab Ch6 — Thẩm định Đặc tả Hình thức SSOT FZP1](figures/seclab_ch6_spec_verification.png)
+* **Quy trình vận hành:**
+  1. Nạp tệp đặc tả SSOT `Nhom11_FZP1_Fuzzing_Spec.xlsx` vào bộ chọn đặc tả.
+  2. Bấm nút **Sinh Kripke + kiểm chứng (Ch1)**: Công cụ tự động dựng mô hình chuyển trạng thái 4 nút (`st_idle`, `st_magic_ok`, `st_checksum_ok`, `st_conflict`), xác thực không có deadlock (deadlock-free) và cảnh báo vi phạm thuộc tính an toàn CTL $AG(\neg \text{violation})$ tại trạng thái xung đột bộ nhớ `st_conflict`.
+  3. Bấm nút **Sinh mã C/Python từ đặc tả**: Công cụ sinh mã nguồn khuôn mẫu cho hàm `parse_fzp1_payload` (CWE-121), `write_fzp1_cache` (CWE-401), và `close_fzp1_session` (CWE-415).
+  4. Bấm nút **Xuất Báo cáo Tích hợp (.docx)** để lưu trữ hồ sơ bằng chứng tự động hóa.
+
+#### 2. Chiến dịch Kiểm thử Fuzzing Động và Đo lường Độ phủ Mã lệnh tại Tab Ch4 (Coverage & Fuzzing):
+![Giao diện SecLabFramework Tab Ch4 — Kiểm thử Fuzzing Động và Đo lường Độ phủ Mã lệnh](figures/seclab_ch4_dynamic_fuzzing.png)
+* **Quy trình vận hành:**
+  1. Chọn mục tiêu kiểm thử nhị phân: `fzp1_parser_v0.exe` (biên dịch bằng GCC với cờ `-O0 -g -fstack-protector-all` và AddressSanitizer).
+  2. Thiết lập đối sánh 3 trường phái: Black-box (đột biến ngẫu nhiên), Greybox (đột biến phong bì FZP1) và White-box Concolic SMT Z3 Solver.
+  3. Bấm nút **Khởi chạy Chiến dịch Fuzzing (30 Trials)**: Theo dõi trực quan đồ thị tăng trưởng Branch Coverage và thời gian phát hiện lỗi đầu tiên (Time-to-first-crash).
+  4. Xác thực nhật ký AddressSanitizer: Phát hiện vi phạm Stack Right Redzone `[f3]` tại offset 112 của biến `stack_buf`, đồng thời chứng minh bản vá $v_1$ tuân thủ **CERT STR31-C** loại trừ 100% khiếm khuyết.
 
 ---
 
