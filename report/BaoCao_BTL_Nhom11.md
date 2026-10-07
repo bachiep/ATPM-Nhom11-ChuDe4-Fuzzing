@@ -65,8 +65,9 @@ Nhóm 11 xin cam đoan:
    - 7.4. Phân tích Hiện tượng Bỏ lọt Lỗi (False Negative) của Cppcheck
    - 7.5. Rào cản Toán học của Checksum đối với Black-box Fuzzing
    - 7.6. Sức mạnh Đột phá và Chi phí Tính toán của White-box Concolic SMT Z3
+   - 7.7. Thảo luận về Giới hạn Tích hợp Công cụ Giảng viên & Liêm chính Học thuật
 8. **Phần 8: Phụ lục**
-   - Phụ lục A: Hướng dẫn Sử dụng Công cụ Giao diện Đồ họa (GUI) `SecLabFramework.exe` theo Hướng dẫn Giảng viên
+   - Phụ lục A: Hướng dẫn Vận hành Công cụ `SecLabFramework.exe` & Quy trình Đối soát Độc lập
    - Phụ lục B: Toàn văn Mã nguồn C Bản Lỗi (`fzp1_parser_v0.c`)
    - Phụ lục C: Toàn văn Mã nguồn C Bản Vá An toàn (`fzp1_parser_v1.c`)
    - Phụ lục D: Phân công Công việc và Hướng dẫn Cài đặt / Tái lập Kết quả Thực nghiệm
@@ -430,28 +431,48 @@ Kết quả trả về: **0 cảnh báo, 0 lỗi tràn bộ đệm (0 findings)*
 * **Ưu điểm vượt trội:** Chuyển hóa toàn bộ câu lệnh điều kiện thành hệ phương trình logic Bit-Vector. SMT Solver giải quyết trực tiếp bài toán tìm nghiệm trong ~3.9 ms mà không phụ thuộc vào may rủi.
 * **Hạn chế và Chi phí (Path Explosion & Non-linear Arithmetic):** Nếu hàm mục tiêu chứa các vòng lặp phụ thuộc dữ liệu phức tạp hoặc hàm băm mật mã (SHA-256), bài toán sẽ trở thành phi tuyến, khiến bộ giải SMT bùng nổ không gian đường đi (Path Explosion). Do đó, phương pháp tiếp cận tối ưu trong công nghiệp là **Hybrid Fuzzing** (kết hợp Greybox tốc độ cao với Concolic giải rào cản).
 
+### 7.7. Thảo luận về Giới hạn Tích hợp Công cụ Giảng viên & Liêm chính Học thuật
+Nhằm quán triệt nguyên tắc liêm chính học thuật (Slide 22 tài liệu *Hướng dẫn Báo cáo BTL*), nhóm báo cáo minh bạch về quá trình vận hành công cụ và dữ liệu thực nghiệm:
+1. **Rào cản môi trường của bản thực thi `SecLabFramework.exe`:**
+   - Ứng dụng `SecLabFramework.exe` do bộ môn cung cấp được đóng gói bằng PyInstaller trên nền tảng Python 3.14. Khi vận hành trên Windows console thông qua các lệnh gọi tự động hóa (CLI), tiến trình phát sinh lỗi mã hóa bảng mã ký tự (`UnicodeEncodeError: 'charmap' codec can't encode character '\u0110'`) do console Windows mặc định dùng trang mã `cp1252`.
+   - Đồng thời, công cụ là phần mềm GUI độc lập, không hỗ trợ giao diện lập trình không đầu (headless batch-mode API) để chạy lặp lại tự động 30 trials benchmark và xuất tệp JSON cấu trúc.
+2. **Giải pháp thực nghiệm độc lập và kiểm chứng khách quan:**
+   - Để thu thập số liệu benchmark 30 trials hoàn toàn chân thực, nhóm đã xây dựng kịch bản thực nghiệm Python `source/ch4_dynafuzz_fzp1.py` áp dụng chuẩn xác mô hình thuật toán `ch4_dynafuzz` (DynaFuzz) và bộ giải hình thức Z3 Bit-Vector.
+   - Nhóm cũng xây dựng kịch bản kiểm định độc lập `scripts/validate_fzp1_pipeline.py` nhằm trực tiếp nạp tệp đặc tả SSOT `Nhom11_FZP1_Fuzzing_Spec.xlsx`, dựng cấu trúc Kripke, kiểm tra các công thức CTL và giải toàn bộ 5 bài toán tràn số nguyên bằng Z3 Solver. Kết quả được lưu tại `results/logs/pipeline_log.txt`.
+3. **Tuân thủ quy chuẩn đặc tả của `SpecVerificationLab`:**
+   - Trong tệp đặc tả SSOT Excel, sheet `LoaiTruLanNhau` chỉ hỗ trợ tối đa 1 cặp thuộc tính theo đúng tài liệu thiết kế của bộ môn. Nhóm tôn trọng tuyệt đối quy chuẩn này bằng cách thiết lập cặp thuộc tính loại trừ then chốt là `magic_ok` và `checksum_ok` (1 dòng dữ liệu duy nhất), thay vì cố tình nhồi nhét nhiều dòng làm sai lệch cấu trúc tương thích của tool.
+
 ---
 
 # PHẦN 8: PHỤ LỤC
 
-### Phụ lục A: Bằng chứng Thực nghiệm Giao diện Đồ họa (GUI) `SecLabFramework.exe` & `SpecVerificationLab` theo Hướng dẫn Giảng viên
-Nhằm đáp ứng yêu cầu nắm vững và vận hành công cụ giảng viên, sinh viên thực hiện quy trình kiểm chứng trực quan trên giao diện đồ họa GUI với đầy đủ bằng chứng đối soát:
+### Phụ lục A: Hướng dẫn Vận hành Công cụ `SecLabFramework.exe` & Quy trình Đối soát Độc lập
+Nhóm cung cấp đầy đủ tệp đặc tả SSOT và hướng dẫn chi tiết để giảng viên hoặc người đánh giá có thể kiểm tra trực tiếp:
 
-#### 1. Kiểm chứng Đặc tả SSOT và Sinh mã Hình thức tại Tab Ch6 (Spec -> Kripke -> Code -> CWE/CVE):
-![Giao diện SecLabFramework Tab Ch6 — Thẩm định Đặc tả Hình thức SSOT FZP1](figures/seclab_ch6_spec_verification.png)
-* **Quy trình vận hành:**
-  1. Nạp tệp đặc tả SSOT `Nhom11_FZP1_Fuzzing_Spec.xlsx` vào bộ chọn đặc tả.
-  2. Bấm nút **Sinh Kripke + kiểm chứng (Ch1)**: Công cụ tự động dựng mô hình chuyển trạng thái 4 nút (`st_idle`, `st_magic_ok`, `st_checksum_ok`, `st_conflict`), xác thực không có deadlock (deadlock-free) và cảnh báo vi phạm thuộc tính an toàn CTL $AG(\neg \text{violation})$ tại trạng thái xung đột bộ nhớ `st_conflict`.
-  3. Bấm nút **Sinh mã C/Python từ đặc tả**: Công cụ sinh mã nguồn khuôn mẫu cho hàm `parse_fzp1_payload` (CWE-121), `write_fzp1_cache` (CWE-401), và `close_fzp1_session` (CWE-415).
-  4. Bấm nút **Xuất Báo cáo Tích hợp (.docx)** để lưu trữ hồ sơ bằng chứng tự động hóa.
+#### 1. Thao tác nạp tệp Đặc tả SSOT trên giao diện `SecLabFramework.exe` (Tab Ch6):
+* **Bước 1:** Khởi chạy tệp `TAI_LIEU_VA_YEU_CAU/04_Cong_Cu_Giang_Vien/SecLabFramework.exe`.
+* **Bước 2:** Chọn thẻ Tab **Ch6: Spec -> Kripke -> Code -> CWE/CVE**.
+* **Bước 3:** Nhấn nút **Chọn file Excel đặc tả**, điều hướng và chọn tệp: `specification/Nhom11_FZP1_Fuzzing_Spec.xlsx`.
+* **Bước 4:** Nhấn nút **Kiểm chứng Kripke & Thuộc tính CTL**: Quan sát đồ thị Kripke 4 trạng thái (`st_idle`, `st_magic_ok`, `st_checksum_ok`, `st_conflict`), xác nhận tính chất không có deadlock (deadlock-free) và cảnh báo vi phạm thuộc tính an toàn tại trạng thái xung đột.
+* **Bước 5:** Nhấn nút **Sinh mã C/Python từ đặc tả**: Quan sát mã nguồn khuôn mẫu cho các hàm kiểm toán an toàn bộ nhớ.
 
-#### 2. Chiến dịch Kiểm thử Fuzzing Động và Đo lường Độ phủ Mã lệnh tại Tab Ch4 (Coverage & Fuzzing):
-![Giao diện SecLabFramework Tab Ch4 — Kiểm thử Fuzzing Động và Đo lường Độ phủ Mã lệnh](figures/seclab_ch4_dynamic_fuzzing.png)
-* **Quy trình vận hành:**
-  1. Chọn mục tiêu kiểm thử nhị phân: `fzp1_parser_v0.exe` (biên dịch bằng GCC với cờ `-O0 -g -fstack-protector-all` và AddressSanitizer).
-  2. Thiết lập đối sánh 3 trường phái: Black-box (đột biến ngẫu nhiên), Greybox (đột biến phong bì FZP1) và White-box Concolic SMT Z3 Solver.
-  3. Bấm nút **Khởi chạy Chiến dịch Fuzzing (30 Trials)**: Theo dõi trực quan đồ thị tăng trưởng Branch Coverage và thời gian phát hiện lỗi đầu tiên (Time-to-first-crash).
-  4. Xác thực nhật ký AddressSanitizer: Phát hiện vi phạm Stack Right Redzone `[f3]` tại offset 112 của biến `stack_buf`, đồng thời chứng minh bản vá $v_1$ tuân thủ **CERT STR31-C** loại trừ 100% khiếm khuyết.
+#### 2. Thao tác chạy Bộ kiểm định Độc lập của Nhóm (`validate_fzp1_pipeline.py`):
+Trong trường hợp môi trường dòng lệnh gặp sự cố về bảng mã ký tự hoặc muốn kiểm chứng tự động toàn bộ 10 sheet của đặc tả:
+```bash
+python scripts/validate_fzp1_pipeline.py
+```
+Kịch bản sẽ trực tiếp đối soát:
+- Cấu trúc đồ thị Kripke và 5 công thức CTL trong sheet `ThuocTinhAnToan`.
+- Cặp loại trừ lẫn nhau `magic_ok` vs `checksum_ok` trong sheet `LoaiTruLanNhau`.
+- Chạy thực tế Z3 SMT Bit-Vector solver trên toàn bộ 5 bài toán biên tại sheet `KiemTraSoHoc`.
+- Xuất nhật ký thẩm định ra tệp `results/logs/pipeline_log.txt`.
+
+#### 3. Thao tác chạy Chiến dịch Dynamic Fuzzing Thực nghiệm (`ch4_dynafuzz_fzp1.py`):
+```bash
+python scripts/run_fzp1_benchmark.py
+python scripts/aggregate_results.py
+python scripts/generate_charts.py
+```
 
 ---
 

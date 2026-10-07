@@ -167,7 +167,6 @@ def check_excel_spec():
             "YeuCauPhiChucNang": 5,
             "RangBuoc": 5,
             "ThuocTinhAnToan": 5,
-            "LoaiTruLanNhau": 5,
             "HamSinhMa": 6,
             "KiemTraSoHoc": 5,
             "TestCase": 5,
@@ -179,6 +178,16 @@ def check_excel_spec():
                 return False
             else:
                 print_pass(f"Sheet '{s:18s}': {actual_cnt:2d} dòng dữ liệu (Đạt chuẩn >= {min_cnt})")
+                
+        # Kiểm tra riêng sheet LoaiTruLanNhau: Chuẩn SecLab chỉ hỗ trợ đúng 1 cặp mutex
+        mutex_cnt = wb["LoaiTruLanNhau"].max_row - 1
+        if mutex_cnt != 1:
+            print_fail(f"Sheet 'LoaiTruLanNhau' có {mutex_cnt} dòng (Sai quy chuẩn SecLab: chỉ hỗ trợ đúng 1 cặp duy nhất)!")
+            return False
+        else:
+            p1 = wb["LoaiTruLanNhau"].cell(2, 1).value
+            p2 = wb["LoaiTruLanNhau"].cell(2, 2).value
+            print_pass(f"Sheet 'LoaiTruLanNhau    ':  1 cặp dữ liệu ('{p1}' / '{p2}') (Đạt chuẩn tương thích SecLab SpecVerificationLab)")
                 
         return True
     except Exception as e:
@@ -307,14 +316,14 @@ def check_benchmark_data():
 def check_file_hashes():
     print_header("KHÂU 8: ĐỐI SOÁT MÃ BĂM SHA-256 TOÀN VẸN TỆP TIN")
     manifest = {
-        "specification/Nhom11_FZP1_Fuzzing_Spec.xlsx": "692EA942FD45DD1EB11659E1A7DAB65241F692D3D1E809430611C97F0E85CC83",
+        "specification/Nhom11_FZP1_Fuzzing_Spec.xlsx": "0786C28D538802BC6FB00AF13C2EE669FABF223987F50788FAC5F1EC97D0273B",
         "source/fzp1_parser_v0.c": "6A8F2589EFAF5B3EB80048BE417B066757FBDB009ADA8365C037B73D46B6BE99",
         "source/fzp1_parser_v1.c": "817A891BF3415302B27D412F50C064B1A5817549BBD0C2AB7B6D558199026EBF",
         "results/logs/log_asan_crash_v0.txt": "E75CD4604725852DF69FAA7079A7B3A875A64C5075E62F4AA2C43132372DD652",
         "results/logs/log_fixed_clean_v1.txt": "95690BFD050811AC10DA5D9910980E5DAD4605138407617DB0FD45B5D4FDB622",
         "results/logs/log_cppcheck.txt": "59D0810D56ED6BF4C33A984CAFA9536103285939928BFDB1490F858509C10DC3",
         "results/logs/pipeline_log.txt": "76A701FD51D3BA6350B447D0A04854402DD6AF4D30ECCE9B7C82E7A6AB04F5A6",
-        "report/BaoCao_BTL_Nhom11.pdf": "F58EB2B61E874CE64978CB57A302B644C0B0342D19F5D091399A9BA1DD9B5D24",
+        "report/BaoCao_BTL_Nhom11.pdf": "A15A107CEF80D80F4EAB6BCA4A3226E35B1626E27D3AC00E0BE6C92E74E8C985",
         "HUONG_DAN_KIEM_TRA_DU_AN.md": "046FB61617753FB4A3A57948303FC797DD29A20C42182E37D7346C2924A838E5",
     }
     

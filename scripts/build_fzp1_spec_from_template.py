@@ -123,20 +123,14 @@ def build_fzp1_spec_from_template():
         cell = ws_safe.cell(idx, 1, value=f)
         copy_cell_style(ws_safe.cell(2, 1), cell)
 
-    # Sheet 7: LoaiTruLanNhau (5 dòng >= 5, dòng 1 là cặp khóa chính)
+    # Sheet 7: LoaiTruLanNhau (Đặc tả SecLab SpecVerificationLab chỉ hỗ trợ duy nhất 1 cặp mutex)
     ws_mutex = wb["LoaiTruLanNhau"]
-    mutex_pairs = [
-        ("magic_ok", "checksum_ok"),
-        ("safe", "violation"),
-        ("safe", "magic_ok"),
-        ("safe", "checksum_ok"),
-        ("magic_ok", "violation"),
-    ]
-    for idx, (m1, m2) in enumerate(mutex_pairs, start=2):
-        c1 = ws_mutex.cell(idx, 1, value=m1)
-        c2 = ws_mutex.cell(idx, 2, value=m2)
-        copy_cell_style(ws_mutex.cell(2, 1), c1)
-        copy_cell_style(ws_mutex.cell(2, 2), c2)
+    while ws_mutex.max_row > 2:
+        ws_mutex.delete_rows(ws_mutex.max_row)
+    c1 = ws_mutex.cell(2, 1, value="magic_ok")
+    c2 = ws_mutex.cell(2, 2, value="checksum_ok")
+    copy_cell_style(ws_mutex.cell(2, 1), c1)
+    copy_cell_style(ws_mutex.cell(2, 2), c2)
 
     # Sheet 8: HamSinhMa (6 hàm: 4 C + 2 Python)
     ws_code = wb["HamSinhMa"]
