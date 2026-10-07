@@ -36,7 +36,7 @@ Nhóm 11 xin cam đoan:
    - 2.3. Mô hình Hóa Hình thức Kripke và Kiểm chứng Thuộc tính An toàn CTL
    - 2.4. Phạm vi Thực hiện và Giới hạn Nghiên cứu
 3. **Phần 3: Phương pháp luận**
-   - 3.1. Triết lý Thực hiện: Khai thác Hạt nhân Tự động hóa Tool (70%) và Chiều sâu Nghiên cứu của Nhóm (30%)
+   - 3.1. Triết lý Thực hiện: Đặc tả SSOT Tương thích SecLab và Thực nghiệm Độc lập của Nhóm
    - 3.2. Môi trường Thực nghiệm, Trình biên dịch và Cờ Kiểm toán An toàn
    - 3.3. Kiến trúc và Cơ chế Hoạt động của 3 Trường phái Fuzzing
    - 3.4. Quy trình Thiết kế Thực nghiệm Benchmark 30 Trials Khách quan
@@ -153,17 +153,17 @@ Gói tin FZP1 được quy chuẩn đóng gói theo cấu trúc nhị phân tu�
 
 # PHẦN 3: PHƯƠNG PHÁP LUẬN
 
-### 3.1. Triết lý Thực hiện: Khai thác Hạt nhân Tự động hóa Tool (70%) và Chiều sâu Nghiên cứu của Nhóm (30%)
-Tuân thủ chỉ đạo phương pháp luận của giảng viên: *"Công cụ hỗ trợ 70% khối lượng tự động hóa, nhóm sinh viên đóng góp 30% phân tích bản chất bộ nhớ, đo lường định lượng khách quan và khắc phục chuẩn mực"*, đề tài kết hợp chặt chẽ giữa bộ công cụ nền tảng của môn học và chiều sâu nghiên cứu của nhóm:
-* **Hạt nhân Tự động hóa từ Bộ Công cụ Môn học (70%):**
-  - **Hạt nhân Đặc tả & Kiểm chứng Hình thức (`SecLabFramework`):** Đóng vai trò là Nguồn Chân lý Đơn nhất (SSOT Kernel), quản lý tệp đặc tả Excel 10-sheet (`specification/Nhom11_FZP1_Fuzzing_Spec.xlsx`). Thực hiện tự động hóa kiểm chứng hình thức mô hình Kripke 4 trạng thái, kiểm toán công thức CTL $AG(\neg \text{violation})$, bóc tách AST và giải SMT Bit-Vector kiểm tra nguy cơ tràn số int32 tại sheet `KiemTraSoHoc`, đồng thời sinh mã phân tích các hàm khuôn mẫu kiểm toán an toàn (CWE-121, 401, 415, 416, 369, 798).
-  - **Nền tảng Kiểm thử Mờ Động (`softsec-toolkit/ch4_dynafuzz`):** Căn cứ theo định hướng Chủ đề 4 (Slide 15–16 bài giảng *Hướng dẫn Đề tài Đồ án Môn học*), nhóm kế thừa kiến trúc và các thuật toán cốt lõi từ `ch4_dynafuzz` (kiểm thử hộp đen ngẫu nhiên `random mutation`, bao gói giao thức cấu trúc `greybox`, và kỹ thuật thực thi ký hiệu concolic `04_concolic_execution.py`, `06_white_box_fuzzing.py`).
-  - *Lưu ý về tính trung thực học thuật:* Bộ sinh mã của SecLab chỉ tạo các hàm khuôn mẫu đơn lẻ; nhóm không tuyên bố công cụ tự động tổng hợp trọn gói bộ phân tích cú pháp tệp nhị phân FZP1.
-* **Nghiên cứu Thực nghiệm Độc lập & Chiều sâu Chuyên môn của Nhóm (30%):**
+### 3.1. Triết lý Thực hiện: Đặc tả SSOT Tương thích SecLab và Thực nghiệm Độc lập của Nhóm
+Đề tài được định vị học thuật rõ ràng và trung thực: **Xây dựng bộ phân tích cú pháp và kiểm thử mờ FZP1 độc lập, với tệp đặc tả SSOT tương thích hoàn toàn với chuẩn đặc tả SecLab (`SpecVerificationLab`)**:
+* **Chuẩn hóa Đặc tả Hình thức Tương thích Bộ Công cụ Môn học (`SecLabFramework`):**
+  - **Tệp đặc tả SSOT Excel 10-sheet (`specification/Nhom11_FZP1_Fuzzing_Spec.xlsx`):** Được thiết kế tuân thủ 100% cấu trúc schema, tên sheet, thứ tự và định dạng kiểu dữ liệu của công cụ `SpecVerificationLab` (Tab Ch6).
+  - **Mô hình hóa hình thức:** Định nghĩa mô hình Kripke 4 trạng thái, các công thức CTL kiểm tra tính an toàn/sống còn, và cặp loại trừ lẫn nhau `magic_ok` vs `checksum_ok` theo đúng giới hạn kiến trúc của tool (1 cặp duy nhất).
+  - *Lưu ý về tính trung thực học thuật:* Bộ sinh mã của SecLab chỉ tạo các hàm khuôn mẫu đơn lẻ; nhóm không tuyên bố công cụ tự động sinh trọn gói mã nguồn bộ phân tích FZP1 hay sinh toàn bộ dự án.
+* **Nghiên cứu & Thực nghiệm Độc lập của Nhóm:**
   - **Hiện thực Bộ Parser FZP1 Nhị phân Hoàn chỉnh:** Nhóm tự tay lập trình bộ phân tích cú pháp C nhị phân (`source/fzp1_parser_v0.c` và `source/fzp1_parser_v1.c`), cài đặt cấu trúc tệp nhị phân 4B Magic + 1B Length + Payload + 1B XOR Checksum, bộ đệm ngăn xếp 16 byte, và vòng đời run-to-completion thu hồi Heap an toàn.
-  - **Phát triển Module Fuzzer Mở rộng (`source/ch4_dynafuzz_fzp1.py`):** Kế thừa kiến trúc `ch4_dynafuzz`, nhóm xây dựng module mở rộng với 3 fuzzer chuyên biệt (`FZP1BlackBoxFuzzer`, `FZP1GreyboxFuzzer`, `FZP1WhiteBoxFuzzer`). Trong đó, fuzzer White-box được nhóm trực tiếp phân tích mã nguồn parser và mô hình hóa thủ công điều kiện rẽ nhánh (path condition) thành hệ phương trình Bit-Vector trong Z3 Solver (ràng buộc 4 byte Magic `"FZP1"`, chọn độ dài payload $L > 16$ để kích hoạt nhánh tràn ngăn xếp, và giải ngược XOR Checksum để vượt qua xác thực), tự động tổng hợp gói tin khai thác thỏa mãn (SAT).
+  - **Phát triển Module Fuzzer Mở rộng (`source/ch4_dynafuzz_fzp1.py`):** Dựa trên kiến trúc thuật toán `ch4_dynafuzz` được hướng dẫn ở Chủ đề 4, nhóm xây dựng module mở rộng với 3 fuzzer chuyên biệt (`FZP1BlackBoxFuzzer`, `FZP1GreyboxFuzzer`, `FZP1WhiteBoxFuzzer`). Trong đó, fuzzer White-box được nhóm mô hình hóa thủ công điều kiện rẽ nhánh (path condition) của parser bằng Z3 SMT Bit-Vector solver để tự động tổng hợp gói tin vượt rào cản.
   - **Phân tích Bản chất Ô nhớ Mức thấp:** Nhóm phân tích chi tiết cơ chế ô nhớ Stack Frame x86_64, phân tích shadow bytes AddressSanitizer (`[f3]`), chứng minh điểm mù phân tích tĩnh của Cppcheck, và xây dựng bản vá hoàn chỉnh chuẩn **CERT C** (CERT STR31-C, MEM30-C, MEM31-C).
-  - **Thiết kế Benchmark 30 Trials Khách quan:** Thực thi 30 lượt đo kiểm độc lập, ghi nhận và trực quan hóa dữ liệu thống kê khách quan.
+  - **Thiết kế Benchmark 30 Trials Khách quan:** Thực thi 30 lượt đo kiểm độc lập bằng mã nguồn thực tế, ghi nhận và trực quan hóa dữ liệu thống kê khách quan.
 
 ### 3.2. Môi trường Thực nghiệm, Trình biên dịch và Cờ Kiểm toán An toàn
 * **Hệ điều hành:** Microsoft Windows 11 64-bit (Kiến trúc x86_64).
