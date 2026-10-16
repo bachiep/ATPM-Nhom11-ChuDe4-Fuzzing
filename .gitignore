@@ -29,3 +29,11 @@ Thumbs.db
 .vscode/
 .idea/
 
+# Root duplicate documents (tracked officially under report/)
+/BaoCao_BTL_Nhom11.docx
+/HUONG_DAN_KIEM_TRA_DU_AN.docx
+
+# Internal notes & legacy archive
+docs/
+archive_legacy_v0/
+
