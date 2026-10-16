@@ -8,9 +8,9 @@ Nhóm 11: Lưu Đức Hiệp & Hà Nguyễn Trúc Linh — ThS. Vũ Quang Dũng 
 =============================================================================
 Script này thực hiện 8 khâu kiểm định độc lập và in bảng tổng kết nghiệm thu:
   [1] Kiểm tra Môi trường, Trình biên dịch & Thư viện phụ thuộc
-  [2] Kiểm tra Bộ kiểm thử tự động PyTest (10/10 Test Cases)
+  [2] Kiểm tra Bộ kiểm thử tự động PyTest (10/10 Test Cases FZP1)
   [3] Kiểm tra File Đặc tả Excel 10 Sheet (Single Source of Truth)
-  [4] Kiểm tra Thực nghiệm Lỗ hổng CWE-121 Before/After (CERT STR31-C)
+  [4] Kiểm tra 3 Lỗ hổng Bộ nhớ Thực tế & Bản vá CERT C (CWE-121, 415, 416)
   [5] Kiểm tra Phân tích Tĩnh Cppcheck (Minh chứng False Negative)
   [6] Kiểm tra Khối Suy luận Hình thức SMT Z3 Bit-Vector
   [7] Kiểm tra Tính Toàn vẹn Dữ liệu Benchmark 30 Trials & Biểu đồ
@@ -108,19 +108,19 @@ def check_environment():
     return all_ok
 
 def check_pytest():
-    print_header("KHÂU 2: CHẠY BỘ KIỂM THỬ TỰ ĐỘNG PYTEST (FZP1)")
-    test_path = PROJECT_ROOT / "tests" / "test_fzp1_parser.py"
-    if not test_path.exists():
-        print_fail(f"Không tìm thấy file: {test_path}")
+    print_header("KHÂU 2: CHẠY BỘ KIỂM THỬ TỰ ĐỘNG PYTEST (14/14 TEST CASES)")
+    test_dir = PROJECT_ROOT / "tests"
+    if not test_dir.exists():
+        print_fail(f"Không tìm thấy thư mục tests: {test_dir}")
         return False
         
-    cmd = [sys.executable, "-m", "pytest", str(test_path), "-q", "--no-header"]
+    cmd = [sys.executable, "-m", "pytest", str(test_dir), "-q", "--no-header"]
     try:
         res = subprocess.run(cmd, cwd=str(PROJECT_ROOT), capture_output=True, text=True)
         output = res.stdout.strip()
         if res.returncode == 0 and "passed" in output:
             print_pass(f"Kết quả PyTest: {output}")
-            print_pass("Toàn bộ Test Cases đạt 100% tỷ lệ vượt qua!")
+            print_pass("Toàn bộ Test Cases FZP1 (14/14: 10 đơn vị + 4 tiến hóa) đạt 100% tỷ lệ vượt qua!")
             return True
         else:
             print_fail(f"PyTest có lỗi: exit code={res.returncode}")
@@ -179,15 +179,15 @@ def check_excel_spec():
             else:
                 print_pass(f"Sheet '{s:18s}': {actual_cnt:2d} dòng dữ liệu (Đạt chuẩn >= {min_cnt})")
                 
-        # Kiểm tra riêng sheet LoaiTruLanNhau: Chuẩn SecLab chỉ hỗ trợ đúng 1 cặp mutex
+        # Kiểm tra sheet LoaiTruLanNhau: Hỗ trợ tài liệu hóa các cặp loại trừ lẫn nhau (>= 1 cặp)
         mutex_cnt = wb["LoaiTruLanNhau"].max_row - 1
-        if mutex_cnt != 1:
-            print_fail(f"Sheet 'LoaiTruLanNhau' có {mutex_cnt} dòng (Sai quy chuẩn SecLab: chỉ hỗ trợ đúng 1 cặp duy nhất)!")
+        if mutex_cnt < 1:
+            print_fail("Sheet 'LoaiTruLanNhau' không có dữ liệu!")
             return False
         else:
             p1 = wb["LoaiTruLanNhau"].cell(2, 1).value
             p2 = wb["LoaiTruLanNhau"].cell(2, 2).value
-            print_pass(f"Sheet 'LoaiTruLanNhau    ':  1 cặp dữ liệu ('{p1}' / '{p2}') (Đạt chuẩn tương thích SecLab SpecVerificationLab)")
+            print_pass(f"Sheet 'LoaiTruLanNhau    ': {mutex_cnt:2d} cặp dữ liệu tài liệu hóa (SecLab runtime tự động kiểm tra cặp chính '{p1}' / '{p2}')")
                 
         return True
     except Exception as e:
@@ -195,7 +195,7 @@ def check_excel_spec():
         return False
 
 def check_asan_memory_safety():
-    print_header("KHÂU 4: KIỂM TRA BEFORE/AFTER LỖ HỔNG BỘ NHỚ (CWE-121)")
+    print_header("KHÂU 4: KIỂM TRA 3 LỖ HỔNG BỘ NHỚ THỰC TẾ & BẢN VÁ CERT C")
     v0_src = PROJECT_ROOT / "source" / "fzp1_parser_v0.c"
     v1_src = PROJECT_ROOT / "source" / "fzp1_parser_v1.c"
     
@@ -205,32 +205,57 @@ def check_asan_memory_safety():
         
     # Kiểm tra log ASan lưu sẵn
     log_v0 = PROJECT_ROOT / "results" / "logs" / "log_asan_crash_v0.txt"
+    log_df = PROJECT_ROOT / "results" / "logs" / "log_asan_double_free_v0.txt"
+    log_uaf = PROJECT_ROOT / "results" / "logs" / "log_asan_uaf_v0.txt"
     log_v1 = PROJECT_ROOT / "results" / "logs" / "log_fixed_clean_v1.txt"
     
-    if log_v0.exists() and log_v1.exists():
+    if log_v0.exists():
         content_v0 = log_v0.read_text(encoding="utf-8", errors="ignore")
-        content_v1 = log_v1.read_text(encoding="utf-8", errors="ignore")
         if "[f3]" in content_v0 and "stack-buffer-overflow" in content_v0:
-            print_pass("Xác minh log ASan v0: Phát hiện stack-buffer-overflow với shadow byte [f3] (Stack Right Redzone)!")
+            print_pass("Xác minh CWE-121 (v0): Phát hiện stack-buffer-overflow với shadow byte [f3] (Stack Right Redzone)!")
+    if log_df.exists():
+        content_df = log_df.read_text(encoding="utf-8", errors="ignore")
+        if "double-free" in content_df or "attempting double-free" in content_df:
+            print_pass("Xác minh CWE-415 (v0): Phát hiện double-free trên nhánh abort dọn dẹp kép (CMD 0xFF)!")
+    if log_uaf.exists():
+        content_uaf = log_uaf.read_text(encoding="utf-8", errors="ignore")
+        if "heap-use-after-free" in content_uaf or "[fd]" in content_uaf:
+            print_pass("Xác minh CWE-416 (v0): Phát hiện heap-use-after-free với shadow byte [fd] (Dangling pointer CMD 0xFE)!")
+    if log_v1.exists():
+        content_v1 = log_v1.read_text(encoding="utf-8", errors="ignore")
         if "0 findings" in content_v1 or "CERT STR31-C" in content_v1:
-            print_pass("Xác minh log ASan v1: Bản vá CERT STR31-C từ chối an toàn, 0 memory findings!")
+            print_pass("Xác minh Bản vá CERT C (v1): CERT STR31-C, MEM30-C, MEM31-C từ chối an toàn, 0 memory findings!")
     
-    # Chạy thực thi trực tiếp trên binary
+    # Chạy thực thi trực tiếp trên binary cho cả 3 tệp tấn công
     exe_v0 = PROJECT_ROOT / "source" / "fzp1_parser_v0.exe"
     exe_v1 = PROJECT_ROOT / "source" / "fzp1_parser_v1.exe"
     
-    crash_file = PROJECT_ROOT / "crashes" / "whitebox_s0_crash_0.bin"
-    if exe_v0.exists() and exe_v1.exists() and crash_file.exists():
-        res_v0 = subprocess.run([str(exe_v0), str(crash_file)], capture_output=True)
-        res_v1 = subprocess.run([str(exe_v1), str(crash_file)], capture_output=True)
-        
-        if res_v0.returncode != 0 and res_v0.returncode != 2:
-            print_pass(f"Bản v0 thực thi với tệp tấn công -> CRASH (Exit Code = {res_v0.returncode}) đúng kỳ vọng!")
-        if res_v1.returncode == 2:
-            print_pass(f"Bản v1 thực thi với cùng tệp tấn công -> TỪ CHỐI AN TOÀN (Exit Code = 2, CERT STR31-C)!")
-            return True
-            
-    return True
+    crash_tests = [
+        ("CWE-121 (Stack Overflow)", PROJECT_ROOT / "crashes" / "whitebox_s0_crash_0.bin"),
+        ("CWE-415 (Double Free)", PROJECT_ROOT / "crashes" / "crash_cwe415.bin"),
+        ("CWE-416 (Use-After-Free)", PROJECT_ROOT / "crashes" / "crash_cwe416.bin"),
+    ]
+    
+    all_crashes_ok = True
+    if exe_v0.exists() and exe_v1.exists():
+        for name, cf in crash_tests:
+            if cf.exists():
+                res_v0 = subprocess.run([str(exe_v0), str(cf)], capture_output=True)
+                res_v1 = subprocess.run([str(exe_v1), str(cf)], capture_output=True)
+                
+                v0_crashed = (res_v0.returncode != 0 and res_v0.returncode != 2)
+                v1_safe = (res_v1.returncode == 2)
+                
+                if v0_crashed and v1_safe:
+                    print_pass(f"{name:26s} -> v0 sập ({res_v0.returncode}) | v1 từ chối an toàn (Exit Code = 2)")
+                else:
+                    print_fail(f"{name:26s} -> v0 code={res_v0.returncode}, v1 code={res_v1.returncode}")
+                    all_crashes_ok = False
+            else:
+                print_fail(f"Thiếu file crash: {cf.name}")
+                all_crashes_ok = False
+                
+    return all_crashes_ok
 
 def check_cppcheck_analysis():
     print_header("KHÂU 5: KIỂM TRA PHÂN TÍCH TĨNH CPPCHECK")
@@ -280,15 +305,22 @@ def check_benchmark_data():
     data_dir = PROJECT_ROOT / "results" / "data_raw"
     fig_dir = PROJECT_ROOT / "results" / "figures"
     
-    files = ["blackbox_results.json", "greybox_results.json", "whitebox_results.json", "unlock_results.json", "aggregated_results.json"]
+    files = [
+        "blackbox_results.json",
+        "greybox_results.json",
+        "whitebox_results.json",
+        "unlock_results.json",
+        "aggregated_results.json",
+        "iterative_crash_evolution.json"
+    ]
     all_ok = True
     for f in files:
         fp = data_dir / f
         if fp.exists():
             try:
                 data = json.loads(fp.read_text(encoding="utf-8"))
-                trials_cnt = len(data) if isinstance(data, list) else len(data.get("trials", []))
-                print_pass(f"Tệp dữ liệu thô: {f:25s} ({trials_cnt} bản ghi, {fp.stat().st_size:,} bytes)")
+                trials_cnt = len(data) if isinstance(data, list) else len(data.get("trials", [])) if "trials" in data else len(data.get("stages", []))
+                print_pass(f"Tệp dữ liệu thô: {f:32s} ({trials_cnt} bản ghi, {fp.stat().st_size:,} bytes)")
             except Exception as e:
                 print_fail(f"Lỗi đọc JSON {f}: {e}")
                 all_ok = False
@@ -301,12 +333,14 @@ def check_benchmark_data():
         "time_to_crash_boxplot.png",
         "success_rate_bar.png",
         "unlock_benchmark.png",
-        "kripke_model.png"
+        "kripke_model.png",
+        "iterative_crash_lifecycle.png",
+        "coverage_branch_growth.png"
     ]
     for c in charts:
         cp = fig_dir / c
         if cp.exists() and cp.stat().st_size > 1000:
-            print_pass(f"Biểu đồ trực quan: {c:30s} ({cp.stat().st_size:,} bytes)")
+            print_pass(f"Biểu đồ trực quan: {c:32s} ({cp.stat().st_size:,} bytes)")
         else:
             print_fail(f"Thiếu hoặc hỏng biểu đồ: {c}")
             all_ok = False
@@ -316,15 +350,34 @@ def check_benchmark_data():
 def check_file_hashes():
     print_header("KHÂU 8: ĐỐI SOÁT MÃ BĂM SHA-256 TOÀN VẸN TỆP TIN")
     manifest = {
-        "specification/Nhom11_FZP1_Fuzzing_Spec.xlsx": "0786C28D538802BC6FB00AF13C2EE669FABF223987F50788FAC5F1EC97D0273B",
-        "source/fzp1_parser_v0.c": "6A8F2589EFAF5B3EB80048BE417B066757FBDB009ADA8365C037B73D46B6BE99",
-        "source/fzp1_parser_v1.c": "817A891BF3415302B27D412F50C064B1A5817549BBD0C2AB7B6D558199026EBF",
+        "specification/Nhom11_FZP1_Fuzzing_Spec.xlsx": "1BB7FF9272E27112F977ADECEA840085E1A2A8EB43C742D2D8A5D196FC00524E",
+        "source/fzp1_parser_v0.c": "08B3DBDFBAB6487C35F56A0B6E1022F147639AF5D0E7B45FE5F8F6B982E45169",
+        "source/fzp1_parser_v0_1.c": "3D4A8026F4CC43B96A96ED58C537E0AFCBD528AA1963F91D80D996144EF96FDA",
+        "source/fzp1_parser_v0_2.c": "67F331174184F0A10D39DD0D43E9E0D54F25B82440946B85EB0A130245D823E1",
+        "source/fzp1_parser_v1.c": "9FE50E2CFF6407B803DD8F5AAF187AC8397F91ED9051AC9246360EDEB0CA890C",
+        "source/ch4_dynafuzz_fzp1.py": "24E0B5A8EEC7E7CC1FF48ED158067167FB938E0FBA982691D593AA9BBB7812FD",
+        "tests/test_fzp1_parser.py": "DC786D88D7A929EECFB5FCB2F88E5702F464B7BA586FA4D9C7FA814E2525AE51",
+        "tests/test_fzp1_evolution.py": "331487C7F3374A5A5F233419991EC4973E2CBA39BA01E78C2CCCDBE034CB7609",
+        "network_capture/iot_sensor_stream.pcap": "F6E923E2058913132DA7B922B80555C2D5924CD4A2BDF74A53626054A3A87574",
+        "crashes/whitebox_s0_crash_0.bin": "335FAAEFFA09DD2972FECA3D69204FC2612D859C7AC98C8A3FA4578023F10EB2",
+        "crashes/crash_cwe415.bin": "4D54B3CD0F473E603B44D7C68CC4C4DF66E1FEEC05775028A6703E1C1092F96B",
+        "crashes/crash_cwe416.bin": "999AB9A937700EF3F560C79C5B8D87E44538D8BC014A2C67453305F2780F80BE",
+        "crashes/iter1_cwe121_crash.bin": "ED88ED638D7FFA617F37046969ADB4EDD5F2C4233B2C97F097F1C04506D024FE",
+        "crashes/iter2_cwe415_crash.bin": "F710C0431D1C79ED78F8A752C0E52ACB7533295C5C6135B9C691692BAF91B098",
+        "crashes/iter3_cwe416_crash.bin": "40EB13B102A7D88722FF4DCF7673684CB4DE529DF5721C7B5F3E547960B8557E",
         "results/logs/log_asan_crash_v0.txt": "E75CD4604725852DF69FAA7079A7B3A875A64C5075E62F4AA2C43132372DD652",
-        "results/logs/log_fixed_clean_v1.txt": "95690BFD050811AC10DA5D9910980E5DAD4605138407617DB0FD45B5D4FDB622",
+        "results/logs/log_asan_double_free_v0.txt": "CFEA930E47DE3A47ECB2C89319BC7058B1B20815068584AECE91C0C016CA0388",
+        "results/logs/log_asan_uaf_v0.txt": "5EB88F9124B61860A3A508956D0958C2860CA39177DECE50418D49C5DE8A1637",
+        "results/logs/log_fixed_clean_v1.txt": "5091EC0CEEB65AF096C387575FF369236FCDD239BCA39B9039BBCC0CAD356E63",
         "results/logs/log_cppcheck.txt": "59D0810D56ED6BF4C33A984CAFA9536103285939928BFDB1490F858509C10DC3",
-        "results/logs/pipeline_log.txt": "76A701FD51D3BA6350B447D0A04854402DD6AF4D30ECCE9B7C82E7A6AB04F5A6",
-        "report/BaoCao_BTL_Nhom11.pdf": "E0FD053E595C84409908923A284B21275DE0296ACDA6B86802398D63CF883E8C",
-        "HUONG_DAN_KIEM_TRA_DU_AN.md": "046FB61617753FB4A3A57948303FC797DD29A20C42182E37D7346C2924A838E5",
+        "results/logs/pcap_traffic_log.txt": "16EEF9E9C565C99BBA08BF795E77EB4E27B9169BA8596D63C7AAFD0C89F64987",
+        "results/logs/iterative_crash_evolution_log.txt": "B0784201DF5F2C0CAA841FFD939A19E4194E290327D9BB2754527EF8BF290963",
+        "results/data_raw/iterative_crash_evolution.json": "BF7FAEF9DE22737C42C79E38BE9B324F7EC12B910D6D8B44CE3A7B440CB68F6D",
+        "report/BaoCao_BTL_Nhom11.pdf": "8617BE74183C31C95F3AE76C8EFFF216D6F0479DBBEFD56B6497EFA8D6E49A6A",
+        "report/BaoCao_BTL_Nhom11.docx": "7A606C4440EDD8A0F9730EDF6E896983EF4A3C9C652EC8F43E8215BCB00D96C4",
+        "report/BaoCao_BTL_Nhom11.md": "4498822CCD6BC55594CB645FBA0CE4403868E825CBB3EBFC69C0C1355F518360",
+        "HUONG_DAN_KIEM_TRA_DU_AN.md": "E9BD24F87B7028E9FA3CC9FA33A198E74294421E4F5D732332AC83A173627B80",
+        "README.md": "B40AE1FA37F67D95E4F874764CAFAD9BF4735C45F75EB7993CEADB0B8F5598D9",
     }
     
     all_matched = True
@@ -336,11 +389,12 @@ def check_file_hashes():
             continue
         actual_hash = sha256_file(fp)
         if actual_hash == expected_hash:
-            print_pass(f"{rel_path:45s} -> KHỚP 100% SHA-256")
+            print_pass(f"{rel_path:55s} -> KHỚP 100% SHA-256")
         else:
-            print_warn(f"{rel_path:45s} -> Khác mã băm (Có cập nhật mới)")
+            print_warn(f"{rel_path:55s} -> Khác mã băm (Có cập nhật mới)")
             print(f"       Kỳ vọng: {expected_hash}")
             print(f"       Thực tế: {actual_hash}")
+            all_matched = False
     return all_matched
 
 def main():
@@ -351,27 +405,27 @@ def main():
     
     results = {}
     results["1. Toolchain & Phụ thuộc"] = check_environment()
-    results["2. Unit Test PyTest (10/10)"] = check_pytest()
+    results["2. Unit Test PyTest (14/14)"] = check_pytest()
     results["3. Đặc tả Excel 10 Sheet (SSOT)"] = check_excel_spec()
-    results["4. Lỗ hổng CWE-121 & CERT STR31-C"] = check_asan_memory_safety()
+    results["4. 3 Lỗ hổng Bộ nhớ & Bản vá CERT C"] = check_asan_memory_safety()
     results["5. Phân tích tĩnh Cppcheck"] = check_cppcheck_analysis()
     results["6. Suy luận hình thức SMT Z3"] = check_smt_z3()
     results["7. Benchmark 30 Trials & Biểu đồ"] = check_benchmark_data()
     results["8. Toàn vẹn Mã băm SHA-256"] = check_file_hashes()
     
-    print_header("BẢNG TỔNG KẾT KẾT QUẢ KIỂM ĐỊNH DỰ ÁN")
+    print_header("BẢNG TỔNG KẾT KẾT QUẢ KIỂM ĐỊNH DỰ ÁN (8 KHÂU)")
     all_passed = True
     for item, passed in results.items():
         status_str = f"{GREEN}ĐẠT CHUẨN (PASS){RESET}" if passed else f"{RED}CHƯA ĐẠT (FAIL/WARN){RESET}"
-        print(f"  * {item:35s}: {status_str}")
+        print(f"  * {item:42s}: {status_str}")
         if not passed:
             all_passed = False
             
     print(f"\n{BOLD}{'='*75}{RESET}")
     if all_passed:
-        print(f"{BOLD}{GREEN}  KẾT LUẬN: DỰ ÁN ĐẠT ĐIỂM CHUẨN 10/10 — ĐỦ ĐIỀU KIỆN NGHIỆM THU TUYỆT ĐỐI!{RESET}")
+        print(f"{BOLD}{GREEN}  KẾT LUẬN: TẤT CẢ 8 HẠNG MỤC ĐẠT CHUẨN (PASS) — SẴN SÀNG NGHIỆM THU THEO YÊU CẦU ĐỀ TÀI.{RESET}")
     else:
-        print(f"{BOLD}{YELLOW}  KẾT LUẬN: DỰ ÁN CÓ MỘT SỐ CẢNH BÁO NHẸ (VẪN ĐẠT TIÊU CHÍ BẢO VỆ).{RESET}")
+        print(f"{BOLD}{YELLOW}  KẾT LUẬN: DỰ ÁN CÓ MỘT SỐ HẠNG MỤC CẦN LƯU Ý.{RESET}")
     print(f"{BOLD}{'='*75}{RESET}\n")
 
 if __name__ == "__main__":

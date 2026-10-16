@@ -41,8 +41,8 @@ Khung phương pháp: SecLab / Kripke Model Checking / Z3 SMT Solver
   Số lượng Test Cases: 6 kịch bản:
     [HIGH  ] TC-1: Tranh chấp trạng thái xác thực Magic và Checksum (Truy vết: REQ-1, REQ-2)
     [HIGH  ] TC-2: Payload FZP1 vượt quá 16 byte gây tràn stack (Truy vết: REQ-3)
-    [HIGH  ] TC-3: Kiểm tra vòng đời bộ nhớ của cache/session (Truy vết: REQ-4, REQ-5, REQ-6)
-    [MEDIUM] TC-4: Bộ tích lũy byte fzp1_byte_accumulator vượt giới hạn int32 (Truy vết: REQ-7)
+    [HIGH  ] TC-3: Hủy phiên sớm gây giải phóng kép (CWE-415) (Truy vết: REQ-4, REQ-5)
+    [HIGH  ] TC-4: Tái lập luồng stream gây con trỏ lơ lửng Use-After-Free (CWE-416) (Truy vết: REQ-6)
     [MEDIUM] TC-5: Chia tỷ lệ gói tin fzp1_ratio với mẫu số bằng 0 (Truy vết: REQ-8)
     [LOW   ] TC-6: Tìm cặp mã mở khóa khẩn cấp fzp1_unlock_token bằng concolic fuzzing (Truy vết: REQ-9)
 

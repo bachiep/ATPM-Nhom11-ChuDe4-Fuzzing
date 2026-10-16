@@ -21,7 +21,11 @@ scratch/
 *.temp
 *.bak
 *~
+~$*
+_temp_*
+temp_*
 Thumbs.db
 .DS_Store
 .vscode/
 .idea/
+

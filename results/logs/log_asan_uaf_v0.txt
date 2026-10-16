@@ -1,0 +1,32 @@
+=================================================================
+==42160==ERROR: AddressSanitizer: heap-use-after-free on address 0x603000000020 at pc 0x55d7f8a9a7a8 bp 0x7ffe42f7d1a0 sp 0x7ffe42f7d198
+READ of size 8 at 0x603000000020 thread T0
+    #0 0x55d7f8a9a7a8 in release_fzp1_stream source/fzp1_parser_v0.c:120
+    #1 0x55d7f8a9a8ec in process_fzp1_packet source/fzp1_parser_v0.c:190
+    #2 0x55d7f8a9a3f2 in main source/fzp1_parser_v0.c:238
+    #3 0x7fa26ce29d8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #4 0x7fa26ce29e3f in __libc_start_main_impl ../csu/libc-start.c:392
+    #5 0x55d7f8a9a104 in _start (source/fzp1_parser_v0+0x2104)
+
+0x603000000020 is located 16 bytes inside of 24-byte region [0x603000000010,0x603000000028)
+freed by thread T0 here:
+    #0 0x7fa26d03f128 in free /build/gcc/src/gcc/libsanitizer/asan/asan_malloc_linux.cpp:52
+    #1 0x55d7f8a9a740 in release_fzp1_stream source/fzp1_parser_v0.c:112
+    #2 0x55d7f8a9a8ec in process_fzp1_packet source/fzp1_parser_v0.c:190
+    #3 0x55d7f8a9a3f2 in main source/fzp1_parser_v0.c:238
+
+previously allocated by thread T0 here:
+    #0 0x7fa26d03f568 in malloc /build/gcc/src/gcc/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x55d7f8a9a610 in init_fzp1_session source/fzp1_parser_v0.c:54
+    #2 0x55d7f8a9a810 in process_fzp1_packet source/fzp1_parser_v0.c:177
+    #3 0x55d7f8a9a3f2 in main source/fzp1_parser_v0.c:238
+
+SUMMARY: AddressSanitizer: heap-use-after-free source/fzp1_parser_v0.c:120 in release_fzp1_stream
+Shadow bytes around the buggy address:
+  0x0c067fff7fb0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c067fff7fc0: fa fa fd fd fd fa fa fa [fd] fd fd fa fa fa fa fa
+  0x0c067fff7fd0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Freed heap region:     fd
+==42160==ABORTING

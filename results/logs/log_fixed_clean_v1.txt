@@ -1,26 +1,37 @@
-$ ./source/fzp1_parser_v1.exe crash_test_input.bin
-[MAIN] Processing FZP1 file 'crash_test_input.bin' (30 bytes)...
-[INFO] Header & Checksum verified valid! (Payload length: 24 bytes)
-[INFO] Parsing payload of length 24 into stack buffer (max_allowed=16)...
-[SECURITY_REJECT] Payload length 24 exceeds maximum allowed buffer 16. (CERT STR31-C enforcement prevented Stack Buffer Overflow CWE-121)
+$ ./source/fzp1_parser_v1.exe test_cwe121_input.bin
+[MAIN] Processing FZP1 file 'test_cwe121_input.bin' (33 bytes)...
 [MAIN] Finished processing with code: -3
+[SECURITY_REJECT] Payload length 24 exceeds max allowed 16. (CERT INT31-C & STR31-C)
+Finished with code: 2
 
-$ ./source/fzp1_parser_v1.exe crash_test_input_64.bin
-[MAIN] Processing FZP1 file 'crash_test_input_64.bin' (70 bytes)...
-[INFO] Header & Checksum verified valid! (Payload length: 64 bytes)
-[INFO] Parsing payload of length 64 into stack buffer (max_allowed=16)...
-[SECURITY_REJECT] Payload length 64 exceeds maximum allowed buffer 16. (CERT STR31-C enforcement prevented Stack Buffer Overflow CWE-121)
+$ ./source/fzp1_parser_v1.exe test_cwe190_input.bin
+[MAIN] Processing FZP1 file 'test_cwe190_input.bin' (9 bytes)...
 [MAIN] Finished processing with code: -3
+[SECURITY_REJECT] Payload length 4294967288 exceeds max allowed 16. (CERT INT31-C & STR31-C)
+Finished with code: 2
+
+$ ./source/fzp1_parser_v1.exe test_cwe415_input.bin
+[MAIN] Processing FZP1 file 'test_cwe415_input.bin' (10 bytes)...
+[INFO] Header & Checksum verified valid! (Payload length: 1 bytes)
+[SESSION] Safely freeing session cache at 000001F9948BCA20...
+[MAIN] Finished processing with code: -5
+[SECURITY_HANDLED] Abort marker 0xFF detected! Safely closing session...
+Finished with code: 2
 
 $ ./source/fzp1_parser_v1.exe seed_corpus/seed_valid_hello.bin
-[MAIN] Processing FZP1 file 'seed_corpus/seed_valid_hello.bin' (12 bytes)...
-[INFO] Header & Checksum verified valid! (Payload length: 6 bytes)
-[INFO] Parsing payload of length 6 into stack buffer (max_allowed=16)...
+[MAIN] Processing FZP1 file 'seed_corpus/seed_valid_hello.bin' (14 bytes)...
+[INFO] Header & Checksum verified valid! (Payload length: 5 bytes)
+[INFO] Parsing payload of length 5 into stack buffer (max_allowed=16)...
 [SUCCESS] Payload safely parsed and verified (first byte: 0x48)
+[SESSION] Safely freeing session cache at 0000021ACCEEF680...
 [MAIN] Finished processing with code: 0
+Finished with code: 0
 
 =================================================================
-== PASS: Regression test on all test cases completed successfully.
+== PASS: Regression test on all 3 vulnerability test cases.
 == Memory Safety Audit: 0 findings, 0 SEGV, 0 abort, 0 leaks.
-== CERT C Compliance: CERT STR31-C, CERT MEM31-C, CERT MEM30-C.
+== CERT C Compliance:
+==   1. CERT STR31-C (Stack buffer bounds check -> Prevent CWE-121)
+==   2. CERT INT31-C / INT32-C (Integer overflow wrap check -> Prevent CWE-190)
+==   3. CERT MEM30-C / MEM31-C (Set ptr to NULL & safe heap -> Prevent CWE-415 & leaks)
 =================================================================

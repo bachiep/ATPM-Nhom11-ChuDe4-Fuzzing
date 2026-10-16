@@ -24,13 +24,13 @@
     },
     "exec_per_sec": {
       "n": 30,
-      "median": 74.8,
-      "q1": 73.9,
-      "q3": 75.3,
-      "iqr": 1.4,
-      "min": 72.5,
-      "max": 76.7,
-      "mean": 74.6567
+      "median": 80.8,
+      "q1": 77.8,
+      "q3": 83.3,
+      "iqr": 5.5,
+      "min": 73.5,
+      "max": 85.8,
+      "mean": 80.7433
     },
     "unique_crash_signatures": 0
   },
@@ -41,13 +41,13 @@
     "success_rate": 1.0,
     "time_to_crash": {
       "n": 30,
-      "median": 0.2229,
-      "q1": 0.0178,
-      "q3": 0.2364,
-      "iqr": 0.2186,
-      "min": 0.0173,
-      "max": 0.6131,
-      "mean": 0.1523
+      "median": 0.2056,
+      "q1": 0.197,
+      "q3": 0.216,
+      "iqr": 0.019,
+      "min": 0.1711,
+      "max": 0.2358,
+      "mean": 0.2053
     },
     "iterations_to_crash": {
       "n": 30,
@@ -61,50 +61,50 @@
     },
     "exec_per_sec": {
       "n": 30,
-      "median": 4.5,
-      "q1": 4.2,
-      "q3": 56.1,
-      "iqr": 51.9,
-      "min": 1.6,
-      "max": 58.0,
-      "mean": 26.0233
+      "median": 4.9,
+      "q1": 4.6,
+      "q3": 5.1,
+      "iqr": 0.5,
+      "min": 4.2,
+      "max": 5.8,
+      "mean": 4.8933
     },
     "unique_crash_signatures": 1
   },
   {
     "fuzzer": "Greybox",
     "n_trials": 30,
-    "success_count": 24,
-    "success_rate": 0.8,
+    "success_count": 14,
+    "success_rate": 0.4667,
     "time_to_crash": {
-      "n": 24,
-      "median": 3.274,
-      "q1": 1.779,
-      "q3": 5.1139,
-      "iqr": 3.335,
-      "min": 0.387,
-      "max": 10.3933,
-      "mean": 3.7965
+      "n": 14,
+      "median": 2.1568,
+      "q1": 1.2094,
+      "q3": 4.2711,
+      "iqr": 3.0617,
+      "min": 0.5161,
+      "max": 6.2719,
+      "mean": 2.6015
     },
     "iterations_to_crash": {
-      "n": 24,
-      "median": 165.0,
-      "q1": 74.5,
-      "q3": 297.5,
-      "iqr": 223.0,
-      "min": 11.0,
-      "max": 496.0,
-      "mean": 190.75
+      "n": 14,
+      "median": 160.5,
+      "q1": 80.0,
+      "q3": 325.0,
+      "iqr": 245.0,
+      "min": 28.0,
+      "max": 486.0,
+      "mean": 195.1429
     },
     "exec_per_sec": {
       "n": 30,
-      "median": 47.8,
-      "q1": 45.7,
-      "q3": 48.9,
-      "iqr": 3.2,
-      "min": 31.0,
-      "max": 74.1,
-      "mean": 48.2767
+      "median": 79.05,
+      "q1": 75.3,
+      "q3": 81.8,
+      "iqr": 6.5,
+      "min": 56.2,
+      "max": 85.1,
+      "mean": 76.43
     },
     "unique_crash_signatures": 1
   }

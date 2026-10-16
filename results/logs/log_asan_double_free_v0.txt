@@ -1,0 +1,24 @@
+=================================================================
+==42150==ERROR: AddressSanitizer: attempting double-free on 0x602000000010 in thread T0:
+    #0 0x7fa26d03f128 in free /build/gcc/src/gcc/libsanitizer/asan/asan_malloc_linux.cpp:52
+    #1 0x55d7f8a9a6b4 in close_fzp1_session source/fzp1_parser_v0.c:75
+    #2 0x55d7f8a9a418 in main source/fzp1_parser_v0.c:215
+    #3 0x7fa26ce29d8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #4 0x7fa26ce29e3f in __libc_start_main_impl ../csu/libc-start.c:392
+    #5 0x55d7f8a9a104 in _start (source/fzp1_parser_v0+0x2104)
+
+0x602000000010 is located 0 bytes inside of 1-byte region [0x602000000010,0x602000000011)
+freed by thread T0 here:
+    #0 0x7fa26d03f128 in free /build/gcc/src/gcc/libsanitizer/asan/asan_malloc_linux.cpp:52
+    #1 0x55d7f8a9a6b4 in close_fzp1_session source/fzp1_parser_v0.c:75
+    #2 0x55d7f8a9a832 in process_fzp1_packet source/fzp1_parser_v0.c:165
+    #3 0x55d7f8a9a3f2 in main source/fzp1_parser_v0.c:205
+
+previously allocated by thread T0 here:
+    #0 0x7fa26d03f568 in malloc /build/gcc/src/gcc/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x55d7f8a9a610 in init_fzp1_session source/fzp1_parser_v0.c:58
+    #2 0x55d7f8a9a810 in process_fzp1_packet source/fzp1_parser_v0.c:158
+    #3 0x55d7f8a9a3f2 in main source/fzp1_parser_v0.c:205
+
+SUMMARY: AddressSanitizer: double-free source/fzp1_parser_v0.c:75 in close_fzp1_session
+==42150==ABORTING

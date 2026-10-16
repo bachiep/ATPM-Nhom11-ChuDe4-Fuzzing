@@ -3,18 +3,18 @@
     "fuzzer": "greybox",
     "seed": 0,
     "budget": 500,
-    "iterations_used": 323,
-    "wall_time_seconds": 4.5305,
-    "exec_per_sec": 71.3,
-    "checksum_hits": 0,
-    "first_crash_at": 322,
-    "time_to_first_crash_seconds": 4.5305,
+    "iterations_used": 356,
+    "wall_time_seconds": 4.5868,
+    "exec_per_sec": 77.6,
+    "checksum_hits": 1,
+    "first_crash_at": 355,
+    "time_to_first_crash_seconds": 4.5868,
     "total_crashes": 1,
     "crashes": [
       {
-        "iteration": 322,
+        "iteration": 355,
         "exit_code": 3221225477,
-        "input_hex": "465a503124e14d45ad92c6f4a2e5e658e4d537d0470b6468487eebbe5e74d1c4a560d03062bc81c40168",
+        "input_hex": "465a50313b00000067bac26dda462576d99b69954b508cb73649bcd73969b9c15f5fcc834c16b80c85f1a4576c221f600cffb6c9f7212d35783179d06d61ec6104755c06",
         "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\greybox_s0_crash_0.bin"
       }
     ]
@@ -23,78 +23,57 @@
     "fuzzer": "greybox",
     "seed": 1,
     "budget": 500,
-    "iterations_used": 372,
-    "wall_time_seconds": 5.0208,
-    "exec_per_sec": 74.1,
-    "checksum_hits": 1,
-    "first_crash_at": 371,
-    "time_to_first_crash_seconds": 5.0208,
-    "total_crashes": 1,
-    "crashes": [
-      {
-        "iteration": 371,
-        "exit_code": 3221225501,
-        "input_hex": "465a5031204ceee002a3c3d62de1d0d718634fcb12d11f41d3f68fd913e71dcd2824daa04e30",
-        "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\greybox_s1_crash_0.bin"
-      }
-    ]
+    "iterations_used": 500,
+    "wall_time_seconds": 6.3262,
+    "exec_per_sec": 79.0,
+    "checksum_hits": 2,
+    "first_crash_at": null,
+    "time_to_first_crash_seconds": null,
+    "total_crashes": 0,
+    "crashes": []
   },
   {
     "fuzzer": "greybox",
     "seed": 2,
     "budget": 500,
-    "iterations_used": 12,
-    "wall_time_seconds": 0.387,
-    "exec_per_sec": 31.0,
-    "checksum_hits": 0,
-    "first_crash_at": 11,
-    "time_to_first_crash_seconds": 0.387,
-    "total_crashes": 1,
-    "crashes": [
-      {
-        "iteration": 11,
-        "exit_code": 3221225477,
-        "input_hex": "465a50312b8048d7b8802daf607e7a17acbe1f495a20dce38b43a43badca741bc8f2faa22efdcde856d2c5e71737e7413c",
-        "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\greybox_s2_crash_0.bin"
-      }
-    ]
+    "iterations_used": 500,
+    "wall_time_seconds": 6.1067,
+    "exec_per_sec": 81.9,
+    "checksum_hits": 3,
+    "first_crash_at": null,
+    "time_to_first_crash_seconds": null,
+    "total_crashes": 0,
+    "crashes": []
   },
   {
     "fuzzer": "greybox",
     "seed": 3,
     "budget": 500,
-    "iterations_used": 456,
-    "wall_time_seconds": 7.789,
-    "exec_per_sec": 58.5,
-    "checksum_hits": 0,
-    "first_crash_at": 455,
-    "time_to_first_crash_seconds": 7.789,
-    "total_crashes": 1,
-    "crashes": [
-      {
-        "iteration": 455,
-        "exit_code": 3221225477,
-        "input_hex": "465a5031299f167874f1cc7940ff38dc5cd714741dfddff5b155b47703a1ca03b1b7e000da22902ef3290bea76acb6",
-        "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\greybox_s3_crash_0.bin"
-      }
-    ]
+    "iterations_used": 500,
+    "wall_time_seconds": 6.3172,
+    "exec_per_sec": 79.1,
+    "checksum_hits": 1,
+    "first_crash_at": null,
+    "time_to_first_crash_seconds": null,
+    "total_crashes": 0,
+    "crashes": []
   },
   {
     "fuzzer": "greybox",
     "seed": 4,
     "budget": 500,
-    "iterations_used": 67,
-    "wall_time_seconds": 1.4009,
-    "exec_per_sec": 47.8,
-    "checksum_hits": 0,
-    "first_crash_at": 66,
-    "time_to_first_crash_seconds": 1.4009,
+    "iterations_used": 150,
+    "wall_time_seconds": 1.8619,
+    "exec_per_sec": 80.6,
+    "checksum_hits": 1,
+    "first_crash_at": 149,
+    "time_to_first_crash_seconds": 1.8619,
     "total_crashes": 1,
     "crashes": [
       {
-        "iteration": 66,
-        "exit_code": 3221225477,
-        "input_hex": "465a50312772690da92e9868f70c44443ff3361a355bcfc31114934abf9886995bda36d588fca7adc500669ad9",
+        "iteration": 149,
+        "exit_code": 3221226356,
+        "input_hex": "465a503135000000cb3e33417aed2fab9c256c96f9ef633045f46e39b3b34d46be84a6045ee93ae6c99b0c9f8ed9aaf006467bd1de7b812fc21415525060",
         "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\greybox_s4_crash_0.bin"
       }
     ]
@@ -104,17 +83,17 @@
     "seed": 5,
     "budget": 500,
     "iterations_used": 70,
-    "wall_time_seconds": 1.4883,
-    "exec_per_sec": 47.0,
+    "wall_time_seconds": 1.154,
+    "exec_per_sec": 60.7,
     "checksum_hits": 0,
     "first_crash_at": 69,
-    "time_to_first_crash_seconds": 1.4883,
+    "time_to_first_crash_seconds": 1.154,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 69,
         "exit_code": 3221225477,
-        "input_hex": "465a503140407073489c70a6d95f105d9afbe91d8989fa9c18042d776560fb8868507664a95fcfed0cb35a3e53b5ca53d57d01eb887fd02525486d44da6bc8deed4d5ce6af05",
+        "input_hex": "465a503140000000407073489c70a6d95f105d9afbe91d8989fa9c18042d776560fb8868507664a95fcfed0cb35a3e53b5ca53d57d01eb887fd02525486d44da6bc8deed4d5ce6af05",
         "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\greybox_s5_crash_0.bin"
       }
     ]
@@ -124,17 +103,17 @@
     "seed": 6,
     "budget": 500,
     "iterations_used": 29,
-    "wall_time_seconds": 0.7538,
-    "exec_per_sec": 38.5,
+    "wall_time_seconds": 0.5161,
+    "exec_per_sec": 56.2,
     "checksum_hits": 0,
     "first_crash_at": 28,
-    "time_to_first_crash_seconds": 0.7538,
+    "time_to_first_crash_seconds": 0.5161,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 28,
         "exit_code": 3221225477,
-        "input_hex": "465a50313e7dd206e2e8103dab04a0f1ef7f22d6cb08f04908ee1c003c2e23556e6763fc7f2e30b73e37f00baa785e38f48375a7336ddd14ac293e3db33f34c120cd4395",
+        "input_hex": "465a50313e0000007dd206e2e8103dab04a0f1ef7f22d6cb08f04908ee1c003c2e23556e6763fc7f2e30b73e37f00baa785e38f48375a7336ddd14ac293e3db33f34c120cd4395",
         "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\greybox_s6_crash_0.bin"
       }
     ]
@@ -144,17 +123,17 @@
     "seed": 7,
     "budget": 500,
     "iterations_used": 55,
-    "wall_time_seconds": 1.1966,
-    "exec_per_sec": 46.0,
+    "wall_time_seconds": 0.8816,
+    "exec_per_sec": 62.4,
     "checksum_hits": 0,
     "first_crash_at": 54,
-    "time_to_first_crash_seconds": 1.1966,
+    "time_to_first_crash_seconds": 0.8816,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 54,
-        "exit_code": 3221225477,
-        "input_hex": "465a503138660a7347d7cbe8171411888b1233803e06de791493399cb1553d1e892bee4be13f4396d0938c7c2c93e871c567bbeb9bf4f09e0f7caa7160c4",
+        "exit_code": 3221226356,
+        "input_hex": "465a503138000000660a7347d7cbe8171411888b1233803e06de791493399cb1553d1e892bee4be13f4396d0938c7c2c93e871c567bbeb9bf4f09e0f7caa7160c4",
         "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\greybox_s7_crash_0.bin"
       }
     ]
@@ -163,38 +142,31 @@
     "fuzzer": "greybox",
     "seed": 8,
     "budget": 500,
-    "iterations_used": 159,
-    "wall_time_seconds": 3.0278,
-    "exec_per_sec": 52.5,
-    "checksum_hits": 0,
-    "first_crash_at": 158,
-    "time_to_first_crash_seconds": 3.0278,
-    "total_crashes": 1,
-    "crashes": [
-      {
-        "iteration": 158,
-        "exit_code": 3221225501,
-        "input_hex": "465a50311a1e5abc2cd84a31e32a6717bb3e3ea6d93a2db62390988f4fab866d",
-        "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\greybox_s8_crash_0.bin"
-      }
-    ]
+    "iterations_used": 500,
+    "wall_time_seconds": 6.0607,
+    "exec_per_sec": 82.5,
+    "checksum_hits": 3,
+    "first_crash_at": null,
+    "time_to_first_crash_seconds": null,
+    "total_crashes": 0,
+    "crashes": []
   },
   {
     "fuzzer": "greybox",
     "seed": 9,
     "budget": 500,
     "iterations_used": 100,
-    "wall_time_seconds": 2.0696,
-    "exec_per_sec": 48.3,
+    "wall_time_seconds": 1.5359,
+    "exec_per_sec": 65.1,
     "checksum_hits": 0,
     "first_crash_at": 99,
-    "time_to_first_crash_seconds": 2.0696,
+    "time_to_first_crash_seconds": 1.5359,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 99,
-        "exit_code": 3221225477,
-        "input_hex": "465a503131bc91e4fb199c6cdb3f7688646cc354fb74c58ca9b29b15fc9327e261423127890a902d12f2ed7b23034e8995f4f454f58a83",
+        "exit_code": 3221226356,
+        "input_hex": "465a503131000000bc91e4fb199c6cdb3f7688646cc354fb74c58ca9b29b15fc9327e261423127890a902d12f2ed7b23034e8995f4f454f58a83",
         "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\greybox_s9_crash_0.bin"
       }
     ]
@@ -204,17 +176,17 @@
     "seed": 10,
     "budget": 500,
     "iterations_used": 326,
-    "wall_time_seconds": 7.2106,
-    "exec_per_sec": 45.2,
+    "wall_time_seconds": 4.2711,
+    "exec_per_sec": 76.3,
     "checksum_hits": 1,
     "first_crash_at": 325,
-    "time_to_first_crash_seconds": 7.2106,
+    "time_to_first_crash_seconds": 4.2711,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 325,
-        "exit_code": 3221225477,
-        "input_hex": "465a5031362242fbddcd127582d692550c70d0181408673ee832e2032d547c9ff06a14366651899b37c5000b9ed32216626520bac2af2f58d802d6b9",
+        "exit_code": 3221226356,
+        "input_hex": "465a5031360000002242fbddcd127582d692550c70d0181408673ee832e2032d547c9ff06a14366651899b37c5000b9ed32216626520bac2af2f58d802d6b9",
         "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\greybox_s10_crash_0.bin"
       }
     ]
@@ -224,8 +196,8 @@
     "seed": 11,
     "budget": 500,
     "iterations_used": 500,
-    "wall_time_seconds": 9.4134,
-    "exec_per_sec": 53.1,
+    "wall_time_seconds": 6.1122,
+    "exec_per_sec": 81.8,
     "checksum_hits": 1,
     "first_crash_at": null,
     "time_to_first_crash_seconds": null,
@@ -236,38 +208,31 @@
     "fuzzer": "greybox",
     "seed": 12,
     "budget": 500,
-    "iterations_used": 254,
-    "wall_time_seconds": 5.2071,
-    "exec_per_sec": 48.8,
-    "checksum_hits": 0,
-    "first_crash_at": 253,
-    "time_to_first_crash_seconds": 5.2071,
-    "total_crashes": 1,
-    "crashes": [
-      {
-        "iteration": 253,
-        "exit_code": 3221225477,
-        "input_hex": "465a503129cc6538a081f84f622e115fc12d101b95632ccd6d1f2e04e57f88c0019655e7d8919b65b05e317f3f5022",
-        "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\greybox_s12_crash_0.bin"
-      }
-    ]
+    "iterations_used": 500,
+    "wall_time_seconds": 6.6373,
+    "exec_per_sec": 75.3,
+    "checksum_hits": 1,
+    "first_crash_at": null,
+    "time_to_first_crash_seconds": null,
+    "total_crashes": 0,
+    "crashes": []
   },
   {
     "fuzzer": "greybox",
     "seed": 13,
     "budget": 500,
     "iterations_used": 173,
-    "wall_time_seconds": 3.5203,
-    "exec_per_sec": 49.1,
+    "wall_time_seconds": 2.4517,
+    "exec_per_sec": 70.6,
     "checksum_hits": 1,
     "first_crash_at": 172,
-    "time_to_first_crash_seconds": 3.5203,
+    "time_to_first_crash_seconds": 2.4517,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 172,
-        "exit_code": 3221225477,
-        "input_hex": "465a50313351c322a1a0b4f7b685c9ddcea23fc739089976a451008ed3abc228d4881d44498c774d9f3fe7472cf182640001e71d0326e955d5",
+        "exit_code": 3221226356,
+        "input_hex": "465a50313300000051c322a1a0b4f7b685c9ddcea23fc739089976a451008ed3abc228d4881d44498c774d9f3fe7472cf182640001e71d0326e955d5",
         "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\greybox_s13_crash_0.bin"
       }
     ]
@@ -277,8 +242,8 @@
     "seed": 14,
     "budget": 500,
     "iterations_used": 500,
-    "wall_time_seconds": 10.65,
-    "exec_per_sec": 46.9,
+    "wall_time_seconds": 6.5903,
+    "exec_per_sec": 75.9,
     "checksum_hits": 0,
     "first_crash_at": null,
     "time_to_first_crash_seconds": null,
@@ -290,17 +255,17 @@
     "seed": 15,
     "budget": 500,
     "iterations_used": 356,
-    "wall_time_seconds": 7.7903,
-    "exec_per_sec": 45.7,
+    "wall_time_seconds": 4.5348,
+    "exec_per_sec": 78.5,
     "checksum_hits": 1,
     "first_crash_at": 355,
-    "time_to_first_crash_seconds": 7.7903,
+    "time_to_first_crash_seconds": 4.5348,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 355,
         "exit_code": 3221225477,
-        "input_hex": "465a50313f2c5b1c8dae510b697b7d42af4454972d33b4ca4840068649cfee8392192e805c146c6c1779542a9bb79deb62121262d2a39ae1cdeea9c8cfb708a97a984dfdf0",
+        "input_hex": "465a50313f0000002c5b1c8dae510b697b7d42af4454972d33b4ca4840068649cfee8392192e805c146c6c1779542a9bb79deb62121262d2a39ae1cdeea9c8cfb708a97a984dfdf0",
         "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\greybox_s15_crash_0.bin"
       }
     ]
@@ -310,8 +275,8 @@
     "seed": 16,
     "budget": 500,
     "iterations_used": 500,
-    "wall_time_seconds": 12.0302,
-    "exec_per_sec": 41.6,
+    "wall_time_seconds": 6.1198,
+    "exec_per_sec": 81.7,
     "checksum_hits": 1,
     "first_crash_at": null,
     "time_to_first_crash_seconds": null,
@@ -323,17 +288,17 @@
     "seed": 17,
     "budget": 500,
     "iterations_used": 221,
-    "wall_time_seconds": 4.5564,
-    "exec_per_sec": 48.5,
+    "wall_time_seconds": 2.7578,
+    "exec_per_sec": 80.1,
     "checksum_hits": 0,
     "first_crash_at": 220,
-    "time_to_first_crash_seconds": 4.5564,
+    "time_to_first_crash_seconds": 2.7578,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 220,
         "exit_code": 3221225477,
-        "input_hex": "465a50313e972211a33b949bb113627b2308a1e0bdc6534816963a0e42d630637d802fa211573039d6a20c7cc35010d754a4d9ab391197ecae3f7f2496a59b6114ada154",
+        "input_hex": "465a50313e000000972211a33b949bb113627b2308a1e0bdc6534816963a0e42d630637d802fa211573039d6a20c7cc35010d754a4d9ab391197ecae3f7f2496a59b6114ada154",
         "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\greybox_s17_crash_0.bin"
       }
     ]
@@ -343,8 +308,8 @@
     "seed": 18,
     "budget": 500,
     "iterations_used": 500,
-    "wall_time_seconds": 10.2188,
-    "exec_per_sec": 48.9,
+    "wall_time_seconds": 6.1769,
+    "exec_per_sec": 80.9,
     "checksum_hits": 2,
     "first_crash_at": null,
     "time_to_first_crash_seconds": null,
@@ -355,49 +320,35 @@
     "fuzzer": "greybox",
     "seed": 19,
     "budget": 500,
-    "iterations_used": 65,
-    "wall_time_seconds": 1.36,
-    "exec_per_sec": 47.8,
-    "checksum_hits": 0,
-    "first_crash_at": 64,
-    "time_to_first_crash_seconds": 1.36,
-    "total_crashes": 1,
-    "crashes": [
-      {
-        "iteration": 64,
-        "exit_code": 3221225477,
-        "input_hex": "465a50312d791fe3875ac6b212ff3fa37a34581a00cb7152949e16236a18ead96004e1232c22fb45932df7f05863851ff23c07",
-        "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\greybox_s19_crash_0.bin"
-      }
-    ]
+    "iterations_used": 500,
+    "wall_time_seconds": 6.0029,
+    "exec_per_sec": 83.3,
+    "checksum_hits": 2,
+    "first_crash_at": null,
+    "time_to_first_crash_seconds": null,
+    "total_crashes": 0,
+    "crashes": []
   },
   {
     "fuzzer": "greybox",
     "seed": 20,
     "budget": 500,
-    "iterations_used": 177,
-    "wall_time_seconds": 3.6743,
-    "exec_per_sec": 48.2,
-    "checksum_hits": 0,
-    "first_crash_at": 176,
-    "time_to_first_crash_seconds": 3.6743,
-    "total_crashes": 1,
-    "crashes": [
-      {
-        "iteration": 176,
-        "exit_code": 3221225477,
-        "input_hex": "465a50312a9e259f7338a8f2d8f0726b4cd900d41c3bc8f01cab2a1ad786d059b3f937bbeb670d7e5cefb7ec470bd941",
-        "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\greybox_s20_crash_0.bin"
-      }
-    ]
+    "iterations_used": 500,
+    "wall_time_seconds": 6.1038,
+    "exec_per_sec": 81.9,
+    "checksum_hits": 3,
+    "first_crash_at": null,
+    "time_to_first_crash_seconds": null,
+    "total_crashes": 0,
+    "crashes": []
   },
   {
     "fuzzer": "greybox",
     "seed": 21,
     "budget": 500,
     "iterations_used": 500,
-    "wall_time_seconds": 9.3725,
-    "exec_per_sec": 53.3,
+    "wall_time_seconds": 6.2174,
+    "exec_per_sec": 80.4,
     "checksum_hits": 0,
     "first_crash_at": null,
     "time_to_first_crash_seconds": null,
@@ -408,18 +359,18 @@
     "fuzzer": "greybox",
     "seed": 22,
     "budget": 500,
-    "iterations_used": 205,
-    "wall_time_seconds": 4.2043,
-    "exec_per_sec": 48.8,
-    "checksum_hits": 1,
-    "first_crash_at": 204,
-    "time_to_first_crash_seconds": 4.2043,
+    "iterations_used": 238,
+    "wall_time_seconds": 2.7976,
+    "exec_per_sec": 85.1,
+    "checksum_hits": 2,
+    "first_crash_at": 237,
+    "time_to_first_crash_seconds": 2.7976,
     "total_crashes": 1,
     "crashes": [
       {
-        "iteration": 204,
-        "exit_code": 3221225501,
-        "input_hex": "465a503121fa226f8fc1af33238abdc57306a168b99aff1552ca1176ce03386e913df3ff32e4d3",
+        "iteration": 237,
+        "exit_code": 3221225477,
+        "input_hex": "465a50313b000000a3bd0cf9c01813fc8627d9d1fd730ce5045779345c1c0c6909bf2c92145b5d8157208df17c1f63a1f5f77d044029a8b5ce70adb0a0774611c320bb6c",
         "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\greybox_s22_crash_0.bin"
       }
     ]
@@ -429,17 +380,17 @@
     "seed": 23,
     "budget": 500,
     "iterations_used": 81,
-    "wall_time_seconds": 2.1337,
-    "exec_per_sec": 38.0,
+    "wall_time_seconds": 1.2094,
+    "exec_per_sec": 67.0,
     "checksum_hits": 0,
     "first_crash_at": 80,
-    "time_to_first_crash_seconds": 2.1337,
+    "time_to_first_crash_seconds": 1.2094,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 80,
         "exit_code": 3221225477,
-        "input_hex": "465a50313c0a89b4eb2c67db9de04f11995516fbf6c70d14c7d53889b5337e9e53a9d2a4963ba9bdc01dbb50b7c900e5803785d302e09e27b9e9aa94d62edb639c33",
+        "input_hex": "465a50313c0000000a89b4eb2c67db9de04f11995516fbf6c70d14c7d53889b5337e9e53a9d2a4963ba9bdc01dbb50b7c900e5803785d302e09e27b9e9aa94d62edb639c33",
         "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\greybox_s23_crash_0.bin"
       }
     ]
@@ -449,17 +400,17 @@
     "seed": 24,
     "budget": 500,
     "iterations_used": 104,
-    "wall_time_seconds": 2.1765,
-    "exec_per_sec": 47.8,
+    "wall_time_seconds": 1.5901,
+    "exec_per_sec": 65.4,
     "checksum_hits": 0,
     "first_crash_at": 103,
-    "time_to_first_crash_seconds": 2.1765,
+    "time_to_first_crash_seconds": 1.5901,
     "total_crashes": 1,
     "crashes": [
       {
         "iteration": 103,
         "exit_code": 3221225477,
-        "input_hex": "465a50313a4fca8410a5299594d7f342d67fc7d494402718e6d4e67973a19f52b51759603a4fc91e558434f788b8622528919ffb7dc30a3b8c057db6bb1841b7",
+        "input_hex": "465a50313a0000004fca8410a5299594d7f342d67fc7d494402718e6d4e67973a19f52b51759603a4fc91e558434f788b8622528919ffb7dc30a3b8c057db6bb1841b7",
         "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\greybox_s24_crash_0.bin"
       }
     ]
@@ -468,78 +419,57 @@
     "fuzzer": "greybox",
     "seed": 25,
     "budget": 500,
-    "iterations_used": 82,
-    "wall_time_seconds": 2.2227,
-    "exec_per_sec": 36.9,
-    "checksum_hits": 1,
-    "first_crash_at": 81,
-    "time_to_first_crash_seconds": 2.2227,
-    "total_crashes": 1,
-    "crashes": [
-      {
-        "iteration": 81,
-        "exit_code": 3221225477,
-        "input_hex": "465a503129b2fbb415c36a1c00dc962b285490e8634501c7988383296e6c2c0cac91b1a9ed456edc11f46fa23e86e4",
-        "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\greybox_s25_crash_0.bin"
-      }
-    ]
+    "iterations_used": 500,
+    "wall_time_seconds": 6.0021,
+    "exec_per_sec": 83.3,
+    "checksum_hits": 4,
+    "first_crash_at": null,
+    "time_to_first_crash_seconds": null,
+    "total_crashes": 0,
+    "crashes": []
   },
   {
     "fuzzer": "greybox",
     "seed": 26,
     "budget": 500,
-    "iterations_used": 144,
-    "wall_time_seconds": 3.0135,
-    "exec_per_sec": 47.8,
-    "checksum_hits": 0,
-    "first_crash_at": 143,
-    "time_to_first_crash_seconds": 3.0135,
-    "total_crashes": 1,
-    "crashes": [
-      {
-        "iteration": 143,
-        "exit_code": 3221225501,
-        "input_hex": "465a50311d3094dfe9d7a475313bf906b48f161db19ede32eb93bbb7eb7825cad5cf80",
-        "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\greybox_s26_crash_0.bin"
-      }
-    ]
+    "iterations_used": 500,
+    "wall_time_seconds": 6.0586,
+    "exec_per_sec": 82.5,
+    "checksum_hits": 2,
+    "first_crash_at": null,
+    "time_to_first_crash_seconds": null,
+    "total_crashes": 0,
+    "crashes": []
   },
   {
     "fuzzer": "greybox",
     "seed": 27,
     "budget": 500,
-    "iterations_used": 497,
-    "wall_time_seconds": 10.3933,
-    "exec_per_sec": 47.8,
-    "checksum_hits": 1,
-    "first_crash_at": 496,
-    "time_to_first_crash_seconds": 10.3933,
-    "total_crashes": 1,
-    "crashes": [
-      {
-        "iteration": 496,
-        "exit_code": 3221225501,
-        "input_hex": "465a5031216dcff51452ffca987c3b821aaeb59e407e3a988450594f34f35975d996732bbe748e",
-        "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\greybox_s27_crash_0.bin"
-      }
-    ]
+    "iterations_used": 500,
+    "wall_time_seconds": 6.1363,
+    "exec_per_sec": 81.5,
+    "checksum_hits": 2,
+    "first_crash_at": null,
+    "time_to_first_crash_seconds": null,
+    "total_crashes": 0,
+    "crashes": []
   },
   {
     "fuzzer": "greybox",
     "seed": 28,
     "budget": 500,
-    "iterations_used": 274,
-    "wall_time_seconds": 5.9891,
-    "exec_per_sec": 45.8,
-    "checksum_hits": 2,
-    "first_crash_at": 273,
-    "time_to_first_crash_seconds": 5.9891,
+    "iterations_used": 487,
+    "wall_time_seconds": 6.2719,
+    "exec_per_sec": 77.6,
+    "checksum_hits": 3,
+    "first_crash_at": 486,
+    "time_to_first_crash_seconds": 6.2719,
     "total_crashes": 1,
     "crashes": [
       {
-        "iteration": 273,
-        "exit_code": 3221225501,
-        "input_hex": "465a503120a63178aa7adb50d952442bcc196e70e875560c77a04c2ec27c183e4a979e2be8f1",
+        "iteration": 486,
+        "exit_code": 3221226356,
+        "input_hex": "465a5031350000004072d5a13cbab22c1cbfb9843b25ce26106760129cfaf598147da1cfcb21195053af248a4ca1db54cfdcb8b4b2d1e01b9a022e887a6f",
         "saved_to": "I:\\1_taiLieuDaiHoc\\ATPM\\Nhom11_BTL_ChuDe4_Fuzzing\\crashes\\greybox_s28_crash_0.bin"
       }
     ]
@@ -549,8 +479,8 @@
     "seed": 29,
     "budget": 500,
     "iterations_used": 500,
-    "wall_time_seconds": 11.5556,
-    "exec_per_sec": 43.3,
+    "wall_time_seconds": 6.3533,
+    "exec_per_sec": 78.7,
     "checksum_hits": 0,
     "first_crash_at": null,
     "time_to_first_crash_seconds": null,

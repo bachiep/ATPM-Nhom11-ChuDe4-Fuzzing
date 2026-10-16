@@ -1,0 +1,113 @@
+================================================================================
+NHẬT KÝ PHÂN TÍCH LƯU LƯỢNG MẠNG IOT (PCAP DUMP) & TRUY VẾT ĐẶC TẢ FZP1
+Tệp nguồn: network_capture/iot_sensor_stream.pcap
+Chuỗi truy vết: Gói tin mạng -> Log hex dump -> Đặc tả SSOT -> Yêu cầu REQ
+================================================================================
+
+--- [Khung mạng #1] Timestamp: 1792076628.000000 ---
+  Giao thức vận chuyển: UDP | 192.168.1.100:5000 -> 192.168.1.1:8888 | Dung lượng UDP payload: 25 bytes
+  Dữ liệu nhị phân thô (Hex dump):
+      0000:  46 5A 50 31 10 00 00 00 54 45 4D 50 3A 32 38 43   |FZP1....TEMP:28C|
+      0010:  3B 48 55 4D 3A 36 35 25 08                        |;HUM:65%.|
+  Trích xuất cấu trúc FZP1:
+    + Magic Header   : 'FZP1' (0x465A5031) -> HỢP LỆ (FZP1)
+    + Payload Length : 16 bytes (uint32 Little-Endian)
+    + Payload Data   : b'TEMP:28C;HUM:65%'
+    + XOR Checksum   : Nhận 0x08 | Tính toán 0x08 -> KHỚP TOÀN VẸN
+
+--- [Khung mạng #2] Timestamp: 1792076629.150000 ---
+  Giao thức vận chuyển: UDP | 192.168.1.101:5000 -> 192.168.1.1:8888 | Dung lượng UDP payload: 21 bytes
+  Dữ liệu nhị phân thô (Hex dump):
+      0000:  46 5A 50 31 0C 00 00 00 42 41 52 4F 3A 31 30 31   |FZP1....BARO:101|
+      0010:  33 68 50 61 7E                                    |3hPa~|
+  Trích xuất cấu trúc FZP1:
+    + Magic Header   : 'FZP1' (0x465A5031) -> HỢP LỆ (FZP1)
+    + Payload Length : 12 bytes (uint32 Little-Endian)
+    + Payload Data   : b'BARO:1013hPa'
+    + XOR Checksum   : Nhận 0x7E | Tính toán 0x7E -> KHỚP TOÀN VẸN
+
+--- [Khung mạng #3] Timestamp: 1792076630.300000 ---
+  Giao thức vận chuyển: UDP | 192.168.1.102:5000 -> 192.168.1.1:8888 | Dung lượng UDP payload: 22 bytes
+  Dữ liệu nhị phân thô (Hex dump):
+      0000:  46 5A 50 31 0D 00 00 00 53 54 41 54 55 53 3A 4F   |FZP1....STATUS:O|
+      0010:  4E 4C 49 4E 45 21                                 |NLINE!|
+  Trích xuất cấu trúc FZP1:
+    + Magic Header   : 'FZP1' (0x465A5031) -> HỢP LỆ (FZP1)
+    + Payload Length : 13 bytes (uint32 Little-Endian)
+    + Payload Data   : b'STATUS:ONLINE'
+    + XOR Checksum   : Nhận 0x21 | Tính toán 0x21 -> KHỚP TOÀN VẸN
+
+--- [Khung mạng #4] Timestamp: 1792076631.450000 ---
+  Giao thức vận chuyển: UDP | 192.168.1.103:5000 -> 192.168.1.1:8888 | Dung lượng UDP payload: 25 bytes
+  Dữ liệu nhị phân thô (Hex dump):
+      0000:  46 5A 50 31 10 00 00 00 56 4F 4C 54 3A 33 2E 33   |FZP1....VOLT:3.3|
+      0010:  56 3B 42 41 54 3A 39 38 14                        |V;BAT:98.|
+  Trích xuất cấu trúc FZP1:
+    + Magic Header   : 'FZP1' (0x465A5031) -> HỢP LỆ (FZP1)
+    + Payload Length : 16 bytes (uint32 Little-Endian)
+    + Payload Data   : b'VOLT:3.3V;BAT:98'
+    + XOR Checksum   : Nhận 0x14 | Tính toán 0x14 -> KHỚP TOÀN VẸN
+
+--- [Khung mạng #5] Timestamp: 1792076632.600000 ---
+  Giao thức vận chuyển: UDP | 192.168.1.104:5000 -> 192.168.1.1:8888 | Dung lượng UDP payload: 13 bytes
+  Dữ liệu nhị phân thô (Hex dump):
+      0000:  46 5A 50 31 04 00 00 00 FF 01 02 03 FF            |FZP1.........|
+  Trích xuất cấu trúc FZP1:
+    + Magic Header   : 'FZP1' (0x465A5031) -> HỢP LỆ (FZP1)
+    + Payload Length : 4 bytes (uint32 Little-Endian)
+    + Payload Data   : b'\xff\x01\x02\x03'
+    + XOR Checksum   : Nhận 0xFF | Tính toán 0xFF -> KHỚP TOÀN VẸN
+    [!] LỆNH ĐẶC BIỆT: Nhận mã 0xFF (CMD_ABORT_SESSION) -> Kích hoạt chu trình giải phóng kép (CWE-415)!
+
+--- [Khung mạng #6] Timestamp: 1792076633.750000 ---
+  Giao thức vận chuyển: UDP | 192.168.1.105:5000 -> 192.168.1.1:8888 | Dung lượng UDP payload: 13 bytes
+  Dữ liệu nhị phân thô (Hex dump):
+      0000:  46 5A 50 31 04 00 00 00 FE 00 01 00 FF            |FZP1.........|
+  Trích xuất cấu trúc FZP1:
+    + Magic Header   : 'FZP1' (0x465A5031) -> HỢP LỆ (FZP1)
+    + Payload Length : 4 bytes (uint32 Little-Endian)
+    + Payload Data   : b'\xfe\x00\x01\x00'
+    + XOR Checksum   : Nhận 0xFF | Tính toán 0xFF -> KHỚP TOÀN VẸN
+    [!] LỆNH ĐẶC BIỆT: Nhận mã 0xFE (CMD_RESET_STREAM) -> Kích hoạt chu trình con trỏ lơ lửng (CWE-416)!
+
+--- [Khung mạng #7] Timestamp: 1792076634.900000 ---
+  Giao thức vận chuyển: UDP | 192.168.1.106:5000 -> 192.168.1.1:8888 | Dung lượng UDP payload: 40 bytes
+  Dữ liệu nhị phân thô (Hex dump):
+      0000:  46 5A 50 31 1F 00 00 00 41 54 54 41 43 4B 5F 4F   |FZP1....ATTACK_O|
+      0010:  56 45 52 46 4C 4F 57 5F 42 55 46 46 45 52 5F 50   |VERFLOW_BUFFER_P|
+      0020:  41 59 4C 4F 41 44 21 24                           |AYLOAD!$|
+  Trích xuất cấu trúc FZP1:
+    + Magic Header   : 'FZP1' (0x465A5031) -> HỢP LỆ (FZP1)
+    + Payload Length : 31 bytes (uint32 Little-Endian)
+    + Payload Data   : b'ATTACK_OVERFLOW_BUFFER_PAYLOAD!'
+    + XOR Checksum   : Nhận 0x24 | Tính toán 0x24 -> KHỚP TOÀN VẸN
+    [!] CẢNH BÁO BẢO MẬT: Payload length (31B) vượt quá kích thước bộ đệm an toàn 16B (Nguy cơ tràn Stack CWE-121)!
+
+================================================================================
+BẢNG ÁNH XẠ TRUY VẾT TỪ LOG THỰC TẾ SANG TỆP ĐẶC TẢ SSOT EXCEL (SPEC & REQ)
+================================================================================
+
+1. [Khung cấu trúc gói tin mạng FZP1]
+   -> Ánh xạ sang Sheet 'RangBuoc':
+      * CON-1: Gói tin tuân thủ cấu trúc 4B Magic | 4B Length | N-B Payload | 1B XOR Checksum.
+      * CON-2: Bộ đệm stack frame cục bộ nhận payload có kích thước cố định 16 byte.
+      * CON-4: Độ dài dữ liệu trường payload len được quy định bởi uint32_t Little-Endian.
+
+2. [Cơ chế xác thực an toàn cổng biên]
+   -> Ánh xạ sang Sheet 'YeuCauChucNang':
+      * REQ-1: Hệ thống phải xác thực chính xác 4 byte Magic "FZP1" ở đầu gói tin.
+      * REQ-2: Không được rơi vào deadlock trong mọi chu trình tiếp nhận.
+      * REQ-3: parse_fzp1_payload() không được gây tràn bộ đệm stack (CWE-121) khi len > 16 byte.
+      * REQ-5: Hàm đóng phiên không được giải phóng lặp lại (CWE-415) khi gặp mã lệnh 0xFF.
+      * REQ-6: Không được truy cập con trỏ lơ lửng Use-After-Free (CWE-416) khi gặp mã lệnh 0xFE.
+
+3. [Mô hình hóa hình thức chuyển trạng thái Kripke]
+   -> Ánh xạ sang Sheet 'MoHinhTrangThai':
+      * st_idle        : Sẵn sàng nhận gói tin từ mạng (safe, session_closed)
+      * st_magic_ok    : Xác thực Magic Header hợp lệ (magic_ok, header_valid)
+      * st_checksum_ok : Xác thực Checksum hợp lệ (checksum_ok, session_active)
+      * st_conflict    : Trạng thái xung đột nguy cơ tràn bộ đệm (magic_ok, checksum_ok, violation)
+
+================================================================================
+KẾT LUẬN: ĐÃ XÁC THỰC HOÀN TOÀN TÍNH TRUY VẾT TỪ GÓI TIN MẠNG -> ĐẶC TẢ EXCEL
+================================================================================

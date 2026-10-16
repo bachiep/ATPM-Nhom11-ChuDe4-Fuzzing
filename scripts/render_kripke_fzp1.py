@@ -23,16 +23,16 @@ tikz_content = r"""% Sơ đồ chuyển trạng thái Kripke: fzp1_binary_parser
   every node/.style={draw, ellipse, inner sep=3pt, minimum size=10mm, align=center, font=\scriptsize},
   ->, >=stealth, thick, auto
 ]
-  \node[fill=blue!20] (st_idle) at (0.0, 1.8) {st\_idle\\{\tiny safe, ready}};
-  \node[fill=gray!15] (st_magic) at (-2.8, 0.0) {st\_magic\_valid\\{\tiny magic\_ok}};
-  \node[fill=gray!15] (st_chk) at (2.8, 0.0) {st\_checksum\_valid\\{\tiny checksum\_ok}};
-  \node[fill=red!35] (st_hazard) at (0.0, -1.8) {st\_overflow\_hazard\\{\tiny magic\_ok, chk\_ok, violation}};
+  \node[fill=blue!20] (st_idle) at (0.0, 1.8) {st\_idle\\{\tiny safe, session\_closed}};
+  \node[fill=gray!15] (st_magic) at (-2.8, 0.0) {st\_magic\_ok\\{\tiny magic\_ok, header\_valid}};
+  \node[fill=gray!15] (st_chk) at (2.8, 0.0) {st\_checksum\_ok\\{\tiny checksum\_ok, session\_active}};
+  \node[fill=red!35] (st_conflict) at (0.0, -1.8) {st\_conflict\\{\tiny magic\_ok, checksum\_ok, violation}};
   \draw (st_idle) -- (st_magic);
   \draw (st_idle) -- (st_chk);
   \draw (st_magic) -- (st_idle);
-  \draw (st_magic) -- (st_hazard);
+  \draw (st_magic) -- (st_conflict);
   \draw (st_chk) -- (st_idle);
-  \draw (st_hazard) -- (st_idle);
+  \draw (st_conflict) -- (st_idle);
 \end{tikzpicture}
 """
 
@@ -49,10 +49,10 @@ ax.axis("off")
 
 # Draw nodes
 states = [
-    ("st_idle\n[safe, ready]", 0.0, 1.8, "#d0e1fd", "#1a5fb4"),
-    ("st_magic_valid\n[magic_ok]", -2.4, 0.0, "#e1f5fe", "#0288d1"),
-    ("st_checksum_valid\n[checksum_ok]", 2.4, 0.0, "#e1f5fe", "#0288d1"),
-    ("st_overflow_hazard\n[VIOLATION!]", 0.0, -1.8, "#fce4ec", "#c2185b")
+    ("st_idle\n[safe, session_closed]", 0.0, 1.8, "#d0e1fd", "#1a5fb4"),
+    ("st_magic_ok\n[magic_ok, header_valid]", -2.4, 0.0, "#e1f5fe", "#0288d1"),
+    ("st_checksum_ok\n[checksum_ok, session_active]", 2.4, 0.0, "#e1f5fe", "#0288d1"),
+    ("st_conflict\n[VIOLATION: magic & chk]", 0.0, -1.8, "#fce4ec", "#c2185b")
 ]
 
 for name, x, y, facecolor, edgecolor in states:
@@ -61,12 +61,12 @@ for name, x, y, facecolor, edgecolor in states:
 
 # Draw arrows
 arrows = [
-    ((0, 1.3), (-1.8, 0.3)),   # idle -> magic
-    ((0, 1.3), (1.8, 0.3)),    # idle -> checksum
-    ((-1.8, 0.0), (-0.4, 1.4)), # magic -> idle
-    ((-1.8, -0.3), (-0.4, -1.4)), # magic -> hazard
-    ((1.8, 0.0), (0.4, 1.4)),  # checksum -> idle
-    ((0, -1.3), (0, 1.3))      # hazard -> idle
+    ((0, 1.3), (-1.8, 0.3)),     # idle -> magic_ok
+    ((0, 1.3), (1.8, 0.3)),      # idle -> checksum_ok
+    ((-1.8, 0.0), (-0.4, 1.4)),  # magic_ok -> idle
+    ((-1.8, -0.3), (-0.4, -1.4)),# magic_ok -> conflict
+    ((1.8, 0.0), (0.4, 1.4)),    # checksum_ok -> idle
+    ((0, -1.3), (0, 1.3))        # conflict -> idle
 ]
 
 for start, end in arrows:
@@ -75,8 +75,8 @@ for start, end in arrows:
                                 connectionstyle="arc3,rad=0.1"))
 
 # Annotations
-ax.text(0, 2.7, "Mô hình Kripke: FZP1 Binary Parser", ha="center", fontsize=13, fontweight="bold", color="#1f4e78")
-ax.text(0, -2.6, "Vi phạm Loại trừ lẫn nhau: AG(!violation) thất bại tại st_overflow_hazard",
+ax.text(0, 2.7, "Mô hình Kripke: FZP1 Binary Parser (SSOT)", ha="center", fontsize=13, fontweight="bold", color="#1f4e78")
+ax.text(0, -2.6, "Kiểm chứng An toàn CTL: AG(!violation) VI PHẠM tại st_conflict (phát hiện nguy cơ bộ nhớ)",
         ha="center", fontsize=9, style="italic", color="#c2185b", fontweight="semibold")
 
 plt.tight_layout()

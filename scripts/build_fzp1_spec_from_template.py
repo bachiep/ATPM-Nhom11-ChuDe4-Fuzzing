@@ -49,7 +49,7 @@ def build_fzp1_spec_from_template():
     # Sheet 1: ThongTin
     ws_info = wb["ThongTin"]
     ws_info.cell(2, 2, value="fzp1_binary_parser")
-    ws_info.cell(3, 2, value="Bộ phân tích cú pháp gói tin nhị phân FZP1 (Magic 4B, Length 1B, Payload, Checksum XOR 1B) phục vụ kiểm thử Fuzzing và kiểm chứng an toàn bộ nhớ.")
+    ws_info.cell(3, 2, value="Bộ phân tích cú pháp gói tin nhị phân FZP1 (Magic 4B, Length 4B uint32, Payload, Checksum XOR 1B) phục vụ kiểm thử Fuzzing và kiểm chứng an toàn bộ nhớ.")
 
     # Sheet 2: YeuCauChucNang (9 dòng)
     ws_req = wb["YeuCauChucNang"]
@@ -60,7 +60,7 @@ def build_fzp1_spec_from_template():
         ("REQ-4", "Vùng đệm tệp nhị phân cấp phát trên heap phải được giải phóng đúng sau khi hoàn tất xử lý (CWE-401)", "memory", "MEDIUM"),
         ("REQ-5", "Hàm đóng phiên xử lý gói tin không được giải phóng cùng một con trỏ nhiều hơn 1 lần (CWE-415 double-free)", "memory", "HIGH"),
         ("REQ-6", "Sau khi giải phóng tài nguyên vùng nhớ, hệ thống không được tiếp tục truy cập con trỏ đó (CWE-416 use-after-free)", "memory", "HIGH"),
-        ("REQ-7", "Bộ tích lũy dung lượng byte dữ liệu fzp1_byte_accumulator không được tràn kiểu int 32-bit (CWE-190)", "safety", "MEDIUM"),
+        ("REQ-7", "Kiểm soát an toàn trường length uint32 và kích thước tổng gói tin theo hạn mức giao thức, ngăn chặn wrap tràn số (CERT STR31-C, INT31-C)", "safety", "MEDIUM"),
         ("REQ-8", "Hàm tính tỷ lệ gói tin hợp lệ fzp1_ratio không được gây lỗi chia cho không (CWE-369)", "functional", "MEDIUM"),
         ("REQ-9", "Cơ chế xác thực token mở khóa khẩn cấp fzp1_unlock_token cần được kiểm thử bằng kỹ thuật concolic fuzzing SMT Z3", "functional", "LOW"),
     ]
@@ -86,10 +86,10 @@ def build_fzp1_spec_from_template():
     # Sheet 4: RangBuoc (5 dòng >= 5)
     ws_con = wb["RangBuoc"]
     cons = [
-        ("CON-1", "Gói tin FZP1 tuân thủ cấu trúc nhị phân: 4B Magic | 1B Length | N-B Payload | 1B XOR Checksum", "MEDIUM"),
+        ("CON-1", "Gói tin FZP1 tuân thủ cấu trúc nhị phân: 4B Magic | 4B Length | N-B Payload | 1B XOR Checksum", "MEDIUM"),
         ("CON-2", "Bộ đệm stack frame cục bộ nhận payload có kích thước cố định 16 byte", "HIGH"),
         ("CON-3", "Cặp mã mở khóa khẩn cấp thiết bị FZP1 phải là cặp số nguyên 16-bit dương", "MEDIUM"),
-        ("CON-4", "Độ dài dữ liệu trường payload len được quy định bởi số nguyên không dấu uint8_t (0 đến 255)", "HIGH"),
+        ("CON-4", "Độ dài dữ liệu trường payload len được quy định bởi số nguyên không dấu 4-byte uint32_t (0 đến 2^32-1)", "HIGH"),
         ("CON-5", "Toàn bộ tài nguyên heap cấp phát cho buffer tệp tin phải được giải phóng run-to-completion", "HIGH"),
     ]
     for idx, (cid, desc, pri) in enumerate(cons, start=2):
@@ -97,12 +97,12 @@ def build_fzp1_spec_from_template():
             cell = ws_con.cell(idx, col_idx, value=val)
             copy_cell_style(ws_con.cell(2, col_idx), cell)
 
-    # Sheet 5: MoHinhTrangThai (4 trạng thái Kripke)
+    # Sheet 5: MoHinhTrangThai (4 trạng thái Kripke chuẩn)
     ws_sm = wb["MoHinhTrangThai"]
     sms = [
-        ("st_idle", "x", "safe", "st_magic_ok, st_checksum_ok"),
-        ("st_magic_ok", "", "magic_ok", "st_idle, st_conflict"),
-        ("st_checksum_ok", "", "checksum_ok", "st_idle"),
+        ("st_idle", "x", "safe, session_closed", "st_magic_ok, st_checksum_ok"),
+        ("st_magic_ok", "", "magic_ok, header_valid", "st_idle, st_conflict"),
+        ("st_checksum_ok", "", "checksum_ok, session_active", "st_idle"),
         ("st_conflict", "", "magic_ok, checksum_ok, violation", "st_idle"),
     ]
     for idx, (st, init, labels, trans) in enumerate(sms, start=2):
@@ -123,14 +123,20 @@ def build_fzp1_spec_from_template():
         cell = ws_safe.cell(idx, 1, value=f)
         copy_cell_style(ws_safe.cell(2, 1), cell)
 
-    # Sheet 7: LoaiTruLanNhau (Đặc tả SecLab SpecVerificationLab chỉ hỗ trợ duy nhất 1 cặp mutex)
+    # Sheet 7: LoaiTruLanNhau (Tuân thủ mục 3.7 & checklist trang 25 của hướng dẫn: dòng đầu là cụm khóa chính, >= 5 dòng tài liệu hóa)
     ws_mutex = wb["LoaiTruLanNhau"]
-    while ws_mutex.max_row > 2:
-        ws_mutex.delete_rows(ws_mutex.max_row)
-    c1 = ws_mutex.cell(2, 1, value="magic_ok")
-    c2 = ws_mutex.cell(2, 2, value="checksum_ok")
-    copy_cell_style(ws_mutex.cell(2, 1), c1)
-    copy_cell_style(ws_mutex.cell(2, 2), c2)
+    mutex_pairs = [
+        ("magic_ok", "checksum_ok"),             # Dòng 1 (bắt buộc): Cụm khóa chính được pipeline tự động kiểm tra
+        ("violation", "safe"),                   # Dòng 2: Loại trừ trạng thái vi phạm và an toàn
+        ("session_active", "session_closed"),    # Dòng 3: Loại trừ trạng thái mở phiên và đóng phiên
+        ("header_valid", "violation"),           # Dòng 4: Loại trừ hợp lệ tiêu đề và lỗi vi phạm
+        ("checksum_ok", "violation"),            # Dòng 5: Loại trừ kiểm tra checksum thành công và lỗi vi phạm
+    ]
+    for idx, (m1, m2) in enumerate(mutex_pairs, start=2):
+        c1 = ws_mutex.cell(idx, 1, value=m1)
+        c2 = ws_mutex.cell(idx, 2, value=m2)
+        copy_cell_style(ws_mutex.cell(2, 1), c1)
+        copy_cell_style(ws_mutex.cell(2, 2), c2)
 
     # Sheet 8: HamSinhMa (6 hàm: 4 C + 2 Python)
     ws_code = wb["HamSinhMa"]
@@ -164,10 +170,10 @@ def build_fzp1_spec_from_template():
     # Sheet 10: TestCase (6 dòng >= 5)
     ws_tc = wb["TestCase"]
     tcs = [
-        ("TC-1", "REQ-1, REQ-2", "Tranh chấp trạng thái xác thực Magic và Checksum", "Hệ thống ở trạng thái 'st_idle'", "Kiểm chứng mô hình Kripke 4 trạng thái sinh từ đặc tả", "AG(!violation) ĐÚNG và không có trạng thái deadlock", "HIGH"),
+        ("TC-1", "REQ-1, REQ-2", "Tranh chấp trạng thái xác thực Magic và Checksum", "Hệ thống ở trạng thái 'st_idle'", "Kiểm chứng mô hình Kripke 4 trạng thái sinh từ đặc tả", "AG(!violation) VI PHẠM (phát hiện nguy cơ vi phạm an toàn tại st_conflict), EF(violation) ĐÚNG, và hệ thống không có deadlock", "HIGH"),
         ("TC-2", "REQ-3", "Payload FZP1 vượt quá 16 byte gây tràn stack", "Hàm parse_fzp1_payload() sinh từ đặc tả (bug=buffer-overflow)", "Sinh mã C cho parse_fzp1_payload()\nChạy kiểm tra AST C", "Phát hiện nguy cơ buffer-overflow (CWE-120/121)", "HIGH"),
-        ("TC-3", "REQ-4, REQ-5, REQ-6", "Kiểm tra vòng đời bộ nhớ của cache/session", "write_fzp1_cache(), close_fzp1_session(), release_fzp1_stream() đã sinh", "Kiểm tra mã C của cả 3 hàm quản lý heap", "Phát hiện đủ 3 loại lỗi: memory-leak (CWE-401), double-free (CWE-415), use-after-free (CWE-416)", "HIGH"),
-        ("TC-4", "REQ-7", "Bộ tích lũy byte fzp1_byte_accumulator vượt giới hạn int32", "header_bytes, payload_bytes >= 0 và tổng > 2,000,000,000", "Chạy check_int32_overflow() bằng Z3 trên biểu thức header_bytes + payload_bytes", "Kết quả SAT (phát hiện nguy cơ tràn số CWE-190)", "MEDIUM"),
+        ("TC-3", "REQ-4, REQ-5", "Hủy phiên sớm gây giải phóng kép (CWE-415)", "Hàm close_fzp1_session() dọn dẹp bộ đệm session trên heap", "Kích hoạt mã điều khiển CMD 0xFF (CMD_ABORT_SESSION) trên v0 và v1", "v0 crash Double-Free (0xC0000374 / ASan), v1 gán NULL idempotent an toàn (CERT MEM30-C, MEM31-C)", "HIGH"),
+        ("TC-4", "REQ-6", "Tái lập luồng stream gây con trỏ lơ lửng Use-After-Free (CWE-416)", "Hàm release_fzp1_stream() xử lý luồng sự kiện stream", "Kích hoạt mã điều khiển CMD 0xFE (CMD_RESET_STREAM) trên v0 và v1", "v0 crash Heap Use-After-Free (0xC0000005 / shadow [fd]), v1 gọi callback trước khi free và xóa con trỏ (CERT MEM30-C)", "HIGH"),
         ("TC-5", "REQ-8", "Chia tỷ lệ gói tin fzp1_ratio với mẫu số bằng 0", "Hàm fzp1_ratio(issued, consumed) sinh từ đặc tả", "Chạy blackbox_fuzz() 300 lần", "Tìm được ít nhất 1 crash ZeroDivisionError (CWE-369)", "MEDIUM"),
         ("TC-6", "REQ-9", "Tìm cặp mã mở khóa khẩn cấp fzp1_unlock_token bằng concolic fuzzing", "Hàm fzp1_unlock_token(token_a, token_b), magic=(18010, 20529)", "Chạy concolic_fuzz() với Z3 SMT Solver", "Tìm được đúng bộ giá trị (18010, 20529) trong 1 lần thử", "LOW"),
     ]

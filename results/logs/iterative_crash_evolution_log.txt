@@ -1,0 +1,80 @@
+================================================================================
+NHẬT KÝ TIẾN TRÌNH FUZZING - VÁ LỖI - ĐỔI SEED - TÁI KIỂM ĐỊNH (GROUP 11)
+Thời gian thực nghiệm: 2026-10-15 22:47:55
+Học phần: Kỹ thuật Lập trình An toàn — ThS. Vũ Quang Dũng (Phenikaa)
+================================================================================
+
+--- [GIAI ĐOẠN: Stage_1_Initial_v0] ---
+  + Phiên bản mã nguồn  : v0 (fzp1_parser_v0.exe)
+  + Mục tiêu kiểm thử   : CWE-121: Stack-based Buffer Overflow
+  + Chuẩn an toàn áp dụng: Chưa áp dụng CERT C (Thiếu kiểm tra cận trên độ dài)
+  + Số lượt kiểm thử    : 250
+  + Số lượng Crash sập  : 90 (36.0%)
+  + Từ chối bảo mật     : 64
+  + Xử lý an toàn       : 96
+  + Nhánh độ phủ đạt    : 7/9 nhánh giao thức
+  + Thời gian chạy      : 15.541 giây
+  + Tệp crash trích xuất: crashes/iter1_cwe121_crash.bin
+  + Chi tiết các mẫu crash tiêu biểu:
+      * Iter #1: Code 0xc0000374 | Payload len: 8B | [TRIGGER] Abort command 0xFF detected! Early closing session...
+      * Iter #4: Code 0xc0000374 | Payload len: 8B | [TRIGGER] Abort command 0xFF detected! Early closing session...
+      * Iter #7: Code 0xc0000374 | Payload len: 32B | [TRIGGER] Abort command 0xFF detected! Early closing session...
+      * Iter #11: Code 0xc0000374 | Payload len: 8B | [TRIGGER] Abort command 0xFF detected! Early closing session...
+      * Iter #16: Code 0xc0000374 | Payload len: 8B | [TRIGGER] Abort command 0xFF detected! Early closing session...
+
+--- [GIAI ĐOẠN: Stage_2_Intermediate_v0_1] ---
+  + Phiên bản mã nguồn  : v0.1 (fzp1_parser_v0_1.exe)
+  + Mục tiêu kiểm thử   : CWE-415: Double Free (Sau khi vá CWE-121)
+  + Chuẩn an toàn áp dụng: Đã vá CERT STR31-C | Chưa vá CERT MEM30-C/31-C
+  + Số lượt kiểm thử    : 250
+  + Số lượng Crash sập  : 58 (23.2%)
+  + Từ chối bảo mật     : 127
+  + Xử lý an toàn       : 65
+  + Nhánh độ phủ đạt    : 8/9 nhánh giao thức
+  + Thời gian chạy      : 11.223 giây
+  + Tệp crash trích xuất: crashes/iter2_cwe415_crash.bin
+  + Chi tiết các mẫu crash tiêu biểu:
+      * Iter #3: Code 0xc0000374 | Payload len: 8B | [TRIGGER] Abort command 0xFF detected! Early closing session...
+      * Iter #4: Code 0xc0000374 | Payload len: 8B | [TRIGGER] Reset stream command 0xFE detected! Releasing stream...
+      * Iter #8: Code 0xc0000374 | Payload len: 8B | [TRIGGER] Reset stream command 0xFE detected! Releasing stream...
+      * Iter #9: Code 0xc0000005 | Payload len: 8B | [TRIGGER] Reset stream command 0xFE detected! Releasing stream...
+      * Iter #12: Code 0xc0000374 | Payload len: 64B | [TRIGGER] Reset stream command 0xFE detected! Releasing stream...
+
+--- [GIAI ĐOẠN: Stage_3_Intermediate_v0_2] ---
+  + Phiên bản mã nguồn  : v0.2 (fzp1_parser_v0_2.exe)
+  + Mục tiêu kiểm thử   : CWE-416: Use-After-Free (Sau khi vá CWE-121 & CWE-415)
+  + Chuẩn an toàn áp dụng: Đã vá CERT STR31-C & MEM31-C | Chưa vá triệt để CERT MEM30-C
+  + Số lượt kiểm thử    : 250
+  + Số lượng Crash sập  : 22 (8.8%)
+  + Từ chối bảo mật     : 175
+  + Xử lý an toàn       : 53
+  + Nhánh độ phủ đạt    : 8/9 nhánh giao thức
+  + Thời gian chạy      : 5.715 giây
+  + Tệp crash trích xuất: crashes/iter3_cwe416_crash.bin
+  + Chi tiết các mẫu crash tiêu biểu:
+      * Iter #12: Code 0xc0000374 | Payload len: 8B | [TRIGGER] Reset stream command 0xFE detected! Releasing stream...
+      * Iter #16: Code 0xc0000374 | Payload len: 8B | [TRIGGER] Reset stream command 0xFE detected! Releasing stream...
+      * Iter #33: Code 0xc0000374 | Payload len: 8B | [TRIGGER] Reset stream command 0xFE detected! Releasing stream...
+      * Iter #34: Code 0xc0000374 | Payload len: 24B | [TRIGGER] Reset stream command 0xFE detected! Releasing stream...
+      * Iter #45: Code 0xc0000374 | Payload len: 16B | [TRIGGER] Reset stream command 0xFE detected! Releasing stream...
+
+--- [GIAI ĐOẠN: Stage_4_Final_v1] ---
+  + Phiên bản mã nguồn  : v1 (fzp1_parser_v1.exe)
+  + Mục tiêu kiểm thử   : Tái kiểm định toàn diện (CWE-121, CWE-415, CWE-416)
+  + Chuẩn an toàn áp dụng: Tuân thủ toàn diện CERT STR31-C, MEM30-C, MEM31-C
+  + Số lượt kiểm thử    : 500
+  + Số lượng Crash sập  : 0 (0.0%)
+  + Từ chối bảo mật     : 390
+  + Xử lý an toàn       : 110
+  + Nhánh độ phủ đạt    : 8/9 nhánh giao thức
+  + Thời gian chạy      : 7.166 giây
+
+================================================================================
+BẢNG ĐỐI CHIẾU TIẾN TRÌNH TIỆT TIÊU LỖ HỔNG (CRASH EVOLUTION MATRIX):
+Phiên bản    | Trọng tâm lỗi                  | Số lần Fuzz  | Số Crash   | Tỷ lệ    | Trạng thái
+-------------------------------------------------------------------------------------
+v0           | CWE-121: Stack-based Buffer Ov | 250          | 90         |  36.0% | NGUY HIỂM (CÓ LỖI)
+v0.1         | CWE-415: Double Free (Sau khi  | 250          | 58         |  23.2% | NGUY HIỂM (CÓ LỖI)
+v0.2         | CWE-416: Use-After-Free (Sau k | 250          | 22         |   8.8% | NGUY HIỂM (CÓ LỖI)
+v1           | Tái kiểm định toàn diện (CWE-1 | 500          | 0          |   0.0% | AN TOÀN TUYỆT ĐỐI
+================================================================================

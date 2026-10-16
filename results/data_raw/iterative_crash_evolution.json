@@ -1,0 +1,194 @@
+{
+  "timestamp": "2026-10-15 22:47:55",
+  "fuzzer_engine": "FZP1CoverageGuidedFuzzer",
+  "stages": [
+    {
+      "stage": "Stage_1_Initial_v0",
+      "target_version": "v0",
+      "target_executable": "fzp1_parser_v0.exe",
+      "cwe_target": "CWE-121: Stack-based Buffer Overflow",
+      "cert_standard": "Chưa áp dụng CERT C (Thiếu kiểm tra cận trên độ dài)",
+      "iterations": 250,
+      "crashes": 90,
+      "clean_rejects": 64,
+      "successes": 96,
+      "crash_rate_percent": 36.0,
+      "branches_discovered": 7,
+      "new_branches_in_stage": 6,
+      "elapsed_sec": 15.541,
+      "crash_samples": [
+        {
+          "iteration": 1,
+          "returncode": 3221226356,
+          "hex_code": "0xc0000374",
+          "payload_len": 8,
+          "error_snippet": "[TRIGGER] Abort command 0xFF detected! Early closing session..."
+        },
+        {
+          "iteration": 4,
+          "returncode": 3221226356,
+          "hex_code": "0xc0000374",
+          "payload_len": 8,
+          "error_snippet": "[TRIGGER] Abort command 0xFF detected! Early closing session..."
+        },
+        {
+          "iteration": 7,
+          "returncode": 3221226356,
+          "hex_code": "0xc0000374",
+          "payload_len": 32,
+          "error_snippet": "[TRIGGER] Abort command 0xFF detected! Early closing session..."
+        },
+        {
+          "iteration": 11,
+          "returncode": 3221226356,
+          "hex_code": "0xc0000374",
+          "payload_len": 8,
+          "error_snippet": "[TRIGGER] Abort command 0xFF detected! Early closing session..."
+        },
+        {
+          "iteration": 16,
+          "returncode": 3221226356,
+          "hex_code": "0xc0000374",
+          "payload_len": 8,
+          "error_snippet": "[TRIGGER] Abort command 0xFF detected! Early closing session..."
+        }
+      ],
+      "saved_crash_binary": "iter1_cwe121_crash.bin"
+    },
+    {
+      "stage": "Stage_2_Intermediate_v0_1",
+      "target_version": "v0.1",
+      "target_executable": "fzp1_parser_v0_1.exe",
+      "cwe_target": "CWE-415: Double Free (Sau khi vá CWE-121)",
+      "cert_standard": "Đã vá CERT STR31-C | Chưa vá CERT MEM30-C/31-C",
+      "iterations": 250,
+      "crashes": 58,
+      "clean_rejects": 127,
+      "successes": 65,
+      "crash_rate_percent": 23.2,
+      "branches_discovered": 8,
+      "new_branches_in_stage": 1,
+      "elapsed_sec": 11.223,
+      "crash_samples": [
+        {
+          "iteration": 3,
+          "returncode": 3221226356,
+          "hex_code": "0xc0000374",
+          "payload_len": 8,
+          "error_snippet": "[TRIGGER] Abort command 0xFF detected! Early closing session..."
+        },
+        {
+          "iteration": 4,
+          "returncode": 3221226356,
+          "hex_code": "0xc0000374",
+          "payload_len": 8,
+          "error_snippet": "[TRIGGER] Reset stream command 0xFE detected! Releasing stream..."
+        },
+        {
+          "iteration": 8,
+          "returncode": 3221226356,
+          "hex_code": "0xc0000374",
+          "payload_len": 8,
+          "error_snippet": "[TRIGGER] Reset stream command 0xFE detected! Releasing stream..."
+        },
+        {
+          "iteration": 9,
+          "returncode": 3221225477,
+          "hex_code": "0xc0000005",
+          "payload_len": 8,
+          "error_snippet": "[TRIGGER] Reset stream command 0xFE detected! Releasing stream..."
+        },
+        {
+          "iteration": 12,
+          "returncode": 3221226356,
+          "hex_code": "0xc0000374",
+          "payload_len": 64,
+          "error_snippet": "[TRIGGER] Reset stream command 0xFE detected! Releasing stream..."
+        }
+      ],
+      "saved_crash_binary": "iter2_cwe415_crash.bin"
+    },
+    {
+      "stage": "Stage_3_Intermediate_v0_2",
+      "target_version": "v0.2",
+      "target_executable": "fzp1_parser_v0_2.exe",
+      "cwe_target": "CWE-416: Use-After-Free (Sau khi vá CWE-121 & CWE-415)",
+      "cert_standard": "Đã vá CERT STR31-C & MEM31-C | Chưa vá triệt để CERT MEM30-C",
+      "iterations": 250,
+      "crashes": 22,
+      "clean_rejects": 175,
+      "successes": 53,
+      "crash_rate_percent": 8.8,
+      "branches_discovered": 8,
+      "new_branches_in_stage": 0,
+      "elapsed_sec": 5.715,
+      "crash_samples": [
+        {
+          "iteration": 12,
+          "returncode": 3221226356,
+          "hex_code": "0xc0000374",
+          "payload_len": 8,
+          "error_snippet": "[TRIGGER] Reset stream command 0xFE detected! Releasing stream..."
+        },
+        {
+          "iteration": 16,
+          "returncode": 3221226356,
+          "hex_code": "0xc0000374",
+          "payload_len": 8,
+          "error_snippet": "[TRIGGER] Reset stream command 0xFE detected! Releasing stream..."
+        },
+        {
+          "iteration": 33,
+          "returncode": 3221226356,
+          "hex_code": "0xc0000374",
+          "payload_len": 8,
+          "error_snippet": "[TRIGGER] Reset stream command 0xFE detected! Releasing stream..."
+        },
+        {
+          "iteration": 34,
+          "returncode": 3221226356,
+          "hex_code": "0xc0000374",
+          "payload_len": 24,
+          "error_snippet": "[TRIGGER] Reset stream command 0xFE detected! Releasing stream..."
+        },
+        {
+          "iteration": 45,
+          "returncode": 3221226356,
+          "hex_code": "0xc0000374",
+          "payload_len": 16,
+          "error_snippet": "[TRIGGER] Reset stream command 0xFE detected! Releasing stream..."
+        }
+      ],
+      "saved_crash_binary": "iter3_cwe416_crash.bin"
+    },
+    {
+      "stage": "Stage_4_Final_v1",
+      "target_version": "v1",
+      "target_executable": "fzp1_parser_v1.exe",
+      "cwe_target": "Tái kiểm định toàn diện (CWE-121, CWE-415, CWE-416)",
+      "cert_standard": "Tuân thủ toàn diện CERT STR31-C, MEM30-C, MEM31-C",
+      "iterations": 500,
+      "crashes": 0,
+      "clean_rejects": 390,
+      "successes": 110,
+      "crash_rate_percent": 0.0,
+      "branches_discovered": 8,
+      "new_branches_in_stage": 0,
+      "elapsed_sec": 7.166,
+      "crash_samples": [],
+      "saved_crash_binary": null
+    }
+  ],
+  "total_branches_covered": 8,
+  "branch_descriptions": {
+    "0": "REJECT_TOO_SHORT (< 9 bytes)",
+    "1": "REJECT_INVALID_MAGIC (!= 'FZP1')",
+    "2": "REJECT_PAYLOAD_QUOTA (> 65536 bytes)",
+    "3": "REJECT_SIZE_MISMATCH (Expected != Actual)",
+    "4": "REJECT_CHECKSUM_MISMATCH (XOR Checksum Invalid)",
+    "5": "PARSE_SAFE_TELEMETRY (Payload <= 16 bytes, Valid Path)",
+    "6": "PARSE_OVERFLOW_CWE121 (Payload > 16 bytes, Stack Crash)",
+    "7": "CMD_ABORT_CWE415 (Payload[0] == 0xFF, Double Free)",
+    "8": "CMD_RESET_CWE416 (Payload[0] == 0xFE, Use-After-Free)"
+  }
+}

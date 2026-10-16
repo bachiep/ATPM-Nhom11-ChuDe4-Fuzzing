@@ -16,6 +16,7 @@ import random
 import subprocess
 import sys
 import time
+import struct
 from z3 import BitVec, BitVecVal, Solver, sat
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -78,7 +79,7 @@ def run_blackbox_trial(seed: int, budget: int = BLACKBOX_BUDGET) -> dict:
     checksum_hits = 0
 
     for it in range(budget):
-        pkt_len = rng.randint(6, 70)
+        pkt_len = rng.randint(9, 80)
         # Sinh ngau nhien hoan toan
         pkt = bytes(rng.randrange(256) for _ in range(pkt_len))
 
@@ -131,7 +132,8 @@ def run_greybox_trial(seed: int, budget: int = GREYBOX_BUDGET) -> dict:
         payload = bytes(rng.randrange(256) for _ in range(payload_len))
         # Checksum ngau nhien (xac suat dung la 1/256)
         chk = rng.randrange(256)
-        pkt = b"FZP1" + bytes([payload_len]) + payload + bytes([chk])
+        len_bytes = struct.pack("<I", payload_len)
+        pkt = b"FZP1" + len_bytes + payload + bytes([chk])
 
         code, out, err = run_target(TARGET_VULN_EXE, pkt)
         if "Header & Checksum verified" in out:

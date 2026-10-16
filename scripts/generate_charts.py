@@ -189,13 +189,95 @@ def chart_unlock_benchmark() -> None:
     print(f"  [OK] {path}")
 
 
+def chart_iterative_crash_lifecycle() -> None:
+    """Bar chart: Chu trình tiến hóa triệt tiêu Crash qua 4 mốc (v0 -> v0.1 -> v0.2 -> v1)."""
+    data = load_json("iterative_crash_evolution.json")
+    if not data:
+        print("  [SKIP] Khong co du lieu iterative crash evolution")
+        return
+
+    stages = data.get("stages", [])
+    if not stages:
+        return
+
+    fig, ax = plt.subplots(figsize=(9, 5.5))
+    versions = [f"{s['target_version']}\n({s['target_executable']})" for s in stages]
+    crashes = [s["crashes"] for s in stages]
+    rates = [s["crash_rate_percent"] for s in stages]
+
+    colors = ["#e74c3c", "#e67e22", "#f39c12", "#2ecc71"]
+    bars = ax.bar(versions, crashes, color=colors, alpha=0.88, edgecolor="black", width=0.55)
+
+    for bar, c_val, r_val, s in zip(bars, crashes, rates, stages):
+        y_pos = bar.get_height()
+        if c_val > 0:
+            status_label = f"{c_val} crashes\n({r_val}% sập)\n[{s['cwe_target'].split(':')[0]}]"
+            va_align = "bottom"
+            y_offset = max(1.5, max(crashes) * 0.02)
+        else:
+            status_label = "0 CRASHES\n(100% An Toàn)\n[CERT C Patched]"
+            va_align = "bottom"
+            y_offset = 2
+
+        ax.text(bar.get_x() + bar.get_width() / 2, y_pos + y_offset,
+                status_label, ha="center", va=va_align, fontweight="bold", fontsize=9)
+
+    ax.set_ylabel("Số lượng sự cố sập (Crashes)", fontsize=11, fontweight="bold")
+    ax.set_xlabel("Tiến trình phiên bản mã nguồn bộ phân tích FZP1", fontsize=11, fontweight="bold")
+    ax.set_title("Chu trình Tiến hóa Fuzzing: Triệt tiêu Lỗ hổng Bộ nhớ qua các Mốc vá CERT C",
+                 fontsize=12, fontweight="bold", pad=15)
+    ax.set_ylim(0, max(crashes) * 1.35 if max(crashes) > 0 else 10)
+    ax.grid(axis="y", alpha=0.3, linestyle="--")
+    plt.tight_layout()
+    path = os.path.join(FIG_DIR, "iterative_crash_lifecycle.png")
+    fig.savefig(path, dpi=DPI)
+    plt.close(fig)
+    print(f"  [OK] {path}")
+
+
+def chart_coverage_branch_growth() -> None:
+    """Bar & Step chart: Số nhánh logic giao thức FZP1 đã được khám phá."""
+    data = load_json("iterative_crash_evolution.json")
+    if not data:
+        print("  [SKIP] Khong co du lieu iterative crash evolution cho coverage")
+        return
+
+    stages = data.get("stages", [])
+    if not stages:
+        return
+
+    fig, ax = plt.subplots(figsize=(8, 4.8))
+    stages_names = [f"Mốc {s['target_version']}" for s in stages]
+    branches = [s["branches_discovered"] for s in stages]
+
+    ax.plot(stages_names, branches, marker="o", markersize=10, linewidth=2.5,
+            color="#2980b9", label="Số nhánh đã phủ (Branch Bitmap)")
+
+    for i, (name, b) in enumerate(zip(stages_names, branches)):
+        ax.annotate(f"{b}/9 nhánh", (name, b), textcoords="offset points",
+                    xytext=(0, 12), ha="center", fontweight="bold", fontsize=10)
+
+    ax.set_ylabel("Số nhánh giao thức FZP1 đã khám phá", fontsize=10, fontweight="bold")
+    ax.set_title("Độ phủ Nhánh Biên theo Tiến trình Fuzzing Định hướng (Coverage-guided)",
+                 fontsize=11, fontweight="bold", pad=12)
+    ax.set_ylim(0, 10)
+    ax.set_yticks(range(0, 10))
+    ax.grid(alpha=0.3, linestyle="--")
+    ax.legend(loc="lower right")
+    plt.tight_layout()
+    path = os.path.join(FIG_DIR, "coverage_branch_growth.png")
+    fig.savefig(path, dpi=DPI)
+    plt.close(fig)
+    print(f"  [OK] {path}")
+
+
 def main():
     import shutil
     os.makedirs(FIG_DIR, exist_ok=True)
     os.makedirs(REPORT_FIG_DIR, exist_ok=True)
 
     print("=" * 60)
-    print("  TAO BIEU DO")
+    print("  TAO BIEU DO THUC NGHIEM & CHU TRINH TIEN HOA")
     print("=" * 60)
 
     bb = load_json("blackbox_results.json")
@@ -206,6 +288,8 @@ def main():
     chart_success_rate(bb, wb, gb)
     chart_greybox_coverage(gb)
     chart_unlock_benchmark()
+    chart_iterative_crash_lifecycle()
+    chart_coverage_branch_growth()
 
     # Sync to report/figures
     for f in os.listdir(FIG_DIR):
@@ -217,3 +301,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

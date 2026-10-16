@@ -4,14 +4,14 @@
   every node/.style={draw, ellipse, inner sep=3pt, minimum size=10mm, align=center, font=\scriptsize},
   ->, >=stealth, thick, auto
 ]
-  \node[fill=blue!20] (st_idle) at (0.0, 1.8) {st\_idle\\{\tiny safe, ready}};
-  \node[fill=gray!15] (st_magic) at (-2.8, 0.0) {st\_magic\_valid\\{\tiny magic\_ok}};
-  \node[fill=gray!15] (st_chk) at (2.8, 0.0) {st\_checksum\_valid\\{\tiny checksum\_ok}};
-  \node[fill=red!35] (st_hazard) at (0.0, -1.8) {st\_overflow\_hazard\\{\tiny magic\_ok, chk\_ok, violation}};
+  \node[fill=blue!20] (st_idle) at (0.0, 1.8) {st\_idle\\{\tiny safe, session\_closed}};
+  \node[fill=gray!15] (st_magic) at (-2.8, 0.0) {st\_magic\_ok\\{\tiny magic\_ok, header\_valid}};
+  \node[fill=gray!15] (st_chk) at (2.8, 0.0) {st\_checksum\_ok\\{\tiny checksum\_ok, session\_active}};
+  \node[fill=red!35] (st_conflict) at (0.0, -1.8) {st\_conflict\\{\tiny magic\_ok, checksum\_ok, violation}};
   \draw (st_idle) -- (st_magic);
   \draw (st_idle) -- (st_chk);
   \draw (st_magic) -- (st_idle);
-  \draw (st_magic) -- (st_hazard);
+  \draw (st_magic) -- (st_conflict);
   \draw (st_chk) -- (st_idle);
-  \draw (st_hazard) -- (st_idle);
+  \draw (st_conflict) -- (st_idle);
 \end{tikzpicture}
