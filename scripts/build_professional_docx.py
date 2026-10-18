@@ -95,7 +95,7 @@ def clean_latex(text: str) -> str:
         res = re.sub(p, r, res)
     return res
 
-def add_formatted_runs(paragraph, text: str, font_name="Times New Roman", font_size=12, default_color=None, bold_all=False, italic_all=False):
+def add_formatted_runs(paragraph, text: str, font_name="Times New Roman", font_size=13, default_color=None, bold_all=False, italic_all=False):
     """Phân tích chuỗi markdown có **bold**, *italic*, `code`, và toán học LaTeX sang các Run định dạng chuẩn."""
     # Pattern phân tách tokens: inline code `...`, bold **...**, italic *...*
     token_pattern = re.compile(r"(`[^`]+`|\*\*[^*]+\*\*|\*[^*]+\*)")
@@ -332,6 +332,13 @@ def convert_markdown_to_academic_docx(md_path: Path, docx_path: Path, has_cover_
         section.page_width = Cm(21.0)
         section.page_height = Cm(29.7)
 
+    # Cấu hình phông chữ mặc định Times New Roman, cỡ 13, dãn dòng 1.5 theo quy định học thuật Phenikaa
+    style_normal = doc.styles['Normal']
+    style_normal.font.name = 'Times New Roman'
+    style_normal.font.size = Pt(13)
+    style_normal.paragraph_format.line_spacing = 1.5
+    style_normal.paragraph_format.space_after = Pt(6)
+
     if has_cover_page:
         create_phenikaa_cover_page(doc)
         setup_header_footer(doc)
@@ -463,7 +470,7 @@ def convert_markdown_to_academic_docx(md_path: Path, docx_path: Path, has_cover_
             title_text = raw_line[2:]
             r = p.add_run(title_text)
             r.font.name = "Times New Roman"
-            r.font.size = Pt(16)
+            r.font.size = Pt(17)
             r.font.bold = True
             r.font.color.rgb = NAVY_COLOR
             continue
@@ -476,51 +483,54 @@ def convert_markdown_to_academic_docx(md_path: Path, docx_path: Path, has_cover_
             p.paragraph_format.keep_with_next = True
             r = p.add_run(clean_latex(raw_line[2:]))
             r.font.name = "Times New Roman"
-            r.font.size = Pt(16)
+            r.font.size = Pt(16.5)
             r.font.bold = True
             r.font.color.rgb = NAVY_COLOR
         elif raw_line.startswith("## "):
             p = doc.add_paragraph()
-            p.paragraph_format.space_before = Pt(12)
+            p.paragraph_format.space_before = Pt(14)
             p.paragraph_format.space_after = Pt(4)
             p.paragraph_format.keep_with_next = True
             r = p.add_run(clean_latex(raw_line[3:]))
             r.font.name = "Times New Roman"
-            r.font.size = Pt(13.5)
+            r.font.size = Pt(15)
             r.font.bold = True
             r.font.color.rgb = BLUE_ACCENT
         elif raw_line.startswith("### "):
             p = doc.add_paragraph()
-            p.paragraph_format.space_before = Pt(8)
+            p.paragraph_format.space_before = Pt(10)
             p.paragraph_format.space_after = Pt(3)
             p.paragraph_format.keep_with_next = True
             heading_text = raw_line[4:]
-            add_formatted_runs(p, heading_text, font_name="Times New Roman", font_size=12, default_color=DARK_GRAY, bold_all=True)
+            add_formatted_runs(p, heading_text, font_name="Times New Roman", font_size=14, default_color=DARK_GRAY, bold_all=True)
         elif raw_line.startswith("#### "):
             p = doc.add_paragraph()
-            p.paragraph_format.space_before = Pt(6)
+            p.paragraph_format.space_before = Pt(8)
             p.paragraph_format.space_after = Pt(2)
             p.paragraph_format.keep_with_next = True
             heading_text = raw_line[5:]
-            add_formatted_runs(p, heading_text, font_name="Times New Roman", font_size=11, default_color=MUTED_GRAY, bold_all=True, italic_all=True)
+            add_formatted_runs(p, heading_text, font_name="Times New Roman", font_size=13, default_color=DARK_GRAY, bold_all=True, italic_all=True)
         elif raw_line.startswith("- ") or raw_line.startswith("* "):
             p = doc.add_paragraph(style='List Bullet')
-            p.paragraph_format.space_after = Pt(3)
-            p.paragraph_format.line_spacing = 1.25
+            p.paragraph_format.space_after = Pt(4)
+            p.paragraph_format.line_spacing = 1.5
+            p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
             content = raw_line[2:]
-            add_formatted_runs(p, content, font_name="Times New Roman", font_size=11.5)
+            add_formatted_runs(p, content, font_name="Times New Roman", font_size=13)
         elif re.match(r"^\d+\.\s+", raw_line):
             p = doc.add_paragraph()
             p.paragraph_format.left_indent = Inches(0.25)
-            p.paragraph_format.space_after = Pt(3)
-            p.paragraph_format.line_spacing = 1.25
-            add_formatted_runs(p, raw_line, font_name="Times New Roman", font_size=11.5)
+            p.paragraph_format.space_after = Pt(4)
+            p.paragraph_format.line_spacing = 1.5
+            p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+            add_formatted_runs(p, raw_line, font_name="Times New Roman", font_size=13)
         elif raw_line.startswith("> "):
             p = doc.add_paragraph()
             p.paragraph_format.left_indent = Inches(0.3)
             p.paragraph_format.space_before = Pt(4)
             p.paragraph_format.space_after = Pt(4)
-            add_formatted_runs(p, raw_line[2:], font_name="Times New Roman", font_size=11, default_color=DARK_GRAY, italic_all=True)
+            p.paragraph_format.line_spacing = 1.5
+            add_formatted_runs(p, raw_line[2:], font_name="Times New Roman", font_size=12.5, default_color=DARK_GRAY, italic_all=True)
         elif raw_line == "---":
             # Dòng phân cách nhẹ
             p = doc.add_paragraph()
@@ -533,9 +543,10 @@ def convert_markdown_to_academic_docx(md_path: Path, docx_path: Path, has_cover_
             r.font.color.rgb = MUTED_GRAY
         else:
             p = doc.add_paragraph()
-            p.paragraph_format.line_spacing = 1.25
-            p.paragraph_format.space_after = Pt(4)
-            add_formatted_runs(p, raw_line, font_name="Times New Roman", font_size=11.5)
+            p.paragraph_format.line_spacing = 1.5
+            p.paragraph_format.space_after = Pt(6)
+            p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+            add_formatted_runs(p, raw_line, font_name="Times New Roman", font_size=13)
 
     doc.save(str(docx_path))
     print(f"[+] Hoàn tất xuất Word học thuật: {docx_path}")
