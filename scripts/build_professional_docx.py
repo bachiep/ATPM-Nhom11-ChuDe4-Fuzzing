@@ -429,6 +429,45 @@ def convert_markdown_to_academic_docx(md_path: Path, docx_path: Path, has_cover_
                     r_cap.font.color.rgb = DARK_GRAY
                 except Exception as e:
                     print(f"[-] Lỗi chèn ảnh {full_img_path}: {e}")
+            else:
+                # Khung chờ minh chứng thực tế chuyên nghiệp, không tự vẽ hoặc giả mạo ảnh
+                tbl_ph = doc.add_table(rows=1, cols=1)
+                tbl_ph.alignment = WD_TABLE_ALIGNMENT.CENTER
+                cell_ph = tbl_ph.cell(0, 0)
+                set_cell_background(cell_ph, "FFFDF5")
+                set_cell_margins(cell_ph, top=140, bottom=140, left=180, right=180)
+                p_ph = cell_ph.paragraphs[0]
+                p_ph.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                p_ph.paragraph_format.space_before = Pt(4)
+                p_ph.paragraph_format.space_after = Pt(4)
+                p_ph.paragraph_format.line_spacing = 1.25
+
+                r1 = p_ph.add_run("📷 [KHUNG CHỜ CHÈN ẢNH MINH CHỨNG THỰC TẾ]\n")
+                r1.font.name = "Times New Roman"
+                r1.font.size = Pt(11)
+                r1.font.bold = True
+                r1.font.color.rgb = RGBColor(180, 80, 0)
+
+                r2 = p_ph.add_run(f"Nội dung minh chứng: {caption}\n")
+                r2.font.name = "Times New Roman"
+                r2.font.size = Pt(10.5)
+                r2.font.bold = True
+                r2.font.color.rgb = DARK_GRAY
+
+                r3 = p_ph.add_run(
+                    f"Đường dẫn tệp cần bổ sung: report/{rel_img_path}\n"
+                    f"(Ghi chú: Sinh viên tự thực hiện thao tác và chụp màn hình thực tế trên máy tính, "
+                    f"lưu ảnh định dạng PNG vào đường dẫn trên. Hệ thống biên soạn sẽ tự động nhận diện và chèn ảnh thật vào vị trí này)."
+                )
+                r3.font.name = "Times New Roman"
+                r3.font.size = Pt(9.5)
+                r3.font.italic = True
+                r3.font.color.rgb = MUTED_GRAY
+
+                set_table_borders(tbl_ph, color="E0A96D", sz="6")
+
+                p_space = doc.add_paragraph()
+                p_space.paragraph_format.space_after = Pt(6)
             continue
 
         # Xử lý bảng Markdown
@@ -559,20 +598,7 @@ def main():
     report_docx = PROJECT_ROOT / "report" / "BaoCao_BTL_Nhom11.docx"
     convert_markdown_to_academic_docx(report_md, report_docx, has_cover_page=True)
 
-    # 2. Hướng dẫn kiểm tra dự án
-    guide_md = PROJECT_ROOT / "HUONG_DAN_KIEM_TRA_DU_AN.md"
-    guide_docx = PROJECT_ROOT / "HUONG_DAN_KIEM_TRA_DU_AN.docx"
-    convert_markdown_to_academic_docx(guide_md, guide_docx, has_cover_page=False)
-
-    # 3. Sao chép bản Word sang thư mục gốc và thư mục cha để người dùng mở ngay lập tức
-    root_docx = PROJECT_ROOT / "BaoCao_BTL_Nhom11.docx"
-    parent_docx = PROJECT_ROOT.parent / "BaoCao_BTL_Nhom11.docx"
-    shutil.copy2(report_docx, root_docx)
-    shutil.copy2(report_docx, parent_docx)
-    print(f"[+] Đã tạo bản sao Word tại thư mục gốc: {root_docx}")
-    print(f"[+] Đã tạo bản sao Word tại thư mục cha: {parent_docx}")
-
-    # 4. Cập nhật bản PDF song song qua Word COM
+    # 2. Cập nhật bản PDF song song qua Word COM
     try:
         import win32com.client
         word_app = win32com.client.Dispatch('Word.Application')
@@ -583,12 +609,6 @@ def main():
             wdoc.SaveAs(str(report_pdf), FileFormat=17)
             wdoc.Close()
             print(f"[+] Đã cập nhật PDF đồng bộ từ bản Word: {report_pdf}")
-
-            guide_pdf = PROJECT_ROOT / "HUONG_DAN_KIEM_TRA_DU_AN.pdf"
-            wdoc2 = word_app.Documents.Open(str(guide_docx))
-            wdoc2.SaveAs(str(guide_pdf), FileFormat=17)
-            wdoc2.Close()
-            print(f"[+] Đã cập nhật PDF đồng bộ từ bản Word: {guide_pdf}")
         finally:
             word_app.Quit()
     except Exception as e:

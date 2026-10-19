@@ -204,6 +204,10 @@ Theo định hướng học thuật của giảng viên hướng dẫn (ThS. Vũ
     [!] MÃ LỆNH ĐẶC BIỆT: Gói tin kích hoạt lệnh hủy phiên khẩn cấp (CMD_ABORT_SESSION 0xFF)
 ```
 
+Dưới đây là vị trí dành cho hình ảnh chụp màn hình thực tế từ phần mềm Wireshark khi mở tệp gói tin mạng `network_capture/iot_sensor_stream.pcap`, thể hiện trực quan các khung truyền UDP chứa Magic Header `FZP1` (0x46, 0x5A, 0x50, 0x31) và trường kiểm tra tính toàn vẹn Checksum:
+
+![Giao diện phần mềm Wireshark phân tích gói tin mạng FZP1 thực tế từ tệp iot_sensor_stream.pcap](screenshots/wireshark_pcap_trace.png)
+
 **2. Bảng Ma trận Ánh xạ Truy vết Toàn diện (Traceability Matrix):**
 
 | Khung mạng PCAP | Hex Dữ liệu | Ràng buộc Đặc tả SSOT (`RangBuoc`) | Yêu cầu Chức năng (`YeuCauChucNang`) | Trạng thái Kripke (`MoHinhTrangThai`) | Hiện thực C (`fzp1_parser`) | Mục tiêu Kiểm thử / Lỗ hổng |
@@ -659,6 +663,10 @@ Thực nghiệm đối soát hàm `verify_fzp1_unlock_token` giữa Z3 Solver v�
 ### 6.6. Bằng chứng Phân tích Tĩnh Cppcheck và Bộ Kiểm thử Toàn diện PyTest (14/14 PASS)
 * **Cppcheck:** Nhật ký quét tại `results/logs/log_cppcheck.txt` xác nhận 0 cảnh báo, minh chứng hiện tượng False Negative của phân tích tĩnh với tainted input động.
 * **Pytest Toàn diện (14/14 Test Cases PASS):** Bộ kiểm thử tự động kết hợp 10 test cases đơn vị giao thức (`tests/test_fzp1_parser.py`) và 4 test cases kiểm chứng tiến hóa đa phiên bản (`tests/test_fzp1_evolution.py`), bao phủ trọn vẹn các điều kiện biên của giao thức FZP1, xác thực kích hoạt crash trên 3 lỗi an toàn bộ nhớ ở $v_0$ (CWE-121 Stack Buffer Overflow, CWE-415 Double Free, CWE-416 Use-After-Free), kiểm soát chuyển tiếp qua các mốc trung gian $v_{0.1}$ và $v_{0.2}$, và kiểm chứng cơ chế từ chối an toàn của bản vá hoàn thiện $v_1$ theo chuẩn CERT C (STR31-C, MEM30-C, MEM31-C), đạt 100% tỷ lệ vượt qua trong 2.37 giây.
+* **Minh chứng Thực thi Terminal Kiểm định:**
+  Dưới đây là vị trí dành cho hình ảnh chụp màn hình cửa sổ Windows PowerShell trên máy thực tế khi chạy thành công bộ thẩm định tự động toàn diện 8 khâu `scripts/verify_project.py` và bộ kiểm thử tự động 14 test cases `pytest tests/ -v`:
+
+![Giao diện Terminal Windows PowerShell thực tế chạy thành công bộ thẩm định tự động 8 khâu verify_project.py và PyTest](screenshots/terminal_verify_8_stages.png)
 
 ### 6.7. Khảo sát Mô hình Đặc tả FZP1 trên Công cụ SecLabFramework (Kripke/CTL & Static Analysis)
 Tệp đặc tả SSOT `Nhom11_FZP1_Fuzzing_Spec.xlsx` được nhóm thiết kế để tương thích hoàn toàn với ứng dụng `SpecVerificationLab.exe` và `SecLabFramework.exe` (Tab Ch6) trong bộ tài liệu học phần của giảng viên:
@@ -668,11 +676,9 @@ Tệp đặc tả SSOT `Nhom11_FZP1_Fuzzing_Spec.xlsx` được nhóm thiết k�
    - Thuộc tính khả đạt $EF(\text{magic\_ok})$, $EF(\text{checksum\_ok})$ và $EF(\text{violation})$: **ĐÚNG (True)**, chứng minh trạng thái xung đột bộ nhớ là khả dĩ đạt tới từ trạng thái khởi tạo.
    - Thuộc tính loại trừ lẫn nhau (Mutual Exclusion): Cặp khóa chính `('magic_ok', 'checksum_ok')` phát hiện xung đột tại trạng thái `st_conflict`, khớp hoàn hảo với logic kích hoạt lỗi CWE-121.
 2. **Minh chứng Giao diện Thực tế từ Bộ Công cụ Giảng viên:**
-   Dưới đây là hình ảnh chụp trực tiếp từ cửa sổ giao diện khi chạy các tệp thực thi gốc `SpecVerificationLab.exe` và `SecLabFramework.exe`:
+   Dưới đây là vị trí dành cho hình ảnh chụp màn hình trực tiếp từ cửa sổ giao diện công cụ `SecLabFramework.exe` (Tab Ch6) hoặc `SpecVerificationLab.exe` sau khi nạp tệp đặc tả `specification/Nhom11_FZP1_Fuzzing_Spec.xlsx` và thực hiện đầy đủ quy trình kiểm chứng Pipeline (hiển thị danh sách REQ-1..9, mã nguồn C sinh ra và đồ thị kiểm chứng Kripke):
 
-![Giao diện thực tế công cụ SpecVerificationLab.exe khi nạp và kiểm chứng đặc tả FZP1](screenshots/spec_verification_lab_authentic.png)
-
-![Giao diện thực tế công cụ SecLabFramework.exe (Tab Ch6) khi kiểm chứng đặc tả FZP1](screenshots/seclab_real_capture.png)
+![Giao diện thực tế công cụ SecLabFramework (Tab Ch6) khi nạp đặc tả Nhom11_FZP1_Fuzzing_Spec.xlsx và chạy Pipeline kiểm chứng](screenshots/seclab_real_pipeline_verified.png)
 
 3. **Static C Checker trên Đặc tả (Chương 2):**
    Công cụ nhận diện chính xác các danh mục an toàn bộ nhớ tương đồng:
