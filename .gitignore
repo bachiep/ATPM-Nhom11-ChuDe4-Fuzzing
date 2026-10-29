@@ -38,3 +38,6 @@ Thumbs.db
 docs/
 archive_legacy_v0/
 
+
+# Large binary presentation files
+*.pptx
